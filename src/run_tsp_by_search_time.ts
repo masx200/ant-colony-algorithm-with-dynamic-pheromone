@@ -4,13 +4,9 @@ import { tsp_runner_run_async } from "./tsp_runner_run_async";
 
 export async function run_tsp_by_search_time({
     runner,
-
-    search_time_seconds,
-    // count_of_ants_ref,
-    // selecteleref,
-    // local_pheromone_volatilization_rate,
-    // disablemapswitching,
     is_running,
+    search_time_seconds,
+
     // TSP_before_Start,
     // onglobal_best_routeChange,
     // onLatestRouteChange,
@@ -21,10 +17,7 @@ export async function run_tsp_by_search_time({
     runner: Parameters<typeof tsp_runner_run_async>[0]["runner"];
 
     search_time_seconds: Ref<number>;
-    // count_of_ants_ref: Ref<number>;
-    // selecteleref: Ref<HTMLSelectElement | undefined>;
-    // local_pheromone_volatilization_rate: Ref<number>;
-    // disablemapswitching: Ref<boolean>;
+
     is_running: Ref<boolean>;
     // TSP_before_Start: Fun_TSP_Before_Start;
     // onglobal_best_routeChange: (
@@ -42,12 +35,7 @@ export async function run_tsp_by_search_time({
     // return async () => {
 
     const search_time_ms = search_time_seconds.value * 1000;
-    // const count_of_ants_value = count_of_ants_ref.value;
-    // const element = selecteleref.value;
-    // element && (element.selectedIndex = 0);
-    // const node_coordinates = TSP_cities_map.get(element?.value || "");
-    // const pheromone_volatility_coefficient_R1 =
-    //     local_pheromone_volatilization_rate.value;
+
     if (
         // pheromone_volatility_coefficient_R1 > 0 &&
         search_time_ms > 0 /* &&

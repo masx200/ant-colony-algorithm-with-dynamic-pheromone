@@ -15,7 +15,7 @@ export async function run_tsp_by_search_rounds({
     searchrounds,
     count_of_ants_ref,
     // selecteleref,
-    // local_pheromone_volatilization_rate,
+
     // disablemapswitching,
     is_running,
 }: // onglobal_best_routeChange,
@@ -35,7 +35,7 @@ export async function run_tsp_by_search_rounds({
     searchrounds: Ref<number>;
     count_of_ants_ref: Ref<number>;
     // selecteleref: Ref<HTMLSelectElement | undefined>;
-    // local_pheromone_volatilization_rate: Ref<number>;
+
     // disablemapswitching: Ref<boolean>;
     is_running: Ref<boolean>;
     // onglobal_best_routeChange: (
@@ -58,8 +58,7 @@ export async function run_tsp_by_search_rounds({
     // const element = selecteleref.value;
     // element && (element.selectedIndex = 0);
     // const node_coordinates = TSP_cities_map.get(element?.value || "");
-    // const pheromone_volatility_coefficient_R1 =
-    // local_pheromone_volatilization_rate.value;
+
     if (
         // pheromone_volatility_coefficient_R1 > 0 &&
         iterations_of_search > 0 &&
@@ -101,8 +100,6 @@ export async function run_tsp_by_search_rounds({
         is_running.value = false;
         // runner.onDataChange(data_change_listener);
     } else {
-        // local_pheromone_volatilization_rate.value =
-        // default_pheromone_volatility_coefficient_R1;
         searchrounds.value = default_search_rounds;
         count_of_ants_ref.value = default_count_of_ants;
         // disablemapswitching.value = false;

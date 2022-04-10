@@ -111,16 +111,6 @@
             :controls="false"
         /><br />
 
-        <span>全局信息素挥发率</span>
-        <el-input-number
-            :controls="false"
-            step-strictly
-            :step="0.001"
-            v-model.number="global_pheromone_volatilization_rate"
-            :disabled="disablemapswitching"
-            :min="0.001"
-            :max="0.5"
-        /><br />
         <span>蚂蚁数量</span>
         <el-input-number
             step-strictly

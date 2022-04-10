@@ -44,7 +44,6 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
         // pathTabooList: PathTabooList<number>;
         [Symbol.toStringTag]: string;
 
-
         node_coordinates: NodeCoordinates;
         alpha_zero: number;
         beta_zero: number;

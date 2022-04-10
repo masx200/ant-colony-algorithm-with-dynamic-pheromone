@@ -14,7 +14,6 @@ export type TSPRunnerOptions = {
 
     max_results_of_k_opt?: number | undefined;
 
-
     node_coordinates: NodeCoordinates;
     alpha_zero?: number | undefined;
     beta_zero?: number | undefined;

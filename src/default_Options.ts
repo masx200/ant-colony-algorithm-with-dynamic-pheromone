@@ -27,7 +27,7 @@ const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
     /**每条的k-opt最大数量 */
     max_results_of_k_opt: default_max_results_of_k_opt,
     /**全局信息素挥发率     */
- 
+
     /**信息素强度 */
 
     /**信息素因子 */

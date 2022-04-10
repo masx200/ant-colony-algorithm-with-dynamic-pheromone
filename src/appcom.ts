@@ -136,9 +136,7 @@ export default defineComponent({
         // console.log(dataofoneiteration, oneiterationtableheads);
 
         const is_running = ref(false);
-        // const local_pheromone_volatilization_rate = ref(
-        //     default_pheromone_volatility_coefficient_R1
-        // );
+
         const disablemapswitching = ref(false);
         const searchrounds = ref(default_search_rounds);
         const count_of_ants_ref = ref(default_count_of_ants);
@@ -291,7 +289,7 @@ export default defineComponent({
                 searchrounds,
                 count_of_ants_ref,
                 // selecteleref,
-                // local_pheromone_volatilization_rate,
+
                 // disablemapswitching,
                 is_running,
                 // onglobal_best_routeChange,
@@ -352,9 +350,7 @@ export default defineComponent({
             const element = selecteleref.value;
             // element && (element.selectedIndex = 0);
             const node_coordinates = TSP_cities_map.get(element?.value || "");
-            // const pheromone_volatility_coefficient_R1 =
-            //     local_pheromone_volatilization_rate.value;
-       
+
             const alpha_value = alpha.value;
             const max_routes_of_greedy_value = max_routes_of_greedy.value;
             const beta_value = beta.value;
@@ -363,7 +359,6 @@ export default defineComponent({
                 max_routes_of_greedy_value > 0 &&
                 beta_value > 0 &&
                 alpha_value > 0 &&
-           
                 // pheromone_volatility_coefficient_R1 > 0 &&
                 // search_time_ms > 0 &&
                 count_of_ants_value >= 2 &&
@@ -380,7 +375,7 @@ export default defineComponent({
                     ...input_options,
 
                     distance_round,
-                 
+
                     max_routes_of_greedy: max_routes_of_greedy_value,
                     alpha_zero: alpha_value,
                     beta_zero: beta_value,
@@ -416,7 +411,7 @@ export default defineComponent({
                 search_time_seconds,
                 // count_of_ants_ref,
                 // selecteleref,
-                // local_pheromone_volatilization_rate,
+
                 // disablemapswitching,
                 is_running,
                 // TSP_before_Start,
@@ -438,7 +433,7 @@ export default defineComponent({
             input_options,
 
             round_result,
-            global_pheromone_volatilization_rate,
+
             show_every_route: show_every_route,
             greedy_iteration_table_heads,
             greedy_iteration_table_body,
@@ -466,7 +461,7 @@ export default defineComponent({
             // container_of_iteration_rounds_and_relative_deviation_from_optimal,
             container_of_iteration_rounds_and_information_entropy_chart,
             is_running,
-            // local_pheromone_volatilization_rate,
+
             resethandler: resethandler,
             resultTableHeads,
             resultTableBody,

@@ -60,7 +60,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         distance_round,
         max_routes_of_greedy,
-      
+
         // max_routes_of_greedy,
         max_cities_of_state_transition,
         max_size_of_collection_of_latest_routes,
@@ -448,7 +448,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         on_best_change,
         // runOneRoute,
         // onDataChange,
-     
 
         get_total_time_ms,
         // on_finish_all_iterations,
@@ -481,7 +480,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             get_neighbors_from_optimal_routes_and_latest_routes,
             get_random_selection_probability,
             get_search_count_of_best,
-        
+
             set_weight_of_opt_current,
             get_weight_of_opt_current,
             set_weight_of_opt_best,
