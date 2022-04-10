@@ -1,6 +1,6 @@
-import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 import { NodeCoordinates } from "./NodeCoordinates";
+import { ReadOnlyPheromone } from "./TSP_Runner";
 
 export type SharedOptions = Required<TSPRunnerOptions> & {
     get_neighbors_from_optimal_routes_and_latest_routes: (
@@ -22,7 +22,7 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     get_current_search_count: () => number;
     // setPheromone: (row: number, column: number, value: number) => void;
     // getPheromone: (row: number, column: number) => number;
-    setPheromoneZero: (value: number) => void;
+
     count_of_nodes: number;
     // cross_Point_Coefficient_of_Non_Optimal_Paths: number;
     max_results_of_2_opt: number;
@@ -37,5 +37,5 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     beta_zero: number;
     count_of_ants: number;
     node_coordinates: NodeCoordinates;
-    pheromoneStore: MatrixSymmetry<number>;
+    pheromoneStore: ReadOnlyPheromone;
 };

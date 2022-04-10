@@ -19,7 +19,7 @@ import { assert_number } from "../test/assert_number";
 import { assert_true } from "../test/assert_true";
 
 import { createEventPair } from "./createEventPair";
-import { createPheromoneStore } from "./createPheromoneStore";
+
 import { DataOfBestChange } from "./DataOfBestChange";
 
 import { DataOfFinishOneIteration } from "./DataOfFinishOneIteration";
@@ -31,9 +31,9 @@ import { generateUniqueArrayOfCircularPath } from "./generateUniqueArrayOfCircul
 import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 import { update_weight_of_opt } from "./update_weight_of_opt";
 
-import { TSP_Runner } from "./TSP_Runner";
+import { ReadOnlyPheromone, TSP_Runner } from "./TSP_Runner";
 import { SharedOptions } from "./SharedOptions";
-import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
+
 import { create_collection_of_latest_routes } from "../collections/collection-of-latest-routes";
 import { create_collection_of_optimal_routes } from "../collections/collection-of-optimal-routes";
 import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
@@ -66,24 +66,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
 
-    //由局部信息素挥发率决定全局信息素挥发率
-    // const pheromone_volatility_coefficient_R2 =
-    //     //  rest?.pheromone_volatility_coefficient_R2 ??
-    //     calc_pheromone_volatility_coefficient_R2(
-    //         pheromone_volatility_coefficient_R1 ??
-    //             default_pheromone_volatility_coefficient_R1,
-    //         count_of_ants
-    //     );
 
-    // assert_true(
-    //     float64equal(
-    //         pheromone_volatility_coefficient_R1,
-    //         calc_pheromone_volatility_coefficient_R1(
-    //             pheromone_volatility_coefficient_R2,
-    //             count_of_ants
-    //         )
-    //     )
-    // );
     const {
         distance_round,
         max_routes_of_greedy,
@@ -115,28 +98,23 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let lastrandomselectionprobability = 0;
     let totaltimems = 0;
 
-    const pheromoneStore = new Proxy(createPheromoneStore(count_of_nodes), {
-        get(target, key) {
-            if (key === "get") {
-                return (row: number, column: number) => {
-                    return getPheromone(target, row, column);
-                };
-            }
+    const pheromoneStore: ReadOnlyPheromone = {
+        row: count_of_nodes,
+        get: getPheromone,
+        column: count_of_nodes,
+    };
 
-            return Reflect.get(target, key);
-        },
-    }) as MatrixSymmetry<number>;
-
-    let PheromoneZero = 0;
-    function setPheromoneZero(value: number) {
-        PheromoneZero = value;
-    }
-    function getPheromone(
-        pheromoneStore: MatrixSymmetry<number>,
-        row: number,
-        column: number
-    ): number {
-        return pheromoneStore.get(row, column) || PheromoneZero;
+    function getPheromone(row: number, column: number): number {
+        if (
+            row < 0 ||
+            row > count_of_nodes - 1 ||
+            column < 0 ||
+            column > count_of_nodes - 1
+        ) {
+            throw Error("row,column,out of bounds:" + row + "," + column);
+        } else {
+            return 1;
+        }
     }
 
     let current_search_count = 0;
@@ -259,7 +237,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 emit_finish_one_route,
                 get_probability_of_opt_best,
                 get_probability_of_opt_current,
-                setPheromoneZero,
+
                 count_of_nodes,
                 emit_finish_greedy_iteration,
             });
@@ -299,7 +277,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     pheromone_intensity_Q,
                     set_best_length,
                     set_best_route,
-                    setPheromoneZero,
                 });
                 const endtime_of_one_route = Number(new Date());
                 onRouteCreated(route, length);
@@ -468,175 +445,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         on: on_finish_greedy_iteration,
         emit: emit_finish_greedy_iteration,
     } = createEventPair<DataOfFinishGreedyIteration>(emitter);
-    // async function runOneRoute() {
-    //     const routes_of_greedy = Math.min(max_routes_of_greedy, count_of_nodes);
-    //     if (current_search_count === 0) {
-    //         // 并行计算贪心路径 共 max_routes_of_greedy 条
-    //         await GreedyRoutesGenerator({
-    //             shared,
-    //             get_best_route,
-    //             get_best_length,
-    //             set_best_length,
-    //             set_best_route,
-    //             onRouteCreated,
-    //             emit_finish_one_route,
-    //             get_probability_of_opt_best,
-    //             get_probability_of_opt_current,
-    //             setPheromoneZero,
-    //             count_of_nodes,
-    //             emit_finish_greedy_iteration,
-    //         });
-    //     } else {
-    //         const starttime_of_one_route = Number(new Date());
-    //         const {
-    //             route,
-    //             length,
-    //             // weight_of_opt_best,
-    //             // weight_of_opt_current,
-    //         } = EachRouteGenerator({
-    //             ...shared,
-    //             current_search_count,
-    //             get_probability_of_opt_best,
-    //             count_of_nodes,
-    //             node_coordinates,
-    //             pheromoneStore,
-    //             // setPheromone,
-    //             // getPheromone,
-    //             alpha_zero,
-    //             beta_zero,
-    //             lastrandomselectionprobability,
-    //             max_results_of_k_opt,
-    //             get_best_length,
-    //             get_best_route,
-    //             pheromone_volatility_coefficient_R1,
-    //             pheromone_intensity_Q,
-    //             set_best_length,
-    //             set_best_route,
-    //             setPheromoneZero,
-    //         });
-    //         const endtime_of_one_route = Number(new Date());
-    //         onRouteCreated(route, length);
-    //         routes_and_lengths_of_one_iteration.push({ route, length });
-    //         const time_ms_of_one_route =
-    //             endtime_of_one_route - starttime_of_one_route;
-    //         time_ms_of_one_iteration += time_ms_of_one_route;
-    //         emit_finish_one_route({
-    //             probability_of_opt_best: get_probability_of_opt_best(),
-    //             probability_of_opt_current: get_probability_of_opt_current(),
-    //             // weight_of_opt_best,
-    //             // weight_of_opt_current,
-    //             // way_of_construct,
-    //             time_ms_of_one_route: time_ms_of_one_route,
-    //             route,
-    //             length,
-    //         });
-    //         if (routes_and_lengths_of_one_iteration.length === count_of_ants) {
-    //             const starttime_of_process_iteration = Number(new Date());
-    //             //一轮搜索结束
-
-    //             //后处理时间要加上
-
-    //             const {
-    //                 coefficient_of_diversity_increase,
-    //                 // locally_optimized_length,
-    //                 // relative_deviation_from_optimal,
-    //                 nextrandomselectionprobability,
-    //                 //   routesandlengths,
-    //                 pheromoneDiffusionProbability,
-    //                 population_relative_information_entropy,
-    //                 // ispheromoneDiffusion,
-    //                 optimallengthofthis_iteration,
-    //                 optimalrouteofthis_iteration,
-    //             } = EachIterationHandler({
-    //                 ...shared,
-    //                 coefficient_of_pheromone_Increase_Non_Optimal_Paths,
-    //                 number_of_small_scale_cities_where_pheromone_diffuses,
-
-    //                 number_of_large_scale_cities_where_pheromone_diffuses,
-
-    //                 // pathTabooList,
-    //                 // max_results_of_k_opt,
-    //                 routesandlengths: routes_and_lengths_of_one_iteration,
-    //                 // emit_finish_one_route,
-    //                 // set_best_route,
-    //                 // set_best_length,
-    //                 get_best_length: get_best_length,
-    //                 get_best_route: get_best_route,
-    //                 // pathTabooList,
-    //                 pheromoneStore,
-    //                 node_coordinates,
-    //                 // count_of_ants,
-    //                 // alpha_zero,
-    //                 // beta_zero,
-    //                 // lastrandomselectionprobability,
-    //                 // searchloopcountratio,
-    //                 pheromone_volatility_coefficient_R2,
-    //                 // pheromone_volatility_coefficient_R1,
-    //                 pheromone_intensity_Q,
-    //                 // getPheromone,
-    //                 // setPheromone,
-    //             });
-
-    //             //更新局部优化的系数
-    //             update_weight_of_opt({
-    //                 get_weight_of_opt_best,
-    //                 get_weight_of_opt_current,
-    //                 set_weight_of_opt_best,
-    //                 coefficient_of_diversity_increase,
-    //                 set_weight_of_opt_current,
-    //             });
-    //             const endtime_of_process_iteration = Number(new Date());
-    //             //后处理时间要加上
-    //             const timems_of_process_iteration =
-    //                 endtime_of_process_iteration -
-    //                 starttime_of_process_iteration;
-    //             time_ms_of_one_iteration += timems_of_process_iteration;
-    //             // emit_best_change({
-    //             //     current_search_count,
-    //             //     current_iterations: get_number_of_iterations(),
-    //             //     total_time_ms: totaltimems,
-    //             //     time_of_best_ms,
-    //             //     global_best_route: get_best_route(),
-    //             //     globalbestlength: get_best_length(),
-    //             // });
-    //             totaltimems += timems_of_process_iteration;
-    //             emit_finish_one_iteration({
-    //                 // globalbestlength: globalbestlength,
-    //                 // time_of_best_ms,
-
-    //                 // locally_optimized_length,
-
-    //                 // relative_deviation_from_optimal,
-    //                 // current_iterations: get_number_of_iterations(),
-    //                 pheromoneDiffusionProbability,
-    //                 optimallengthofthis_iteration,
-    //                 optimalrouteofthis_iteration,
-    //                 population_relative_information_entropy,
-    //                 // ispheromoneDiffusion,
-    //                 randomselectionprobability: lastrandomselectionprobability,
-    //                 time_ms_of_one_iteration: time_ms_of_one_iteration,
-    //             });
-    //             time_ms_of_one_iteration = 0;
-    //             lastrandomselectionprobability = nextrandomselectionprobability;
-    //             routes_and_lengths_of_one_iteration.length = 0;
-    //         }
-    //     }
-    //     /* else {
-    //         // const endtime = Number(new Date());
-    //         //后处理时间要加上
-    //         // const timems = endtime - starttime;
-    //         time_ms_of_one_iteration += timems;
-    //         totaltimems += timems;
-    //     } */
-    // }
-    // const runRoutes = async (count: number) => {
-    //     assert_number(count);
-    //     assert_true(count > 0);
-
-    //     for (let i = 0; i < count; i++) {
-    //         await runOneRoute();
-    //     }
-    // };
+   
     function get_search_count_of_best() {
         return search_count_of_best;
     }
@@ -720,7 +529,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             pheromoneStore,
             // setPheromone,
             // getPheromone,
-            setPheromoneZero,
+
             count_of_nodes,
         };
     }

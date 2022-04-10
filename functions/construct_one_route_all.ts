@@ -6,7 +6,6 @@ import { SharedOptions } from "./SharedOptions";
 /* 只是生成一条路径 */
 export function construct_one_route_all(
     options: {
-        setPheromoneZero: (value: number) => void;
         current_search_count: number;
 
         node_coordinates: NodeCoordinates;

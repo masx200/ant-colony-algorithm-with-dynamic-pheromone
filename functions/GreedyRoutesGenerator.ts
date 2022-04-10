@@ -18,8 +18,6 @@ export async function GreedyRoutesGenerator({
     emit_finish_one_route,
     get_probability_of_opt_best,
     get_probability_of_opt_current,
-    setPheromoneZero,
-    count_of_nodes,
 }: {
     shared: SharedOptions;
     emit_finish_greedy_iteration: (data: DataOfFinishGreedyIteration) => void;
@@ -31,7 +29,7 @@ export async function GreedyRoutesGenerator({
     emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
     get_probability_of_opt_best: () => number;
     get_probability_of_opt_current: () => number;
-    setPheromoneZero: (value: number) => void;
+
     count_of_nodes: number;
 }) {
     const greedy_results_iter = greedy_first_search_routes_parallel({
@@ -80,7 +78,6 @@ export async function GreedyRoutesGenerator({
     const { length: best_length, route: optimalrouteofthis_iteration } =
         get_best_routeOfSeriesRoutesAndLengths(parallel_results);
 
-    setPheromoneZero(1 / count_of_nodes / best_length);
     Greedy_algorithm_to_solve_tsp_with_selected_start_pool.clear();
     const time_ms_of_one_iteration = sum(
         parallel_results.map((r) => r.time_ms)

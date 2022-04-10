@@ -2,7 +2,6 @@
 import { NodeCoordinates } from "./NodeCoordinates";
 
 export interface EachRouteGeneratorOptions {
-    setPheromoneZero: (value: number) => void;
     get_probability_of_opt_best: () => number;
     // getPheromone(row: number, column: number): number;
     // setPheromone(row: number, column: number, value: number): void;

@@ -1,19 +1,14 @@
-import {
-    // default_Cross_Point_Coefficient_of_Non_Optimal_Paths,
-    default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
-} from "../src/default_Options";
 // import { PathTabooList } from "../pathTabooList/PathTabooList";
 // import { DataOfFinishOneRoute } from "./DataOfFinishOneRoute";
 import { assert_true } from "../test/assert_true";
 import { calc_population_relative_information_entropy } from "./calc_population-relative-information-entropy";
-import { getworstRouteOfSeriesRoutesAndLengths } from "./getworstRouteOfSeriesRoutesAndLengths";
 import { get_best_routeOfSeriesRoutesAndLengths } from "./get_best_routeOfSeriesRoutesAndLengths";
 import { NodeCoordinates } from "./NodeCoordinates";
-import { performPheromoneDiffusionOperations } from "./performPheromoneDiffusionOperations";
+
 // import { calc_relative_deviation_from_optimal } from "./calc_relative_deviation_from_optimal";
 // import { construct_route_from_k_opt_of_global_best } from "./construct_route_from_k_opt_of_global_best";
 // import { cycle_routetosegments } from "./cycle_routetosegments";
-import { pheromone_update_rule_after_iteration } from "./pheromone_update_rule_after_iteration";
+
 import { SharedOptions } from "./SharedOptions";
 
 // export type AdaptiveTSPSearchOptions =;
@@ -72,35 +67,10 @@ export function EachIterationHandler(
 } {
     // console.log(options);
     const {
-        // setPheromone,
-        // getPheromone,
-        // cross_Point_Coefficient_of_Non_Optimal_Paths = default_Cross_Point_Coefficient_of_Non_Optimal_Paths,
-        coefficient_of_pheromone_Increase_Non_Optimal_Paths = default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
-        number_of_small_scale_cities_where_pheromone_diffuses,
-
-        number_of_large_scale_cities_where_pheromone_diffuses,
-
         // max_results_of_k_opt,
         routesandlengths,
-        // emit_finish_one_route,
-        // searchloopcountratio,
-        // lastrandomselectionprobability,
-        pheromone_intensity_Q,
-        // pheromone_volatility_coefficient_R1,
-        pheromone_volatility_coefficient_R2,
-        // set_best_route,
-        // set_best_length,
-        // pathTabooList,
-        pheromoneStore,
-        node_coordinates,
-        // maxnumberofiterations,
-        // numberofstagnantiterations,
-        // count_of_ants,
-        get_best_length,
-        get_best_route,
     } = options;
     // asserttrue(typeof count_of_ants === "number");
-    const count_of_nodes = node_coordinates.length;
 
     const routes = routesandlengths.map(({ route }) => route);
 
@@ -137,17 +107,9 @@ export function EachIterationHandler(
     // });
     // const locally_optimized_length = result.length;
 
-    const global_best_route = get_best_route();
-    const globalbestlength = get_best_length();
-
-    const worstlengthandroute =
-        getworstRouteOfSeriesRoutesAndLengths(routesandlengths);
-
     //     routesandlengths.reduce((previous, current) => {
     //     return previous.length > current.length ? previous : current;
     // }, routesandlengths[0]);
-    const iterateworstlength = worstlengthandroute.length;
-    const iterateworstroute = worstlengthandroute.route;
 
     const iteratebestlengthandroute =
         get_best_routeOfSeriesRoutesAndLengths(routesandlengths);
@@ -159,43 +121,13 @@ export function EachIterationHandler(
     // const iterateworstroutesegments = cycle_routetosegments(iterateworstroute);
     // const iteratebestroutesegments = cycle_routetosegments(iteratebestroute);
     // const global_best_routesegments = cycle_routetosegments(global_best_route);
-    pheromone_update_rule_after_iteration({
-        ...options,
-        // cross_Point_Coefficient_of_Non_Optimal_Paths,
-        coefficient_of_pheromone_Increase_Non_Optimal_Paths,
-        // node_coordinates,
-        iteratebestroute,
-        global_best_route,
-        count_of_nodes,
-        // global_best_routesegments,
-        globalbestlength,
-        // iteratebestroutesegments,
-        iteratebestlength,
-        iterateworstlength,
-        iterateworstroute,
-        pheromone_intensity_Q,
-        pheromoneStore,
-        pheromone_volatility_coefficient_R2,
-        // setPheromone,
-        // getPheromone,
-    });
+
     // let ispheromoneDiffusion = false;
     // if (Math.random() < pheromoneDiffusionProbability) {
     // console.log("执行信息素扩散操作");
     // ispheromoneDiffusion = true;
     //信息素扩散
-    performPheromoneDiffusionOperations({
-        pheromoneDiffusionProbability,
-        number_of_small_scale_cities_where_pheromone_diffuses,
 
-        number_of_large_scale_cities_where_pheromone_diffuses,
-
-        global_best_route,
-        pheromoneStore,
-        node_coordinates,
-        // setPheromone,
-        // getPheromone,
-    });
     // }
 
     //与最优的相对偏差

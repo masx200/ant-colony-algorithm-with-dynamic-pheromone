@@ -8,6 +8,11 @@ import { DataOfFinishOneRoute } from "./DataOfFinishOneRoute";
 import { NodeCoordinates } from "./NodeCoordinates";
 import { SharedOptions } from "./SharedOptions";
 
+export type ReadOnlyPheromone = Pick<
+    MatrixSymmetry<number>,
+    "row" | "column" | "get"
+>;
+
 // import { WayOfConstruct } from "./WayOfConstruct";
 export type TSP_Runner = Required<TSPRunnerOptions> &
     SharedOptions & {
@@ -40,7 +45,7 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
         get_best_length: () => number;
         get_best_route: () => number[];
         get_current_search_count: () => number;
-        pheromoneStore: MatrixSymmetry<number>;
+        pheromoneStore: ReadOnlyPheromone;
 
         // pathTabooList: PathTabooList<number>;
         [Symbol.toStringTag]: string;

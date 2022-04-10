@@ -1,4 +1,3 @@
-import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 import { assert_true } from "../test/assert_true";
 import { closed_total_path_length } from "./closed-total-path-length";
 import { creategetdistancebyindex } from "./creategetdistancebyindex";
@@ -16,6 +15,7 @@ import { pickRandomOne } from "./pickRandomOne";
 import { SharedOptions } from "./SharedOptions";
 import { select_available_cities_from_optimal_and_latest } from "./select_available_cities_from_optimal_and_latest";
 import { get_distance_round } from "../src/set_distance_round";
+import { ReadOnlyPheromone } from "./TSP_Runner";
 
 // export type PathConstructOptions = ;
 /**使用状态转移概率生成路径. */
@@ -29,7 +29,7 @@ export function generate_paths_using_state_transition_probabilities(
         // get_best_length: () => number;
         node_coordinates: NodeCoordinates;
 
-        pheromoneStore: MatrixSymmetry;
+        pheromoneStore: ReadOnlyPheromone;
     } & SharedOptions
 ): {
     route: number[];

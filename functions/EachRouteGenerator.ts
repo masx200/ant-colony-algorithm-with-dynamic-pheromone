@@ -24,7 +24,7 @@ export function EachRouteGenerator(
         set_weight_of_opt_best,
         get_weight_of_opt_current,
         get_weight_of_opt_best,
-        setPheromoneZero,
+
         // setPheromone,
         get_probability_of_opt_best,
         current_search_count,
@@ -54,7 +54,7 @@ export function EachRouteGenerator(
         length: number;
     } = construct_one_route_all({
         ...options,
-        setPheromoneZero,
+
         // getPheromone,
         // setPheromone,
         current_search_count,
