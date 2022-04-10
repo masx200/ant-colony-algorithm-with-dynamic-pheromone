@@ -6,7 +6,6 @@ export function use_tsp_before_start(
 ): Fun_TSP_Before_Start {
     const TSP_before_Start: Fun_TSP_Before_Start =
         async function TSP_before_Start({
-      
             // onFinishIteration,
             onglobal_best_routeChange,
             onLatestRouteChange,
@@ -19,7 +18,6 @@ export function use_tsp_before_start(
             const runner =
                 // console.log("TSP_before_Start", node_coordinates);
                 /*  TSP_RunnerRef.value || */ await initializeTSP_runner({
-               
                     // onFinishIteration,
                     // pheromone_volatility_coefficient_R1,
                     onglobal_best_routeChange,

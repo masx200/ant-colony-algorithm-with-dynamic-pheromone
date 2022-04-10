@@ -8,7 +8,7 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     ) => number[];
     get_random_selection_probability: () => number;
     get_search_count_of_best: () => number;
-    pheromone_volatility_coefficient_R2: number;
+    
     set_weight_of_opt_current: (value: number) => void;
     get_weight_of_opt_current: () => number;
     set_weight_of_opt_best: (value: number) => void;
@@ -26,7 +26,6 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     count_of_nodes: number;
     // cross_Point_Coefficient_of_Non_Optimal_Paths: number;
     max_results_of_2_opt: number;
-
 
     max_results_of_k_opt: number;
 

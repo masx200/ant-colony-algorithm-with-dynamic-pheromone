@@ -11,11 +11,9 @@ export type TSPRunnerOptions = {
     max_size_of_collection_of_optimal_routes?: number;
     // cross_Point_Coefficient_of_Non_Optimal_Paths?: number;
     max_results_of_2_opt?: number;
-    
 
     max_results_of_k_opt?: number | undefined;
-    // pheromone_volatility_coefficient_R1?: number | undefined;
-    pheromone_volatility_coefficient_R2?: number | undefined;
+
 
     node_coordinates: NodeCoordinates;
     alpha_zero?: number | undefined;

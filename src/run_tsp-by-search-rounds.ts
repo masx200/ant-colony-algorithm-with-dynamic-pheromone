@@ -9,7 +9,7 @@ import { tsp_runner_run_async } from "./tsp_runner_run_async";
 
 export async function run_tsp_by_search_rounds({
     runner,
-  
+
     onprogress,
     // TSP_before_Start,
     searchrounds,
@@ -29,7 +29,7 @@ export async function run_tsp_by_search_rounds({
         runOneIteration: () => Promise<void>;
         // runRoutes: (count: number) => Promise<void>;
     };
- 
+
     onprogress: (percentage: number) => void;
     // TSP_before_Start: Fun_TSP_Before_Start;
     searchrounds: Ref<number>;
@@ -50,7 +50,7 @@ export async function run_tsp_by_search_rounds({
     // finish_one_iteration_listener: () => void;
 }): Promise<void> {
     // return async () => {
-    
+
     // console.log("搜索轮次", searchrounds.value);
     // console.log("蚂蚁数量", count_of_ants_ref.value);
     const iterations_of_search = searchrounds.value;
@@ -77,7 +77,7 @@ export async function run_tsp_by_search_rounds({
         //
         // };
         // const runner = await TSP_before_Start({
-    
+
         //     // onFinishIteration,
         //     pheromone_volatility_coefficient_R1,
         //     onglobal_best_routeChange,

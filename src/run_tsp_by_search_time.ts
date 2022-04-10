@@ -4,7 +4,7 @@ import { tsp_runner_run_async } from "./tsp_runner_run_async";
 
 export async function run_tsp_by_search_time({
     runner,
-    
+
     search_time_seconds,
     // count_of_ants_ref,
     // selecteleref,
@@ -40,7 +40,7 @@ export async function run_tsp_by_search_time({
     onprogress: (p: number) => void;
 }): Promise<void> {
     // return async () => {
-    
+
     const search_time_ms = search_time_seconds.value * 1000;
     // const count_of_ants_value = count_of_ants_ref.value;
     // const element = selecteleref.value;
@@ -65,7 +65,7 @@ export async function run_tsp_by_search_time({
         //
         // };
         // const runner = await TSP_before_Start({
-     
+
         //     // onFinishIteration,
         //     pheromone_volatility_coefficient_R1,
         //     onglobal_best_routeChange,

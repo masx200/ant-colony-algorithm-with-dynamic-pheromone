@@ -30,7 +30,7 @@ export function EachIterationHandler(
         /**局部信息素挥发系数 */
         // pheromone_volatility_coefficient_R1: number;
         /**全局信息素挥发系数 */
-        pheromone_volatility_coefficient_R2: number;
+    
         // set_best_route: (route: number[]) => void;
         // set_best_length: (a: number) => void;
         get_best_length: () => number;

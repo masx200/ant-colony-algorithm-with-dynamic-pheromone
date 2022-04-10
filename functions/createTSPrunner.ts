@@ -7,9 +7,6 @@ import {
     default_alpha,
     default_beta,
     default_max_results_of_k_opt,
-
-
-    
     default_max_results_of_2_opt,
 } from "../src/default_Options";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
@@ -40,7 +37,6 @@ import { set_distance_round } from "../src/set_distance_round";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         max_results_of_2_opt = default_max_results_of_2_opt,
-    
 
         max_results_of_k_opt = default_max_results_of_k_opt,
 
@@ -64,7 +60,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         distance_round,
         max_routes_of_greedy,
-        pheromone_volatility_coefficient_R2,
+      
         // max_routes_of_greedy,
         max_cities_of_state_transition,
         max_size_of_collection_of_latest_routes,
@@ -310,7 +306,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         optimalrouteofthis_iteration,
                     } = EachIterationHandler({
                         ...shared,
-                        
 
                         // pathTabooList,
                         // max_results_of_k_opt,
@@ -444,7 +439,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         // getPheromone,
         // setPheromone,
         max_results_of_k_opt,
-       
 
         get_search_count_of_best,
         get_time_of_best,
@@ -454,7 +448,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         on_best_change,
         // runOneRoute,
         // onDataChange,
-        pheromone_volatility_coefficient_R2,
+     
 
         get_total_time_ms,
         // on_finish_all_iterations,
@@ -487,7 +481,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             get_neighbors_from_optimal_routes_and_latest_routes,
             get_random_selection_probability,
             get_search_count_of_best,
-            pheromone_volatility_coefficient_R2,
+        
             set_weight_of_opt_current,
             get_weight_of_opt_current,
             set_weight_of_opt_best,

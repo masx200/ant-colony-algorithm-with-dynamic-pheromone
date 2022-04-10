@@ -14,7 +14,6 @@ export function use_initialize_tsp_runner({
     onreceivedataofoneIteration: (data: DataOfFinishOneIteration) => void;
 }): Fun_initialize_TSP_runner {
     return async function initializeTSP_runner({
-      
         // onFinishIteration,
         node_coordinates,
         count_of_ants,
@@ -24,7 +23,6 @@ export function use_initialize_tsp_runner({
         ...rest
     }) {
         const runner = await create_TSP_Worker_comlink({
-         
             // pheromone_volatility_coefficient_R1,
             node_coordinates,
             count_of_ants,

@@ -111,7 +111,6 @@
             :controls="false"
         /><br />
 
-       
         <span>全局信息素挥发率</span>
         <el-input-number
             :controls="false"

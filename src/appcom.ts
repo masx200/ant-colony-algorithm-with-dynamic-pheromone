@@ -16,7 +16,7 @@ import Datatable from "./Datatable-com.vue";
 import {
     default_count_of_ants,
     default_search_rounds,
-  
+
     // default_pheromone_volatility_coefficient_R1,
     default_search_time_seconds,
     default_beta,
@@ -60,13 +60,11 @@ export default defineComponent({
         watch(round_result, (round) => {
             set_distance_round(round);
         });
-        const global_pheromone_volatilization_rate = ref(
-            DefaultOptions.pheromone_volatility_coefficient_R2
-        );
+
         const show_summary_of_routes = ref(true);
         const show_routes_of_best = ref(true);
         const show_routes_of_latest = ref(true);
-       
+
         const details_shows = [
             show_routes_of_latest,
             show_summary_of_routes,
@@ -287,7 +285,7 @@ export default defineComponent({
             const runner = TSP_RunnerRef.value;
             return run_tsp_by_search_rounds({
                 runner: runner.remote,
-             
+
                 onprogress,
                 // TSP_before_Start,
                 searchrounds,
@@ -349,7 +347,6 @@ export default defineComponent({
         const search_time_seconds = ref(default_search_time_seconds);
 
         async function create_runner(): Promise<TSP_Worker_Remote> {
-          
             // const search_time_ms = search_time_seconds.value * 1000;
             const count_of_ants_value = count_of_ants_ref.value;
             const element = selecteleref.value;
@@ -357,8 +354,7 @@ export default defineComponent({
             const node_coordinates = TSP_cities_map.get(element?.value || "");
             // const pheromone_volatility_coefficient_R1 =
             //     local_pheromone_volatilization_rate.value;
-            const pheromone_volatility_coefficient_R2 =
-                global_pheromone_volatilization_rate.value;
+       
             const alpha_value = alpha.value;
             const max_routes_of_greedy_value = max_routes_of_greedy.value;
             const beta_value = beta.value;
@@ -367,7 +363,7 @@ export default defineComponent({
                 max_routes_of_greedy_value > 0 &&
                 beta_value > 0 &&
                 alpha_value > 0 &&
-                pheromone_volatility_coefficient_R2 > 0 &&
+           
                 // pheromone_volatility_coefficient_R1 > 0 &&
                 // search_time_ms > 0 &&
                 count_of_ants_value >= 2 &&
@@ -384,11 +380,11 @@ export default defineComponent({
                     ...input_options,
 
                     distance_round,
-                    pheromone_volatility_coefficient_R2,
+                 
                     max_routes_of_greedy: max_routes_of_greedy_value,
                     alpha_zero: alpha_value,
                     beta_zero: beta_value,
-                  
+
                     onglobal_best_routeChange,
                     node_coordinates: await node_coordinates(),
                     count_of_ants,
@@ -416,7 +412,7 @@ export default defineComponent({
             const runner = TSP_RunnerRef.value;
             return run_tsp_by_search_time({
                 runner: runner.remote,
-          
+
                 search_time_seconds,
                 // count_of_ants_ref,
                 // selecteleref,
@@ -453,7 +449,7 @@ export default defineComponent({
             show_routes_of_latest,
             show_routes_of_best,
             show_summary_of_routes,
-           
+
             navbar_float,
             run_way_round,
             run_way_time,

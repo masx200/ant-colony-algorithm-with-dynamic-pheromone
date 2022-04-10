@@ -3,14 +3,12 @@ import { TSPRunnerOptions } from "./TSPRunnerOptions";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 
 export type Fun_TSP_Before_Start = ({
-   
     onglobal_best_routeChange,
     onLatestRouteChange,
     node_coordinates,
     count_of_ants,
 }: // pheromone_volatility_coefficient_R1,
 TSPRunnerOptions & {
-
     // onFinishIteration: () => void;
     // pheromone_volatility_coefficient_R1: number;
     onglobal_best_routeChange: (

@@ -16,8 +16,6 @@ export type ReadOnlyPheromone = Pick<
 // import { WayOfConstruct } from "./WayOfConstruct";
 export type TSP_Runner = Required<TSPRunnerOptions> &
     SharedOptions & {
-     
-
         count_of_nodes: number;
         get_random_selection_probability(): number;
         get_time_of_best(): number;
@@ -45,7 +43,7 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
 
         // pathTabooList: PathTabooList<number>;
         [Symbol.toStringTag]: string;
-        pheromone_volatility_coefficient_R2: number;
+
 
         node_coordinates: NodeCoordinates;
         alpha_zero: number;
