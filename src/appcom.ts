@@ -16,7 +16,7 @@ import Datatable from "./Datatable-com.vue";
 import {
     default_count_of_ants,
     default_search_rounds,
-    default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
+  
     // default_pheromone_volatility_coefficient_R1,
     default_search_time_seconds,
     default_beta,
@@ -66,10 +66,7 @@ export default defineComponent({
         const show_summary_of_routes = ref(true);
         const show_routes_of_best = ref(true);
         const show_routes_of_latest = ref(true);
-        const coefficient_of_pheromone_Increase_Non_Optimal_Paths = ref(
-            default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths
-        );
-
+       
         const details_shows = [
             show_routes_of_latest,
             show_summary_of_routes,
@@ -290,7 +287,7 @@ export default defineComponent({
             const runner = TSP_RunnerRef.value;
             return run_tsp_by_search_rounds({
                 runner: runner.remote,
-                // coefficient_of_pheromone_Increase_Non_Optimal_Paths,
+             
                 onprogress,
                 // TSP_before_Start,
                 searchrounds,
@@ -352,8 +349,7 @@ export default defineComponent({
         const search_time_seconds = ref(default_search_time_seconds);
 
         async function create_runner(): Promise<TSP_Worker_Remote> {
-            const coefficient_of_pheromone_Increase_Non_Optimal_Paths_value =
-                coefficient_of_pheromone_Increase_Non_Optimal_Paths.value;
+          
             // const search_time_ms = search_time_seconds.value * 1000;
             const count_of_ants_value = count_of_ants_ref.value;
             const element = selecteleref.value;
@@ -392,10 +388,7 @@ export default defineComponent({
                     max_routes_of_greedy: max_routes_of_greedy_value,
                     alpha_zero: alpha_value,
                     beta_zero: beta_value,
-                    coefficient_of_pheromone_Increase_Non_Optimal_Paths:
-                        coefficient_of_pheromone_Increase_Non_Optimal_Paths_value,
-                    // onFinishIteration,
-                    // pheromone_volatility_coefficient_R1,
+                  
                     onglobal_best_routeChange,
                     node_coordinates: await node_coordinates(),
                     count_of_ants,
@@ -423,7 +416,7 @@ export default defineComponent({
             const runner = TSP_RunnerRef.value;
             return run_tsp_by_search_time({
                 runner: runner.remote,
-                // coefficient_of_pheromone_Increase_Non_Optimal_Paths,
+          
                 search_time_seconds,
                 // count_of_ants_ref,
                 // selecteleref,
@@ -460,7 +453,7 @@ export default defineComponent({
             show_routes_of_latest,
             show_routes_of_best,
             show_summary_of_routes,
-            coefficient_of_pheromone_Increase_Non_Optimal_Paths,
+           
             navbar_float,
             run_way_round,
             run_way_time,

@@ -4,7 +4,7 @@ import { tsp_runner_run_async } from "./tsp_runner_run_async";
 
 export async function run_tsp_by_search_time({
     runner,
-    // coefficient_of_pheromone_Increase_Non_Optimal_Paths,
+    
     search_time_seconds,
     // count_of_ants_ref,
     // selecteleref,
@@ -19,7 +19,7 @@ export async function run_tsp_by_search_time({
     onprogress,
 }: {
     runner: Parameters<typeof tsp_runner_run_async>[0]["runner"];
-    // coefficient_of_pheromone_Increase_Non_Optimal_Paths: Ref<number>;
+
     search_time_seconds: Ref<number>;
     // count_of_ants_ref: Ref<number>;
     // selecteleref: Ref<HTMLSelectElement | undefined>;
@@ -40,8 +40,7 @@ export async function run_tsp_by_search_time({
     onprogress: (p: number) => void;
 }): Promise<void> {
     // return async () => {
-    // const coefficient_of_pheromone_Increase_Non_Optimal_Paths_value =
-    //     coefficient_of_pheromone_Increase_Non_Optimal_Paths.value;
+    
     const search_time_ms = search_time_seconds.value * 1000;
     // const count_of_ants_value = count_of_ants_ref.value;
     // const element = selecteleref.value;
@@ -66,8 +65,7 @@ export async function run_tsp_by_search_time({
         //
         // };
         // const runner = await TSP_before_Start({
-        //     coefficient_of_pheromone_Increase_Non_Optimal_Paths:
-        //         coefficient_of_pheromone_Increase_Non_Optimal_Paths_value,
+     
         //     // onFinishIteration,
         //     pheromone_volatility_coefficient_R1,
         //     onglobal_best_routeChange,

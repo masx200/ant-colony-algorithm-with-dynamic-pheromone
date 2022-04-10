@@ -7,9 +7,9 @@ import {
     default_alpha,
     default_beta,
     default_max_results_of_k_opt,
-    default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
 
-    // default_pheromone_volatility_coefficient_R1,
+
+    
     default_max_results_of_2_opt,
 } from "../src/default_Options";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
@@ -40,7 +40,7 @@ import { set_distance_round } from "../src/set_distance_round";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         max_results_of_2_opt = default_max_results_of_2_opt,
-        coefficient_of_pheromone_Increase_Non_Optimal_Paths = default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
+    
 
         max_results_of_k_opt = default_max_results_of_k_opt,
 
@@ -310,7 +310,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         optimalrouteofthis_iteration,
                     } = EachIterationHandler({
                         ...shared,
-                        coefficient_of_pheromone_Increase_Non_Optimal_Paths,
+                        
 
                         // pathTabooList,
                         // max_results_of_k_opt,
@@ -444,7 +444,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         // getPheromone,
         // setPheromone,
         max_results_of_k_opt,
-        coefficient_of_pheromone_Increase_Non_Optimal_Paths,
+       
 
         get_search_count_of_best,
         get_time_of_best,

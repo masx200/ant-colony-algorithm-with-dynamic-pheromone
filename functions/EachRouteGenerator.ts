@@ -169,7 +169,7 @@ export function EachRouteGenerator(
     //     ...options,
     //     // ...options,
     //     // cross_Point_Coefficient_of_Non_Optimal_Paths,
-    //     coefficient_of_pheromone_Increase_Non_Optimal_Paths,
+
     //     global_best_route: get_best_route(),
     //     current_length: length,
     //     current_route: route,
@@ -190,7 +190,7 @@ export function EachRouteGenerator(
 // export function createEachRouteGenerator(): {
 //     // options: {
 //     // // cross_Point_Coefficient_of_Non_Optimal_Paths?: number;
-//     // // coefficient_of_pheromone_Increase_Non_Optimal_Paths?: number;
+
 //     // // max_results_of_2_opt?: number;
 //     // // node_coordinates: NodeCoordinates;
 //     // }
@@ -209,7 +209,7 @@ export function EachRouteGenerator(
 //     // const {
 //     //     cross_Point_Coefficient_of_Non_Optimal_Paths = default_Cross_Point_Coefficient_of_Non_Optimal_Paths,
 //     //     max_results_of_2_opt = default_max_results_of_2_opt,
-//     //     coefficient_of_pheromone_Increase_Non_Optimal_Paths = default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
+
 //     // } = options;
 
 //     /**每一条路径的生成和局部信息素更新 */

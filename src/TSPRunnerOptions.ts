@@ -11,7 +11,7 @@ export type TSPRunnerOptions = {
     max_size_of_collection_of_optimal_routes?: number;
     // cross_Point_Coefficient_of_Non_Optimal_Paths?: number;
     max_results_of_2_opt?: number;
-    coefficient_of_pheromone_Increase_Non_Optimal_Paths?: number;
+    
 
     max_results_of_k_opt?: number | undefined;
     // pheromone_volatility_coefficient_R1?: number | undefined;

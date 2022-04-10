@@ -26,7 +26,7 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     count_of_nodes: number;
     // cross_Point_Coefficient_of_Non_Optimal_Paths: number;
     max_results_of_2_opt: number;
-    coefficient_of_pheromone_Increase_Non_Optimal_Paths: number;
+
 
     max_results_of_k_opt: number;
 

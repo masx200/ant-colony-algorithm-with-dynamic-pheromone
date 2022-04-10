@@ -13,7 +13,7 @@ export const default_beta = 3;
 export const default_max_results_of_k_opt = 15;
 export const default_max_results_of_2_opt = 10;
 
-export const default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths = 0.7;
+
 
 export { DefaultOptions };
 //展示每条路径的详细信息
@@ -24,8 +24,7 @@ const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
     /**每条的2-opt最大次数 */
     max_results_of_2_opt: default_max_results_of_2_opt,
     /**非最优解的信息素增量系数 */
-    coefficient_of_pheromone_Increase_Non_Optimal_Paths:
-        default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
+
     /**信息素扩散的小范围城市数 */
 
     /**信息素扩散的大范围城市数 */

@@ -45,7 +45,7 @@ export function EachIterationHandler(
         /**最大迭代次数 */
         // maxnumberofiterations: number;
         // pheromoneStore: MatrixSymmetry;
-        coefficient_of_pheromone_Increase_Non_Optimal_Paths?: number;
+
         /* 停滞迭代次数.如果连续多少代无法发现新路径,则停止搜索 */
         // numberofstagnantiterations: number;
     }

@@ -16,9 +16,7 @@ export type ReadOnlyPheromone = Pick<
 // import { WayOfConstruct } from "./WayOfConstruct";
 export type TSP_Runner = Required<TSPRunnerOptions> &
     SharedOptions & {
-        // getPheromone(row: number, column: number): number;
-        // setPheromone(row: number, column: number, value: number): void;
-        coefficient_of_pheromone_Increase_Non_Optimal_Paths: number;
+     
 
         count_of_nodes: number;
         get_random_selection_probability(): number;

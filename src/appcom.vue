@@ -111,16 +111,7 @@
             :controls="false"
         /><br />
 
-        <span>非最优解的信息素增量系数</span>
-        <el-input-number
-            :controls="false"
-            step-strictly
-            :step="0.001"
-            v-model.number="coefficient_of_pheromone_Increase_Non_Optimal_Paths"
-            :disabled="disablemapswitching"
-            :min="0.001"
-            :max="1"
-        /><br />
+       
         <span>全局信息素挥发率</span>
         <el-input-number
             :controls="false"
