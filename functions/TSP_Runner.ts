@@ -19,8 +19,6 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
         // getPheromone(row: number, column: number): number;
         // setPheromone(row: number, column: number, value: number): void;
         coefficient_of_pheromone_Increase_Non_Optimal_Paths: number;
-        number_of_small_scale_cities_where_pheromone_diffuses: number;
-        number_of_large_scale_cities_where_pheromone_diffuses: number;
 
         count_of_nodes: number;
         get_random_selection_probability(): number;
@@ -50,7 +48,7 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
         // pathTabooList: PathTabooList<number>;
         [Symbol.toStringTag]: string;
         pheromone_volatility_coefficient_R2: number;
-   
+
         node_coordinates: NodeCoordinates;
         alpha_zero: number;
         beta_zero: number;

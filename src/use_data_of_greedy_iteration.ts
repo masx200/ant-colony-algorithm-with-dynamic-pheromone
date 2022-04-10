@@ -65,8 +65,7 @@ export function use_data_of_greedy_iteration(): {
                 index + 1,
                 // data.population_relative_information_entropy,
                 // data.randomselectionprobability,
-                // data.ispheromoneDiffusion,
-                // data.pheromoneDiffusionProbability,
+
                 data.time_ms_of_one_iteration / 1000,
                 data.optimallengthofthis_iteration,
                 // data.relative_deviation_from_optimal,

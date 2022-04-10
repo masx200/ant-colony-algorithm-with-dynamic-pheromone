@@ -6,9 +6,7 @@ import {
     default_count_of_ants,
     default_alpha,
     default_beta,
-    default_number_of_large_scale_cities_where_pheromone_diffuses,
     default_max_results_of_k_opt,
-    default_number_of_small_scale_cities_where_pheromone_diffuses,
     default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
 
     // default_pheromone_volatility_coefficient_R1,
@@ -43,12 +41,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         max_results_of_2_opt = default_max_results_of_2_opt,
         coefficient_of_pheromone_Increase_Non_Optimal_Paths = default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
-        number_of_small_scale_cities_where_pheromone_diffuses = default_number_of_small_scale_cities_where_pheromone_diffuses,
-
-        number_of_large_scale_cities_where_pheromone_diffuses = default_number_of_large_scale_cities_where_pheromone_diffuses,
 
         max_results_of_k_opt = default_max_results_of_k_opt,
-     
+
         node_coordinates,
         alpha_zero = default_alpha,
         beta_zero = default_beta,
@@ -65,7 +60,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
-
 
     const {
         distance_round,
@@ -273,7 +267,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     max_results_of_k_opt,
                     get_best_length,
                     get_best_route,
-                
+
                     set_best_length,
                     set_best_route,
                 });
@@ -309,16 +303,15 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         // relative_deviation_from_optimal,
                         nextrandomselectionprobability,
                         //   routesandlengths,
-                        pheromoneDiffusionProbability,
+
                         population_relative_information_entropy,
-                        // ispheromoneDiffusion,
+
                         optimallengthofthis_iteration,
                         optimalrouteofthis_iteration,
                     } = EachIterationHandler({
                         ...shared,
                         coefficient_of_pheromone_Increase_Non_Optimal_Paths,
-                        number_of_small_scale_cities_where_pheromone_diffuses,
-                        number_of_large_scale_cities_where_pheromone_diffuses,
+
                         // pathTabooList,
                         // max_results_of_k_opt,
                         routesandlengths: routes_and_lengths_of_one_iteration,
@@ -330,7 +323,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         // pathTabooList,
                         pheromoneStore,
                         node_coordinates,
-                    
                     });
                     //更新局部优化的系数
                     update_weight_of_opt({
@@ -356,16 +348,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     // });
                     totaltimems += timems_of_process_iteration;
                     emit_finish_one_iteration({
-                        // globalbestlength: globalbestlength,
-                        // time_of_best_ms,
-                        // locally_optimized_length,
-                        // relative_deviation_from_optimal,
-                        // current_iterations: get_number_of_iterations(),
-                        pheromoneDiffusionProbability,
                         optimallengthofthis_iteration,
                         optimalrouteofthis_iteration,
                         population_relative_information_entropy,
-                        // ispheromoneDiffusion,
+
                         randomselectionprobability:
                             lastrandomselectionprobability,
                         time_ms_of_one_iteration: time_ms_of_one_iteration,
@@ -435,7 +421,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         on: on_finish_greedy_iteration,
         emit: emit_finish_greedy_iteration,
     } = createEventPair<DataOfFinishGreedyIteration>(emitter);
-   
+
     function get_search_count_of_best() {
         return search_count_of_best;
     }
@@ -459,9 +445,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         // setPheromone,
         max_results_of_k_opt,
         coefficient_of_pheromone_Increase_Non_Optimal_Paths,
-        number_of_small_scale_cities_where_pheromone_diffuses,
 
-        number_of_large_scale_cities_where_pheromone_diffuses,
         get_search_count_of_best,
         get_time_of_best,
         get_random_selection_probability,
@@ -471,7 +455,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         // runOneRoute,
         // onDataChange,
         pheromone_volatility_coefficient_R2,
-     
+
         get_total_time_ms,
         // on_finish_all_iterations,
         runIterations,

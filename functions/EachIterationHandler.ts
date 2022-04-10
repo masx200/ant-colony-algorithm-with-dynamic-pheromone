@@ -23,15 +23,10 @@ export function EachIterationHandler(
             route: number[];
             length: number;
         }[];
-        // emit_finish_one_route: Emit_Finish_One_Route;
-        // lastrandomselectionprobability: number;
-        // searchloopcountratio: number;
-        number_of_small_scale_cities_where_pheromone_diffuses: number;
-        number_of_large_scale_cities_where_pheromone_diffuses: number;
 
         get_best_route: () => number[];
         /**信息素强度*/
-      
+
         /**局部信息素挥发系数 */
         // pheromone_volatility_coefficient_R1: number;
         /**全局信息素挥发系数 */
@@ -58,10 +53,10 @@ export function EachIterationHandler(
     coefficient_of_diversity_increase: number;
     // relative_deviation_from_optimal: number;
     nextrandomselectionprobability: number;
-    pheromoneDiffusionProbability: number;
+
     optimallengthofthis_iteration: number;
     optimalrouteofthis_iteration: number[];
-    // ispheromoneDiffusion: boolean;
+
     population_relative_information_entropy: number;
     // locally_optimized_length: number;
 } {
@@ -83,16 +78,9 @@ export function EachIterationHandler(
     );
     const nextrandomselectionprobability =
         coefficient_of_diversity_increase / 8;
-    const pheromoneDiffusionProbability = coefficient_of_diversity_increase / 4;
-    // console.log(
-    //     "种群相对信息熵",
-    //     current_population_relative_information_entropy
-    // );
-    // console.log("随机选择概率", nextrandomselectionprobability);
-    // console.log("信息素扩散概率", pheromoneDiffusionProbability);
+
     assert_true(!Number.isNaN(current_population_relative_information_entropy));
     assert_true(!Number.isNaN(nextrandomselectionprobability));
-    assert_true(!Number.isNaN(pheromoneDiffusionProbability));
 
     //对全局最优解进行k-opt优化
 
@@ -122,12 +110,6 @@ export function EachIterationHandler(
     // const iteratebestroutesegments = cycle_routetosegments(iteratebestroute);
     // const global_best_routesegments = cycle_routetosegments(global_best_route);
 
-    // let ispheromoneDiffusion = false;
-    // if (Math.random() < pheromoneDiffusionProbability) {
-    // console.log("执行信息素扩散操作");
-    // ispheromoneDiffusion = true;
-    //信息素扩散
-
     // }
 
     //与最优的相对偏差
@@ -142,11 +124,10 @@ export function EachIterationHandler(
         // relative_deviation_from_optimal,
         optimallengthofthis_iteration,
         optimalrouteofthis_iteration,
-        // ispheromoneDiffusion,
+
         // routesandlengths,
         nextrandomselectionprobability,
         population_relative_information_entropy:
             current_population_relative_information_entropy,
-        pheromoneDiffusionProbability,
     };
 }

@@ -40,7 +40,7 @@ export function EachRouteGenerator(
         get_best_length,
         get_best_route,
         // pheromone_volatility_coefficient_R1,
-    
+
         set_best_length,
         set_best_route,
         max_segments_of_cross_point,
@@ -64,7 +64,7 @@ export function EachRouteGenerator(
         // set_best_length,
         // set_best_route,
         pheromoneStore,
-        
+
         alpha_zero,
         beta_zero,
         lastrandomselectionprobability,
@@ -177,7 +177,7 @@ export function EachRouteGenerator(
     //     count_of_nodes,
     //     globalbestlength: get_best_length(),
     //     pheromone_volatility_coefficient_R1,
-   
+
     //     // pheromoneStore,
     // });
     return {

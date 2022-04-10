@@ -13,7 +13,7 @@ export function use_data_of_one_iteration(): {
             // boolean,
             number,
             number,
-            number,
+
             // number,
             number
             // number
@@ -26,7 +26,6 @@ export function use_data_of_one_iteration(): {
         "信息熵",
         "随机选择概率",
         // "是否信息素扩散",
-        "信息素扩散概率",
 
         "耗时秒",
         "迭代最优长度",
@@ -54,9 +53,9 @@ export function use_data_of_one_iteration(): {
             // boolean,
             number,
             number,
-            number,
-            // number,
             number
+            // number,
+
             // number
         ][]
     >(() => {
@@ -65,8 +64,7 @@ export function use_data_of_one_iteration(): {
                 index + 1,
                 data.population_relative_information_entropy,
                 data.randomselectionprobability,
-                // data.ispheromoneDiffusion,
-                data.pheromoneDiffusionProbability,
+
                 data.time_ms_of_one_iteration / 1000,
                 data.optimallengthofthis_iteration,
                 // data.relative_deviation_from_optimal,
