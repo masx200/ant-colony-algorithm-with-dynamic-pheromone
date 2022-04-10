@@ -1,8 +1,10 @@
-# ant-colony-algorithm-function-test
+# ant-colony-algorithm-without-storing-pheromone
 
 #### 介绍
 
-ant-colony-algorithm-function-test
+ant-colony-algorithm-without-storing-pheromone
+
+不存储信息素的蚁群算法.
 
 蚁群算法函数测试
 
@@ -14,29 +16,25 @@ ant-colony-algorithm-function-test
 
 软件架构说明
 
-1.信息素扩散机制
+1.有限随机 k-opt
 
-2.信息素奖惩机制
+2.精准 2-opt 去交叉点
 
-3.有限随机 k-opt
+3.贪心算法
 
-4.精准 2-opt 去交叉点
+4.种群相对信息熵
 
-5.贪心算法
+5.状态转移概率
 
-6.信息素初始化
+6.最优路径集合与最新路径集合
 
-7.种群相对信息熵
+7.判断交叉点的方法
 
-8.状态转移概率
+8.随机 k-opt 的对象的选择的权重
 
-9.最优路径集合与最新路径集合
+9.大规模问题部分查找交叉点
 
-10.判断交叉点的方法
-
-11.随机 k-opt 的对象的选择的权重
-
-12.大规模问题部分查找交叉点
+10.信息素实时计算机制代替存储信息素和信息素扩散和信息素挥发
 
 #### 安装教程
 

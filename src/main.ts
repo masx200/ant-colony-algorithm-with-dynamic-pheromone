@@ -5,7 +5,7 @@ import appcom from "./appcom.vue";
 import "./style.css";
 // import { TSP_cities_map } from "./TSP_cities_map";
 
-document.title = "ant-colony-algorithm-function-test";
+document.title = "ant-colony-algorithm-without-storing-pheromone";
 
 export const app = createApp({
     render() {
