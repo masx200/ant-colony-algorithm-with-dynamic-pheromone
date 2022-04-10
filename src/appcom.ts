@@ -23,7 +23,7 @@ import {
     default_alpha,
     DefaultOptions,
     show_every_route,
-    default_pheromone_intensity_Q,
+
 } from "./default_Options";
 import { get_distance_round, set_distance_round } from "./set_distance_round";
 import { draw_best_route_debounced } from "./draw_best_route_debounced";
@@ -56,7 +56,7 @@ export default defineComponent({
     components: { Datatable, Progresselement: Progresselement },
     setup() {
         const input_options = reactive(DefaultOptions);
-        const pheromone_intensity_Q_ref = ref(default_pheromone_intensity_Q);
+       
         const round_result = ref(get_distance_round());
         watch(round_result, (round) => {
             set_distance_round(round);
@@ -353,7 +353,7 @@ export default defineComponent({
         const search_time_seconds = ref(default_search_time_seconds);
 
         async function create_runner(): Promise<TSP_Worker_Remote> {
-            const pheromone_intensity_Q = pheromone_intensity_Q_ref.value;
+           
             const coefficient_of_pheromone_Increase_Non_Optimal_Paths_value =
                 coefficient_of_pheromone_Increase_Non_Optimal_Paths.value;
             // const search_time_ms = search_time_seconds.value * 1000;
@@ -370,7 +370,7 @@ export default defineComponent({
             const beta_value = beta.value;
             const distance_round = round_result.value;
             if (
-                pheromone_intensity_Q > 0 &&
+          
                 max_routes_of_greedy_value > 0 &&
                 beta_value > 0 &&
                 alpha_value > 0 &&
@@ -389,7 +389,7 @@ export default defineComponent({
 
                 const runner = await TSP_before_Start({
                     ...input_options,
-                    pheromone_intensity_Q,
+                
                     distance_round,
                     pheromone_volatility_coefficient_R2,
                     max_routes_of_greedy: max_routes_of_greedy_value,
@@ -450,7 +450,7 @@ export default defineComponent({
         const max_routes_of_greedy = ref(DefaultOptions.max_routes_of_greedy);
         return {
             input_options,
-            pheromone_intensity_Q_ref,
+        
             round_result,
             global_pheromone_volatilization_rate,
             show_every_route: show_every_route,

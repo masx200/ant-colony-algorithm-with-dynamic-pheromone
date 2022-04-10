@@ -9,7 +9,7 @@ export const default_search_time_seconds = 900;
 
 export const default_alpha = 1;
 export const default_beta = 3;
-export const default_pheromone_intensity_Q = 1;
+
 export const default_max_results_of_k_opt = 15;
 export const default_max_results_of_2_opt = 10;
 
@@ -40,7 +40,7 @@ const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
     /**全局信息素挥发率     */
     pheromone_volatility_coefficient_R2: 0.15,
     /**信息素强度 */
-    pheromone_intensity_Q: default_pheromone_intensity_Q,
+  
     /**信息素因子 */
     alpha_zero: default_alpha,
     /**启发式因子 */

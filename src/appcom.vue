@@ -131,15 +131,7 @@
             :min="1"
             :controls="false"
         /><br />
-        <span>信息素强度</span>
-        <el-input-number
-            step-strictly
-            :step="0.01"
-            v-model.number="pheromone_intensity_Q_ref"
-            :disabled="disablemapswitching"
-            :min="0.01"
-            :controls="false"
-        /><br />
+       
         <span>非最优解的信息素增量系数</span>
         <el-input-number
             :controls="false"

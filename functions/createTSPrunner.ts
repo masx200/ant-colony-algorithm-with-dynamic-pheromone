@@ -10,7 +10,7 @@ import {
     default_max_results_of_k_opt,
     default_number_of_small_scale_cities_where_pheromone_diffuses,
     default_Pheromone_Increase_Coefficient_of_Non_Optimal_Paths,
-    default_pheromone_intensity_Q,
+
     // default_pheromone_volatility_coefficient_R1,
     default_max_results_of_2_opt,
 } from "../src/default_Options";
@@ -48,7 +48,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         number_of_large_scale_cities_where_pheromone_diffuses = default_number_of_large_scale_cities_where_pheromone_diffuses,
 
         max_results_of_k_opt = default_max_results_of_k_opt,
-        pheromone_intensity_Q = default_pheromone_intensity_Q,
+     
         node_coordinates,
         alpha_zero = default_alpha,
         beta_zero = default_beta,
@@ -273,8 +273,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     max_results_of_k_opt,
                     get_best_length,
                     get_best_route,
-                    // pheromone_volatility_coefficient_R1,
-                    pheromone_intensity_Q,
+                
                     set_best_length,
                     set_best_route,
                 });
@@ -331,16 +330,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         // pathTabooList,
                         pheromoneStore,
                         node_coordinates,
-                        // count_of_ants,
-                        // alpha_zero,
-                        // beta_zero,
-                        // lastrandomselectionprobability,
-                        // searchloopcountratio,
-                        // pheromone_volatility_coefficient_R2,
-                        // pheromone_volatility_coefficient_R1,
-                        pheromone_intensity_Q,
-                        // getPheromone,
-                        // setPheromone,
+                    
                     });
                     //更新局部优化的系数
                     update_weight_of_opt({
@@ -481,8 +471,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         // runOneRoute,
         // onDataChange,
         pheromone_volatility_coefficient_R2,
-        // pheromone_volatility_coefficient_R1,
-        pheromone_intensity_Q,
+     
         get_total_time_ms,
         // on_finish_all_iterations,
         runIterations,

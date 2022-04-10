@@ -31,7 +31,7 @@ export function EachIterationHandler(
 
         get_best_route: () => number[];
         /**信息素强度*/
-        pheromone_intensity_Q: number;
+      
         /**局部信息素挥发系数 */
         // pheromone_volatility_coefficient_R1: number;
         /**全局信息素挥发系数 */

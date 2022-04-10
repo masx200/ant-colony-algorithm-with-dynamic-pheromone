@@ -30,9 +30,7 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     number_of_small_scale_cities_where_pheromone_diffuses: number;
     number_of_large_scale_cities_where_pheromone_diffuses: number;
     max_results_of_k_opt: number;
-    // pheromone_volatility_coefficient_R1: number;
-    //   pheromone_volatility_coefficient_R2       ,
-    pheromone_intensity_Q: number;
+    
     alpha_zero: number;
     beta_zero: number;
     count_of_ants: number;
