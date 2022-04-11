@@ -1,4 +1,3 @@
-// import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 import { DataOfBestChange } from "./DataOfBestChange";
@@ -13,7 +12,6 @@ export type ReadOnlyPheromone = Pick<
     "row" | "column" | "get"
 >;
 
-// import { WayOfConstruct } from "./WayOfConstruct";
 export type TSP_Runner = Required<TSPRunnerOptions> &
     SharedOptions & {
         count_of_nodes: number;
@@ -21,7 +19,6 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
         get_time_of_best(): number;
         get_search_count_of_best(): number;
         on_best_change: (callback: (data: DataOfBestChange) => void) => void;
-        // runOneRoute: () => Promise<void>;
         runOneIteration: () => Promise<void>;
 
         get_total_time_ms: () => number;
@@ -41,16 +38,13 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
         get_current_search_count: () => number;
         pheromoneStore: ReadOnlyPheromone;
 
-        // pathTabooList: PathTabooList<number>;
         [Symbol.toStringTag]: string;
 
         node_coordinates: NodeCoordinates;
         alpha_zero: number;
         beta_zero: number;
-        // searchloopcountratio: number;
         count_of_ants: number;
         on_finish_greedy_iteration: (
             callback: (data: DataOfFinishGreedyIteration) => void
         ) => void;
-        // runRoutes: (count: number) => Promise<void>;
     };

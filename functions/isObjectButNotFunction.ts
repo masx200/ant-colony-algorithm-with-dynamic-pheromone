@@ -1,4 +1,4 @@
-import { isObject, isFunction } from "lodash";
+import { isFunction, isObject } from "lodash";
 
 export function isObjectButNotFunction(
     v: any

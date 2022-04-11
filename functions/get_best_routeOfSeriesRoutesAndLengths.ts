@@ -1,4 +1,3 @@
-/**找出最短路径 */
 export function get_best_routeOfSeriesRoutesAndLengths(
     routesandlengths: {
         route: number[];

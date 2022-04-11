@@ -30,7 +30,6 @@ export class CollectionOfOptimalRoutes extends Array<{
 
     #unique_string_store = new Array<string>();
     constructor(public max_size: number) {
-        // console.log({ max_size });
         assert_true(0 < max_size, "max_size greater than 0");
         super();
         this.length = 0;
@@ -62,7 +61,6 @@ export class CollectionOfOptimalRoutes extends Array<{
             const index = longest.index;
             assignOwnKeys(
                 this,
-                //filter会创建一个新的数组,导致max_size==0
                 Array.from(this).filter((_v, i) => i !== index)
             );
             this.#unique_string_store = this.#unique_string_store.filter(

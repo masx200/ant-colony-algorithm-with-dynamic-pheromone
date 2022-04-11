@@ -2,7 +2,6 @@ import { isEqual } from "lodash";
 import { cyclereorganizeequal } from "./cycle_reorganizeequal";
 import { reversearray } from "./reversearray";
 
-//回环双向相等
 export function ispathsequalinbothdirectionswithcycle(
     left: Array<number>,
     right: Array<number>

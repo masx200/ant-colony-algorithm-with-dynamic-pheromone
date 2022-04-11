@@ -10,17 +10,10 @@ export function createsymmetrymatrixdistancestore(
     const row = node_coordinates.length;
     return MatrixSymmetryCreate({
         row,
-        // column: row,
-        // default: -1,
         initializer: (left, right) => {
             let leftpair = node_coordinates[left];
             let rightpair = node_coordinates[right];
-            let distance = euclidean_distance(
-                leftpair,
-
-                rightpair,
-                round
-            );
+            let distance = euclidean_distance(leftpair, rightpair, round);
             return distance;
         },
     });

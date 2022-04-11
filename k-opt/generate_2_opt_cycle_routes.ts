@@ -2,13 +2,10 @@ import { assert_true } from "../test/assert_true";
 import { reversearray } from "../functions/reversearray";
 import { split_cycle_route_to_2_sections } from "./split_cycle_route_to_2_sections";
 import { whether_2_sections_reverse_opt } from "./whether_2_sections_reverse_opt";
-/* 生成3-opt的路径 */
 export function generate_2_opt_cycle_routes(oldRoute: number[]): number[][] {
     assert_true(oldRoute.length >= 4);
-    //splitted_Routes.length===3
     const splitted_Routes = split_cycle_route_to_2_sections(oldRoute);
 
-    // console.log("splitted_Routes", splitted_Routes);
     assert_true(
         splitted_Routes.every((partial_route) => partial_route.length >= 2)
     );

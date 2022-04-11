@@ -1,30 +1,17 @@
 import { NodeCoordinates } from "./NodeCoordinates";
-// import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 import { SharedOptions } from "./SharedOptions";
 import { run_greedy_once_thread } from "./run_greedy_once_thread";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
-// import { PathTabooList } from "../pathTabooList/PathTabooList";
-/**并行计算贪心算法搜索路径 */
 export async function* greedy_first_search_routes_parallel({
     max_cities_of_greedy,
     max_routes_of_greedy,
     node_coordinates,
-    // pathTabooList,
     count_of_nodes,
     round = false,
-}: // set_best_length,
-// set_best_route,
-// emit_finish_one_route,
-// pheromoneStore,
-{
+}: {
     round?: boolean;
-    // pathTabooList: PathTabooList;
     node_coordinates: NodeCoordinates;
     count_of_nodes: number;
-    // set_best_length: (bestlength: number) => void;
-    // set_best_route: (route: number[]) => void;
-    // emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
-    // pheromoneStore: MatrixSymmetry<number>;
 } & SharedOptions): AsyncGenerator<
     { length: number; route: number[]; time_ms: number },
     void,
@@ -61,6 +48,4 @@ export async function* greedy_first_search_routes_parallel({
             yield result;
         }
     }
-
-    // return parallel_results;
 }

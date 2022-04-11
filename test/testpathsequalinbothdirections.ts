@@ -2,8 +2,6 @@ import { ispathsequalinbothdirectionswithcycle } from "../functions/ispathsequal
 import { assert_true } from "./assert_true";
 
 export function testpathsequalinbothdirections() {
-    // console.log("test pathsequalinbothdirections start");
-
     assert_true(ispathsequalinbothdirectionswithcycle([1, 2, 3], [3, 2, 1]));
     assert_true(ispathsequalinbothdirectionswithcycle([1, 2, 3], [1, 2, 3]));
     assert_true(
@@ -32,5 +30,4 @@ export function testpathsequalinbothdirections() {
     assert_true(
         ispathsequalinbothdirectionswithcycle([2, 3, 4, 0, 1], [4, 3, 2, 1, 0])
     );
-    // console.log("test pathsequalinbothdirections ok");
 }

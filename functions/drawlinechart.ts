@@ -1,29 +1,10 @@
 import { EChartsType } from "echarts";
 import { ECOption } from "./echarts-line";
 
-// 注册必须的组件
-// const option: ECOption = {
-//     xAxis: {},
-//     yAxis: {},
-//     series: [
-//         {
-//             data: [
-//                 [20, 120],
-//                 [50, 200],
-//                 [40, 50],
-//             ],
-//             type: "line",
-//         },
-//     ],
-//     // ...
-// };
-/* 使用echarts画折线图 */
 export function drawlinechart({
     xAxis_min = "dataMin",
     yAxis_min = "dataMin",
     data,
-    // resize,
-    // setOption,
     chart,
     titletext,
 }: {
@@ -32,8 +13,6 @@ export function drawlinechart({
     data: Array<[number, number]>;
     chart: Pick<EChartsType, "resize" | "setOption">;
     titletext: string;
-    // resize: EChartsType["resize"];
-    // setOption: EChartsType["setOption"];
 }) {
     const option: ECOption = {
         animation: false,
@@ -49,7 +28,6 @@ export function drawlinechart({
                     label: {
                         show: true,
                         formatter(parm) {
-                            // console.log(parm.data);
                             return (
                                 "(" +
                                 Array.from([parm.data].flat()).join(",") +
@@ -62,11 +40,7 @@ export function drawlinechart({
                 type: "line",
             },
         ],
-        // ...
     };
-    // setOption(option);
     chart.setOption(option, { lazyUpdate: true });
     chart.resize();
-    // resize();
-    // chart.resize(/* getcharsizeofwindow() */);
 }

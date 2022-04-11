@@ -1,4 +1,3 @@
-/* 字符串键值生成数字 */
 export function stringkeytonumbers(
     value: `${number},${number}`
 ): [number, number] {

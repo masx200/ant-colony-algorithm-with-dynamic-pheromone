@@ -3,7 +3,6 @@ import { generate_paths_using_state_transition_probabilities } from "./generate-
 import { NodeCoordinates } from "./NodeCoordinates";
 import { SharedOptions } from "./SharedOptions";
 
-/* 只是生成一条路径 */
 export function construct_one_route_all(
     options: {
         current_search_count: number;
@@ -37,6 +36,5 @@ export function construct_one_route_all(
         randomselectionprobability: lastrandomselectionprobability,
         node_coordinates,
     });
-    //最优解有交叉点
     return result;
 }

@@ -3,9 +3,6 @@ import { divide_route_to_k_opt_random } from "./divide_route_to_k-opt-random";
 
 import { whether_k_sections_reverse_opt } from "../k-opt/whether_k_sections_reverse-opt";
 import { reversearray } from "../functions/reversearray";
-// import { split_cycle_route_to_3_sections } from "./split_cycle_route_to_3_sections";
-// import { whether_3_sections_reverse_opt } from "./whether_3_sections_reverse_opt";
-/* 生成k-opt的路径 */
 export function generate_k_opt_cycle_routes_limited({
     oldRoute,
     k,
@@ -16,13 +13,11 @@ export function generate_k_opt_cycle_routes_limited({
     max_results: number;
 }): number[][] {
     assert_true(oldRoute.length >= 2 * k);
-    //splitted_Routes.length===k
     const splitted_Routes = divide_route_to_k_opt_random(
         oldRoute,
         Math.round(k)
     );
 
-    // console.log("splitted_Routes", splitted_Routes);
     assert_true(
         splitted_Routes.every((partial_route) => partial_route.length >= 2)
     );

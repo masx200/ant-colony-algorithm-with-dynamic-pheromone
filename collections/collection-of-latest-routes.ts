@@ -15,7 +15,6 @@ export class CollectionOfLatestRoutes extends Array<number[]> {
         super();
         this.length = 0;
     }
-    //新的在后,旧的在前
     add(route: number[]) {
         assert_true(route.length > 0);
         const unique_string = getUniqueStringOfCircularRoute(route);
@@ -24,7 +23,7 @@ export class CollectionOfLatestRoutes extends Array<number[]> {
             return;
         }
         this.#unique_string_store.push(unique_string);
-        /*   this.#routes_store. */ super.push(route);
+        super.push(route);
 
         if (this.length > this.max_size) {
             assignOwnKeys(this, this.slice(-this.max_size));

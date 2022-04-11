@@ -22,9 +22,7 @@ it("test-collection_of_optimal_routes", () => {
         .forEach((r, i) => {
             cl.add(r, i + 1);
         });
-    // console.log(JSON.stringify(entriesOwnKeys(cl)));
     expect(cl.length).toBe(10);
-    // console.log(Array.from(cl));
     expect(cl[0]).toEqual({ length: 10, route: [1, 2, 3, 10] });
     expect(cl.slice(-1)[0]).toEqual({ length: 9, route: [1, 2, 3, 4, 6, 9] });
     expect(cl[Symbol.toStringTag]).toBe("CollectionOfOptimalRoutes");

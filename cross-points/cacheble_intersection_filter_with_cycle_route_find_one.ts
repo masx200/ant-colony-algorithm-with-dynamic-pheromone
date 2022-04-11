@@ -12,9 +12,6 @@ export function cacheble_intersection_filter_with_cycle_route_find_one({
 
     node_coordinates: NodeCoordinates;
 }): [[number, number], [number, number]] | false {
-    // const getOrCreateSetOfMap = getOrCreateSetOfMapFun(
-    //     node_coordinates_to_intersect_routes_unique
-    // );
     const map = getOrCreateMapOfMapFun(
         node_coordinates_to_intersect_routes_unique,
         node_coordinates
@@ -30,11 +27,7 @@ export function cacheble_intersection_filter_with_cycle_route_find_one({
         cycle_route,
         node_coordinates,
     });
-    // if (result) {
-    //     return result;
-    // } else {
     map.set(unique_string, Boolean(result));
 
     return result;
-    // }
 }

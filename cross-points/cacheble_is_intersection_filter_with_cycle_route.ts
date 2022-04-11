@@ -29,11 +29,7 @@ export function cacheble_is_intersection_filter_with_cycle_route({
         cycle_route,
         node_coordinates,
     });
-    // if (result) {
-    //     return result;
-    // } else {
     map.set(unique_string, result);
 
     return result;
-    // }
 }

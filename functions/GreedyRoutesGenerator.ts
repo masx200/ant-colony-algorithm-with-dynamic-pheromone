@@ -66,9 +66,6 @@ export async function GreedyRoutesGenerator({
         emit_finish_one_route({
             probability_of_opt_best: get_probability_of_opt_best(),
             probability_of_opt_current: get_probability_of_opt_current(),
-            // weight_of_opt_best,
-            // weight_of_opt_current,
-            // way_of_construct,
             time_ms_of_one_route: time_ms,
             route,
             length,

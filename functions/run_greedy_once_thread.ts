@@ -23,5 +23,4 @@ export async function run_greedy_once_thread({
         round,
         max_cities_of_greedy,
     });
-    // return { length, route: greedypath, time_ms };
 }

@@ -2,7 +2,6 @@ import { sum } from "lodash";
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
 import { NodeCoordinates } from "./NodeCoordinates";
 
-/* 计算路径片段的总长度,非环路 */
 export function totalpathlengthwithoutcycle(
     path: number[],
     node_coordinates: NodeCoordinates,
@@ -19,7 +18,7 @@ export function totalpathlengthwithoutcycle(
             })
             .slice(0, -1)
             .map(([left, right]) =>
-                /* console.log(left, right);*/ geteuclideandistancebyindex(
+                geteuclideandistancebyindex(
                     left,
                     right,
                     node_coordinates,

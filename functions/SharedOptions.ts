@@ -20,11 +20,7 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     set_best_route: (route: number[]) => void;
     set_best_length: (bestlength: number) => void;
     get_current_search_count: () => number;
-    // setPheromone: (row: number, column: number, value: number) => void;
-    // getPheromone: (row: number, column: number) => number;
-
     count_of_nodes: number;
-    // cross_Point_Coefficient_of_Non_Optimal_Paths: number;
     max_results_of_2_opt: number;
 
     max_results_of_k_opt: number;

@@ -40,7 +40,6 @@ it("test-intersection_filter_with_cycle_route_find_one-divide_route_to_2_opt_wit
     expect(Array.isArray(intersection)).toBeTruthy();
     if (intersection) {
         const result = divide_route_to_2_opt_with_segment(route, intersection);
-        // console.log(result);
         expect(
             [
                 [

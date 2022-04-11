@@ -4,7 +4,6 @@ import { assert_true } from "../test/assert_true";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
 import { getnumberfromarrayofnmber } from "../functions/getnumberfromarrayofnmber";
 import { pickRandomOne } from "../functions/pickRandomOne";
-/* 把路径拆成3部分,每个部分长度大于等于2 */
 export function split_cycle_route_to_3_sections(
     oldRoute: number[]
 ): [number[], number[], number[]] {

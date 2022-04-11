@@ -5,7 +5,6 @@ import { geteuclideandistancebyindex } from "../functions/geteuclideandistanceby
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { assert_true } from "./assert_true";
 export function testgeteuclideandistance() {
-    // console.log("test geteuclideandistance test start");
     assert_true(euclidean_distance([3, 4], [0, 0]) === 5);
 
     let node_coordinates1: NodeCoordinates = [
@@ -27,20 +26,7 @@ export function testgeteuclideandistance() {
     assert_true(geteuclideandistancebyindex(0, 2, node_coordinates2) === 10);
     assert_true(geteuclideandistancebyindex(2, 0, node_coordinates2) === 10);
     assert_true(geteuclideandistancebyindex(1, 1, node_coordinates2) === 0);
-    // console.log(node_coordinates1);
-    // console.log(node_coordinates2);
-
     const node1distances = getalldistancesofnodes(node_coordinates1);
-    // console.log(node1distances);
-    // asserttrue(
-    //     [
-    //         4.123105625617661, 7.0710678118654755, 10, 4.123105625617661,
-    //         6.4031242374328485, 3.1622776601683795,
-    //     ]
-    //         .map((a, i) => a - node1distances[i])
-    //         .map((a) => aboutequal(a, 0))
-    //         .every(Boolean)
-    // );
     assert_true(
         isEqual(
             [
@@ -51,9 +37,4 @@ export function testgeteuclideandistance() {
         )
     );
     assert_true(10 === Math.max(...node1distances));
-    // console.log("test geteuclideandistance test ok");
 }
-
-// function aboutequal(a: number, b: number) {
-//     return Math.abs(a - b) <= Number.EPSILON;
-// }

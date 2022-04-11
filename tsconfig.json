@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "types": ["vite/client","@types/jest"],
         "declaration": false,
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
@@ -27,7 +28,8 @@
 
         "bin",
         "__tests__",
-        "cross-points/*.ts",
-        "k-opt/*.ts"
+        "cross-points",
+        "cross-points/robust-segment-intersect-module.d.ts",
+        "k-opt"
     ]
 }

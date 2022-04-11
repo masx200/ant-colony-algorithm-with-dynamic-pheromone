@@ -8,8 +8,6 @@ import { cycle_reorganize } from "../functions/cycle_reorganize";
 import { getnumberfromarrayofnmber } from "../functions/getnumberfromarrayofnmber";
 import { pickRandomOne } from "../functions/pickRandomOne";
 
-/**查找环路路径当中随机找一个交叉点,如果未找到则返回 false,如果找到则返回交叉的2个线段城市序号*/
-
 export function intersection_filter_with_cycle_route_find_one_old({
     cycle_route,
     node_coordinates,
@@ -22,7 +20,6 @@ export function intersection_filter_with_cycle_route_find_one_old({
     assert_true(count_of_nodes > 1);
     assert_true(cycle_route.length === node_coordinates.length);
     const oldRoute = cycle_route;
-    //环路随机重排
     const start = getnumberfromarrayofnmber(pickRandomOne(oldRoute));
 
     const cloned = cycle_reorganize(oldRoute, start);

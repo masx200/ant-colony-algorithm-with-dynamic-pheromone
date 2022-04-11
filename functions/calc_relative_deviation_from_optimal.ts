@@ -1,6 +1,5 @@
 import { sum } from "lodash";
 import { assert_true } from "../test/assert_true";
-/**与最优的相对偏差 */
 export function calc_relative_deviation_from_optimal(
     arg0: number[],
     best_length: number

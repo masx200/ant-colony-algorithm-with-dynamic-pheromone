@@ -9,7 +9,6 @@ import { getUniqueStringOfCircularRoute } from "../functions/getUniqueStringOfCi
 import { getOrCreateMapOfMapFun } from "../functions/getOrCreateMapOfMapFun";
 import { node_coordinates_to_intersect_routes_unique } from "./node_coordinates_to_intersect_routes_unique";
 
-/**判断环路部分路径当中是否有交叉点 */
 export function is_intersection_partial_with_cycle_route({
     cycle_route,
     max_of_segments,
@@ -54,7 +53,6 @@ export function is_intersection_partial_with_cycle_route({
                     intersectparameters[3]
                 )
             ) {
-                //只缓存有交叉点的
                 map.set(unique_string, true);
                 return true;
             }

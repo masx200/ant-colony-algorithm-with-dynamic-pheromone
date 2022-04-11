@@ -9,7 +9,6 @@ export function test_3_opt_cycle_routes() {
         const oldRoute = [0, 1, 2, 3, 4, 5, 6];
         const splitted_Routes = split_cycle_route_to_3_sections(oldRoute);
         assert_true(splitted_Routes.length === 3);
-        // console.log("splitted_Routes", splitted_Routes);
         assert_true(
             splitted_Routes.every((partial_route) => partial_route.length >= 2)
         );
@@ -21,14 +20,11 @@ export function test_3_opt_cycle_routes() {
         assert_true(
             newRoutes.every((route) => route.length === oldRoute.length)
         );
-        // console.log("oldRoute", oldRoute);
-        // console.log("newRoutes", newRoutes);
     }
     for (let i = 0; i < 5; i++) {
         const oldRoute = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         const splitted_Routes = split_cycle_route_to_3_sections(oldRoute);
         assert_true(splitted_Routes.length === 3);
-        // console.log("splitted_Routes", splitted_Routes);
         assert_true(
             splitted_Routes.every((partial_route) => partial_route.length >= 2)
         );
@@ -40,14 +36,11 @@ export function test_3_opt_cycle_routes() {
         assert_true(
             newRoutes.every((route) => route.length === oldRoute.length)
         );
-        // console.log("oldRoute", oldRoute);
-        // console.log("newRoutes", newRoutes);
     }
     for (let i = 0; i < 5; i++) {
         const oldRoute = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         const splitted_Routes = divide_route_to_k_opt_random(oldRoute, 3);
         assert_true(splitted_Routes.length === 3);
-        // console.log("splitted_Routes", splitted_Routes);
         assert_true(
             splitted_Routes.every((partial_route) => partial_route.length >= 2)
         );
@@ -59,14 +52,11 @@ export function test_3_opt_cycle_routes() {
         assert_true(
             newRoutes.every((route) => route.length === oldRoute.length)
         );
-        // console.log("oldRoute", oldRoute);
-        // console.log("newRoutes", newRoutes);
     }
     for (let i = 0; i < 5; i++) {
         const oldRoute = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         const splitted_Routes = divide_route_to_k_opt_random(oldRoute, 5);
         assert_true(splitted_Routes.length === 5);
-        // console.log("splitted_Routes", splitted_Routes);
         assert_true(
             splitted_Routes.every((partial_route) => partial_route.length >= 2)
         );
@@ -78,7 +68,5 @@ export function test_3_opt_cycle_routes() {
         assert_true(
             newRoutes.every((route) => route.length === oldRoute.length)
         );
-        // console.log("oldRoute", oldRoute);
-        // console.log("newRoutes", newRoutes);
     }
 }
