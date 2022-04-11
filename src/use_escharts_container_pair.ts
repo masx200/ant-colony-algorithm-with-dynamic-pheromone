@@ -11,10 +11,8 @@ export function use_escharts_container_pair(): {
     onMounted(() => {
         const containerofbest = container.value;
 
-        // setTimeout(() => {
         if (containerofbest) {
             const bestchart = createchartofcontainer(containerofbest);
-            // console.log(bestchart);
             chart.value = bestchart;
         }
     });

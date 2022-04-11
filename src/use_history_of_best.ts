@@ -19,26 +19,12 @@ export function use_history_of_best(
     }[];
     clearData: () => void;
     TableHeads: string[];
-    TableBody: ComputedRef<
-        [
-            number,
-            number,
-            number
-            // number,
-            // number,
-            // number
-            // , string
-        ][]
-    >;
+    TableBody: ComputedRef<[number, number, number][]>;
 } {
     const history_of_best = reactive<
         {
             time_of_best_ms: number;
-            // global_best_route: number[];
             globalbestlength: number;
-            // total_time_ms: number;
-            // current_search_count: number;
-            // current_iterations: number;
             search_count_of_best: number;
         }[]
     >([]);
@@ -73,46 +59,19 @@ export function use_history_of_best(
     const clearData = function clearDataOfResult() {
         history_of_best.length = 0;
     };
-    const TableHeads = [
-        "最优解路径数量",
-        "全局最优长度",
-        "最优解的耗时秒",
+    const TableHeads = ["最优解路径数量", "全局最优长度", "最优解的耗时秒"];
 
-        // "总共耗时秒",
-        // "总计路径数量",
-        // "总计迭代次数",
-        // "全局最优路径",
-    ];
-
-    const TableBody: ComputedRef<
-        [
-            number,
-            number,
-            number
-            // number,
-            // number,
-            // number
-            // , string
-        ][]
-    > = computed(() => {
+    const TableBody: ComputedRef<[number, number, number][]> = computed(() => {
         const resultbest = history_of_best;
         return resultbest.length
             ? resultbest.map((result) => {
                   return [
-                      //   [
                       result.search_count_of_best,
                       result.globalbestlength,
                       result.time_of_best_ms / 1000,
-
-                      //   result.total_time_ms / 1000,
-
-                      //   result.current_search_count,
-                      //   result.current_iterations,
-                      //   JSON.stringify(result.global_best_route),
                   ];
               })
-            : //   ]
-              [];
+            : [];
     });
 
     return {

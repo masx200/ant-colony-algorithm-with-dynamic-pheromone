@@ -5,7 +5,7 @@ import { CollectionOfLatestRoutes } from "../collections/collection-of-latest-ro
 import { CollectionOfOptimalRoutes } from "../collections/collection-of-optimal-routes";
 import "core-js/stable/array/at";
 export function create_get_neighbors_from_optimal_routes_and_latest_routes(
-    collection_of_latest_routes: CollectionOfLatestRoutes ,
+    collection_of_latest_routes: CollectionOfLatestRoutes,
     collection_of_optimal_routes: CollectionOfOptimalRoutes
 ): (city: number) => number[] {
     return function get_neighbors_from_optimal_routes_and_latest_routes(

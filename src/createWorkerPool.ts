@@ -12,7 +12,6 @@ export interface WorkerPool<
     [Symbol.toStringTag]: string;
 }
 
-/**创建线程池 ,泛型W是一个类似于worker的对象,可终止*/
 export function createWorkerPool<W extends { terminate: () => void }>(
     createWorker: () => W,
     {

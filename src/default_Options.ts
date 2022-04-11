@@ -11,42 +11,19 @@ export const default_max_results_of_k_opt = 15;
 export const default_max_results_of_2_opt = 10;
 
 export { DefaultOptions };
-//展示每条路径的详细信息
 export const show_every_route = false;
 const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
-    ///* 状态转移规则的每步最多城市数 */
     max_cities_of_state_transition: 200,
-    /**每条的2-opt最大次数 */
     max_results_of_2_opt: default_max_results_of_2_opt,
-    /**非最优解的信息素增量系数 */
-
-    /**信息素扩散的小范围城市数 */
-
-    /**信息素扩散的大范围城市数 */
-
-    /**每条的k-opt最大数量 */
     max_results_of_k_opt: default_max_results_of_k_opt,
-    /**全局信息素挥发率     */
-
-    /**信息素强度 */
-
-    /**信息素因子 */
     alpha_zero: default_alpha,
-    /**启发式因子 */
     beta_zero: default_beta,
-    /**蚂蚁数量 */
     count_of_ants: default_count_of_ants,
-    /**最优路径的集合最大大小 */
     max_size_of_collection_of_optimal_routes: 10,
-    /**最新路径的集合最大大小 */
     max_size_of_collection_of_latest_routes: 10,
-    /**贪心算法路径数量 */
     max_routes_of_greedy: 20,
-    /**查找交叉点的最大线段数量 */
     max_segments_of_cross_point: 80,
 
-    /**贪心算法的每步最多城市数 */
     max_cities_of_greedy: 500,
-    /**结果四舍五入 */
     distance_round: true,
 };

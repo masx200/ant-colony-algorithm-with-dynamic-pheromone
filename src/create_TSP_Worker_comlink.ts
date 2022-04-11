@@ -4,10 +4,8 @@ import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIter
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
 import { create_Worker_comlink } from "./create_Worker_comlink";
-// import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
 import TSPWorker from "./TSP_Runner.Worker?worker";
-// import { TSP_workerRef } from "./TSP_workerRef";
 import { TSP_Worker_API } from "./TSP_Worker_API";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 
@@ -57,6 +55,5 @@ export async function create_TSP_Worker_comlink(
         on_finish_one_iteration: typeof on_finish_one_iteration;
         on_best_change: typeof on_best_change;
     };
-    // console.log(runner, remote);
     return { remote, worker, terminate };
 }

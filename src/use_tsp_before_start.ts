@@ -6,28 +6,19 @@ export function use_tsp_before_start(
 ): Fun_TSP_Before_Start {
     const TSP_before_Start: Fun_TSP_Before_Start =
         async function TSP_before_Start({
-            // onFinishIteration,
             onglobal_best_routeChange,
             onLatestRouteChange,
-            // iterations_of_search,
             node_coordinates,
             count_of_ants,
-            // pheromone_volatility_coefficient_R1,
             ...rest
         }) {
-            const runner =
-                // console.log("TSP_before_Start", node_coordinates);
-                /*  TSP_RunnerRef.value || */ await initializeTSP_runner({
-                    // onFinishIteration,
-                    // pheromone_volatility_coefficient_R1,
-                    onglobal_best_routeChange,
-                    onLatestRouteChange,
-                    node_coordinates,
-                    count_of_ants,
-                    ...rest,
-                });
-            // TSP_RunnerRef.value?.runIterations(iterations_of_search);
-            // const runner = TSP_RunnerRef.value;
+            const runner = await initializeTSP_runner({
+                onglobal_best_routeChange,
+                onLatestRouteChange,
+                node_coordinates,
+                count_of_ants,
+                ...rest,
+            });
             return runner;
         };
     return TSP_before_Start;

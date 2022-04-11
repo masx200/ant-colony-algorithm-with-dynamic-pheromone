@@ -1,5 +1,4 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
-// import { DefaultOptions, distance_round } from "./default_Options";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 export async function thread_Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,

@@ -8,7 +8,6 @@ app.config.errorHandler = (e) => {
 app.mount(appcontainer);
 !(async () => {
     if (process.env.NODE_ENV === "production") {
-        //@ts-ignore
         const { registerSW } = await import("virtual:pwa-register");
 
         if (
@@ -16,8 +15,6 @@ app.mount(appcontainer);
             "127.0.0.1" !== location.hostname
         ) {
             "serviceWorker" in navigator &&
-                // window.addEventListener(
-                //     "load",
                 (function () {
                     const updateSW = registerSW({
                         onNeedRefresh() {},
@@ -25,9 +22,6 @@ app.mount(appcontainer);
                     });
                     updateSW(true).catch(() => {});
                 })();
-
-            //     { once: true }
-            // );
         }
     }
 })();

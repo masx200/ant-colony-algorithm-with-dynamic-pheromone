@@ -8,7 +8,4 @@ export default defineComponent({
             type: Array as PropType<Array<string | number | boolean>>,
         },
     },
-    // setup({ tableheads, tablebody }) {
-    //     return { tableheads, tablebody };
-    // },
 });

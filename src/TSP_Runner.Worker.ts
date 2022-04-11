@@ -5,7 +5,6 @@ import { DataOfBestChange } from "../functions/DataOfBestChange";
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
-// import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { TSP_Worker_API } from "./TSP_Worker_API";
 let runner: TSP_Runner | undefined = undefined;
 function init_runner(options: TSPRunnerOptions) {
@@ -14,12 +13,6 @@ function init_runner(options: TSPRunnerOptions) {
     }
     runner = createTSPrunner(options);
 }
-// function runOneRoute() {
-//     if (!runner) {
-//         throw new Error("No runner found");
-//     }
-//     runner.runOneRoute();
-// }
 const on_finish_one_route = (
     callback: (data: DataOfFinishOneRoute) => void
 ) => {
@@ -48,7 +41,6 @@ const API: TSP_Worker_API = new Proxy(
     {
         on_best_change,
         init_runner,
-        // runOneRoute,
         on_finish_one_iteration,
         on_finish_one_route,
     },

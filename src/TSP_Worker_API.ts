@@ -2,7 +2,6 @@ import { TSP_Runner } from "../functions/TSP_Runner";
 import { DataOfBestChange } from "../functions/DataOfBestChange";
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
-// import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
 
 export type TSP_Worker_API = TSP_Runner & {
@@ -13,6 +12,5 @@ export type TSP_Worker_API = TSP_Runner & {
     on_finish_one_route: (
         callback: (data: DataOfFinishOneRoute) => void
     ) => void;
-    // runOneRoute: () => void;
     init_runner: (options: TSPRunnerOptions) => void;
 };

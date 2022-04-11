@@ -24,7 +24,7 @@
         "src",
         "test",
         "functions",
-        "pathTabooList",
+
         "bin",
         "__tests__",
         "cross-points/*.ts",

@@ -1,40 +1,27 @@
-// import { TSPRunner } from "../functions/createTSPrunner";
 import { assert_true } from "../test/assert_true";
 import { RunWay } from "./RunWay";
 import { sleep_requestAnimationFrame_async_or_settimeout } from "./sleep_requestAnimationFrame_async_or_settimeout";
 
-/** time_of_search 优先于 count_of_search 优先于 iterations_of_search*/
 export async function tsp_runner_run_async({
     runner,
     time_of_search_ms = Infinity,
-    // count_of_search = Infinity,
     iterations_of_search = Infinity,
-    // count_of_ants,
     onprogress,
 }: {
-    time_of_search_ms?: number; //毫秒
-    // count_of_search?: number;
+    time_of_search_ms?: number;
     runner: {
-        // runOneRoute: () => Promise<void>;
         runIterations: (iterations: number) => Promise<void>;
         runOneIteration: () => Promise<void>;
-        // runRoutes: (count: number) => Promise<void>;
     };
     iterations_of_search?: number;
-    // count_of_ants: number;
     onprogress?: (percentage: number) => void;
 }): Promise<void> {
     assert_true(
-        [time_of_search_ms /*  count_of_search */, iterations_of_search].some(
-            (a) => a < Infinity
-        )
+        [time_of_search_ms, iterations_of_search].some((a) => a < Infinity)
     );
     const all_time = time_of_search_ms;
     onprogress && onprogress(0);
     const all_iterations = iterations_of_search;
-    // count_of_search; /*  < Infinity
-    // ? count_of_search
-    // : iterations_of_search * count_of_ants; */
     let rest_iterations = all_iterations;
     let run_iterations = 1;
     const min_count = 1;
@@ -53,9 +40,6 @@ export async function tsp_runner_run_async({
             await runner.runIterations(run_iterations);
             rest_iterations -= run_iterations;
             duration = Number(new Date()) - last_time;
-
-            // console.log("tsp_runner_run_async,次数", run_iterations);
-            // console.log("tsp_runner_run_async,用时", duration);
 
             onprogress &&
                 onprogress(

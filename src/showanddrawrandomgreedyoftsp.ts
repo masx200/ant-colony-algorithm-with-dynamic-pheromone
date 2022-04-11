@@ -8,23 +8,19 @@ export async function showanddrawrandomgreedyoftsp({
     chart,
     round = false,
     max_cities_of_greedy = Infinity,
-}: // resize,
-{
+}: {
     round?: boolean;
     max_cities_of_greedy?: number;
     node_coordinates: NodeCoordinates;
     chart: Pick<EChartsType, "resize" | "setOption">;
 }) {
-    // console.log(node_coordinates, chart);
-
     const { route } = await cacheble_greed_random_route({
         node_coordinates,
         round,
         max_cities_of_greedy,
     });
-    // const greedypath = route;
     drawrouteofnode_coordinates({
-        /*  resize, */ route,
+        route,
         node_coordinates,
         chart,
     });

@@ -7,10 +7,7 @@ export type Fun_TSP_Before_Start = ({
     onLatestRouteChange,
     node_coordinates,
     count_of_ants,
-}: // pheromone_volatility_coefficient_R1,
-TSPRunnerOptions & {
-    // onFinishIteration: () => void;
-    // pheromone_volatility_coefficient_R1: number;
+}: TSPRunnerOptions & {
     onglobal_best_routeChange: (
         global_best_route: number[],
         node_coordinates: NodeCoordinates
@@ -19,7 +16,6 @@ TSPRunnerOptions & {
         latestroute: number[],
         node_coordinates: NodeCoordinates
     ) => void;
-    // iterations_of_search: number;
     count_of_ants: number;
     node_coordinates: NodeCoordinates;
 }) => Promise<TSP_Worker_Remote>;
