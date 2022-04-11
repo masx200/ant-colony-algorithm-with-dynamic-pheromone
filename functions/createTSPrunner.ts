@@ -54,7 +54,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
-    const convergence_coefficient = 0;
+    let convergence_coefficient = 0;
     const {
         distance_round,
         max_routes_of_greedy,
@@ -273,6 +273,13 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         starttime_of_process_iteration;
                     time_ms_of_one_iteration += timems_of_process_iteration;
                     totaltimems += timems_of_process_iteration;
+
+                    if (coefficient_of_diversity_increase > 0) {
+                        convergence_coefficient *=
+                            1 - coefficient_of_diversity_increase;
+                    } else {
+                        convergence_coefficient += 0.1;
+                    }
                     emit_finish_one_iteration({
                         optimallengthofthis_iteration,
                         optimalrouteofthis_iteration,
