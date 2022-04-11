@@ -1,6 +1,6 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { assert_true } from "../test/assert_true";
-import { cycle_routetosegments } from "../functions/cycle_routetosegments";
+import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { haverepetitions } from "../functions/haverepetitions";
 
 import { combinations } from "combinatorial-generators";
@@ -26,7 +26,7 @@ export function find_one_intersection_partial_with_cycle_route({
     const start = getnumberfromarrayofnmber(pickRandomOne(oldRoute));
 
     const cloned = cycle_reorganize(oldRoute, start);
-    const cyclesegments = ArrayShuffle(cycle_routetosegments(cloned)).slice(
+    const cyclesegments = ArrayShuffle(cycle_route_to_segments(cloned)).slice(
         0,
         max_of_segments
     );

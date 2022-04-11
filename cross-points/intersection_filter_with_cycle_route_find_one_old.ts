@@ -1,5 +1,5 @@
 import { assert_true } from "../test/assert_true";
-import { cycle_routetosegments } from "../functions/cycle_routetosegments";
+import { cycle_route_to_segments } from "../functions/cycle_route_to_segments";
 import { haverepetitions } from "../functions/haverepetitions";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { combinations } from "combinatorial-generators";
@@ -23,7 +23,7 @@ export function intersection_filter_with_cycle_route_find_one_old({
     const start = getnumberfromarrayofnmber(pickRandomOne(oldRoute));
 
     const cloned = cycle_reorganize(oldRoute, start);
-    const cyclesegments = cycle_routetosegments(cloned);
+    const cyclesegments = cycle_route_to_segments(cloned);
 
     for (let [[left1, left2], [right1, right2]] of combinations(
         cyclesegments,

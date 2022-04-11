@@ -39,6 +39,7 @@ import { set_distance_round } from "../src/set_distance_round";
 import { getUniqueStringOfCircularRoute } from "./getUniqueStringOfCircularRoute";
 import { closed_total_path_length } from "./closed-total-path-length";
 import { creategetdistancebyindex } from "./creategetdistancebyindex";
+import { is_segment_in_cycle_route } from "./is_segment_in_cycle_route";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         max_results_of_2_opt = default_max_results_of_2_opt,
@@ -111,15 +112,21 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 sum(
                     latest_and_optimal_routes.map((route) => {
                         const route_length = closed_total_path_length({
+                            round: distance_round,
                             path: route,
                             getdistancebyindex: creategetdistancebyindex(
                                 node_coordinates,
                                 distance_round
                             ),
                         });
-                        return Math.pow(
-                            greedylength / route_length,
-                            convergence_coefficient
+                        return (
+                            Number(
+                                is_segment_in_cycle_route(route, row, column)
+                            ) *
+                            Math.pow(
+                                greedylength / route_length,
+                                convergence_coefficient
+                            )
                         );
                     })
                 ) /

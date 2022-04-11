@@ -1,6 +1,6 @@
 import { sum } from "lodash";
 import { assert_number } from "../test/assert_number";
-import { cycle_routetosegments } from "./cycle_routetosegments";
+import { cycle_route_to_segments } from "./cycle_route_to_segments";
 import { generateUniqueArrayOfCircularPath } from "./generateUniqueArrayOfCircularPath";
 export function closed_total_path_length({
     path,
@@ -13,7 +13,7 @@ export function closed_total_path_length({
 }): number {
     const route = generateUniqueArrayOfCircularPath(path);
     return sum(
-        cycle_routetosegments(route).map(function ([left, right]) {
+        cycle_route_to_segments(route).map(function ([left, right]) {
             const distance = getdistancebyindex(left, right);
             assert_number(distance);
             if (round) {
