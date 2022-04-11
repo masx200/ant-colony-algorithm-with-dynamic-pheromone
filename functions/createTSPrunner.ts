@@ -38,6 +38,7 @@ import { set_distance_round } from "../src/set_distance_round";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { create_latest_and_optimal_routes } from "./create_latest_and_optimal_routes";
 import { calc_pheromone } from "./calc_pheromone";
+import { update_convergence_coefficient } from "./update_convergence_coefficient";
 // import { reactive } from "@vue/reactivity";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emitter = EventEmitterTargetClass({ sync: true });
@@ -322,12 +323,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     time_ms_of_one_iteration += timems_of_process_iteration;
                     totaltimems += timems_of_process_iteration;
 
-                    if (coefficient_of_diversity_increase > 0) {
-                        convergence_coefficient *=
-                            1 - coefficient_of_diversity_increase;
-                    } else {
-                        convergence_coefficient += 0.1;
-                    }
+                    convergence_coefficient = update_convergence_coefficient({
+                        coefficient_of_diversity_increase,
+                        convergence_coefficient,
+                    });
                     emit_finish_one_iteration({
                         optimallengthofthis_iteration,
                         optimalrouteofthis_iteration,

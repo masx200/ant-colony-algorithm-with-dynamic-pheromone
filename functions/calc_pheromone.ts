@@ -25,7 +25,7 @@ export function calc_pheromone({
                     ? Math.pow(
                           greedy_length / route_length,
                           convergence_coefficient
-                      ) * Math.log(convergence_coefficient+1)
+                      ) * Math.log2(convergence_coefficient + 1)
                     : 0;
             })
         ) /
