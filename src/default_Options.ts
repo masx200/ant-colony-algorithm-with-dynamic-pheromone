@@ -5,7 +5,7 @@ export const default_search_rounds = 170;
 export const default_search_time_seconds = 900;
 
 export const default_alpha = 1;
-export const default_beta = 4;
+export const default_beta = 3
 
 export const default_max_results_of_k_opt = 15;
 export const default_max_results_of_2_opt = 10;
@@ -22,7 +22,7 @@ const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
     max_size_of_collection_of_optimal_routes: 10,
     max_size_of_collection_of_latest_routes: 10,
     max_routes_of_greedy: 20,
-    max_segments_of_cross_point: 80,
+    max_segments_of_cross_point: 70,
 
     max_cities_of_greedy: 500,
     distance_round: true,
