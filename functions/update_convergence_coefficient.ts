@@ -8,7 +8,7 @@ export function update_convergence_coefficient({
     if (coefficient_of_diversity_increase > 0) {
         convergence_coefficient *= Math.pow(
             1 - coefficient_of_diversity_increase,
-            2
+            4
         );
     } else {
         convergence_coefficient += 0.05;

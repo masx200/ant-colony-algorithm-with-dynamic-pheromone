@@ -18,7 +18,7 @@ export function EachIterationHandler(
     }
 ): {
     coefficient_of_diversity_increase: number;
-    nextrandomselectionprobability: number;
+    // nextrandomselectionprobability: number;
 
     optimallengthofthis_iteration: number;
     optimalrouteofthis_iteration: number[];
@@ -34,11 +34,10 @@ export function EachIterationHandler(
     const coefficient_of_diversity_increase = Math.sqrt(
         1 - Math.pow(current_population_relative_information_entropy, 2)
     );
-    const nextrandomselectionprobability =
-        coefficient_of_diversity_increase / 8;
+   
 
     assert_true(!Number.isNaN(current_population_relative_information_entropy));
-    assert_true(!Number.isNaN(nextrandomselectionprobability));
+    // assert_true(!Number.isNaN(nextrandomselectionprobability));
 
     const iteratebestlengthandroute =
         get_best_routeOfSeriesRoutesAndLengths(routesandlengths);
@@ -52,7 +51,7 @@ export function EachIterationHandler(
         optimallengthofthis_iteration,
         optimalrouteofthis_iteration,
 
-        nextrandomselectionprobability,
+        // nextrandomselectionprobability,
         population_relative_information_entropy:
             current_population_relative_information_entropy,
     };

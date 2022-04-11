@@ -39,6 +39,7 @@ import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { create_latest_and_optimal_routes } from "./create_latest_and_optimal_routes";
 import { calc_pheromone } from "./calc_pheromone";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
+import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 // import { reactive } from "@vue/reactivity";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emitter = EventEmitterTargetClass({ sync: true });
@@ -295,7 +296,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     const starttime_of_process_iteration = Number(new Date());
                     const {
                         coefficient_of_diversity_increase,
-                        nextrandomselectionprobability,
+                        // nextrandomselectionprobability,
                         population_relative_information_entropy,
 
                         optimallengthofthis_iteration,
@@ -338,10 +339,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         convergence_coefficient,
                     });
                     time_ms_of_one_iteration = 0;
-                    lastrandomselectionprobability = Math.max(
-                        nextrandomselectionprobability,
-                        lastrandomselectionprobability / 4
-                    );
+                    lastrandomselectionprobability =
+                        update_last_random_selection_probability({
+                            coefficient_of_diversity_increase,
+                            lastrandomselectionprobability,
+                        });
                     routes_and_lengths_of_one_iteration.length = 0;
                 }
             }
@@ -453,3 +455,4 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     }
     return result;
 }
+
