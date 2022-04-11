@@ -34,7 +34,6 @@ export function EachIterationHandler(
     const coefficient_of_diversity_increase = Math.sqrt(
         1 - Math.pow(current_population_relative_information_entropy, 2)
     );
-   
 
     assert_true(!Number.isNaN(current_population_relative_information_entropy));
     // assert_true(!Number.isNaN(nextrandomselectionprobability));
