@@ -6,7 +6,7 @@ export function use_data_of_one_iteration(): {
     clearDataOfOneIteration: () => void;
     dataofoneiteration: DataOfFinishOneIteration[];
     oneiterationtablebody: ComputedRef<
-        [number, number, number, number, number, number][]
+        [number, number, number, number, number, number,number][]
     >;
     oneiterationtableheads: string[];
 } {
@@ -17,6 +17,7 @@ export function use_data_of_one_iteration(): {
         "耗时秒",
         "迭代最优长度",
         "全局最优长度",
+        "收敛性系数",
     ];
     const onreceivedataofoneIteration = function onreceivedataofoneIteration(
         data: DataOfFinishOneIteration
@@ -28,7 +29,7 @@ export function use_data_of_one_iteration(): {
     };
     const dataofoneiteration = reactive<DataOfFinishOneIteration[]>([]);
     const oneiterationtablebody = computed<
-        [number, number, number, number, number, number][]
+        [number, number, number, number, number, number, number][]
     >(() => {
         return dataofoneiteration.map((data, index) => {
             return [
@@ -39,6 +40,7 @@ export function use_data_of_one_iteration(): {
                 data.time_ms_of_one_iteration / 1000,
                 data.optimallengthofthis_iteration,
                 data.globalbestlength,
+                data.convergence_coefficient,
             ];
         });
     });
