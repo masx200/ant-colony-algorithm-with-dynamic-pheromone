@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "jsx": "preserve",
         "types": ["vite/client", "@types/jest"],
         "declaration": false,
         "skipLibCheck": true,

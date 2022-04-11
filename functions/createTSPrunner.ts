@@ -1,7 +1,6 @@
 import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "./create_get_neighbors_from_optimal_routes_and_latest_routes";
 
 import uniq from "lodash/uniq";
-import { sum } from "lodash-es";
 import EventEmitterTargetClass from "@masx200/event-emitter-target";
 import { DefaultOptions } from "../src/default_Options";
 import {
@@ -36,9 +35,9 @@ import { create_collection_of_optimal_routes } from "../collections/collection-o
 import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
-import { is_segment_in_cycle_route } from "./is_segment_in_cycle_route";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { create_latest_and_optimal_routes } from "./create_latest_and_optimal_routes";
+import { calc_pheromone } from "./calc_pheromone";
 // import { reactive } from "@vue/reactivity";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emitter = EventEmitterTargetClass({ sync: true });
@@ -125,23 +124,14 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             //     ],
             //     (a, b) => a.length === b.length
             // );
-            const length_of_routes = latest_and_optimal_routes.length;
-            return (
-                PheromoneZero +
-                sum(
-                    latest_and_optimal_routes.map(
-                        ({ route, length: route_length }) => {
-                            return is_segment_in_cycle_route(route, row, column)
-                                ? Math.pow(
-                                      greedylength / route_length,
-                                      convergence_coefficient
-                                  )
-                                : 0;
-                        }
-                    )
-                ) /
-                    length_of_routes
-            );
+            return calc_pheromone({
+                latest_and_optimal_routes,
+                PheromoneZero,
+                row,
+                column,
+                greedy_length,
+                convergence_coefficient,
+            });
         }
     }
 
@@ -151,7 +141,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let time_of_best_ms = 0;
     let search_count_of_best = 0;
     let globalbestlength: number = Infinity;
-    let greedylength: number = Infinity;
+    let greedy_length: number = Infinity;
 
     const get_total_time_ms = () => {
         return totaltimems;
@@ -161,8 +151,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         return current_search_count;
     };
     const set_best_length = (bestlength: number) => {
-        if (greedylength === Infinity) {
-            greedylength = bestlength;
+        if (greedy_length === Infinity) {
+            greedy_length = bestlength;
         }
         if (bestlength < globalbestlength) {
             globalbestlength = bestlength;

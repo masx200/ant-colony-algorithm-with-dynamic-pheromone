@@ -36,6 +36,7 @@
         "@types/node": "^12.12.17",
         "@vitejs/plugin-vue": "^2.2.4",
         "@vue/reactivity": "^3.2.31",
+        "@vue/runtime-core": "^3.2.31",
         "babel-plugin-clean-code": "^0.0.3",
         "babel-plugin-import": "^1.13.3",
         "combinatorial-generators": "^1.0.1",
