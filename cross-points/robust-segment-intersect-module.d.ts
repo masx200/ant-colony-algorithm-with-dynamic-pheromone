@@ -1,5 +1,5 @@
 declare module "robust-segment-intersect" {
-    type Coordinate = [number, number];
+    export type Coordinate = [number, number];
     const a: (
         a0: Coordinate,
         a1: Coordinate,
