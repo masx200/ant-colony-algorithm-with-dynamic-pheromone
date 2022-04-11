@@ -36,11 +36,14 @@ import { create_collection_of_optimal_routes } from "../collections/collection-o
 import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
-import { getUniqueStringOfCircularRoute } from "./getUniqueStringOfCircularRoute";
-import { closed_total_path_length } from "./closed-total-path-length";
-import { creategetdistancebyindex } from "./creategetdistancebyindex";
 import { is_segment_in_cycle_route } from "./is_segment_in_cycle_route";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
+    const emitter = EventEmitterTargetClass({ sync: true });
+    const {
+        on: on_finish_greedy_iteration,
+        emit: emit_finish_greedy_iteration,
+    } = createEventPair<DataOfFinishGreedyIteration>(emitter);
+
     const {
         max_results_of_2_opt = default_max_results_of_2_opt,
 
@@ -88,6 +91,18 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         column: count_of_nodes,
     };
     const PheromoneZero = 1;
+    let latest_and_optimal_routes = uniqWith(
+        [...collection_of_latest_routes, ...collection_of_optimal_routes],
+        (a, b) => a.length === b.length
+    );
+    let length_of_routes = latest_and_optimal_routes.length;
+    function update_latest_and_optimal_routes() {
+        latest_and_optimal_routes = uniqWith(
+            [...collection_of_latest_routes, ...collection_of_optimal_routes],
+            (a, b) => a.length === b.length
+        );
+        length_of_routes = latest_and_optimal_routes.length;
+    }
     function getPheromone(row: number, column: number): number {
         if (
             row < 0 ||
@@ -97,38 +112,27 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         ) {
             throw Error("row,column,out of bounds:" + row + "," + column);
         } else {
-            const latest_and_optimal_routes = uniqWith(
-                [
-                    ...collection_of_latest_routes,
-                    ...collection_of_optimal_routes.map(({ route }) => route),
-                ],
-                (a, b) =>
-                    getUniqueStringOfCircularRoute(a) ===
-                    getUniqueStringOfCircularRoute(b)
-            );
-            const length_of_routes = latest_and_optimal_routes.length;
+            // const latest_and_optimal_routes = uniqWith(
+            //     [
+            //         ...collection_of_latest_routes,
+            //         ...collection_of_optimal_routes,
+            //     ],
+            //     (a, b) => a.length === b.length
+            // );
+            // const length_of_routes = latest_and_optimal_routes.length;
             return (
                 PheromoneZero +
                 sum(
-                    latest_and_optimal_routes.map((route) => {
-                        const route_length = closed_total_path_length({
-                            round: distance_round,
-                            path: route,
-                            getdistancebyindex: creategetdistancebyindex(
-                                node_coordinates,
-                                distance_round
-                            ),
-                        });
-                        return (
-                            Number(
-                                is_segment_in_cycle_route(route, row, column)
-                            ) *
-                            Math.pow(
-                                greedylength / route_length,
-                                convergence_coefficient
-                            )
-                        );
-                    })
+                    latest_and_optimal_routes.map(
+                        ({ route, length: route_length }) => {
+                            return is_segment_in_cycle_route(route, row, column)
+                                ? Math.pow(
+                                      greedylength / route_length,
+                                      convergence_coefficient
+                                  )
+                                : 0;
+                        }
+                    )
                 ) /
                     length_of_routes
             );
@@ -181,7 +185,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         );
     };
 
-    const emitter = EventEmitterTargetClass({ sync: true });
     const { on: on_best_change, emit: emit_best_change } =
         createEventPair<DataOfBestChange>(emitter);
     const { on: on_finish_one_route, emit: inner_emit_finish_one_route } =
@@ -224,7 +227,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             convergence_coefficient,
         });
     };
-
+    on_finish_one_iteration(() => {
+        update_latest_and_optimal_routes();
+    });
+    on_finish_greedy_iteration(() => {
+        update_latest_and_optimal_routes();
+    });
     const runOneIteration = async () => {
         if (current_search_count === 0) {
             await GreedyRoutesGenerator({
@@ -382,13 +390,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             collection_of_optimal_routes.add(route, length);
         }
         if (collection_of_latest_routes) {
-            collection_of_latest_routes.add(route);
+            collection_of_latest_routes.add(route, length);
         }
     }
-    const {
-        on: on_finish_greedy_iteration,
-        emit: emit_finish_greedy_iteration,
-    } = createEventPair<DataOfFinishGreedyIteration>(emitter);
 
     function get_search_count_of_best() {
         return search_count_of_best;

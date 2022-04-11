@@ -4,7 +4,10 @@ import { assignOwnKeys } from "./assignOwnKeys";
 export function create_collection_of_latest_routes(max_size: number) {
     return new CollectionOfLatestRoutes(max_size);
 }
-export class CollectionOfLatestRoutes extends Array<number[]> {
+export class CollectionOfLatestRoutes extends Array<{
+    route: number[];
+    length: number;
+}> {
     get [Symbol.toStringTag]() {
         return "CollectionOfLatestRoutes";
     }
@@ -15,7 +18,7 @@ export class CollectionOfLatestRoutes extends Array<number[]> {
         super();
         this.length = 0;
     }
-    add(route: number[]) {
+    add(route: number[], length: number) {
         assert_true(route.length > 0);
         const unique_string = getUniqueStringOfCircularRoute(route);
 
@@ -23,7 +26,7 @@ export class CollectionOfLatestRoutes extends Array<number[]> {
             return;
         }
         this.#unique_string_store.push(unique_string);
-        super.push(route);
+        super.push({ route, length });
 
         if (this.length > this.max_size) {
             assignOwnKeys(this, this.slice(-this.max_size));

@@ -4,6 +4,7 @@ import uniq from "lodash/uniq";
 import { CollectionOfLatestRoutes } from "../collections/collection-of-latest-routes";
 import { CollectionOfOptimalRoutes } from "../collections/collection-of-optimal-routes";
 import "core-js/stable/array/at";
+import { uniqWith } from "lodash-es";
 export function create_get_neighbors_from_optimal_routes_and_latest_routes(
     collection_of_latest_routes: CollectionOfLatestRoutes,
     collection_of_optimal_routes: CollectionOfOptimalRoutes
@@ -16,10 +17,14 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
         assert_Integer(city);
 
         return uniq(
-            [
-                ...collection_of_latest_routes,
-                ...collection_of_optimal_routes.map(({ route }) => route),
-            ]
+            uniqWith(
+                [
+                    ...collection_of_latest_routes,
+                    ...collection_of_optimal_routes,
+                ],
+                (a, b) => a.length === b.length
+            )
+                .map(({ route }) => route)
                 .map((route) => {
                     const index = route.findIndex((v) => v === city);
 
