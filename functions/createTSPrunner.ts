@@ -1,5 +1,7 @@
 import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "./create_get_neighbors_from_optimal_routes_and_latest_routes";
+
 import uniq from "lodash/uniq";
+import { sum, uniqWith } from "lodash-es";
 import EventEmitterTargetClass from "@masx200/event-emitter-target";
 import { DefaultOptions } from "../src/default_Options";
 import {
@@ -34,6 +36,9 @@ import { create_collection_of_optimal_routes } from "../collections/collection-o
 import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
+import { getUniqueStringOfCircularRoute } from "./getUniqueStringOfCircularRoute";
+import { closed_total_path_length } from "./closed-total-path-length";
+import { creategetdistancebyindex } from "./creategetdistancebyindex";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         max_results_of_2_opt = default_max_results_of_2_opt,
@@ -81,7 +86,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         get: getPheromone,
         column: count_of_nodes,
     };
-
+    const PheromoneZero = 1;
     function getPheromone(row: number, column: number): number {
         if (
             row < 0 ||
@@ -91,7 +96,35 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         ) {
             throw Error("row,column,out of bounds:" + row + "," + column);
         } else {
-            return 1;
+            const latest_and_optimal_routes = uniqWith(
+                [
+                    ...collection_of_latest_routes,
+                    ...collection_of_optimal_routes.map(({ route }) => route),
+                ],
+                (a, b) =>
+                    getUniqueStringOfCircularRoute(a) ===
+                    getUniqueStringOfCircularRoute(b)
+            );
+            const length_of_routes = latest_and_optimal_routes.length;
+            return (
+                PheromoneZero +
+                sum(
+                    latest_and_optimal_routes.map((route) => {
+                        const route_length = closed_total_path_length({
+                            path: route,
+                            getdistancebyindex: creategetdistancebyindex(
+                                node_coordinates,
+                                distance_round
+                            ),
+                        });
+                        return Math.pow(
+                            greedylength / route_length,
+                            convergence_coefficient
+                        );
+                    })
+                ) /
+                    length_of_routes
+            );
         }
     }
 
@@ -101,6 +134,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let time_of_best_ms = 0;
     let search_count_of_best = 0;
     let globalbestlength: number = Infinity;
+    let greedylength: number = Infinity;
 
     const get_total_time_ms = () => {
         return totaltimems;
@@ -110,6 +144,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         return current_search_count;
     };
     const set_best_length = (bestlength: number) => {
+        if (greedylength === Infinity) {
+            greedylength = bestlength;
+        }
         if (bestlength < globalbestlength) {
             globalbestlength = bestlength;
             time_of_best_ms = totaltimems;
