@@ -61,30 +61,20 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         distance_round,
         max_routes_of_greedy,
 
-        // max_routes_of_greedy,
-        max_cities_of_state_transition,
         max_size_of_collection_of_latest_routes,
         max_size_of_collection_of_optimal_routes,
     } = options;
     set_distance_round(distance_round);
     const count_of_nodes = node_coordinates.length;
-    const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
-    const collection_of_latest_routes = is_count_not_large
-        ? undefined
-        : create_collection_of_latest_routes(
-              max_size_of_collection_of_latest_routes
-          );
-    // if (!is_count_not_large) {
-    //     console.log(collection_of_latest_routes);
-    // }
-    const collection_of_optimal_routes = is_count_not_large
-        ? undefined
-        : create_collection_of_optimal_routes(
-              max_size_of_collection_of_optimal_routes
-          );
-    // if (!is_count_not_large) {
-    //     console.log(collection_of_optimal_routes);
-    // }
+
+    const collection_of_latest_routes = create_collection_of_latest_routes(
+        max_size_of_collection_of_latest_routes
+    );
+
+    const collection_of_optimal_routes = create_collection_of_optimal_routes(
+        max_size_of_collection_of_optimal_routes
+    );
+
     let lastrandomselectionprobability = 0;
     let totaltimems = 0;
 
