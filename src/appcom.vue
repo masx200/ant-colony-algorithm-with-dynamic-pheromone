@@ -5,7 +5,7 @@
             :percentage="percentage"
             :indeterminate="indeterminate"
         />
-        <h1>自适应+奖惩+蚁群+k-opt 测试</h1>
+        <h1>自适应+蚁群+k-opt+不存储信息素-TSP-测试</h1>
         <hr />
         <span>选择城市地图</span>
         <select

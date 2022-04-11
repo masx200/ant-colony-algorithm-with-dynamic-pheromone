@@ -6,7 +6,7 @@ export function use_data_of_one_iteration(): {
     clearDataOfOneIteration: () => void;
     dataofoneiteration: DataOfFinishOneIteration[];
     oneiterationtablebody: ComputedRef<
-        [number, number, number, number, number, number,number][]
+        [number, number, number, number, number, number, number][]
     >;
     oneiterationtableheads: string[];
 } {
