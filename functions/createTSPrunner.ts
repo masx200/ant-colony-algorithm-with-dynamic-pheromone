@@ -1,7 +1,7 @@
 import { create_get_neighbors_from_optimal_routes_and_latest_routes } from "./create_get_neighbors_from_optimal_routes_and_latest_routes";
 
 import uniq from "lodash/uniq";
-import { sum, uniqWith } from "lodash-es";
+import { sum } from "lodash-es";
 import EventEmitterTargetClass from "@masx200/event-emitter-target";
 import { DefaultOptions } from "../src/default_Options";
 import {
@@ -37,6 +37,9 @@ import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
 import { is_segment_in_cycle_route } from "./is_segment_in_cycle_route";
+import { assignOwnKeys } from "../collections/assignOwnKeys";
+import { create_latest_and_optimal_routes } from "./create_latest_and_optimal_routes";
+// import { reactive } from "@vue/reactivity";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emitter = EventEmitterTargetClass({ sync: true });
     const {
@@ -91,17 +94,20 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         column: count_of_nodes,
     };
     const PheromoneZero = 1;
-    let latest_and_optimal_routes = uniqWith(
-        [...collection_of_latest_routes, ...collection_of_optimal_routes],
-        (a, b) => a.length === b.length
+    const latest_and_optimal_routes = create_latest_and_optimal_routes(
+        collection_of_latest_routes,
+        collection_of_optimal_routes
     );
-    let length_of_routes = latest_and_optimal_routes.length;
+    // let length_of_routes = latest_and_optimal_routes.length;
     function update_latest_and_optimal_routes() {
-        latest_and_optimal_routes = uniqWith(
-            [...collection_of_latest_routes, ...collection_of_optimal_routes],
-            (a, b) => a.length === b.length
+        assignOwnKeys(
+            latest_and_optimal_routes,
+            create_latest_and_optimal_routes(
+                collection_of_latest_routes,
+                collection_of_optimal_routes
+            )
         );
-        length_of_routes = latest_and_optimal_routes.length;
+        // length_of_routes = latest_and_optimal_routes.length;
     }
     function getPheromone(row: number, column: number): number {
         if (
@@ -119,7 +125,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             //     ],
             //     (a, b) => a.length === b.length
             // );
-            // const length_of_routes = latest_and_optimal_routes.length;
+            const length_of_routes = latest_and_optimal_routes.length;
             return (
                 PheromoneZero +
                 sum(
@@ -405,8 +411,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     }
     const get_neighbors_from_optimal_routes_and_latest_routes =
         create_get_neighbors_from_optimal_routes_and_latest_routes(
-            collection_of_latest_routes,
-            collection_of_optimal_routes
+            latest_and_optimal_routes
         );
     const shared = getShared();
     const result: TSP_Runner = {

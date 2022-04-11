@@ -59,7 +59,7 @@ export function use_history_of_best(
     const clearData = function clearDataOfResult() {
         history_of_best.length = 0;
     };
-    const TableHeads = ["最优解路径数量", "全局最优长度", "最优解的耗时秒"];
+    const TableHeads = ["最优解路径序号", "全局最优长度", "最优解的耗时秒"];
 
     const TableBody: ComputedRef<[number, number, number][]> = computed(() => {
         const resultbest = history_of_best;

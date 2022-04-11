@@ -1,29 +1,25 @@
-import { assert_true } from "../test/assert_true";
+// import { assert_true } from "../test/assert_true";
 import { assert_Integer } from "../test/assert_Integer";
 import uniq from "lodash/uniq";
-import { CollectionOfLatestRoutes } from "../collections/collection-of-latest-routes";
-import { CollectionOfOptimalRoutes } from "../collections/collection-of-optimal-routes";
+// import { CollectionOfLatestRoutes } from "../collections/collection-of-latest-routes";
+// import { CollectionOfOptimalRoutes } from "../collections/collection-of-optimal-routes";
 import "core-js/stable/array/at";
-import { uniqWith } from "lodash-es";
+// import { uniqWith } from "lodash-es";
 export function create_get_neighbors_from_optimal_routes_and_latest_routes(
-    collection_of_latest_routes: CollectionOfLatestRoutes,
-    collection_of_optimal_routes: CollectionOfOptimalRoutes
+    latest_and_optimal_routes: {
+        route: number[];
+        length: number;
+    }[]
 ): (city: number) => number[] {
     return function get_neighbors_from_optimal_routes_and_latest_routes(
         city: number
     ): number[] {
-        assert_true(collection_of_latest_routes);
-        assert_true(collection_of_optimal_routes);
+        // assert_true(collection_of_latest_routes);
+        // assert_true(collection_of_optimal_routes);
         assert_Integer(city);
 
         return uniq(
-            uniqWith(
-                [
-                    ...collection_of_latest_routes,
-                    ...collection_of_optimal_routes,
-                ],
-                (a, b) => a.length === b.length
-            )
+            latest_and_optimal_routes
                 .map(({ route }) => route)
                 .map((route) => {
                     const index = route.findIndex((v) => v === city);

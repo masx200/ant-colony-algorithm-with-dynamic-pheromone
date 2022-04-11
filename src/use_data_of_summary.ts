@@ -25,7 +25,7 @@ export function use_data_of_summary(): {
     const resultTableHeads = [
         "全局最优长度",
         "最优解的耗时秒",
-        "最优解路径数量",
+        "最优解路径序号",
         "总共耗时秒",
         "总计路径数量",
         "总计迭代次数",
