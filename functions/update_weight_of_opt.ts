@@ -16,11 +16,11 @@ export function update_weight_of_opt({
     set_weight_of_opt_best(
         get_weight_of_opt_best() +
             (coefficient_of_diversity_increase / 4) *
-                ((avarage_weight * 2) / 3 - get_weight_of_opt_best())
+                ((avarage_weight * 1) / 3 - get_weight_of_opt_best())
     );
     set_weight_of_opt_current(
         get_weight_of_opt_current() +
             (coefficient_of_diversity_increase / 4) *
-                ((avarage_weight * 4) / 3 - get_weight_of_opt_current())
+                ((avarage_weight * 5) / 3 - get_weight_of_opt_current())
     );
 }
