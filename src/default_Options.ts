@@ -5,7 +5,7 @@ export const default_search_rounds = 170;
 export const default_search_time_seconds = 600;
 
 export const default_alpha = 1;
-export const default_beta = 4;
+export const default_beta = 2.5;
 
 export const default_max_results_of_k_opt = 10;
 export const default_max_results_of_2_opt = 10;
