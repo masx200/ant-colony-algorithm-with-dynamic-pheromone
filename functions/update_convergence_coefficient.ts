@@ -15,7 +15,10 @@ export function update_convergence_coefficient({
             4
         );
     } else if (optimal_length_of_iteration > greedy_length) {
-        convergence_coefficient *= optimal_length_of_iteration / greedy_length;
+        convergence_coefficient *= Math.pow(
+            optimal_length_of_iteration / greedy_length,
+            3
+        );
     } else {
         convergence_coefficient += 0.2;
     }
