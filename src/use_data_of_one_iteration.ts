@@ -38,7 +38,7 @@ export function use_data_of_one_iteration(): {
                 data.randomselectionprobability,
 
                 data.time_ms_of_one_iteration / 1000,
-                data.optimallengthofthis_iteration,
+                data.optimal_length_of_iteration,
                 data.globalbestlength,
                 data.convergence_coefficient,
             ];

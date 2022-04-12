@@ -66,7 +66,7 @@ export async function GreedyRoutesGenerator({
         });
     }
 
-    const { length: best_length, route: optimalrouteofthis_iteration } =
+    const { length: best_length, route: optimal_route_of_iteration } =
         get_best_routeOfSeriesRoutesAndLengths(parallel_results);
 
     Greedy_algorithm_to_solve_tsp_with_selected_start_pool.clear();
@@ -75,8 +75,8 @@ export async function GreedyRoutesGenerator({
     );
     emit_finish_greedy_iteration({
         current_iterations: 1,
-        optimallengthofthis_iteration: best_length,
-        optimalrouteofthis_iteration,
+        optimal_length_of_iteration: best_length,
+        optimal_route_of_iteration,
         time_ms_of_one_iteration,
         globalbestlength: get_best_length(),
     });

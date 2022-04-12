@@ -23,7 +23,7 @@ export function use_data_of_greedy_iteration(): {
             return [
                 index + 1,
                 data.time_ms_of_one_iteration / 1000,
-                data.optimallengthofthis_iteration,
+                data.optimal_length_of_iteration,
                 data.globalbestlength,
             ];
         });

@@ -20,8 +20,8 @@ export function EachIterationHandler(
     coefficient_of_diversity_increase: number;
     // nextrandomselectionprobability: number;
 
-    optimallengthofthis_iteration: number;
-    optimalrouteofthis_iteration: number[];
+    optimal_length_of_iteration: number;
+    optimal_route_of_iteration: number[];
 
     population_relative_information_entropy: number;
 } {
@@ -43,12 +43,12 @@ export function EachIterationHandler(
 
     const iteratebestlength = iteratebestlengthandroute.length;
     const iteratebestroute = iteratebestlengthandroute.route;
-    const optimalrouteofthis_iteration = iteratebestroute;
-    const optimallengthofthis_iteration = iteratebestlength;
+    const optimal_route_of_iteration = iteratebestroute;
+    const optimal_length_of_iteration = iteratebestlength;
     return {
         coefficient_of_diversity_increase,
-        optimallengthofthis_iteration,
-        optimalrouteofthis_iteration,
+        optimal_length_of_iteration,
+        optimal_route_of_iteration,
 
         // nextrandomselectionprobability,
         population_relative_information_entropy:

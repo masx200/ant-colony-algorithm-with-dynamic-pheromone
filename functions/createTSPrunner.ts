@@ -303,8 +303,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         // nextrandomselectionprobability,
                         population_relative_information_entropy,
 
-                        optimallengthofthis_iteration,
-                        optimalrouteofthis_iteration,
+                        optimal_length_of_iteration,
+                        optimal_route_of_iteration,
                     } = EachIterationHandler({
                         ...shared,
 
@@ -325,10 +325,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     convergence_coefficient = update_convergence_coefficient({
                         coefficient_of_diversity_increase,
                         convergence_coefficient,
+                        optimal_length_of_iteration,
+                        greedy_length,
                     });
                     emit_finish_one_iteration({
-                        optimallengthofthis_iteration,
-                        optimalrouteofthis_iteration,
+                        optimal_length_of_iteration,
+                        optimal_route_of_iteration,
                         population_relative_information_entropy,
 
                         randomselectionprobability:
