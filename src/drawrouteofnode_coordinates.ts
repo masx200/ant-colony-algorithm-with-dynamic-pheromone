@@ -2,7 +2,7 @@ import { EChartsType } from "echarts";
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
-import { drawlinechart } from "../functions/drawlinechart";
+import { draw_line_chart } from "../functions/draw_line_chart";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { get_distance_round } from "./set_distance_round";
 
@@ -28,7 +28,7 @@ export function drawrouteofnode_coordinates({
     const linechardata = [...greedypath, greedypath[0]].map(
         (v) => node_coordinates[v]
     );
-    drawlinechart({
+    draw_line_chart({
         data: linechardata,
         chart: chart,
         titletext: `城市数:${node_coordinates.length},路径长度:${length}`,

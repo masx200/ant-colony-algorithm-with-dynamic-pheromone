@@ -1,7 +1,7 @@
 import { EChartsType } from "echarts";
 import { ShallowRef } from "vue";
 import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
-import { drawlinechart } from "../functions/drawlinechart";
+import { draw_line_chart } from "../functions/draw_line_chart";
 
 export function draw_path_number_and_current_path_length_chart(
     path_number_and_current_path_length_chart: ShallowRef<
@@ -16,7 +16,7 @@ export function draw_path_number_and_current_path_length_chart(
             a.current_search_count,
             a.length,
         ]);
-        drawlinechart({
+        draw_line_chart({
             yAxis_min: 0,
             titletext,
             data: data,

@@ -1,7 +1,7 @@
 import { EChartsType } from "echarts";
 import { ECOption } from "./echarts-line";
 
-export function drawlinechart({
+export function draw_line_chart_raw({
     xAxis_min = "dataMin",
     yAxis_min = "dataMin",
     data,

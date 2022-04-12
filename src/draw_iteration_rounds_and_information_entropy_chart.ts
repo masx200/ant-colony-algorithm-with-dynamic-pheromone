@@ -1,7 +1,7 @@
 import { EChartsType } from "echarts";
 import { ShallowRef } from "vue";
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
-import { drawlinechart } from "../functions/drawlinechart";
+import { draw_line_chart } from "../functions/draw_line_chart";
 
 export function draw_iteration_rounds_and_information_entropy_chart(
     iteration_rounds_and_information_entropy_chart: ShallowRef<
@@ -16,7 +16,7 @@ export function draw_iteration_rounds_and_information_entropy_chart(
             a.current_iterations,
             a.population_relative_information_entropy,
         ]);
-        drawlinechart({
+        draw_line_chart({
             yAxis_min: 0,
             titletext,
             data: data,
