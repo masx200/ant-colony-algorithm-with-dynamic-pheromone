@@ -22,10 +22,10 @@ export function calc_pheromone({
         sum(
             latest_and_optimal_routes.map(({ route, length: route_length }) => {
                 return is_segment_in_cycle_route(route, row, column)
-                    ? Math.pow(
+                    ? (Math.pow(
                         1 + greedy_length / route_length,
                         convergence_coefficient
-                    ) *
+                    ) - 1) *
                     (1 - Math.exp(-convergence_coefficient))
                     : 0;
             })
