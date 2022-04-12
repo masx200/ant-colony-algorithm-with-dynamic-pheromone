@@ -39,6 +39,7 @@ import { create_latest_and_optimal_routes } from "./create_latest_and_optimal_ro
 import { calc_pheromone } from "./calc_pheromone";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
+import { create_pheromone_cache } from "./create_pheromone_cache";
 // import { reactive } from "@vue/reactivity";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emitter = EventEmitterTargetClass({ sync: true });
@@ -90,7 +91,37 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     let lastrandomselectionprobability = 0;
     let totaltimems = 0;
+    let pheromone_cache = create_pheromone_cache(count_of_nodes);
+    function getPheromone(row: number, column: number): number {
+        if (
+            row < 0 ||
+            row > count_of_nodes - 1 ||
+            column < 0 ||
+            column > count_of_nodes - 1
+        ) {
+            throw Error("row,column,out of bounds:" + row + "," + column);
+        } else {
+            const cached = pheromone_cache.get(row, column);
+            if (!cached) {
+                const result = calc_pheromone({
+                    latest_and_optimal_routes,
+                    PheromoneZero,
+                    row,
+                    column,
+                    greedy_length,
+                    convergence_coefficient,
+                });
 
+                pheromone_cache.set(row, column, result);
+                return result;
+            } else {
+                return cached;
+            }
+        }
+    }
+    function clear_pheromone_cache() {
+        pheromone_cache = create_pheromone_cache(count_of_nodes);
+    }
     const pheromoneStore: ReadOnlyPheromone = {
         row: count_of_nodes,
         get: getPheromone,
@@ -111,32 +142,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             )
         );
         // length_of_routes = latest_and_optimal_routes.length;
-    }
-    function getPheromone(row: number, column: number): number {
-        if (
-            row < 0 ||
-            row > count_of_nodes - 1 ||
-            column < 0 ||
-            column > count_of_nodes - 1
-        ) {
-            throw Error("row,column,out of bounds:" + row + "," + column);
-        } else {
-            // const latest_and_optimal_routes = uniqWith(
-            //     [
-            //         ...collection_of_latest_routes,
-            //         ...collection_of_optimal_routes,
-            //     ],
-            //     (a, b) => a.length === b.length
-            // );
-            return calc_pheromone({
-                latest_and_optimal_routes,
-                PheromoneZero,
-                row,
-                column,
-                greedy_length,
-                convergence_coefficient,
-            });
-        }
     }
 
     let current_search_count = 0;
@@ -229,9 +234,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     };
     on_finish_one_iteration(() => {
         update_latest_and_optimal_routes();
+        clear_pheromone_cache();
     });
     on_finish_greedy_iteration(() => {
         update_latest_and_optimal_routes();
+        clear_pheromone_cache();
     });
     const runOneIteration = async () => {
         if (current_search_count === 0) {
