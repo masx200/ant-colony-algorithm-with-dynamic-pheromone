@@ -15,7 +15,7 @@ export function update_convergence_coefficient({
             4
         );
     } else if (optimal_length_of_iteration > greedy_length) {
-        convergence_coefficient += 2;
+        convergence_coefficient *= optimal_length_of_iteration / greedy_length;
     } else {
         convergence_coefficient += 0.2;
     }
