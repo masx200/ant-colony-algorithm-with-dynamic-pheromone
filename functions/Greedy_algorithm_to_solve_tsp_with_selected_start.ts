@@ -37,9 +37,9 @@ export function Greedy_algorithm_to_solve_tsp_with_selected_start({
         const restnodes =
             max_cities_of_greedy < Infinity
                 ? ArrayShuffle(Array.from(indexsset)).slice(
-                    0,
-                    max_cities_of_greedy
-                )
+                      0,
+                      max_cities_of_greedy
+                  )
                 : Array.from(indexsset);
         const nextnodesanddistances: {
             nextnode: number;

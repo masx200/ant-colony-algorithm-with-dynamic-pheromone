@@ -19,6 +19,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
         size?: number;
     }
 ): ThreadPool<W> {
+    const queue = reactive(new Map<number, (w: W) => Promise<unknown>>());
     let destroyed = ref(false);
     let id = 0;
     const running = reactive(new Map<number, (w: W) => Promise<unknown>>());
@@ -34,10 +35,8 @@ export function createThreadPool<W extends { terminate: () => void }>(
     });
     const threads: W[] = [];
 
-    const queue = reactive(new Map<number, (w: W) => Promise<unknown>>());
-
     function run<R>(callback: (w: W) => Promise<R>): Promise<R> {
-        if (destroyed) {
+        if (destroyed.value) {
             throw new Error("can not run on destroyed pool");
         }
         const task_id = id;

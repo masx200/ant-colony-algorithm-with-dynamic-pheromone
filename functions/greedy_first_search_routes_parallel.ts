@@ -1,6 +1,6 @@
 import { NodeCoordinates } from "./NodeCoordinates";
 import { SharedOptions } from "./SharedOptions";
-import { run_greedy_once_thread } from "./run_greedy_once_thread";
+import { run_greedy_once_thread_with_time } from "./run_greedy_once_thread_with_time";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 export async function* greedy_first_search_routes_parallel({
     max_cities_of_greedy,
@@ -35,7 +35,7 @@ export async function* greedy_first_search_routes_parallel({
                     time_ms: number;
                 }>
             >({ length: current_threads }).map(() =>
-                run_greedy_once_thread({
+                run_greedy_once_thread_with_time({
                     inputindexs,
                     node_coordinates,
                     round,
