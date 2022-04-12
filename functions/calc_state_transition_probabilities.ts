@@ -25,7 +25,7 @@ export function calc_state_transition_probabilities({
         Math.pow(phermone, alpha) /
         Math.pow(
             getdistancebyserialnumber(nextnode, currentnode),
-            beta * get_convergence_coefficient()
+            beta * Math.log2(get_convergence_coefficient() + 1)
         );
     assert_true(weight > 0);
     return weight;

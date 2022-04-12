@@ -1,4 +1,5 @@
 import { ArrayShuffle } from "../functions/ArrayShuffle";
+import { assert_Integer } from "../test/assert_Integer";
 import { assert_true } from "../test/assert_true";
 import { IntegerRange } from "./IntegerRange";
 
@@ -16,10 +17,14 @@ export function generate_one_k_exchange_route({
     const selected = ArrayShuffle(index_range).slice(0, k);
 
     const changes = ArrayShuffle(selected);
-
+    const selected_to_changes = new Map(
+        selected.map((a, i) => [a, changes[i]])
+    );
     const result = route.map((v, i, a) => {
-        if (selected.includes(i)) {
-            return a[changes[i]];
+        if (selected_to_changes.has(i)) {
+            const t = selected_to_changes.get(i);
+            assert_Integer(t);
+            return a[t];
         } else {
             return v;
         }
