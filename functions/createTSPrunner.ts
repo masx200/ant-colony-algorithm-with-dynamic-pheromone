@@ -66,7 +66,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
-    let convergence_coefficient = 0;
+    let convergence_coefficient = 1;
     function get_convergence_coefficient() {
         return convergence_coefficient;
     }
