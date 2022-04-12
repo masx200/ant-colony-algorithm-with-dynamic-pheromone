@@ -6,5 +6,5 @@ export type PureDataOfFinishOneRoute = Omit<
     | "total_time_ms"
     | "current_iterations"
     | "global_best_route"
-    | "globalbestlength"
+    | "global_best_length"
 >;

@@ -1,15 +1,15 @@
 export function update_last_random_selection_probability({
     coefficient_of_diversity_increase,
-    lastrandomselectionprobability,
+    lastrandom_selection_probability,
 }: {
     coefficient_of_diversity_increase: number;
-    lastrandomselectionprobability: number;
+    lastrandom_selection_probability: number;
 }): number {
-    const nextrandomselectionprobability =
+    const nextrandom_selection_probability =
         coefficient_of_diversity_increase / 12;
-    lastrandomselectionprobability = Math.max(
-        nextrandomselectionprobability,
-        lastrandomselectionprobability / 6
+    lastrandom_selection_probability = Math.max(
+        nextrandom_selection_probability,
+        lastrandom_selection_probability / 6
     );
-    return lastrandomselectionprobability;
+    return lastrandom_selection_probability;
 }

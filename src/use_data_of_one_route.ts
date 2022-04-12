@@ -19,7 +19,7 @@ export function use_data_of_one_route() {
             return [
                 index + 1,
                 data.length,
-                data.globalbestlength,
+                data.global_best_length,
                 data.time_ms_of_one_route / 1000,
                 data.total_time_ms / 1000,
             ];

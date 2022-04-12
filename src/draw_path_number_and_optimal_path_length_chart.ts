@@ -14,7 +14,7 @@ export function draw_path_number_and_optimal_path_length_chart(
     if (chart) {
         const data: [number, number][] = dataofoneroute.map((a) => [
             a.current_search_count,
-            a.globalbestlength,
+            a.global_best_length,
         ]);
         draw_line_chart({
             yAxis_min: 0,

@@ -16,7 +16,7 @@ export function generate_paths_using_state_transition_probabilities(
     options: {
         alpha_zero: number;
         beta_zero: number;
-        randomselectionprobability: number;
+        random_selection_probability: number;
         node_coordinates: NodeCoordinates;
 
         pheromoneStore: ReadOnlyPheromone;
@@ -30,7 +30,7 @@ export function generate_paths_using_state_transition_probabilities(
         get_convergence_coefficient,
         get_neighbors_from_optimal_routes_and_latest_routes,
         max_cities_of_state_transition,
-        randomselectionprobability,
+        random_selection_probability,
         node_coordinates,
         pheromoneStore,
 
@@ -62,31 +62,31 @@ export function generate_paths_using_state_transition_probabilities(
     const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
     while (route.length !== count_of_nodes) {
         const current_city = Array.from(route).slice(-1)[0];
-        const randomselection = Math.random() < randomselectionprobability;
+        const randomselection = Math.random() < random_selection_probability;
         const get_filtered_nodes = function (): number[] | Set<number> {
             return is_count_not_large
                 ? available_nodes
                 : select_available_cities_from_optimal_and_latest({
-                      available_nodes,
-                      get_neighbors_from_optimal_routes_and_latest_routes,
-                      current_city,
-                      max_size_of_cities: max_cities_of_state_transition,
-                  });
+                    available_nodes,
+                    get_neighbors_from_optimal_routes_and_latest_routes,
+                    current_city,
+                    max_size_of_cities: max_cities_of_state_transition,
+                });
         };
         const nextnode = randomselection
             ? getnumberfromarrayofnmber(
-                  pickRandomOne(Array.from(available_nodes))
-              )
+                pickRandomOne(Array.from(available_nodes))
+            )
             : picknextnode({
-                  ...options,
-                  alpha_zero,
-                  beta_zero,
-                  get_convergence_coefficient,
-                  currentnode: current_city,
-                  availablenextnodes: Array.from(get_filtered_nodes()),
-                  getpheromone,
-                  getdistancebyserialnumber,
-              });
+                ...options,
+                alpha_zero,
+                beta_zero,
+                get_convergence_coefficient,
+                currentnode: current_city,
+                availablenextnodes: Array.from(get_filtered_nodes()),
+                getpheromone,
+                getdistancebyserialnumber,
+            });
         route.push(nextnode);
         available_nodes.delete(nextnode);
     }

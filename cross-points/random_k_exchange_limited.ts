@@ -1,7 +1,7 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
-import { get_best_routeOfSeriesRoutesAndLengths } from "../functions/get_best_routeOfSeriesRoutesAndLengths";
+import { get_best_route_Of_Series_routes_and_lengths } from "../functions/get_best_route_Of_Series_routes_and_lengths";
 
 import { assert_true as assert_true } from "../test/assert_true";
 
@@ -36,7 +36,7 @@ export function random_k_exchange_limited({
             })
         );
 
-        const routesAndLengths = routes_of_2_opt_accurate
+        const routes_and_lengths = routes_of_2_opt_accurate
             .map((route) => {
                 const length = closed_total_path_length({
                     round: get_distance_round(),
@@ -50,8 +50,10 @@ export function random_k_exchange_limited({
             })
             .filter((a) => a.length !== length);
         const { route: best_route_of_2_opt, length: best_length_of_2_opt } =
-            routesAndLengths.length
-                ? get_best_routeOfSeriesRoutesAndLengths(routesAndLengths)
+            routes_and_lengths.length
+                ? get_best_route_Of_Series_routes_and_lengths(
+                      routes_and_lengths
+                  )
                 : { length: length, route: route };
         if (best_length_of_2_opt < length) {
             route = best_route_of_2_opt;

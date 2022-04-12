@@ -40,6 +40,7 @@ import { calc_pheromone } from "./calc_pheromone";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { create_pheromone_cache } from "./create_pheromone_cache";
+import { sum } from "lodash-es";
 // import { reactive } from "@vue/reactivity";
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emitter = EventEmitterTargetClass({ sync: true });
@@ -89,7 +90,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         max_size_of_collection_of_optimal_routes
     );
 
-    let lastrandomselectionprobability = 0;
+    let lastrandom_selection_probability = 0;
     let totaltimems = 0;
     let pheromone_cache = create_pheromone_cache(count_of_nodes);
     function getPheromone(row: number, column: number): number {
@@ -150,7 +151,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     let time_of_best_ms = 0;
     let search_count_of_best = 0;
-    let globalbestlength: number = Infinity;
+    let global_best_length: number = Infinity;
     let greedy_length: number = Infinity;
 
     const get_total_time_ms = () => {
@@ -164,8 +165,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         if (greedy_length === Infinity) {
             greedy_length = bestlength;
         }
-        if (bestlength < globalbestlength) {
-            globalbestlength = bestlength;
+        if (bestlength < global_best_length) {
+            global_best_length = bestlength;
             time_of_best_ms = totaltimems;
             search_count_of_best = current_search_count + 1;
         }
@@ -179,7 +180,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     };
 
     const get_best_length = () => {
-        return globalbestlength;
+        return global_best_length;
     };
 
     const get_number_of_iterations = () => {
@@ -205,14 +206,14 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             total_time_ms: totaltimems,
             time_of_best_ms,
             global_best_route,
-            globalbestlength: globalbestlength,
+            global_best_length: global_best_length,
         });
         inner_emit_finish_one_route({
             ...data,
             current_search_count,
 
             total_time_ms: totaltimems,
-            globalbestlength,
+            global_best_length,
         });
     };
     const {
@@ -223,12 +224,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emit_finish_one_iteration = (
         data: Omit<
             DataOfFinishOneIteration,
-            "current_iterations" | "globalbestlength"
+            "current_iterations" | "global_best_length"
         >
     ) => {
         inner_emit_finish_one_iteration({
             ...data,
-            globalbestlength: globalbestlength,
+            global_best_length: global_best_length,
             current_iterations: get_number_of_iterations(),
             convergence_coefficient,
         });
@@ -276,7 +277,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     pheromoneStore,
                     alpha_zero,
                     beta_zero,
-                    lastrandomselectionprobability,
+                    lastrandom_selection_probability,
                     max_results_of_k_opt,
                     get_best_length,
                     get_best_route,
@@ -304,7 +305,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     const starttime_of_process_iteration = Number(new Date());
                     const {
                         coefficient_of_diversity_increase,
-                        // nextrandomselectionprobability,
+                        // nextrandom_selection_probability,
                         population_relative_information_entropy,
 
                         optimal_length_of_iteration,
@@ -312,7 +313,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     } = EachIterationHandler({
                         ...shared,
 
-                        routesandlengths: routes_and_lengths_of_one_iteration,
+                        routes_and_lengths: routes_and_lengths_of_one_iteration,
                         get_best_length: get_best_length,
                         get_best_route: get_best_route,
                         pheromoneStore,
@@ -332,21 +333,28 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         optimal_length_of_iteration,
                         greedy_length,
                     });
+                    const average_length_of_iteration =
+                        sum(
+                            routes_and_lengths_of_one_iteration.map(
+                                (a) => a.length
+                            )
+                        ) / routes_and_lengths_of_one_iteration.length;
                     emit_finish_one_iteration({
+                        average_length_of_iteration,
                         optimal_length_of_iteration,
                         optimal_route_of_iteration,
                         population_relative_information_entropy,
 
-                        randomselectionprobability:
-                            lastrandomselectionprobability,
+                        random_selection_probability:
+                            lastrandom_selection_probability,
                         time_ms_of_one_iteration: time_ms_of_one_iteration,
                         convergence_coefficient,
                     });
                     time_ms_of_one_iteration = 0;
-                    lastrandomselectionprobability =
+                    lastrandom_selection_probability =
                         update_last_random_selection_probability({
                             coefficient_of_diversity_increase,
-                            lastrandomselectionprobability,
+                            lastrandom_selection_probability,
                         });
                     routes_and_lengths_of_one_iteration.length = 0;
                 }
@@ -378,7 +386,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         return time_of_best_ms;
     }
     function get_random_selection_probability() {
-        return lastrandomselectionprobability;
+        return lastrandom_selection_probability;
     }
     const get_neighbors_from_optimal_routes_and_latest_routes =
         create_get_neighbors_from_optimal_routes_and_latest_routes(

@@ -1,7 +1,7 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
-import { get_best_routeOfSeriesRoutesAndLengths } from "../functions/get_best_routeOfSeriesRoutesAndLengths";
+import { get_best_route_Of_Series_routes_and_lengths } from "../functions/get_best_route_Of_Series_routes_and_lengths";
 import { get_distance_round } from "../src/set_distance_round";
 
 import { generate_k_opt_cycle_routes_limited } from "./generate_k_opt_cycle_routes_limited";
@@ -39,7 +39,7 @@ export function Random_K_OPT_full_limited_find_best({
             })
         )
         .flat();
-    const routesAndLengths = routes_of_k_opt
+    const routes_and_lengths = routes_of_k_opt
         .map((route) => {
             const length = closed_total_path_length({
                 round: get_distance_round(),
@@ -53,8 +53,8 @@ export function Random_K_OPT_full_limited_find_best({
         })
         .filter((a) => a.length !== oldLength);
     const { route: best_route_of_k_opt, length: best_length_of_k_opt } =
-        routesAndLengths.length
-            ? get_best_routeOfSeriesRoutesAndLengths(routesAndLengths)
+        routes_and_lengths.length
+            ? get_best_route_Of_Series_routes_and_lengths(routes_and_lengths)
             : { route: oldRoute, length: oldLength };
     let route = best_route_of_k_opt;
     let length = best_length_of_k_opt;

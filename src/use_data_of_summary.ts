@@ -42,7 +42,7 @@ export function use_data_of_summary(): {
         return result
             ? [
                   [
-                      result.globalbestlength,
+                      result.global_best_length,
                       result.time_of_best_ms / 1000,
                       result.search_count_of_best,
                       result.total_time_ms / 1000,

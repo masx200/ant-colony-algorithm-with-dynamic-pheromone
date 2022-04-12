@@ -14,7 +14,7 @@ export function use_history_of_best(
 ): {
     history_of_best: {
         time_of_best_ms: number;
-        globalbestlength: number;
+        global_best_length: number;
         search_count_of_best: number;
     }[];
     clearData: () => void;
@@ -24,32 +24,32 @@ export function use_history_of_best(
     const history_of_best = reactive<
         {
             time_of_best_ms: number;
-            globalbestlength: number;
+            global_best_length: number;
             search_count_of_best: number;
         }[]
     >([]);
     onMounted(() => {
         watch(dataofresult, (value, old) => {
-            const globalbestlength = value?.globalbestlength;
-            const old_globalbestlength = old?.globalbestlength;
-            if (!globalbestlength) {
+            const global_best_length = value?.global_best_length;
+            const old_global_best_length = old?.global_best_length;
+            if (!global_best_length) {
                 return;
             }
             const { time_of_best_ms, search_count_of_best } = value;
-            if (!old_globalbestlength) {
+            if (!old_global_best_length) {
                 history_of_best.push({
                     time_of_best_ms,
-                    globalbestlength,
+                    global_best_length,
                     search_count_of_best,
                 });
             }
             if (
-                old_globalbestlength &&
-                old_globalbestlength > globalbestlength
+                old_global_best_length &&
+                old_global_best_length > global_best_length
             ) {
                 history_of_best.push({
                     time_of_best_ms,
-                    globalbestlength,
+                    global_best_length,
                     search_count_of_best,
                 });
             }
@@ -67,7 +67,7 @@ export function use_history_of_best(
             ? resultbest.map((result) => {
                   return [
                       result.search_count_of_best,
-                      result.globalbestlength,
+                      result.global_best_length,
                       result.time_of_best_ms / 1000,
                   ];
               })

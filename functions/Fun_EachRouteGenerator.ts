@@ -7,7 +7,7 @@ export interface EachRouteGeneratorOptions {
     node_coordinates: NodeCoordinates;
     alpha_zero: number;
     beta_zero: number;
-    lastrandomselectionprobability: number;
+    lastrandom_selection_probability: number;
     max_results_of_k_opt: number;
     get_best_length: () => number;
     get_best_route: () => number[];

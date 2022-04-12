@@ -2,7 +2,7 @@ import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 import { SharedOptions } from "./SharedOptions";
 import { greedy_first_search_routes_parallel } from "./greedy_first_search_routes_parallel";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "../src/Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
-import { get_best_routeOfSeriesRoutesAndLengths } from "./get_best_routeOfSeriesRoutesAndLengths";
+import { get_best_route_Of_Series_routes_and_lengths } from "./get_best_route_Of_Series_routes_and_lengths";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { sum } from "lodash-es";
 import { get_distance_round } from "../src/set_distance_round";
@@ -67,18 +67,21 @@ export async function GreedyRoutesGenerator({
     }
 
     const { length: best_length, route: optimal_route_of_iteration } =
-        get_best_routeOfSeriesRoutesAndLengths(parallel_results);
+        get_best_route_Of_Series_routes_and_lengths(parallel_results);
     const best_route = optimal_route_of_iteration;
     Greedy_algorithm_to_solve_tsp_with_selected_start_pool.clear();
     const time_ms_of_one_iteration = sum(
         parallel_results.map((r) => r.time_ms)
     );
+    const average_length_of_iteration =
+        sum(parallel_results.map((a) => a.length)) / parallel_results.length;
     emit_finish_greedy_iteration({
+        average_length_of_iteration,
         current_iterations: 1,
         optimal_length_of_iteration: best_length,
         optimal_route_of_iteration,
         time_ms_of_one_iteration,
-        globalbestlength: get_best_length(),
+        global_best_length: get_best_length(),
     });
     return { best_length, best_route };
 }

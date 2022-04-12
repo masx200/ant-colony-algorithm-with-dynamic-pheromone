@@ -1,13 +1,13 @@
 import { assert_true } from "../test/assert_true";
 import { calc_population_relative_information_entropy } from "./calc_population-relative-information-entropy";
-import { get_best_routeOfSeriesRoutesAndLengths } from "./get_best_routeOfSeriesRoutesAndLengths";
+import { get_best_route_Of_Series_routes_and_lengths } from "./get_best_route_Of_Series_routes_and_lengths";
 import { NodeCoordinates } from "./NodeCoordinates";
 
 import { SharedOptions } from "./SharedOptions";
 
 export function EachIterationHandler(
     options: SharedOptions & {
-        routesandlengths: {
+        routes_and_lengths: {
             route: number[];
             length: number;
         }[];
@@ -18,15 +18,15 @@ export function EachIterationHandler(
     }
 ): {
     coefficient_of_diversity_increase: number;
-    // nextrandomselectionprobability: number;
+    // nextrandom_selection_probability: number;
 
     optimal_length_of_iteration: number;
     optimal_route_of_iteration: number[];
 
     population_relative_information_entropy: number;
 } {
-    const { routesandlengths } = options;
-    const routes = routesandlengths.map(({ route }) => route);
+    const { routes_and_lengths } = options;
+    const routes = routes_and_lengths.map(({ route }) => route);
 
     const current_population_relative_information_entropy =
         calc_population_relative_information_entropy(routes);
@@ -36,10 +36,10 @@ export function EachIterationHandler(
     );
 
     assert_true(!Number.isNaN(current_population_relative_information_entropy));
-    // assert_true(!Number.isNaN(nextrandomselectionprobability));
+    // assert_true(!Number.isNaN(nextrandom_selection_probability));
 
     const iteratebestlengthandroute =
-        get_best_routeOfSeriesRoutesAndLengths(routesandlengths);
+        get_best_route_Of_Series_routes_and_lengths(routes_and_lengths);
 
     const iteratebestlength = iteratebestlengthandroute.length;
     const iteratebestroute = iteratebestlengthandroute.route;
@@ -50,7 +50,7 @@ export function EachIterationHandler(
         optimal_length_of_iteration,
         optimal_route_of_iteration,
 
-        // nextrandomselectionprobability,
+        // nextrandom_selection_probability,
         population_relative_information_entropy:
             current_population_relative_information_entropy,
     };
