@@ -242,7 +242,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     });
     const runOneIteration = async () => {
         if (current_search_count === 0) {
-            await GreedyRoutesGenerator({
+            const { best_length, best_route } = await GreedyRoutesGenerator({
                 shared,
                 get_best_route,
                 get_best_length,
@@ -254,6 +254,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 count_of_nodes,
                 emit_finish_greedy_iteration,
             });
+            greedy_length = best_length;
+            set_best_length(best_length);
+            set_best_route(best_route);
         } else {
             let time_ms_of_one_iteration: number = 0;
             const routes_and_lengths_of_one_iteration: {

@@ -27,7 +27,7 @@ export async function GreedyRoutesGenerator({
     emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
 
     count_of_nodes: number;
-}) {
+}): Promise<{ best_length: number; best_route: number[] }> {
     const greedy_results_iter = greedy_first_search_routes_parallel({
         ...shared,
         round: get_distance_round(),
@@ -68,7 +68,7 @@ export async function GreedyRoutesGenerator({
 
     const { length: best_length, route: optimal_route_of_iteration } =
         get_best_routeOfSeriesRoutesAndLengths(parallel_results);
-
+    const best_route = optimal_route_of_iteration;
     Greedy_algorithm_to_solve_tsp_with_selected_start_pool.clear();
     const time_ms_of_one_iteration = sum(
         parallel_results.map((r) => r.time_ms)
@@ -80,4 +80,5 @@ export async function GreedyRoutesGenerator({
         time_ms_of_one_iteration,
         globalbestlength: get_best_length(),
     });
+    return { best_length, best_route };
 }
