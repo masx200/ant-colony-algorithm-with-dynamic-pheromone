@@ -36,7 +36,7 @@ import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { create_latest_and_optimal_routes } from "./create_latest_and_optimal_routes";
-import { calc_pheromone } from "./calc_pheromone";
+import { calc_pheromone_dynamic } from "./calc_pheromone_dynamic";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { create_pheromone_cache } from "./create_pheromone_cache";
@@ -104,7 +104,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         } else {
             const cached = pheromone_cache.get(row, column);
             if (0 === cached) {
-                const result = calc_pheromone({
+                const result = calc_pheromone_dynamic({
                     latest_and_optimal_routes,
                     PheromoneZero,
                     row,

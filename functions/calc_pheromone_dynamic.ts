@@ -1,7 +1,7 @@
 import { sum } from "lodash-es";
 import { is_segment_in_cycle_route } from "./is_segment_in_cycle_route";
 
-export function calc_pheromone({
+export function calc_pheromone_dynamic({
     latest_and_optimal_routes,
     PheromoneZero,
     row,
@@ -23,9 +23,9 @@ export function calc_pheromone({
             latest_and_optimal_routes.map(({ route, length: route_length }) => {
                 return is_segment_in_cycle_route(route, row, column)
                     ? (Math.pow(
-                          1 + greedy_length / route_length,
+                          greedy_length / route_length,
                           convergence_coefficient
-                      ) -
+                      ) +
                           1) *
                           (1 - Math.exp(-convergence_coefficient))
                     : 0;
