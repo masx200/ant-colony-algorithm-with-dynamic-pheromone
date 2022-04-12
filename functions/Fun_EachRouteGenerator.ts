@@ -1,8 +1,6 @@
 import { NodeCoordinates } from "./NodeCoordinates";
 
 export interface EachRouteGeneratorOptions {
-    get_probability_of_opt_best: () => number;
-
     max_results_of_2_opt?: number;
     current_search_count: number;
     count_of_nodes: number;

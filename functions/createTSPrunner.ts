@@ -25,7 +25,6 @@ import { EachIterationHandler } from "./EachIterationHandler";
 import { EachRouteGenerator } from "./EachRouteGenerator";
 import { generateUniqueArrayOfCircularPath } from "./generateUniqueArrayOfCircularPath";
 import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
-import { update_weight_of_opt } from "./update_weight_of_opt";
 
 import { ReadOnlyPheromone, TSP_Runner } from "./TSP_Runner";
 import { SharedOptions } from "./SharedOptions";
@@ -244,8 +243,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 set_best_route,
                 onRouteCreated,
                 emit_finish_one_route,
-                get_probability_of_opt_best,
-                get_probability_of_opt_current,
 
                 count_of_nodes,
                 emit_finish_greedy_iteration,
@@ -262,7 +259,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 const { route, length } = EachRouteGenerator({
                     ...shared,
                     current_search_count,
-                    get_probability_of_opt_best,
+
                     count_of_nodes,
                     node_coordinates,
                     pheromoneStore,
@@ -286,9 +283,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     endtime_of_one_route - starttime_of_one_route;
                 time_ms_of_one_iteration += time_ms_of_one_route;
                 emit_finish_one_route({
-                    probability_of_opt_best: get_probability_of_opt_best(),
-                    probability_of_opt_current:
-                        get_probability_of_opt_current(),
                     time_ms_of_one_route: time_ms_of_one_route,
                     route,
                     length,
@@ -313,13 +307,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         pheromoneStore,
                         node_coordinates,
                     });
-                    update_weight_of_opt({
-                        get_weight_of_opt_best,
-                        get_weight_of_opt_current,
-                        set_weight_of_opt_best,
-                        coefficient_of_diversity_increase,
-                        set_weight_of_opt_current,
-                    });
+
                     const endtime_of_process_iteration = Number(new Date());
                     const timems_of_process_iteration =
                         endtime_of_process_iteration -
@@ -360,31 +348,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             await runOneIteration();
         }
     };
-    let weight_of_opt_best = 1;
-    let weight_of_opt_current = 1;
 
-    function get_probability_of_opt_best(): number {
-        return (
-            weight_of_opt_best / (weight_of_opt_best + weight_of_opt_current)
-        );
-    }
-    function get_probability_of_opt_current(): number {
-        return (
-            weight_of_opt_current / (weight_of_opt_best + weight_of_opt_current)
-        );
-    }
-    function get_weight_of_opt_best() {
-        return weight_of_opt_best;
-    }
-    function set_weight_of_opt_best(value: number) {
-        weight_of_opt_best = value;
-    }
-    function get_weight_of_opt_current() {
-        return weight_of_opt_current;
-    }
-    function set_weight_of_opt_current(value: number) {
-        weight_of_opt_current = value;
-    }
     function onRouteCreated(route: number[], length: number) {
         if (collection_of_optimal_routes) {
             collection_of_optimal_routes.add(route, length);
@@ -442,12 +406,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             get_random_selection_probability,
             get_search_count_of_best,
 
-            set_weight_of_opt_current,
-            get_weight_of_opt_current,
-            set_weight_of_opt_best,
-            get_weight_of_opt_best,
-            get_probability_of_opt_current,
-            get_probability_of_opt_best,
             get_best_route,
             get_best_length,
             set_best_route,

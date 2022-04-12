@@ -16,8 +16,6 @@ export async function GreedyRoutesGenerator({
     set_best_route,
     onRouteCreated,
     emit_finish_one_route,
-    get_probability_of_opt_best,
-    get_probability_of_opt_current,
 }: {
     shared: SharedOptions;
     emit_finish_greedy_iteration: (data: DataOfFinishGreedyIteration) => void;
@@ -27,8 +25,6 @@ export async function GreedyRoutesGenerator({
     set_best_route: (route: number[]) => void;
     onRouteCreated: (route: number[], length: number) => void;
     emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
-    get_probability_of_opt_best: () => number;
-    get_probability_of_opt_current: () => number;
 
     count_of_nodes: number;
 }) {
@@ -64,8 +60,6 @@ export async function GreedyRoutesGenerator({
         onRouteCreated(route, length);
 
         emit_finish_one_route({
-            probability_of_opt_best: get_probability_of_opt_best(),
-            probability_of_opt_current: get_probability_of_opt_current(),
             time_ms_of_one_route: time_ms,
             route,
             length,

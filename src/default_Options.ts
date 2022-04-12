@@ -2,17 +2,19 @@ import { TSPRunnerOptions } from "./TSPRunnerOptions";
 
 export const default_count_of_ants = 20;
 export const default_search_rounds = 170;
-export const default_search_time_seconds = 900;
+export const default_search_time_seconds = 600;
 
 export const default_alpha = 1;
 export const default_beta = 4;
 
-export const default_max_results_of_k_opt = 15;
+export const default_max_results_of_k_opt = 10;
 export const default_max_results_of_2_opt = 10;
+export const default_max_results_of_k_exchange = 10;
 
 export { DefaultOptions };
 export const show_every_route = false;
 const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
+    max_results_of_k_exchange: default_max_results_of_k_exchange,
     max_cities_of_state_transition: 200,
     max_results_of_2_opt: default_max_results_of_2_opt,
     max_results_of_k_opt: default_max_results_of_k_opt,

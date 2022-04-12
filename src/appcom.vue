@@ -101,6 +101,15 @@
             :disabled="disablemapswitching"
             :min="1"
             :controls="false"
+        /><br />
+        <span>每条的k-exchange最大次数</span>
+        <el-input-number
+            step-strictly
+            :step="1"
+            v-model.number="input_options.max_results_of_k_exchange"
+            :disabled="disablemapswitching"
+            :min="1"
+            :controls="false"
         /><br /><span>每条的2-opt最大次数</span>
         <el-input-number
             step-strictly

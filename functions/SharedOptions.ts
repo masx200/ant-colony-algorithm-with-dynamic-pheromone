@@ -10,12 +10,6 @@ export type SharedOptions = Required<TSPRunnerOptions> & {
     get_random_selection_probability: () => number;
     get_search_count_of_best: () => number;
 
-    set_weight_of_opt_current: (value: number) => void;
-    get_weight_of_opt_current: () => number;
-    set_weight_of_opt_best: (value: number) => void;
-    get_weight_of_opt_best: () => number;
-    get_probability_of_opt_current: () => number;
-    get_probability_of_opt_best: () => number;
     get_best_route: () => number[];
     get_best_length: () => number;
     set_best_route: (route: number[]) => void;

@@ -6,6 +6,7 @@ import { Precise_2_opt_eliminates_all_intersections } from "../cross-points/Prec
 import { partial_precise_random_2_opt_eliminates_cross_points } from "../cross-points/partial_precise_random_2_opt_eliminates_cross_points";
 import { Random_K_OPT_full_limited_find_best } from "../k-opt/Random_K_OPT_full_limited_find_best";
 import { SharedOptions } from "./SharedOptions";
+import { random_k_exchange_limited } from "../cross-points/random_k_exchange_limited";
 export function EachRouteGenerator(
     options: EachRouteGeneratorOptions & SharedOptions
 ): {
@@ -13,12 +14,6 @@ export function EachRouteGenerator(
     length: number;
 } {
     const {
-        set_weight_of_opt_current,
-        set_weight_of_opt_best,
-        get_weight_of_opt_current,
-        get_weight_of_opt_best,
-
-        get_probability_of_opt_best,
         current_search_count,
         max_results_of_2_opt,
         count_of_nodes,
@@ -28,6 +23,7 @@ export function EachRouteGenerator(
         beta_zero,
         lastrandomselectionprobability,
         max_results_of_k_opt,
+        max_results_of_k_exchange,
         get_best_length,
         get_best_route,
         set_best_length,
@@ -59,31 +55,23 @@ export function EachRouteGenerator(
         }
     }
     const is_count_not_large = count_of_nodes <= max_segments_of_cross_point;
-    const { route: route1, length: length1 } = is_count_not_large
-        ? Precise_2_opt_eliminates_all_intersections({
-              ...options,
-              max_results_of_2_opt,
-              route: oldRoute,
-              length: oldLength,
-              node_coordinates,
-          })
-        : partial_precise_random_2_opt_eliminates_cross_points({
-              ...options,
-              max_of_segments: max_segments_of_cross_point,
-              max_results_of_2_opt,
-              route: oldRoute,
-              length: oldLength,
-              node_coordinates,
-          });
-    const select_opt_best = Math.random() < get_probability_of_opt_best();
-    const { route: route2, length: length2 } =
+
+    const { route: route1, length: length1 } =
         Random_K_OPT_full_limited_find_best({
             ...options,
-            oldRoute: select_opt_best ? get_best_route() : oldRoute,
+            oldRoute: oldRoute,
             max_results_of_k_opt,
             node_coordinates,
-            oldLength: select_opt_best ? get_best_length() : oldLength,
+            oldLength: oldLength,
         });
+    const { route: route2, length: length2 } = random_k_exchange_limited({
+        ...options,
+        route: route1,
+        length: length1,
+        node_coordinates,
+        max_results_of_k_exchange,
+    });
+
     const { route: route3, length: length3 } = is_count_not_large
         ? Precise_2_opt_eliminates_all_intersections({
               ...options,
@@ -110,17 +98,6 @@ export function EachRouteGenerator(
     const { route, length } =
         get_best_routeOfSeriesRoutesAndLengths(temp_set_of_routes);
     if (length < get_best_length()) {
-        if (length1 === length) {
-            set_weight_of_opt_current(get_weight_of_opt_current() + 1);
-        } else if (
-            select_opt_best &&
-            (length2 === length || length3 === length)
-        ) {
-            set_weight_of_opt_best(get_weight_of_opt_best() * 1.1);
-        } else {
-            set_weight_of_opt_current(get_weight_of_opt_current() * 1.1);
-        }
-
         set_best_length(length);
         set_best_route(route);
     }
