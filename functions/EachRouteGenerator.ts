@@ -74,20 +74,20 @@ export function EachRouteGenerator(
 
     const { route: route3, length: length3 } = is_count_not_large
         ? Precise_2_opt_eliminates_all_intersections({
-            ...options,
-            max_results_of_2_opt,
-            route: route2,
-            length: length2,
-            node_coordinates,
-        })
+              ...options,
+              max_results_of_2_opt,
+              route: route2,
+              length: length2,
+              node_coordinates,
+          })
         : partial_precise_random_2_opt_eliminates_cross_points({
-            ...options,
-            max_of_segments: max_segments_of_cross_point,
-            max_results_of_2_opt,
-            route: route2,
-            length: length2,
-            node_coordinates,
-        });
+              ...options,
+              max_of_segments: max_segments_of_cross_point,
+              max_results_of_2_opt,
+              route: route2,
+              length: length2,
+              node_coordinates,
+          });
 
     const temp_set_of_routes = [
         { route: route1, length: length1 },
