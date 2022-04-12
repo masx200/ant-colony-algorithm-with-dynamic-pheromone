@@ -30,6 +30,9 @@ export function createThreadPool<W extends { terminate: () => void }>(
     });
 
     const f = effect(() => {
+if(queue.size===0){
+return
+}
         if (free.value) {
             next();
         }
@@ -84,6 +87,9 @@ s()
         queue.set(task_id, callback);
     }
     function next() {
+if(running.size >= size){
+return
+}
         if (queue.size) {
             const [task_id, callback] = [...queue.entries()][0];
             queue.delete(task_id);
