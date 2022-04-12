@@ -23,13 +23,13 @@ export function calc_pheromone({
             latest_and_optimal_routes.map(({ route, length: route_length }) => {
                 return is_segment_in_cycle_route(route, row, column)
                     ? Math.pow(
-                          greedy_length / route_length,
-                          convergence_coefficient
-                      ) *
-                          (1 - Math.exp(-convergence_coefficient))
+                        10 * greedy_length / route_length,
+                        convergence_coefficient
+                    ) *
+                    (1 - Math.exp(-convergence_coefficient))
                     : 0;
             })
         ) /
-            length_of_routes
+        length_of_routes
     );
 }
