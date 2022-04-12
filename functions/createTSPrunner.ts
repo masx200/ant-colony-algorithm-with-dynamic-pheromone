@@ -129,7 +129,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         get: getPheromone,
         column: count_of_nodes,
     };
-    const PheromoneZero = 1;
+    const PheromoneZero = 1e-16;
     const latest_and_optimal_routes = create_latest_and_optimal_routes(
         collection_of_latest_routes,
         collection_of_optimal_routes
