@@ -46,10 +46,16 @@ export function createThreadPool<W extends { terminate: () => void }>(
             next();
         }
         return new Promise<R>((resolve, reject) => {
+function s(){
+stop(d)
+stop(e)
+}
+
             const d = effect(() => {
                 if (destroyed.value) {
                     reject(new Error("pool is destroyed"));
                     stop(d);
+s()
                 }
             });
 
@@ -59,8 +65,12 @@ export function createThreadPool<W extends { terminate: () => void }>(
                     resolve(result);
                     stop(e);
                     results.delete(task_id);
+s()
                 }
             });
+
+
+
         });
     }
     function get(task_id: number): W {
