@@ -1,10 +1,10 @@
-# ant-colony-algorithm-without-storing-pheromone
+# ant-colony-algorithm-with-storing-pheromone
 
 #### 介绍
 
-ant-colony-algorithm-without-storing-pheromone
+ant-colony-algorithm-with-dynamic-pheromone
 
-不存储信息素的蚁群算法.
+动态计算信息素的蚁群算法.
 
 蚁群算法函数测试
 

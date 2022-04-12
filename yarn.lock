@@ -1719,9 +1719,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@masx200/ant-colony-algorithm-without-storing-pheromone@workspace:.":
+"@masx200/ant-colony-algorithm-with-dynamic-pheromone@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@masx200/ant-colony-algorithm-without-storing-pheromone@workspace:."
+  resolution: "@masx200/ant-colony-algorithm-with-dynamic-pheromone@workspace:."
   dependencies:
     "@babel/core": ^7.17.5
     "@babel/generator": ^7.17.3
