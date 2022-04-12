@@ -5,7 +5,7 @@ import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
 import { getnumberfromarrayofnmber } from "./getnumberfromarrayofnmber";
 import { NodeCoordinates } from "./NodeCoordinates";
 import { picknextnodeRoulette } from "./pick-next-node-Roulette";
-import { PickNextNodeRouletteOptions } from "./PickNextNodeRouletteOptions";
+// import { PickNextNodeRouletteOptions } from "./PickNextNodeRouletteOptions";
 import { pickRandomOne } from "./pickRandomOne";
 import { SharedOptions } from "./SharedOptions";
 import { select_available_cities_from_optimal_and_latest } from "./select_available_cities_from_optimal_and_latest";
@@ -25,9 +25,9 @@ export function generate_paths_using_state_transition_probabilities(
     route: number[];
     length: number;
 } {
-    const picknextnode: (args: PickNextNodeRouletteOptions) => number =
-        picknextnodeRoulette;
+    const picknextnode = picknextnodeRoulette;
     const {
+        get_convergence_coefficient,
         get_neighbors_from_optimal_routes_and_latest_routes,
         max_cities_of_state_transition,
         randomselectionprobability,
@@ -80,7 +80,7 @@ export function generate_paths_using_state_transition_probabilities(
             : picknextnode({
                   alpha_zero,
                   beta_zero,
-
+                  get_convergence_coefficient,
                   currentnode: current_city,
                   availablenextnodes: Array.from(get_filtered_nodes()),
                   getpheromone,

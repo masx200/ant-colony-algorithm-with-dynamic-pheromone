@@ -3,16 +3,19 @@ import { getnumberfromarrayofnmber } from "./getnumberfromarrayofnmber";
 import { PickNextNodeRouletteOptions } from "./PickNextNodeRouletteOptions";
 import { pickRandomOne } from "./pickRandomOne";
 export function picknextnodeRoulette(
-    args: PickNextNodeRouletteOptions
+    options: PickNextNodeRouletteOptions & {
+        get_convergence_coefficient: () => number;
+    }
 ): number {
     const {
         alpha_zero,
+        get_convergence_coefficient,
         beta_zero,
         getpheromone,
         getdistancebyserialnumber,
         currentnode,
         availablenextnodes,
-    } = args;
+    } = options;
     if (availablenextnodes.length === 0) {
         throw Error(
             "invalid availablenextnodes:" + JSON.stringify(availablenextnodes)
@@ -26,6 +29,7 @@ export function picknextnodeRoulette(
             availablenextnodes.map((nextnode) => {
                 const weight = calc_state_transition_probabilities({
                     getpheromone,
+                    get_convergence_coefficient,
                     nextnode,
                     currentnode,
                     alpha,

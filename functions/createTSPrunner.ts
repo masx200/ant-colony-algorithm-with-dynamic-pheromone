@@ -68,6 +68,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
     let convergence_coefficient = 0;
+    function get_convergence_coefficient() {
+        return convergence_coefficient;
+    }
     const {
         distance_round,
         max_routes_of_greedy,
@@ -434,6 +437,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     function getShared(): SharedOptions {
         return {
             ...options,
+            get_convergence_coefficient,
             get_neighbors_from_optimal_routes_and_latest_routes,
             get_random_selection_probability,
             get_search_count_of_best,

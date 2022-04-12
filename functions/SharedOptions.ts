@@ -3,6 +3,7 @@ import { NodeCoordinates } from "./NodeCoordinates";
 import { ReadOnlyPheromone } from "./TSP_Runner";
 
 export type SharedOptions = Required<TSPRunnerOptions> & {
+    get_convergence_coefficient: () => number;
     get_neighbors_from_optimal_routes_and_latest_routes: (
         current_city: number
     ) => number[];
