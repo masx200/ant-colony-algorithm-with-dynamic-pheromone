@@ -102,7 +102,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             throw Error("row,column,out of bounds:" + row + "," + column);
         } else {
             const cached = pheromone_cache.get(row, column);
-            if (!cached) {
+            if (0 === cached) {
                 const result = calc_pheromone({
                     latest_and_optimal_routes,
                     PheromoneZero,
@@ -111,7 +111,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     greedy_length,
                     convergence_coefficient,
                 });
-
+                // debugger;
+                // console.log(row, column, result);
                 pheromone_cache.set(row, column, result);
                 return result;
             } else {

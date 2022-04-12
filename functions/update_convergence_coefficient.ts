@@ -12,7 +12,7 @@ export function update_convergence_coefficient({
     if (coefficient_of_diversity_increase > 0) {
         convergence_coefficient *= Math.pow(
             1 - coefficient_of_diversity_increase,
-            4
+            2
         );
     } else if (optimal_length_of_iteration > greedy_length) {
         convergence_coefficient *= 5;
