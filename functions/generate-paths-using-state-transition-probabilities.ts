@@ -78,6 +78,7 @@ export function generate_paths_using_state_transition_probabilities(
                   pickRandomOne(Array.from(available_nodes))
               )
             : picknextnode({
+                  ...options,
                   alpha_zero,
                   beta_zero,
                   get_convergence_coefficient,
