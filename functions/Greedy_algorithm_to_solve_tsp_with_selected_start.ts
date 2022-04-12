@@ -9,7 +9,7 @@ import { cycle_reorganize } from "./cycle_reorganize";
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
 import { NodeCoordinates } from "./NodeCoordinates";
 
-export function Greedyalgorithmtosolvetspwithselectedstart({
+export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,
     start,
     round = false,
@@ -37,9 +37,9 @@ export function Greedyalgorithmtosolvetspwithselectedstart({
         const restnodes =
             max_cities_of_greedy < Infinity
                 ? ArrayShuffle(Array.from(indexsset)).slice(
-                      0,
-                      max_cities_of_greedy
-                  )
+                    0,
+                    max_cities_of_greedy
+                )
                 : Array.from(indexsset);
         const nextnodesanddistances: {
             nextnode: number;
