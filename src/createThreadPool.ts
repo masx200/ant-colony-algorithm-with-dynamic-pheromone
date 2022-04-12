@@ -94,6 +94,9 @@ s()
                 results.set(task_id, p);
             });
         }
+Promise.resolve().then(() => {
+            next();
+        });
     }
     function clear() {
         threads.forEach((w) => w.terminate());
