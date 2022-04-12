@@ -9,6 +9,7 @@ export interface ThreadPool<
     size: number;
     [Symbol.toStringTag]: string;
     destroyed(): boolean;
+free():boolean
 }
 
 export function createThreadPool<W extends { terminate: () => void }>(
@@ -115,5 +116,8 @@ Promise.resolve().then(() => {
         },
         size,
         [Symbol.toStringTag]: "ThreadPool",
+free(){
+return free.value
+}
     };
 }
