@@ -7,12 +7,14 @@ import { partial_precise_random_2_opt_eliminates_cross_points } from "../cross-p
 import { Random_K_OPT_full_limited_find_best } from "../k-opt/Random_K_OPT_full_limited_find_best";
 import { SharedOptions } from "./SharedOptions";
 import { random_k_exchange_limited } from "../cross-points/random_k_exchange_limited";
-export function EachRouteGenerator(
+export async function EachRouteGenerator(
     options: EachRouteGeneratorOptions & SharedOptions
-): {
+): Promise<{
     route: number[];
     length: number;
-} {
+    time_ms: number;
+}> {
+    const starttime_of_one_route = Number(new Date());
     const {
         current_search_count,
         max_results_of_2_opt,
@@ -103,8 +105,7 @@ export function EachRouteGenerator(
     }
     assert_true(get_best_length() < Infinity);
     assert_true(get_best_route().length === count_of_nodes);
-    return {
-        route,
-        length,
-    };
+    const endtime_of_one_route = Number(new Date());
+    const time_ms_of_one_route = endtime_of_one_route - starttime_of_one_route;
+    return { time_ms: time_ms_of_one_route, route, length };
 }

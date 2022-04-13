@@ -264,100 +264,102 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             const routes_and_lengths_of_one_iteration: {
                 route: number[];
                 length: number;
-            }[] = [];
+                time_ms: number;
+            }[] = await Promise.all(
+                Array.from({ length: count_of_ants }).map(
+                    async () =>
+                        await EachRouteGenerator({
+                            ...shared,
+                            current_search_count,
 
-            for (let i = 0; i < count_of_ants; i++) {
-                const starttime_of_one_route = Number(new Date());
-                const { route, length } = EachRouteGenerator({
-                    ...shared,
-                    current_search_count,
+                            count_of_nodes,
+                            node_coordinates,
+                            pheromoneStore,
+                            alpha_zero,
+                            beta_zero,
+                            lastrandom_selection_probability,
+                            max_results_of_k_opt,
+                            get_best_length,
+                            get_best_route,
 
-                    count_of_nodes,
-                    node_coordinates,
-                    pheromoneStore,
-                    alpha_zero,
-                    beta_zero,
-                    lastrandom_selection_probability,
-                    max_results_of_k_opt,
-                    get_best_length,
-                    get_best_route,
+                            set_best_length,
+                            set_best_route,
+                        })
+                )
+            );
 
-                    set_best_length,
-                    set_best_route,
-                });
-                const endtime_of_one_route = Number(new Date());
+            for (let {
+                route,
+                length,
+                time_ms: time_ms_of_one_route,
+            } of routes_and_lengths_of_one_iteration) {
                 onRouteCreated(route, length);
-                routes_and_lengths_of_one_iteration.push({
-                    route,
-                    length,
-                });
-                const time_ms_of_one_route =
-                    endtime_of_one_route - starttime_of_one_route;
+                // routes_and_lengths_of_one_iteration.push({ time_ms: time_ms_of_one_route,
+                //     route,
+                //     length,
+                // });
+
                 time_ms_of_one_iteration += time_ms_of_one_route;
                 emit_finish_one_route({
                     time_ms_of_one_route: time_ms_of_one_route,
                     route,
                     length,
                 });
-                if (
-                    routes_and_lengths_of_one_iteration.length === count_of_ants
-                ) {
-                    const starttime_of_process_iteration = Number(new Date());
-                    const {
+            }
+            if (routes_and_lengths_of_one_iteration.length === count_of_ants) {
+                const starttime_of_process_iteration = Number(new Date());
+                const {
+                    coefficient_of_diversity_increase,
+                    // nextrandom_selection_probability,
+                    population_relative_information_entropy,
+
+                    optimal_length_of_iteration,
+                    optimal_route_of_iteration,
+                } = EachIterationHandler({
+                    ...shared,
+
+                    routes_and_lengths: routes_and_lengths_of_one_iteration,
+                    get_best_length: get_best_length,
+                    get_best_route: get_best_route,
+                    pheromoneStore,
+                    node_coordinates,
+                });
+
+                const endtime_of_process_iteration = Number(new Date());
+                const timems_of_process_iteration =
+                    endtime_of_process_iteration -
+                    starttime_of_process_iteration;
+                time_ms_of_one_iteration += timems_of_process_iteration;
+                totaltimems += timems_of_process_iteration;
+
+                convergence_coefficient = update_convergence_coefficient({
+                    coefficient_of_diversity_increase,
+                    convergence_coefficient,
+                    optimal_length_of_iteration,
+                    greedy_length,
+                });
+                const average_length_of_iteration =
+                    sum(
+                        routes_and_lengths_of_one_iteration.map((a) => a.length)
+                    ) / routes_and_lengths_of_one_iteration.length;
+                emit_finish_one_iteration({
+                    average_length_of_iteration,
+                    optimal_length_of_iteration,
+                    optimal_route_of_iteration,
+                    population_relative_information_entropy,
+
+                    random_selection_probability:
+                        lastrandom_selection_probability,
+                    time_ms_of_one_iteration: time_ms_of_one_iteration,
+                    convergence_coefficient,
+                });
+                time_ms_of_one_iteration = 0;
+                lastrandom_selection_probability =
+                    update_last_random_selection_probability({
                         coefficient_of_diversity_increase,
-                        // nextrandom_selection_probability,
-                        population_relative_information_entropy,
-
-                        optimal_length_of_iteration,
-                        optimal_route_of_iteration,
-                    } = EachIterationHandler({
-                        ...shared,
-
-                        routes_and_lengths: routes_and_lengths_of_one_iteration,
-                        get_best_length: get_best_length,
-                        get_best_route: get_best_route,
-                        pheromoneStore,
-                        node_coordinates,
+                        lastrandom_selection_probability,
                     });
-
-                    const endtime_of_process_iteration = Number(new Date());
-                    const timems_of_process_iteration =
-                        endtime_of_process_iteration -
-                        starttime_of_process_iteration;
-                    time_ms_of_one_iteration += timems_of_process_iteration;
-                    totaltimems += timems_of_process_iteration;
-
-                    convergence_coefficient = update_convergence_coefficient({
-                        coefficient_of_diversity_increase,
-                        convergence_coefficient,
-                        optimal_length_of_iteration,
-                        greedy_length,
-                    });
-                    const average_length_of_iteration =
-                        sum(
-                            routes_and_lengths_of_one_iteration.map(
-                                (a) => a.length
-                            )
-                        ) / routes_and_lengths_of_one_iteration.length;
-                    emit_finish_one_iteration({
-                        average_length_of_iteration,
-                        optimal_length_of_iteration,
-                        optimal_route_of_iteration,
-                        population_relative_information_entropy,
-
-                        random_selection_probability:
-                            lastrandom_selection_probability,
-                        time_ms_of_one_iteration: time_ms_of_one_iteration,
-                        convergence_coefficient,
-                    });
-                    time_ms_of_one_iteration = 0;
-                    lastrandom_selection_probability =
-                        update_last_random_selection_probability({
-                            coefficient_of_diversity_increase,
-                            lastrandom_selection_probability,
-                        });
-                    routes_and_lengths_of_one_iteration.length = 0;
-                }
+                routes_and_lengths_of_one_iteration.length = 0;
             }
         }
     };

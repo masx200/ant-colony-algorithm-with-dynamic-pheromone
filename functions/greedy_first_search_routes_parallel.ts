@@ -28,13 +28,7 @@ export async function* greedy_first_search_routes_parallel({
     while (rest_count > 0) {
         const current_threads = Math.min(max_current, rest_count);
         const parallel_results = await Promise.all(
-            Array.from<
-                Promise<{
-                    length: number;
-                    route: number[];
-                    time_ms: number;
-                }>
-            >({ length: current_threads }).map(() =>
+            Array.from({ length: current_threads }).map(() =>
                 run_greedy_once_thread_with_time({
                     inputindexs,
                     node_coordinates,
