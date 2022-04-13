@@ -2,7 +2,7 @@ import { assert_true } from "../test/assert_true";
 import { construct_one_route_all } from "./construct_one_route_all";
 import { EachRouteGeneratorOptions } from "./Fun_EachRouteGenerator";
 import { SharedOptions } from "./SharedOptions";
-import { local_optimization_route } from "./local_optimization_route";
+import { local_optimization_route_thread } from "./local_optimization_route_thread";
 export async function EachRouteGenerator(
     options: EachRouteGeneratorOptions & SharedOptions
 ): Promise<{
@@ -59,7 +59,7 @@ export async function EachRouteGenerator(
         route,
         length,
         time_ms: time_ms_of_optimization,
-    } = await local_optimization_route({
+    } = await local_optimization_route_thread({
         count_of_nodes,
         max_segments_of_cross_point,
         distance_round,

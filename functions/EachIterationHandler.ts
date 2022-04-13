@@ -1,7 +1,7 @@
 import { assert_true } from "../test/assert_true";
 import { calc_population_relative_information_entropy } from "./calc_population-relative-information-entropy";
 import { get_best_route_Of_Series_routes_and_lengths } from "./get_best_route_Of_Series_routes_and_lengths";
-import { local_optimization_route } from "./local_optimization_route";
+import { local_optimization_route_thread } from "./local_optimization_route_thread";
 import { NodeCoordinates } from "./NodeCoordinates";
 
 import { SharedOptions } from "./SharedOptions";
@@ -64,7 +64,7 @@ export async function EachIterationHandler(
         route: optimal_route_of_iteration,
         length: optimal_length_of_iteration,
         time_ms: optimal_time_ms,
-    } = await local_optimization_route({
+    } = await local_optimization_route_thread({
         count_of_nodes,
         max_segments_of_cross_point,
         distance_round,

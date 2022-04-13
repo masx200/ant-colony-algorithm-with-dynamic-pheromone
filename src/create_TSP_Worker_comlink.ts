@@ -3,6 +3,7 @@ import { DataOfBestChange } from "../functions/DataOfBestChange";
 import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
+import { worker_error_listener } from "../functions/worker_error_listener";
 import { create_Worker_comlink } from "./create_Worker_comlink";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
 import TSPWorker from "./TSP_Runner.Worker?worker";
@@ -18,12 +19,9 @@ export async function create_TSP_Worker_comlink(
         remote: runner,
     } = create_Worker_comlink<TSP_Worker_API>(() => {
         const w = new TSPWorker();
-        w.addEventListener("error", (e) => {
-            alert(String(e) + e.message);
-            throw e;
-        });
+
         return w;
-    });
+    }, worker_error_listener);
     await runner.init_runner(options);
     const on_finish_one_iteration = async (
         callback: (data: DataOfFinishOneIteration) => void
