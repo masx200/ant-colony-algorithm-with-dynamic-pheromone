@@ -266,25 +266,24 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 length: number;
                 time_ms: number;
             }[] = await Promise.all(
-                Array.from({ length: count_of_ants }).map(
-                    async () =>
-                        await EachRouteGenerator({
-                            ...shared,
-                            current_search_count,
+                Array.from({ length: count_of_ants }).map(() =>
+                    EachRouteGenerator({
+                        ...shared,
+                        current_search_count,
 
-                            count_of_nodes,
-                            node_coordinates,
-                            pheromoneStore,
-                            alpha_zero,
-                            beta_zero,
-                            lastrandom_selection_probability,
-                            max_results_of_k_opt,
-                            get_best_length,
-                            get_best_route,
+                        count_of_nodes,
+                        node_coordinates,
+                        pheromoneStore,
+                        alpha_zero,
+                        beta_zero,
+                        lastrandom_selection_probability,
+                        max_results_of_k_opt,
+                        get_best_length,
+                        get_best_route,
 
-                            set_best_length,
-                            set_best_route,
-                        })
+                        set_best_length,
+                        set_best_route,
+                    })
                 )
             );
 

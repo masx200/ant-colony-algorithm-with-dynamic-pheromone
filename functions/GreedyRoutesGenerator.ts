@@ -6,6 +6,7 @@ import { get_best_route_Of_Series_routes_and_lengths } from "./get_best_route_Of
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { sum } from "lodash-es";
 import { get_distance_round } from "../src/set_distance_round";
+import { assert_true } from "../test/assert_true";
 
 export async function GreedyRoutesGenerator({
     shared,
@@ -28,6 +29,7 @@ export async function GreedyRoutesGenerator({
 
     count_of_nodes: number;
 }): Promise<{ best_length: number; best_route: number[] }> {
+    const { count_of_nodes } = shared;
     const greedy_results_iter = greedy_first_search_routes_parallel({
         ...shared,
         round: get_distance_round(),
@@ -47,12 +49,12 @@ export async function GreedyRoutesGenerator({
 
         const oldLength = length;
         const oldRoute = route;
-        if (get_best_route().length === 0) {
-            if (oldLength < get_best_length()) {
-                set_best_length(oldLength);
-                set_best_route(oldRoute);
-            }
+        // if (get_best_route().length === 0) {
+        if (oldLength < get_best_length()) {
+            set_best_length(oldLength);
+            set_best_route(oldRoute);
         }
+        // }
         if (oldLength < get_best_length()) {
             set_best_length(oldLength);
             set_best_route(oldRoute);
@@ -83,5 +85,7 @@ export async function GreedyRoutesGenerator({
         time_ms_of_one_iteration,
         global_best_length: get_best_length(),
     });
+    assert_true(get_best_length() < Infinity);
+    assert_true(get_best_route().length === count_of_nodes);
     return { best_length, best_route };
 }
