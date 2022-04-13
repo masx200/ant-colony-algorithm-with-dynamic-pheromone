@@ -109,7 +109,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
         queue.set(task_id, callback);
     }
     function next() {
-        debugger;
+        // debugger;
         if (running.size >= maxThreads) {
             return;
         }

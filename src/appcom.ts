@@ -235,6 +235,7 @@ export default defineComponent({
             }
         };
         const create_and_run_tsp_by_search_rounds = async () => {
+            is_running.value = true;
             TSP_RunnerRef.value ||= await create_runner();
             const runner = TSP_RunnerRef.value;
             return run_tsp_by_search_rounds({
@@ -338,6 +339,7 @@ export default defineComponent({
             }
         }
         const create_and_run_tsp_by_search_time = async () => {
+            is_running.value = true;
             TSP_RunnerRef.value ||= await create_runner();
             const runner = TSP_RunnerRef.value;
             return run_tsp_by_search_time({
