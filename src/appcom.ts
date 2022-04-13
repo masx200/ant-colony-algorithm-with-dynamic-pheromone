@@ -174,6 +174,7 @@ export default defineComponent({
             });
 
             assignOwnKeys(options_of_best_route_chart, options);
+            assignOwnKeys(options_of_latest_route_chart, options);
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {

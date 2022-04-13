@@ -18,7 +18,7 @@ export default defineComponent({
     setup(props) {
         const { container: container, chart: chart } =
             use_escharts_container_pair();
-        const intersect = ref(false);
+        const intersect = ref(true);
         const intersection_observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.intersectionRatio > 0) {
@@ -33,22 +33,22 @@ export default defineComponent({
         });
         const update_chart = () =>
             run_idle_work(function update_chart() {
+                // console.log("update_chart", props.options, chart, intersect);
                 if (!chart.value) {
                     return;
                 }
                 if (!intersect.value) {
                     return;
                 }
+                // console.log("render chart");
                 chart.value.resize();
                 chart.value.setOption(props.options);
             }, 4000);
         onMounted(() => {
-            watch(
-                () => props.options,
-                () => {
-                    update_chart();
-                }
-            );
+            update_chart();
+            watch(props.options, () => {
+                update_chart();
+            });
             watch(
                 () => {
                     return {
