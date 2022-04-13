@@ -10,12 +10,12 @@ export function get_worst_route_Of_Series_routes_and_lengths(
     if (!(routes_and_lengths.length > 0)) {
         throw new Error("routes_and_lengths empty!");
     }
-    const iteratebestlengthandroute = routes_and_lengths.reduce(
+    const iterate_best_lengthandroute = routes_and_lengths.reduce(
         (previous, current) => {
             return previous.length > current.length ? previous : current;
         },
         routes_and_lengths[0]
     );
 
-    return iteratebestlengthandroute;
+    return iterate_best_lengthandroute;
 }

@@ -10,4 +10,6 @@ export interface DataOfFinishOneIteration {
     time_ms_of_one_iteration: number;
     global_best_length: number;
     convergence_coefficient: number;
+    iterate_best_route: number[];
+    iterate_best_length: number;
 }

@@ -306,15 +306,16 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 });
             }
             if (routes_and_lengths_of_one_iteration.length === count_of_ants) {
-                const starttime_of_process_iteration = Number(new Date());
                 const {
+                    iterate_best_route,
                     coefficient_of_diversity_increase,
                     // nextrandom_selection_probability,
                     population_relative_information_entropy,
-
+                    iterate_best_length,
                     optimal_length_of_iteration,
                     optimal_route_of_iteration,
-                } = EachIterationHandler({
+                    time_ms: timems_of_process_iteration,
+                } = await EachIterationHandler({
                     ...shared,
 
                     routes_and_lengths: routes_and_lengths_of_one_iteration,
@@ -323,11 +324,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     pheromoneStore,
                     node_coordinates,
                 });
-
-                const endtime_of_process_iteration = Number(new Date());
-                const timems_of_process_iteration =
-                    endtime_of_process_iteration -
-                    starttime_of_process_iteration;
+                onRouteCreated(
+                    optimal_route_of_iteration,
+                    optimal_length_of_iteration
+                );
                 time_ms_of_one_iteration += timems_of_process_iteration;
                 totaltimems += timems_of_process_iteration;
 
@@ -342,6 +342,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         routes_and_lengths_of_one_iteration.map((a) => a.length)
                     ) / routes_and_lengths_of_one_iteration.length;
                 emit_finish_one_iteration({
+                    iterate_best_route,
+                    iterate_best_length,
                     average_length_of_iteration,
                     optimal_length_of_iteration,
                     optimal_route_of_iteration,
