@@ -10,7 +10,7 @@ export interface ThreadPool<
     W extends {
         terminate: () => void;
     }
-> {
+    > {
     onQueueSizeChange(callback: (queueSize: number) => void): () => void;
     drain(): boolean;
     destroy: () => void;
@@ -60,6 +60,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
     const threads: W[] = [];
 
     function run<R>(callback: (w: W) => Promise<R>): Promise<R> {
+        // debugger;
         if (destroyed.value) {
             throw new Error("can not run on destroyed pool");
         }
@@ -108,6 +109,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
         queue.set(task_id, callback);
     }
     function next() {
+        debugger;
         if (running.size >= maxThreads) {
             return;
         }
@@ -121,10 +123,12 @@ export function createThreadPool<W extends { terminate: () => void }>(
                 running.delete(task_id);
                 results.set(task_id, p);
             });
+            Promise.resolve().then(() => {
+                next();
+            });
         }
-        Promise.resolve().then(() => {
-            next();
-        });
+
+
     }
     function destroy() {
         threads.forEach((w) => w.terminate());
