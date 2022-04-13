@@ -31,6 +31,7 @@ export async function EachIterationHandler(
 }> {
     const starttime_of_process_iteration = Number(new Date());
     const {
+        distance_round,
         routes_and_lengths,
         get_best_length,
         get_best_route,
@@ -66,7 +67,7 @@ export async function EachIterationHandler(
     } = await local_optimization_route({
         count_of_nodes,
         max_segments_of_cross_point,
-        options,
+        distance_round,
         oldRoute: get_best_route(),
         max_results_of_k_opt,
         node_coordinates,

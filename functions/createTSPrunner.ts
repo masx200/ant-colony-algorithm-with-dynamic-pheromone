@@ -374,6 +374,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     };
 
     function onRouteCreated(route: number[], length: number) {
+        if (length < get_best_length()) {
+            set_best_length(length);
+            set_best_route(route);
+        }
         if (collection_of_optimal_routes) {
             collection_of_optimal_routes.add(route, length);
         }

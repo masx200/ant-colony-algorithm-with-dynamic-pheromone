@@ -4,13 +4,14 @@ import { partial_precise_random_2_opt_eliminates_cross_points } from "../cross-p
 import { Random_K_OPT_full_limited_find_best } from "../k-opt/Random_K_OPT_full_limited_find_best";
 import { random_k_exchange_limited } from "../cross-points/random_k_exchange_limited";
 import { NodeCoordinates } from "./NodeCoordinates";
-import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
-import { ReadOnlyPheromone } from "./TSP_Runner";
+// import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
+// import { ReadOnlyPheromone } from "./TSP_Runner";
+import { set_distance_round } from "../src/set_distance_round";
 
 export async function local_optimization_route({
     count_of_nodes,
     max_segments_of_cross_point,
-    options,
+    distance_round,
     oldRoute,
     max_results_of_k_opt,
     node_coordinates,
@@ -20,27 +21,7 @@ export async function local_optimization_route({
 }: {
     count_of_nodes: number;
     max_segments_of_cross_point: number;
-    options: Required<TSPRunnerOptions> & {
-        get_convergence_coefficient: () => number;
-        get_neighbors_from_optimal_routes_and_latest_routes: (
-            current_city: number
-        ) => number[];
-        get_random_selection_probability: () => number;
-        get_search_count_of_best: () => number;
-        get_best_route: () => number[];
-        get_best_length: () => number;
-        set_best_route: (route: number[]) => void;
-        set_best_length: (bestlength: number) => void;
-        get_current_search_count: () => number;
-        count_of_nodes: number;
-        max_results_of_2_opt: number;
-        max_results_of_k_opt: number;
-        alpha_zero: number;
-        beta_zero: number;
-        count_of_ants: number;
-        node_coordinates: NodeCoordinates;
-        pheromoneStore: ReadOnlyPheromone;
-    };
+    distance_round: boolean;
     oldRoute: number[];
     max_results_of_k_opt: number;
     node_coordinates: NodeCoordinates;
@@ -48,19 +29,19 @@ export async function local_optimization_route({
     max_results_of_k_exchange: number;
     max_results_of_2_opt: number;
 }): Promise<{ route: number[]; length: number; time_ms: number }> {
+    set_distance_round(distance_round);
     const starttime_of_one_route = Number(new Date());
     const is_count_not_large = count_of_nodes <= max_segments_of_cross_point;
 
     const { route: route1, length: length1 } =
         Random_K_OPT_full_limited_find_best({
-            ...options,
+            count_of_nodes,
             oldRoute: oldRoute,
             max_results_of_k_opt,
             node_coordinates,
             oldLength: oldLength,
         });
     const { route: route2, length: length2 } = random_k_exchange_limited({
-        ...options,
         route: route1,
         length: length1,
         node_coordinates,
@@ -69,14 +50,14 @@ export async function local_optimization_route({
 
     const { route: route3, length: length3 } = is_count_not_large
         ? Precise_2_opt_eliminates_all_intersections({
-              ...options,
+              count_of_nodes,
               max_results_of_2_opt,
               route: route2,
               length: length2,
               node_coordinates,
           })
         : partial_precise_random_2_opt_eliminates_cross_points({
-              ...options,
+              count_of_nodes,
               max_of_segments: max_segments_of_cross_point,
               max_results_of_2_opt,
               route: route2,

@@ -12,6 +12,7 @@ export async function EachRouteGenerator(
 }> {
     const starttime_of_one_route = Number(new Date());
     const {
+        distance_round,
         current_search_count,
         max_results_of_2_opt,
         count_of_nodes,
@@ -61,7 +62,7 @@ export async function EachRouteGenerator(
     } = await local_optimization_route({
         count_of_nodes,
         max_segments_of_cross_point,
-        options,
+        distance_round,
         oldRoute,
         max_results_of_k_opt,
         node_coordinates,
