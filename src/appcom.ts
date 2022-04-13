@@ -49,6 +49,7 @@ import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 import { use_data_of_greedy_iteration } from "./use_data_of_greedy_iteration";
 import LineChart from "./LineChart.vue";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
+import { get_options_route_of_node_coordinates } from "./get_options_route_of_node_coordinates";
 export default defineComponent({
     components: {
         Data_table: Data_table,
@@ -165,15 +166,11 @@ export default defineComponent({
         );
         const options_of_best_path_length_chart: ECBasicOption = reactive({});
         const submit = async () => {
-            const greedy_preview_echarts_options =
-                await generate_greedy_preview_echarts_options({
-                    selecteleref,
-                });
+            const options = await generate_greedy_preview_echarts_options({
+                selecteleref,
+            });
 
-            assignOwnKeys(
-                options_of_best_route_chart,
-                greedy_preview_echarts_options
-            );
+            assignOwnKeys(options_of_best_route_chart, options);
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
@@ -200,26 +197,36 @@ export default defineComponent({
             route: number[],
             node_coordinates: NodeCoordinates
         ) => {
-            const latestchart = chart_store_latest.value;
-            if (latestchart) {
-                draw_latest_route_debounced(
-                    route,
-                    node_coordinates,
-                    latestchart
-                );
-            }
+            // const latestchart = chart_store_latest.value;
+            // if (latestchart) {
+            //     draw_latest_route_debounced(
+            //         route,
+            //         node_coordinates,
+            //         latestchart
+            //     );
+            // }
+            const options = get_options_route_of_node_coordinates({
+                route,
+                node_coordinates,
+            });
+            assignOwnKeys(options_of_latest_route_chart, options);
         };
 
         const onglobal_best_routeChange = (
             route: number[],
             node_coordinates: NodeCoordinates
         ) => {
-            assert_true(route.length > 0);
-            assert_true(route.length === node_coordinates.length);
-            const chart = chart_store_best.value;
-            if (chart) {
-                draw_best_route_debounced(route, node_coordinates, chart);
-            }
+            // assert_true(route.length > 0);
+            // assert_true(route.length === node_coordinates.length);
+            // const chart = chart_store_best.value;
+            // if (chart) {
+            //     draw_best_route_debounced(route, node_coordinates, chart);
+            // }
+            const options = get_options_route_of_node_coordinates({
+                route,
+                node_coordinates,
+            });
+            assignOwnKeys(options_of_best_route_chart, options);
         };
         onMounted(() => {
             watch(dataofoneiteration, () => {

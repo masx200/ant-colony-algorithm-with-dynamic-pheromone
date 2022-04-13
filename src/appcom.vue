@@ -267,7 +267,11 @@
             @toggle="show_chart_of_best = $event.target.open"
         >
             <summary>路径序号和最优路径长度</summary>
-            <LineChart class="singlechart" style="" :options="options_of_best_path_length_chart"></LineChart>
+            <LineChart
+                class="singlechart"
+                style=""
+                :options="options_of_best_path_length_chart"
+            ></LineChart>
         </details>
         <hr />
 

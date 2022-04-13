@@ -5,7 +5,8 @@ import { debounce_animation_frame } from "./debounce_animation_frame";
 // import { onUnmounted } from "vue";
 
 export function use_create_chart_of_container(
-    container: HTMLElement,cleanup:(hook:()=>void) => void
+    container: HTMLElement,
+    cleanup: (hook: () => void) => void
 ): Pick<EChartsType, "resize" | "setOption"> {
     const debouncedresize = debounce_animation_frame(
         debounce(() => {

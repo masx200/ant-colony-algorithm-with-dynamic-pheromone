@@ -11,13 +11,10 @@ import { get_distance_round } from "./set_distance_round";
 export async function get_options_route_of_node_coordinates({
     route,
     node_coordinates,
-    
 }: {
     route: number[];
     node_coordinates: NodeCoordinates;
-
-    
-}) : Promise<ECBasicOption>{
+}): Promise<ECBasicOption> {
     const greedypath = cycle_reorganize(route, 0);
     const length = closed_total_path_length({
         round: get_distance_round(),
