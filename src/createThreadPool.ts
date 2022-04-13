@@ -10,7 +10,7 @@ export interface ThreadPool<
     W extends {
         terminate: () => void;
     }
-    > {
+> {
     onQueueSizeChange(callback: (queueSize: number) => void): () => void;
     drain(): boolean;
     destroy: () => void;
@@ -127,8 +127,6 @@ export function createThreadPool<W extends { terminate: () => void }>(
                 next();
             });
         }
-
-
     }
     function destroy() {
         threads.forEach((w) => w.terminate());
