@@ -1,5 +1,7 @@
 import { ECOption } from "./echarts-line";
 
+import { ECBasicOption } from "echarts/types/dist/shared";
+
 export function create_line_chart_options({
     title_text,
     xAxis_min,
@@ -10,7 +12,7 @@ export function create_line_chart_options({
     xAxis_min?: string | number;
     yAxis_min?: string | number;
     data: [number, number][];
-}): ECOption {
+}): ECBasicOption & ECOption {
     return {
         animation: false,
         title: { text: title_text },

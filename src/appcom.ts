@@ -11,7 +11,7 @@ import {
 } from "vue";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { assert_number } from "../test/assert_number";
-import { assert_true } from "../test/assert_true";
+// import { assert_true } from "../test/assert_true";
 import Data_table from "./Data_table.vue";
 import {
     default_count_of_ants,
@@ -23,11 +23,11 @@ import {
     show_every_route,
 } from "./default_Options";
 import { get_distance_round, set_distance_round } from "./set_distance_round";
-import { draw_best_route_debounced } from "./draw_best_route_debounced";
-import { draw_iteration_rounds_and_information_entropy_chart_debounced } from "./draw_iteration_rounds_and_information_entropy_chart_debounced";
-import { draw_latest_route_debounced } from "./draw_latest_route_debounced";
-import { draw_path_number_and_current_path_length_chart_debounced } from "./draw_path_number_and_current_path_length_chart_debounced";
-import { draw_path_number_and_optimal_path_length_chart_debounced } from "./draw_path_number_and_optimal_path_length_chart_debounced";
+// import { draw_best_route_debounced } from "./draw_best_route_debounced";
+// import { draw_iteration_rounds_and_information_entropy_chart_debounced } from "./draw_iteration_rounds_and_information_entropy_chart_debounced";
+// import { draw_latest_route_debounced } from "./draw_latest_route_debounced";
+// import { draw_path_number_and_current_path_length_chart_debounced } from "./draw_path_number_and_current_path_length_chart_debounced";
+// import { draw_path_number_and_optimal_path_length_chart_debounced } from "./draw_path_number_and_optimal_path_length_chart_debounced";
 import Progress_element from "./Progress-element.vue";
 import { RunWay } from "./RunWay";
 import { Stop_TSP_Worker } from "./Stop_TSP_Worker";
@@ -50,6 +50,9 @@ import { use_data_of_greedy_iteration } from "./use_data_of_greedy_iteration";
 import LineChart from "./LineChart.vue";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { get_options_route_of_node_coordinates } from "./get_options_route_of_node_coordinates";
+import { get_options_route_number_and_best_length_chart } from "./get_options_route_number_and_best_length_chart";
+import { get_options_iterations_and_information_entropy_chart } from "./get_options_iterations_and_information_entropy_chart";
+import { get_options_route_number_and_current_length_chart } from "./get_options_route_number_and_current_length_chart";
 export default defineComponent({
     components: {
         Data_table: Data_table,
@@ -238,23 +241,42 @@ export default defineComponent({
             });
         });
         const data_change_listener = () => {
-            draw_path_number_and_optimal_path_length_chart_debounced(
-                path_number_and_optimal_path_length_chart,
-                dataofoneroute
-            );
+            const options =
+                get_options_route_number_and_best_length_chart(dataofoneroute);
+
+            assignOwnKeys(options_of_best_path_length_chart, options);
+            // draw_path_number_and_optimal_path_length_chart_debounced(
+            //     path_number_and_optimal_path_length_chart,
+            //     dataofoneroute
+            // );
         };
         const finish_one_iteration_listener = () => {
-            draw_iteration_rounds_and_information_entropy_chart_debounced(
-                iteration_rounds_and_information_entropy_chart,
-                dataofoneiteration
+            const options =
+                get_options_iterations_and_information_entropy_chart(
+                    dataofoneiteration
+                );
+
+            assignOwnKeys(
+                options_of_iterations_and_information_entropy_chart,
+                options
             );
+            // draw_iteration_rounds_and_information_entropy_chart_debounced(
+            //     iteration_rounds_and_information_entropy_chart,
+            //     dataofoneiteration
+            // );
         };
 
         const finish_one_route_listener = () => {
-            draw_path_number_and_current_path_length_chart_debounced(
-                path_number_and_current_path_length_chart,
-                dataofoneroute
-            );
+            const options =
+                get_options_route_number_and_current_length_chart(
+                    dataofoneroute
+                );
+
+            assignOwnKeys(options_of_current_path_length_chart, options);
+            // draw_path_number_and_current_path_length_chart_debounced(
+            //     path_number_and_current_path_length_chart,
+            //     dataofoneroute
+            // );
         };
         const onprogress = (p: number) => {
             assert_number(p);
