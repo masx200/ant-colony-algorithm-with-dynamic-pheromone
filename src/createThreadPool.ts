@@ -9,7 +9,7 @@ export interface ThreadPool<
     size: number;
     [Symbol.toStringTag]: string;
     destroyed(): boolean;
-free():boolean
+    free(): boolean;
 }
 
 export function createThreadPool<W extends { terminate: () => void }>(
@@ -30,9 +30,9 @@ export function createThreadPool<W extends { terminate: () => void }>(
     });
 
     const f = effect(() => {
-if(queue.size===0){
-return
-}
+        if (queue.size === 0) {
+            return;
+        }
         if (free.value) {
             next();
         }
@@ -50,16 +50,16 @@ return
             next();
         }
         return new Promise<R>((resolve, reject) => {
-function s(){
-stop(d)
-stop(e)
-}
+            function s() {
+                stop(d);
+                stop(e);
+            }
 
             const d = effect(() => {
                 if (destroyed.value) {
                     reject(new Error("pool is destroyed"));
                     stop(d);
-s()
+                    s();
                 }
             });
 
@@ -69,12 +69,9 @@ s()
                     resolve(result);
                     stop(e);
                     results.delete(task_id);
-s()
+                    s();
                 }
             });
-
-
-
         });
     }
     function get(task_id: number): W {
@@ -87,9 +84,9 @@ s()
         queue.set(task_id, callback);
     }
     function next() {
-if(running.size >= size){
-return
-}
+        if (running.size >= size) {
+            return;
+        }
         if (queue.size) {
             const [task_id, callback] = [...queue.entries()][0];
             queue.delete(task_id);
@@ -101,7 +98,7 @@ return
                 results.set(task_id, p);
             });
         }
-Promise.resolve().then(() => {
+        Promise.resolve().then(() => {
             next();
         });
     }
@@ -122,8 +119,8 @@ Promise.resolve().then(() => {
         },
         size,
         [Symbol.toStringTag]: "ThreadPool",
-free(){
-return free.value
-}
+        free() {
+            return free.value;
+        },
     };
 }
