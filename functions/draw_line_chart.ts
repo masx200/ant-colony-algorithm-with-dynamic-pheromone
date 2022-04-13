@@ -6,7 +6,7 @@ export function draw_line_chart(options: {
     yAxis_min?: string | number;
     data: Array<[number, number]>;
     chart: Pick<EChartsType, "resize" | "setOption">;
-    titletext: string;
+    title_text: string;
 }): void {
     idle_work(() => {
         draw_line_chart_raw(options);

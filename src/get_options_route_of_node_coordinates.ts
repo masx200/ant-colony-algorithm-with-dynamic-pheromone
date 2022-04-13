@@ -1,21 +1,23 @@
-import { EChartsType } from "echarts";
+// import { EChartsType } from "echarts";
+import { ECBasicOption } from "echarts/types/dist/shared";
 import { closed_total_path_length } from "../functions/closed-total-path-length";
 import { creategetdistancebyindex } from "../functions/creategetdistancebyindex";
+import { create_line_chart_options } from "../functions/create_line_chart_options";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
-import { draw_line_chart } from "../functions/draw_line_chart";
+// import { draw_line_chart } from "../functions/draw_line_chart";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { get_distance_round } from "./set_distance_round";
 
-export function drawrouteofnode_coordinates({
+export async function get_options_route_of_node_coordinates({
     route,
     node_coordinates,
-    chart,
+    
 }: {
     route: number[];
     node_coordinates: NodeCoordinates;
 
-    chart: Pick<EChartsType, "resize" | "setOption">;
-}) {
+    
+}) : Promise<ECBasicOption>{
     const greedypath = cycle_reorganize(route, 0);
     const length = closed_total_path_length({
         round: get_distance_round(),
@@ -28,9 +30,9 @@ export function drawrouteofnode_coordinates({
     const linechardata = [...greedypath, greedypath[0]].map(
         (v) => node_coordinates[v]
     );
-    draw_line_chart({
+    return create_line_chart_options({
         data: linechardata,
-        chart: chart,
+        // chart: chart,
         title_text: `城市数:${node_coordinates.length},路径长度:${length}`,
     });
 }

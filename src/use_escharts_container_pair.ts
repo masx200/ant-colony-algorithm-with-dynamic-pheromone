@@ -1,6 +1,6 @@
 import { EChartsType } from "echarts";
-import { onMounted, Ref, ref, ShallowRef, shallowRef } from "vue";
-import { createchartofcontainer } from "./createchartofcontainer";
+import { onMounted, onUnmounted, Ref, ref, ShallowRef, shallowRef } from "vue";
+import { use_create_chart_of_container } from "./use_create_chart_of_container";
 
 export function use_escharts_container_pair(): {
     container: Ref<HTMLDivElement | undefined>;
@@ -9,10 +9,15 @@ export function use_escharts_container_pair(): {
     const container = ref<HTMLDivElement>();
     const chart = shallowRef<Pick<EChartsType, "resize" | "setOption">>();
     onMounted(() => {
-        const containerofbest = container.value;
-
-        if (containerofbest) {
-            const bestchart = createchartofcontainer(containerofbest);
+        const container_element = container.value;
+        if (chart.value) {
+            return;
+        }
+        if (container_element) {
+            const bestchart = use_create_chart_of_container(
+                container_element,
+                onUnmounted
+            );
             chart.value = bestchart;
         }
     });

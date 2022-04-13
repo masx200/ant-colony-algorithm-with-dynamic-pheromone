@@ -1,5 +1,5 @@
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
-
+import { ECBasicOption } from "echarts/types/dist/shared";
 import {
     computed,
     defineComponent,
@@ -37,18 +37,24 @@ import { TSP_RunnerRef } from "./TSP_workerRef";
 import { use_data_of_one_iteration } from "./use_data_of_one_iteration";
 import { use_data_of_one_route } from "./use_data_of_one_route";
 import { use_data_of_summary } from "./use_data_of_summary";
-import { use_escharts_container_pair } from "./use_escharts_container_pair";
+// import { use_escharts_container_pair } from "./use_escharts_container_pair";
 import { use_history_of_best } from "./use_history_of_best";
 import { use_initialize_tsp_runner } from "./use_initialize_tsp_runner";
 import { run_tsp_by_search_rounds } from "./run_tsp-by-search-rounds";
 import { run_tsp_by_search_time as run_tsp_by_search_time } from "./run_tsp_by_search_time";
-import { use_submit } from "./use_submit";
+import { generate_greedy_preview_echarts_options } from "./generate_greedy_preview_echarts_options";
 import { use_tsp_before_start } from "./use_tsp_before_start";
 import { TSP_cities_map } from "./TSP_cities_map";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 import { use_data_of_greedy_iteration } from "./use_data_of_greedy_iteration";
+import LineChart from "./LineChart.vue";
+import { assignOwnKeys } from "../collections/assignOwnKeys";
 export default defineComponent({
-    components: { Data_table: Data_table, Progress_element: Progress_element },
+    components: {
+        Data_table: Data_table,
+        Progress_element: Progress_element,
+        LineChart,
+    },
     setup() {
         const input_options = reactive(DefaultOptions);
 
@@ -59,7 +65,7 @@ export default defineComponent({
         const show_chart_of_best = ref(false);
         const show_summary_of_routes = ref(true);
         const show_routes_of_best = ref(true);
-        const show_routes_of_latest = ref(true);
+        const show_routes_of_latest = ref(false);
         const show_chart_of_latest = ref(false);
         const show_chart_of_entropy = ref(false);
         const show_summary_of_iterations = ref(true);
@@ -131,31 +137,44 @@ export default defineComponent({
         const searchrounds = ref(default_search_rounds);
         const count_of_ants_ref = ref(default_count_of_ants);
         const selecteleref = ref<HTMLSelectElement>();
-        const { container: container_of_best_chart, chart: chart_store_best } =
-            use_escharts_container_pair();
-        const {
-            container: container_of_latest_chart,
-            chart: chart_store_latest,
-        } = use_escharts_container_pair();
-        const {
-            container:
-                container_of_iteration_rounds_and_information_entropy_chart,
-            chart: iteration_rounds_and_information_entropy_chart,
-        } = use_escharts_container_pair();
-        const {
-            container: container_of_path_number_and_current_path_length_chart,
-            chart: path_number_and_current_path_length_chart,
-        } = use_escharts_container_pair();
-        const {
-            container: container_of_path_number_and_optimal_path_length_chart,
-            chart: path_number_and_optimal_path_length_chart,
-        } = use_escharts_container_pair();
+        // const { container: container_of_best_chart, chart: chart_store_best } =
+        //     use_escharts_container_pair();
+        // const {
+        //     container: container_of_latest_chart,
+        //     chart: chart_store_latest,
+        // } = use_escharts_container_pair();
+        // const {
+        //     container:
+        //         container_of_iteration_rounds_and_information_entropy_chart,
+        //     chart: iteration_rounds_and_information_entropy_chart,
+        // } = use_escharts_container_pair();
+        // const {
+        //     container: container_of_path_number_and_current_path_length_chart,
+        //     chart: path_number_and_current_path_length_chart,
+        // } = use_escharts_container_pair();
+        // const {
+        //     container: container_of_path_number_and_optimal_path_length_chart,
+        //     chart: path_number_and_optimal_path_length_chart,
+        // } = use_escharts_container_pair();
+        const options_of_best_route_chart: ECBasicOption = reactive({});
+        const options_of_latest_route_chart: ECBasicOption = reactive({});
+        const options_of_iterations_and_information_entropy_chart: ECBasicOption =
+            reactive({});
+        const options_of_current_path_length_chart: ECBasicOption = reactive(
+            {}
+        );
+        const options_of_best_path_length_chart: ECBasicOption = reactive({});
+        const submit = async () => {
+            const greedy_preview_echarts_options =
+                await generate_greedy_preview_echarts_options({
+                    selecteleref,
+                });
 
-        const submit = use_submit({
-            selecteleref,
-            chart_store_latest,
-            chart_store_best,
-        });
+            assignOwnKeys(
+                options_of_best_route_chart,
+                greedy_preview_echarts_options
+            );
+        };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
             if (indeterminate.value === true) {
@@ -368,7 +387,7 @@ export default defineComponent({
             show_chart_of_latest,
             show_chart_of_entropy,
             round_result,
-
+            options_of_latest_route_chart,
             show_every_route: show_every_route,
             greedy_iteration_table_heads,
             greedy_iteration_table_body,
@@ -380,7 +399,7 @@ export default defineComponent({
             show_routes_of_latest,
             show_routes_of_best,
             show_summary_of_routes,
-
+            options_of_best_route_chart,
             navbar_float,
             run_way_round,
             show_summary_of_iterations,
@@ -395,9 +414,9 @@ export default defineComponent({
             stop_handler,
             global_best_routeBody,
             global_best_routeHeads,
-            container_of_iteration_rounds_and_information_entropy_chart,
+            // container_of_iteration_rounds_and_information_entropy_chart,
             is_running,
-
+            options_of_iterations_and_information_entropy_chart,
             resethandler: resethandler,
             resultTableHeads,
             resultTableBody,
@@ -406,17 +425,19 @@ export default defineComponent({
             oneiterationtableheads,
             oneiterationtablebody,
             count_of_ants_ref,
-            container_of_path_number_and_current_path_length_chart,
+            // container_of_path_number_and_current_path_length_chart,
             disablemapswitching,
-            container_of_path_number_and_optimal_path_length_chart,
+            // container_of_path_number_and_optimal_path_length_chart,
             create_and_run_tsp_by_search_rounds,
             searchrounds,
             TSP_cities_data,
             submit_select_node_coordinates,
             selecteleref,
-            container_of_best_chart,
-            container_of_latest_chart,
+            // container_of_best_chart,
+            // container_of_latest_chart,
             percentage,
+            options_of_current_path_length_chart,
+            options_of_best_path_length_chart,
         };
     },
 });

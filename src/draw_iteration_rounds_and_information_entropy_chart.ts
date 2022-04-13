@@ -9,7 +9,7 @@ export function draw_iteration_rounds_and_information_entropy_chart(
     >,
     dataofoneiteration: DataOfFinishOneIteration[]
 ) {
-    const titletext = "迭代轮次和相对信息熵";
+    const title_text = "迭代轮次和相对信息熵";
     const chart = iteration_rounds_and_information_entropy_chart.value;
     if (chart) {
         const data: [number, number][] = dataofoneiteration.map((a) => [
@@ -18,7 +18,7 @@ export function draw_iteration_rounds_and_information_entropy_chart(
         ]);
         draw_line_chart({
             yAxis_min: 0,
-            titletext,
+            title_text,
             data: data,
             chart: chart,
         });

@@ -9,7 +9,7 @@ export function draw_path_number_and_optimal_path_length_chart(
     >,
     dataofoneroute: DataOfFinishOneRoute[]
 ) {
-    const titletext = "路径序号和最优路径长度";
+    const title_text = "路径序号和最优路径长度";
     const chart = path_number_and_optimal_path_length_chart.value;
     if (chart) {
         const data: [number, number][] = dataofoneroute.map((a) => [
@@ -18,7 +18,7 @@ export function draw_path_number_and_optimal_path_length_chart(
         ]);
         draw_line_chart({
             yAxis_min: 0,
-            titletext,
+            title_text,
             data: data,
             chart: chart,
         });

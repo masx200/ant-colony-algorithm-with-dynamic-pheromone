@@ -202,11 +202,11 @@
             >
                 <summary>全局最优路径的展示</summary>
                 <!-- 全局最优解的图 -->
-                <div
+                <LineChart
                     class="singlechart"
                     style=""
-                    ref="container_of_best_chart"
-                ></div>
+                    :options="options_of_best_route_chart"
+                ></LineChart>
             </details>
 
             <!-- 最近一条路径的图 -->
@@ -218,11 +218,11 @@
             @toggle="show_routes_of_latest = $event.target.open"
         >
             <summary>最近一条路径的展示</summary>
-            <div
+            <LineChart
                 class="singlechart"
                 style=""
-                ref="container_of_latest_chart"
-            ></div>
+                :options="options_of_latest_route_chart"
+            ></LineChart>
         </details>
 
         <hr />
@@ -231,14 +231,16 @@
             :open="show_chart_of_latest"
             @toggle="show_chart_of_latest = $event.target.open"
         >
-            <summary>路径序号和当前路径长度</summary>
+            <summary>迭代次数和相对信息熵</summary>
             <div class="chartcontainer" style="">
                 <!-- 路径序号和当前路径长度的图表 -->
-                <div
+                <LineChart
                     class="singlechart"
                     style=""
-                    ref="container_of_path_number_and_current_path_length_chart"
-                ></div>
+                    :options="
+                        options_of_iterations_and_information_entropy_chart
+                    "
+                ></LineChart>
                 <!-- 路径序号和最优路径长度的图表 -->
             </div>
         </details>
@@ -248,14 +250,14 @@
             :open="show_chart_of_entropy"
             @toggle="show_chart_of_entropy = $event.target.open"
         >
-            <summary>迭代次数和相对信息熵</summary>
+            <summary>路径序号和当前路径长度</summary>
             <div class="chartcontainer" style="">
                 <!-- 迭代轮次和相对信息熵的图表 -->
-                <div
+                <LineChart
                     class="singlechart"
                     style=""
-                    ref="container_of_iteration_rounds_and_information_entropy_chart"
-                ></div>
+                    :options="options_of_current_path_length_chart"
+                ></LineChart>
             </div>
         </details>
         <hr />
@@ -265,11 +267,7 @@
             @toggle="show_chart_of_best = $event.target.open"
         >
             <summary>路径序号和最优路径长度</summary>
-            <div
-                class="singlechart"
-                style=""
-                ref="container_of_path_number_and_optimal_path_length_chart"
-            ></div>
+            <LineChart class="singlechart" style="" :options="options_of_best_path_length_chart"></LineChart>
         </details>
         <hr />
 
