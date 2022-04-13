@@ -5,6 +5,7 @@ import { DefaultOptions } from "./default_Options";
 import { get_distance_round } from "./set_distance_round";
 import { get_options_of_random_greedy_of_tsp } from "./get_options_of_random_greedy_of_tsp";
 import { TSP_cities_map } from "./TSP_cities_map";
+import { ECOption } from "../functions/echarts-line";
 
 export async function generate_greedy_preview_echarts_options({
     selecteleref,
@@ -18,7 +19,7 @@ export async function generate_greedy_preview_echarts_options({
     // chart_store_best: ShallowRef<
     //     Pick<EChartsType, "resize" | "setOption"> | undefined
     // >;
-}): Promise<ECBasicOption> {
+}): Promise<ECBasicOption & ECOption> {
     const element = selecteleref.value;
     const node_coordinates = TSP_cities_map.get(element?.value || "");
     if (node_coordinates) {

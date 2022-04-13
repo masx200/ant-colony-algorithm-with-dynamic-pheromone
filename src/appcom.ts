@@ -6,6 +6,7 @@ import {
     onMounted,
     reactive,
     readonly,
+    Ref,
     ref,
     watch,
 } from "vue";
@@ -48,11 +49,12 @@ import { TSP_cities_map } from "./TSP_cities_map";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 import { use_data_of_greedy_iteration } from "./use_data_of_greedy_iteration";
 import LineChart from "./LineChart.vue";
-import { assignOwnKeys } from "../collections/assignOwnKeys";
+// import { assignOwnKeys } from "../collections/assignOwnKeys";
 import { get_options_route_of_node_coordinates } from "./get_options_route_of_node_coordinates";
 import { get_options_route_number_and_best_length_chart } from "./get_options_route_number_and_best_length_chart";
 import { get_options_iterations_and_information_entropy_chart } from "./get_options_iterations_and_information_entropy_chart";
 import { get_options_route_number_and_current_length_chart } from "./get_options_route_number_and_current_length_chart";
+import { ECOption } from "../functions/echarts-line";
 export default defineComponent({
     components: {
         Data_table: Data_table,
@@ -160,21 +162,23 @@ export default defineComponent({
         //     container: container_of_path_number_and_optimal_path_length_chart,
         //     chart: path_number_and_optimal_path_length_chart,
         // } = use_escharts_container_pair();
-        const options_of_best_route_chart: ECBasicOption = reactive({});
-        const options_of_latest_route_chart: ECBasicOption = reactive({});
-        const options_of_iterations_and_information_entropy_chart: ECBasicOption =
-            reactive({});
-        const options_of_current_path_length_chart: ECBasicOption = reactive(
+        const options_of_best_route_chart: Ref<ECBasicOption> = ref({});
+        const options_of_latest_route_chart: Ref<ECBasicOption & ECOption> =
+            ref({});
+        const options_of_iterations_and_information_entropy_chart: Ref<ECBasicOption> =
+            ref({});
+        const options_of_current_path_length_chart: Ref<ECBasicOption> = ref(
             {}
         );
-        const options_of_best_path_length_chart: ECBasicOption = reactive({});
+        const options_of_best_path_length_chart: Ref<ECBasicOption> = ref({});
         const submit = async () => {
             const options = await generate_greedy_preview_echarts_options({
                 selecteleref,
             });
-
-            assignOwnKeys(options_of_best_route_chart, options);
-            assignOwnKeys(options_of_latest_route_chart, options);
+            options_of_best_route_chart.value = options;
+            options_of_latest_route_chart.value = options;
+            // assignOwnKeys(options_of_best_route_chart, options);
+            // assignOwnKeys(options_of_latest_route_chart, options);
         };
         const indeterminate = ref(false);
         async function submit_select_node_coordinates() {
@@ -213,13 +217,16 @@ export default defineComponent({
                 route,
                 node_coordinates,
             });
-            assignOwnKeys(options_of_latest_route_chart, options);
+            options_of_latest_route_chart.value = options;
+            // assignOwnKeys(options_of_latest_route_chart, options);
+            // assignOwnKeys(options_of_latest_route_chart, options);
         };
 
         const onglobal_best_routeChange = (
             route: number[],
             node_coordinates: NodeCoordinates
         ) => {
+            // console.log('// onglobal_best_routeChange',route)
             // assert_true(route.length > 0);
             // assert_true(route.length === node_coordinates.length);
             // const chart = chart_store_best.value;
@@ -230,7 +237,9 @@ export default defineComponent({
                 route,
                 node_coordinates,
             });
-            assignOwnKeys(options_of_best_route_chart, options);
+            options_of_best_route_chart.value = options;
+            // assignOwnKeys(options_of_best_route_chart, options);
+            // assignOwnKeys(options_of_best_route_chart, options);
         };
         onMounted(() => {
             watch(dataofoneiteration, () => {
@@ -244,8 +253,9 @@ export default defineComponent({
         const data_change_listener = () => {
             const options =
                 get_options_route_number_and_best_length_chart(dataofoneroute);
-
-            assignOwnKeys(options_of_best_path_length_chart, options);
+            options_of_best_path_length_chart.value = options;
+            // assignOwnKeys(options_of_best_path_length_chart, options);
+            // assignOwnKeys(options_of_best_path_length_chart, options);
             // draw_path_number_and_optimal_path_length_chart_debounced(
             //     path_number_and_optimal_path_length_chart,
             //     dataofoneroute
@@ -256,11 +266,11 @@ export default defineComponent({
                 get_options_iterations_and_information_entropy_chart(
                     dataofoneiteration
                 );
-
-            assignOwnKeys(
-                options_of_iterations_and_information_entropy_chart,
-                options
-            );
+            options_of_iterations_and_information_entropy_chart.value = options;
+            // assignOwnKeys(
+            //     options_of_iterations_and_information_entropy_chart,
+            //     options
+            // );
             // draw_iteration_rounds_and_information_entropy_chart_debounced(
             //     iteration_rounds_and_information_entropy_chart,
             //     dataofoneiteration
@@ -272,8 +282,8 @@ export default defineComponent({
                 get_options_route_number_and_current_length_chart(
                     dataofoneroute
                 );
-
-            assignOwnKeys(options_of_current_path_length_chart, options);
+            options_of_current_path_length_chart.value = options;
+            // assignOwnKeys(options_of_current_path_length_chart, options);
             // draw_path_number_and_current_path_length_chart_debounced(
             //     path_number_and_current_path_length_chart,
             //     dataofoneroute

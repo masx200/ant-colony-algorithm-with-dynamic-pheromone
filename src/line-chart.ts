@@ -46,16 +46,29 @@ export default defineComponent({
             }, 4000);
         onMounted(() => {
             update_chart();
-            watch(props.options, () => {
+            watch(props, () => {
                 update_chart();
             });
             watch(
+                intersect,
+                // () => {
+                //     return {
+                //         chart: chart.value,
+                //         // intersect: intersect.value,
+                //     };
+                // },
                 () => {
-                    return {
-                        chart: chart.value,
-                        intersect: intersect.value,
-                    };
-                },
+                    update_chart();
+                }
+            );
+            watch(
+                chart,
+                // () => {
+                //     return {
+                //         chart: chart.value,
+                //         // intersect: intersect.value,
+                //     };
+                // },
                 () => {
                     update_chart();
                 }
