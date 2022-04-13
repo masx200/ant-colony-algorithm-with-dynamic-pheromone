@@ -99,7 +99,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
             threads.push(create());
         }
         const index = task_id % maxThreads;
-        while (typeof threads[index] === "undefined") {
+        if (typeof threads[index] === "undefined") {
             threads.push(create());
         }
         return threads[index];
