@@ -1,6 +1,6 @@
 <template>
     <div :class="{ 'container-top': navbar_float }">
-        <Progresselement
+        <Progress_element
             :class="{ 'fixed-top-navbar': navbar_float }"
             :percentage="percentage"
             :indeterminate="indeterminate"
@@ -274,26 +274,26 @@
         <hr />
 
         <!-- //汇总结果 -->
-        <Datatable
+        <Data_table
             :tableheads="resultTableHeads"
             :tablebody="resultTableBody"
         />
         <!-- 拆分表格 -->
         <hr />
-        <Datatable
+        <Data_table
             :tableheads="global_best_routeHeads"
             :tablebody="global_best_routeBody"
         />
 
         <hr />
-        <Datatable
+        <Data_table
             :tableheads="TableHeadsOfHistoryOfBest"
             :tablebody="TableBodyOfHistoryOfBest"
         />
         <hr />
         <!-- <details class="width-100-percent" :open="true">
             <summary>贪心路径的统计</summary> -->
-        <Datatable
+        <Data_table
             :tableheads="greedy_iteration_table_heads"
             :tablebody="greedy_iteration_table_body"
         />
@@ -306,7 +306,7 @@
         >
             <summary>每次迭代的统计</summary>
             <!-- 迭代结果 -->
-            <Datatable
+            <Data_table
                 :tableheads="oneiterationtableheads"
                 :tablebody="oneiterationtablebody"
             />
@@ -320,7 +320,7 @@
         >
             <summary>每条路径的统计</summary>
             <!-- 路径结果 -->
-            <Datatable
+            <Data_table
                 :tableheads="oneroutetableheads"
                 :tablebody="oneroutetablebody"
             />

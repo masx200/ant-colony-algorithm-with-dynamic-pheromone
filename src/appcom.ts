@@ -12,7 +12,7 @@ import {
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { assert_number } from "../test/assert_number";
 import { assert_true } from "../test/assert_true";
-import Datatable from "./Datatable-com.vue";
+import Data_table from "./Data_table.vue";
 import {
     default_count_of_ants,
     default_search_rounds,
@@ -28,7 +28,7 @@ import { draw_iteration_rounds_and_information_entropy_chart_debounced } from ".
 import { draw_latest_route_debounced } from "./draw_latest_route_debounced";
 import { draw_path_number_and_current_path_length_chart_debounced } from "./draw_path_number_and_current_path_length_chart_debounced";
 import { draw_path_number_and_optimal_path_length_chart_debounced } from "./draw_path_number_and_optimal_path_length_chart_debounced";
-import Progresselement from "./Progress-element.vue";
+import Progress_element from "./Progress-element.vue";
 import { RunWay } from "./RunWay";
 import { Stop_TSP_Worker } from "./Stop_TSP_Worker";
 import { TSP_cities_data } from "./TSP_cities_data";
@@ -48,7 +48,7 @@ import { TSP_cities_map } from "./TSP_cities_map";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 import { use_data_of_greedy_iteration } from "./use_data_of_greedy_iteration";
 export default defineComponent({
-    components: { Datatable, Progresselement: Progresselement },
+    components: { Data_table: Data_table, Progress_element: Progress_element },
     setup() {
         const input_options = reactive(DefaultOptions);
 
