@@ -1,25 +1,44 @@
-import { reactive, effect, stop, computed, ref } from "@vue/reactivity";
+import {
+    reactive,
+    effect,
+    stop,
+    computed,
+    ref,
+    shallowReadonly,
+} from "@vue/reactivity";
 export interface ThreadPool<
     W extends {
         terminate: () => void;
     }
 > {
-    clear: () => void;
+    onQueueSizeChange(callback: (queueSize: number) => void): () => void;
+    drain(): boolean;
+    destroy: () => void;
     run<R>(callback: (w: W) => Promise<R>): Promise<R>;
-    size: number;
+    maxThreads: number;
     [Symbol.toStringTag]: string;
     destroyed(): boolean;
     free(): boolean;
     busy(): boolean;
+    threads: readonly W[];
+    queueSize(): number;
+    pendingSize(): number;
+    onPendingSizeChange(callback: (pendingSize: number) => void): () => void;
 }
+const getcpuCount = function (): number {
+    if (typeof navigator !== "undefined") {
+        return navigator.hardwareConcurrency;
+    }
 
+    if (typeof os !== "undefined") {
+        return os.cpus().length;
+    }
+    return 1;
+};
 export function createThreadPool<W extends { terminate: () => void }>(
     create: () => W,
-    {
-        size = navigator.hardwareConcurrency,
-    }: {
-        size?: number;
-    }
+
+    maxThreads = getcpuCount()
 ): ThreadPool<W> {
     const queue = reactive(new Map<number, (w: W) => Promise<unknown>>());
     let destroyed = ref(false);
@@ -27,7 +46,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
     const running = reactive(new Map<number, (w: W) => Promise<unknown>>());
     const results = reactive(new Map<number, Promise<unknown>>());
     const free = computed(() => {
-        return running.size < size;
+        return running.size < maxThreads;
     });
 
     const f = effect(() => {
@@ -76,16 +95,20 @@ export function createThreadPool<W extends { terminate: () => void }>(
         });
     }
     function get(task_id: number): W {
-        if (threads.length < size) {
+        if (threads.length < maxThreads) {
             threads.push(create());
         }
-        return threads[task_id % size];
+        const index = task_id % maxThreads;
+        while (typeof threads[index] === "undefined") {
+            threads.push(create());
+        }
+        return threads[index];
     }
     function add<R>(callback: (w: W) => Promise<R>, task_id: number): void {
         queue.set(task_id, callback);
     }
     function next() {
-        if (running.size >= size) {
+        if (running.size >= maxThreads) {
             return;
         }
         if (queue.size) {
@@ -103,7 +126,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
             next();
         });
     }
-    function clear() {
+    function destroy() {
         threads.forEach((w) => w.terminate());
         threads.length = 0;
         running.clear();
@@ -112,19 +135,51 @@ export function createThreadPool<W extends { terminate: () => void }>(
         stop(f);
         destroyed.value = true;
     }
+    function onQueueSizeChange(
+        callback: (queueSize: number) => void
+    ): () => void {
+        const r = effect(() => {
+            callback(queue.size);
+        });
+        return () => {
+            stop(r);
+        };
+    }
+    function onPendingSizeChange(
+        callback: (pendingSize: number) => void
+    ): () => void {
+        const r = effect(() => {
+            callback(running.size);
+        });
+        return () => {
+            stop(r);
+        };
+    }
     return {
-        clear,
+        onPendingSizeChange,
+        onQueueSizeChange,
+        queueSize() {
+            return queue.size;
+        },
+        pendingSize() {
+            return running.size;
+        },
+        threads: shallowReadonly(threads),
+        destroy,
         run,
         destroyed() {
             return destroyed.value;
         },
-        size,
+        maxThreads,
         [Symbol.toStringTag]: "ThreadPool",
         free() {
             return free.value;
         },
         busy() {
             return !free.value;
+        },
+        drain() {
+            return queue.size === 0;
         },
     };
 }
