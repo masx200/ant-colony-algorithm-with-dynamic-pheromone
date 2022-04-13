@@ -113,6 +113,9 @@ export function createThreadPool<W extends { terminate: () => void }>(
         if (running.size >= maxThreads) {
             return;
         }
+        if (queue.size === 0) {
+            return;
+        }
         if (queue.size) {
             const [task_id, callback] = [...queue.entries()][0];
             queue.delete(task_id);
