@@ -41,6 +41,6 @@ export function draw_line_chart_raw({
             },
         ],
     };
-    chart.setOption(option, { lazyUpdate: true });
+    chart.setOption(option, { lazyUpdate: false });
     chart.resize();
 }
