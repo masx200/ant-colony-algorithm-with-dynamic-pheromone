@@ -1,12 +1,12 @@
 export function update_convergence_coefficient({
     coefficient_of_diversity_increase,
     convergence_coefficient,
-    optimal_length_of_iteration,
+    iterate_best_length,
     greedy_length,
 }: {
     coefficient_of_diversity_increase: number;
     convergence_coefficient: number;
-    optimal_length_of_iteration: number;
+    iterate_best_length: number;
     greedy_length: number;
 }): number {
     if (coefficient_of_diversity_increase > 0) {
@@ -14,7 +14,7 @@ export function update_convergence_coefficient({
             1 - coefficient_of_diversity_increase,
             2
         );
-    } else if (optimal_length_of_iteration > greedy_length) {
+    } else if (iterate_best_length > greedy_length) {
         convergence_coefficient *= 2;
     } else {
         convergence_coefficient *= 1.05;

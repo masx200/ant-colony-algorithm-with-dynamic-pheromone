@@ -334,7 +334,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 convergence_coefficient = update_convergence_coefficient({
                     coefficient_of_diversity_increase,
                     convergence_coefficient,
-                    optimal_length_of_iteration,
+                    iterate_best_length,
                     greedy_length,
                 });
                 const average_length_of_iteration =
