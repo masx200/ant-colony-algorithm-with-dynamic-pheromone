@@ -10,11 +10,14 @@ export interface ThreadPool<
     W extends {
         terminate: () => void;
     }
-> {
+    > {
     onQueueSizeChange(callback: (queueSize: number) => void): () => void;
     drain(): boolean;
     destroy: () => void;
-    run<R>(callback: (w: W) => Promise<R>): Promise<R>;
+    run<R>(
+        callback: (w: W) => Promise<R>,
+        signal?: AbortSignal | undefined
+    ): Promise<R>;
     maxThreads: number;
     [Symbol.toStringTag]: string;
     destroyed(): boolean;
@@ -25,7 +28,7 @@ export interface ThreadPool<
     pendingSize(): number;
     onPendingSizeChange(callback: (pendingSize: number) => void): () => void;
 }
-const getcpuCount = function (): number {
+const get_cpu_Count = function (): number {
     if (typeof navigator !== "undefined") {
         return navigator.hardwareConcurrency;
     }
@@ -38,15 +41,15 @@ const getcpuCount = function (): number {
 export function createThreadPool<W extends { terminate: () => void }>(
     create: () => W,
 
-    maxThreads = getcpuCount()
+    maxThreads = get_cpu_Count()
 ): ThreadPool<W> {
     const queue = reactive(new Map<number, (w: W) => Promise<unknown>>());
     let destroyed = ref(false);
     let id = 0;
-    const running = reactive(new Map<number, (w: W) => Promise<unknown>>());
+    const pending = reactive(new Map<number, (w: W) => Promise<unknown>>());
     const results = reactive(new Map<number, Promise<unknown>>());
     const free = computed(() => {
-        return running.size < maxThreads;
+        return pending.size < maxThreads;
     });
 
     const f = effect(() => {
@@ -59,7 +62,10 @@ export function createThreadPool<W extends { terminate: () => void }>(
     });
     const threads: W[] = [];
 
-    function run<R>(callback: (w: W) => Promise<R>): Promise<R> {
+    function run<R>(
+        callback: (w: W) => Promise<R>,
+        signal?: AbortSignal
+    ): Promise<R> {
         // debugger;
         if (destroyed.value) {
             throw new Error("can not run on destroyed pool");
@@ -71,9 +77,27 @@ export function createThreadPool<W extends { terminate: () => void }>(
             next();
         }
         return new Promise<R>((resolve, reject) => {
+            const abort_listener = () => {
+                reject(new Error("task signal aborted"));
+                s();
+                const maps = [queue, pending, results]
+                maps.forEach(m => m.delete(task_id))
+                const index = task_id % maxThreads;
+                const w = threads.splice(index, 1)
+                w[0].terminate()
+            };
+            if (signal) {
+                signal.addEventListener("abort", abort_listener);
+                if (signal.aborted) {
+                    abort_listener()
+                }
+            }
             function s() {
                 stop(d);
                 stop(e);
+                if (signal) {
+                    signal.removeEventListener("abort", abort_listener);
+                }
             }
 
             const d = effect(() => {
@@ -85,7 +109,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
             });
 
             const e = effect(() => {
-                const result = results.get(task_id) as unknown as R;
+                const result = results.get(task_id) as unknown as Promise<R> | undefined
                 if (result) {
                     resolve(result);
                     stop(e);
@@ -96,11 +120,9 @@ export function createThreadPool<W extends { terminate: () => void }>(
         });
     }
     function get(task_id: number): W {
-        if (threads.length < maxThreads) {
-            threads.push(create());
-        }
+
         const index = task_id % maxThreads;
-        if (typeof threads[index] === "undefined") {
+        while (typeof threads[index] === "undefined") {
             threads.push(create());
         }
         return threads[index];
@@ -110,7 +132,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
     }
     function next() {
         // debugger;
-        if (running.size >= maxThreads) {
+        if (pending.size >= maxThreads) {
             return;
         }
         if (queue.size === 0) {
@@ -120,10 +142,10 @@ export function createThreadPool<W extends { terminate: () => void }>(
             const [task_id, callback] = [...queue.entries()][0];
             queue.delete(task_id);
             const w = get(task_id);
-            running.set(task_id, callback);
+            pending.set(task_id, callback);
             const p = callback(w);
             p.finally(() => {
-                running.delete(task_id);
+                pending.delete(task_id);
                 results.set(task_id, p);
             });
             Promise.resolve().then(() => {
@@ -134,7 +156,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
     function destroy() {
         threads.forEach((w) => w.terminate());
         threads.length = 0;
-        running.clear();
+        pending.clear();
         results.clear();
         queue.clear();
         stop(f);
@@ -154,7 +176,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
         callback: (pendingSize: number) => void
     ): () => void {
         const r = effect(() => {
-            callback(running.size);
+            callback(pending.size);
         });
         return () => {
             stop(r);
@@ -167,7 +189,7 @@ export function createThreadPool<W extends { terminate: () => void }>(
             return queue.size;
         },
         pendingSize() {
-            return running.size;
+            return pending.size;
         },
         threads: shallowReadonly(threads),
         destroy,
