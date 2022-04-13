@@ -6,7 +6,7 @@ import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
 import { worker_error_listener } from "../functions/worker_error_listener";
 import { create_Worker_comlink } from "./create_Worker_comlink";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
-import TSPWorker from "./TSP_Runner.Worker?worker";
+import TSPWorker from "./TSP_Runner.Worker?worker&inline";
 import { TSP_Worker_API } from "./TSP_Worker_API";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 
