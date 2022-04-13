@@ -1,4 +1,4 @@
-export function idle_work(work: () => void, timeout: number = 2000) {
+export function run_idle_work(work: () => void, timeout: number = 2000) {
     const startTask = (deadline: {
         timeRemaining: () => number;
         didTimeout: boolean;

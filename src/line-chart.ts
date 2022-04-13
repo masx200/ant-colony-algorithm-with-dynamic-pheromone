@@ -9,6 +9,7 @@ import {
     watch,
 } from "vue";
 import { ECBasicOption } from "echarts/types/dist/shared";
+import { run_idle_work } from "../functions/run_idle_work";
 
 export default defineComponent({
     props: {
@@ -30,16 +31,17 @@ export default defineComponent({
         onUnmounted(() => {
             intersection_observer.disconnect();
         });
-        function update_chart() {
-            if (!chart.value) {
-                return;
-            }
-            if (!intersect.value) {
-                return;
-            }
-            chart.value.resize();
-            chart.value.setOption(props.options);
-        }
+        const update_chart = () =>
+            run_idle_work(function update_chart() {
+                if (!chart.value) {
+                    return;
+                }
+                if (!intersect.value) {
+                    return;
+                }
+                chart.value.resize();
+                chart.value.setOption(props.options);
+            }, 4000);
         onMounted(() => {
             watch(
                 () => props.options,
