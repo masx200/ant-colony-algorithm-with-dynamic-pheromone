@@ -56,22 +56,28 @@ export default defineComponent({
         watch(round_result, (round) => {
             set_distance_round(round);
         });
-
+        const show_chart_of_best = ref(false);
         const show_summary_of_routes = ref(true);
         const show_routes_of_best = ref(true);
         const show_routes_of_latest = ref(true);
-
-        const details_shows = [
+        const show_chart_of_latest = ref(false);
+        const show_chart_of_entropy = ref(false);
+        const show_summary_of_iterations = ref(true);
+        const details_shows_should_hide = [
+            show_summary_of_iterations,
+            show_chart_of_entropy,
+            show_chart_of_latest,
             show_routes_of_latest,
             show_summary_of_routes,
             show_routes_of_best,
+            show_chart_of_best,
         ];
         onMounted(() => {
             watch(is_running, (running) => {
                 if (running) {
-                    details_shows.forEach((a) => (a.value = false));
+                    details_shows_should_hide.forEach((a) => (a.value = false));
                 } else {
-                    details_shows.forEach((a) => (a.value = true));
+                    details_shows_should_hide.forEach((a) => (a.value = true));
                 }
             });
             window.addEventListener("beforeunload", (e) => {
@@ -359,13 +365,15 @@ export default defineComponent({
         const max_routes_of_greedy = ref(DefaultOptions.max_routes_of_greedy);
         return {
             input_options,
-
+            show_chart_of_latest,
+            show_chart_of_entropy,
             round_result,
 
             show_every_route: show_every_route,
             greedy_iteration_table_heads,
             greedy_iteration_table_body,
             max_routes_of_greedy,
+            show_chart_of_best,
             alpha,
             beta,
             can_run,
@@ -375,6 +383,7 @@ export default defineComponent({
 
             navbar_float,
             run_way_round,
+            show_summary_of_iterations,
             run_way_time,
             radio_run_way,
             create_and_run_tsp_by_search_time,

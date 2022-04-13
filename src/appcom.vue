@@ -200,7 +200,7 @@
                 :open="show_routes_of_best"
                 @toggle="show_routes_of_best = $event.target.open"
             >
-                <summary>全局最优解的展示</summary>
+                <summary>全局最优路径的展示</summary>
                 <!-- 全局最优解的图 -->
                 <div
                     class="singlechart"
@@ -226,30 +226,51 @@
         </details>
 
         <hr />
-        <div class="chartcontainer" style="">
-            <!-- 路径序号和当前路径长度的图表 -->
+        <details
+            class="width-100-percent"
+            :open="show_chart_of_latest"
+            @toggle="show_chart_of_latest = $event.target.open"
+        >
+            <summary>路径序号和当前路径长度</summary>
+            <div class="chartcontainer" style="">
+                <!-- 路径序号和当前路径长度的图表 -->
+                <div
+                    class="singlechart"
+                    style=""
+                    ref="container_of_path_number_and_current_path_length_chart"
+                ></div>
+                <!-- 路径序号和最优路径长度的图表 -->
+            </div>
+        </details>
+        <hr />
+        <details
+            class="width-100-percent"
+            :open="show_chart_of_entropy"
+            @toggle="show_chart_of_entropy = $event.target.open"
+        >
+            <summary>迭代次数和相对信息熵</summary>
+            <div class="chartcontainer" style="">
+                <!-- 迭代轮次和相对信息熵的图表 -->
+                <div
+                    class="singlechart"
+                    style=""
+                    ref="container_of_iteration_rounds_and_information_entropy_chart"
+                ></div>
+            </div>
+        </details>
+        <hr />
+        <details
+            class="width-100-percent"
+            :open="show_chart_of_best"
+            @toggle="show_chart_of_best = $event.target.open"
+        >
+            <summary>路径序号和最优路径长度</summary>
             <div
                 class="singlechart"
                 style=""
-                ref="container_of_path_number_and_current_path_length_chart"
+                ref="container_of_path_number_and_optimal_path_length_chart"
             ></div>
-            <!-- 路径序号和最优路径长度的图表 -->
-        </div>
-        <hr />
-        <div class="chartcontainer" style="">
-            <!-- 迭代轮次和相对信息熵的图表 -->
-            <div
-                class="singlechart"
-                style=""
-                ref="container_of_iteration_rounds_and_information_entropy_chart"
-            ></div>
-        </div>
-        <hr />
-        <div
-            class="singlechart"
-            style=""
-            ref="container_of_path_number_and_optimal_path_length_chart"
-        ></div>
+        </details>
         <hr />
 
         <!-- //汇总结果 -->
@@ -270,15 +291,19 @@
             :tablebody="TableBodyOfHistoryOfBest"
         />
         <hr />
-        <details class="width-100-percent" :open="true">
-            <summary>贪心路径的统计</summary>
-            <Datatable
-                :tableheads="greedy_iteration_table_heads"
-                :tablebody="greedy_iteration_table_body"
-            />
-        </details>
+        <!-- <details class="width-100-percent" :open="true">
+            <summary>贪心路径的统计</summary> -->
+        <Datatable
+            :tableheads="greedy_iteration_table_heads"
+            :tablebody="greedy_iteration_table_body"
+        />
+        <!-- </details> -->
         <hr />
-        <details class="width-100-percent" :open="true">
+        <details
+            class="width-100-percent"
+            :open="show_summary_of_iterations"
+            @toggle="show_summary_of_iterations = $event.target.open"
+        >
             <summary>每次迭代的统计</summary>
             <!-- 迭代结果 -->
             <Datatable

@@ -28,8 +28,9 @@ export function use_data_of_one_iteration(): {
         "迭代最优长度",
         "迭代平均长度",
         "全局最优长度",
-        "收敛性系数",
+
         "局部优化长度",
+        "收敛性系数",
     ];
     const onreceivedataofoneIteration = function onreceivedataofoneIteration(
         data: DataOfFinishOneIteration
@@ -63,8 +64,9 @@ export function use_data_of_one_iteration(): {
                 data.iterate_best_length,
                 data.average_length_of_iteration,
                 data.global_best_length,
-                data.convergence_coefficient,
+
                 data.optimal_length_of_iteration,
+                data.convergence_coefficient,
             ];
         });
     });
