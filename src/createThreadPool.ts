@@ -10,7 +10,7 @@ export interface ThreadPool<
     W extends {
         terminate: () => void;
     }
-    > {
+> {
     onQueueSizeChange(callback: (queueSize: number) => void): () => void;
     drain(): boolean;
     destroy: () => void;
@@ -80,16 +80,16 @@ export function createThreadPool<W extends { terminate: () => void }>(
             const abort_listener = () => {
                 reject(new Error("task signal aborted"));
                 s();
-                const maps = [queue, pending, results]
-                maps.forEach(m => m.delete(task_id))
+                const maps = [queue, pending, results];
+                maps.forEach((m) => m.delete(task_id));
                 const index = task_id % maxThreads;
-                const w = threads.splice(index, 1)
-                w[0].terminate()
+                const w = threads.splice(index, 1);
+                w[0].terminate();
             };
             if (signal) {
                 signal.addEventListener("abort", abort_listener);
                 if (signal.aborted) {
-                    abort_listener()
+                    abort_listener();
                 }
             }
             function s() {
@@ -109,7 +109,9 @@ export function createThreadPool<W extends { terminate: () => void }>(
             });
 
             const e = effect(() => {
-                const result = results.get(task_id) as unknown as Promise<R> | undefined
+                const result = results.get(task_id) as unknown as
+                    | Promise<R>
+                    | undefined;
                 if (result) {
                     resolve(result);
                     stop(e);
@@ -120,7 +122,6 @@ export function createThreadPool<W extends { terminate: () => void }>(
         });
     }
     function get(task_id: number): W {
-
         const index = task_id % maxThreads;
         while (typeof threads[index] === "undefined") {
             threads.push(create());
