@@ -331,7 +331,7 @@ export default defineComponent({
                 await runner.remote.on_finish_greedy_iteration(
                     on_receive_data_of_greedy
                 );
-                Greedy_algorithm_to_solve_tsp_with_selected_start_pool.clear();
+                Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
                 return runner;
             } else {
                 throw new Error("incorrect parameters create_runner");

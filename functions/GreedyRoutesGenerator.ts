@@ -69,7 +69,7 @@ export async function GreedyRoutesGenerator({
     const { length: best_length, route: optimal_route_of_iteration } =
         get_best_route_Of_Series_routes_and_lengths(parallel_results);
     const best_route = optimal_route_of_iteration;
-    Greedy_algorithm_to_solve_tsp_with_selected_start_pool.clear();
+    Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
     const time_ms_of_one_iteration = sum(
         parallel_results.map((r) => r.time_ms)
     );

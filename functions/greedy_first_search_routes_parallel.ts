@@ -23,7 +23,7 @@ export async function* greedy_first_search_routes_parallel({
         .fill(0)
         .map((_v, i) => i);
     const max_current =
-        Greedy_algorithm_to_solve_tsp_with_selected_start_pool.size;
+        Greedy_algorithm_to_solve_tsp_with_selected_start_pool.maxThreads;
     let rest_count = routes_of_greedy;
     while (rest_count > 0) {
         const current_threads = Math.min(max_current, rest_count);
