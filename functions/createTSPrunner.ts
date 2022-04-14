@@ -41,6 +41,7 @@ import { update_convergence_coefficient } from "./update_convergence_coefficient
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { create_pheromone_cache } from "./create_pheromone_cache";
 import { sum } from "lodash-es";
+import { DataOfTotal } from "./DataOfTotal";
 // import { reactive } from "@vue/reactivity";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
@@ -159,9 +160,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             search_count_of_best = current_search_count + 1;
             emit_best_change({
                 search_count_of_best: search_count_of_best,
-                current_search_count,
-                current_iterations: get_number_of_iterations(),
-                total_time_ms: total_time_ms,
+                // current_search_count,
+                // current_iterations: get_number_of_iterations(),
+                // total_time_ms: total_time_ms,
                 time_of_best_ms,
                 global_best_route: route,
                 global_best_length: length,
@@ -230,6 +231,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         createEventPair<DataOfBestChange>(emitter);
     const { on: on_finish_one_route, emit: inner_emit_finish_one_route } =
         createEventPair<DataOfFinishOneRoute>(emitter);
+
+    const { on: on_total_change, emit: emit_total_change } =
+        createEventPair<DataOfTotal>(emitter);
     const emit_finish_one_route = (data: PureDataOfFinishOneRoute) => {
         total_time_ms += data.time_ms_of_one_route;
         current_search_count++;
@@ -238,7 +242,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             ...data,
             current_search_count,
 
-            total_time_ms: total_time_ms,
+            // total_time_ms: total_time_ms,
             global_best_length: get_best_length(),
         });
     };
@@ -418,6 +422,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         if (collection_of_latest_routes) {
             collection_of_latest_routes.add(route, length);
         }
+
+        emit_total_change({
+            total_time_ms,
+            current_search_count,
+            current_iterations: get_number_of_iterations(),
+        });
     }
 
     function get_search_count_of_best() {
@@ -437,6 +447,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const result: TSP_Runner = {
         ...shared,
         max_results_of_2_opt,
+        on_total_change,
         on_finish_greedy_iteration,
         max_results_of_k_opt,
 

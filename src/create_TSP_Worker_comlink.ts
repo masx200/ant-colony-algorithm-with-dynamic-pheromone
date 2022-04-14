@@ -3,6 +3,7 @@ import { DataOfBestChange } from "../functions/DataOfBestChange";
 import { DataOfFinishGreedyIteration } from "../functions/DataOfFinishGreedyIteration";
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
+import { DataOfTotal } from "../functions/DataOfTotal";
 import { worker_error_listener } from "../functions/worker_error_listener";
 import { create_Worker_comlink } from "./create_Worker_comlink";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
@@ -43,11 +44,17 @@ export async function create_TSP_Worker_comlink(
     ) => {
         runner.on_finish_greedy_iteration(comlink.proxy(callback));
     };
+    const on_total_change: (
+        callback: (data: DataOfTotal) => void
+    ) => Promise<void> = async (callback) => {
+        runner.on_total_change(comlink.proxy(callback));
+    };
     const remote = Object.create(runner, {
         on_finish_greedy_iteration: { value: on_finish_greedy_iteration },
         on_finish_one_route: { value: on_finish_one_route },
         on_finish_one_iteration: { value: on_finish_one_iteration },
         on_best_change: { value: on_best_change },
+        on_total_change: { value: on_total_change },
     }) as typeof runner & {
         on_finish_one_route: typeof on_finish_one_route;
         on_finish_one_iteration: typeof on_finish_one_iteration;

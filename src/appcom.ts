@@ -117,7 +117,7 @@ export default defineComponent({
         } = use_data_of_one_route();
         const {
             on_receive_Data_Of_total,
-            data_of_total,
+            // data_of_total,
             summary_best_TableHeads,
             summary_total_TableHeads,
             summary_best_TableBody,
@@ -383,6 +383,7 @@ export default defineComponent({
                 await runner.remote.on_finish_greedy_iteration(
                     on_receive_data_of_greedy
                 );
+                await runner.remote.on_total_change(on_receive_Data_Of_total);
                 Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
                 return runner;
             } else {

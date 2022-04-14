@@ -4,6 +4,7 @@ import { DataOfBestChange } from "./DataOfBestChange";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { DataOfFinishOneIteration } from "./DataOfFinishOneIteration";
 import { DataOfFinishOneRoute } from "./DataOfFinishOneRoute";
+import { DataOfTotal } from "./DataOfTotal";
 import { NodeCoordinates } from "./NodeCoordinates";
 import { SharedOptions } from "./SharedOptions";
 
@@ -47,4 +48,5 @@ export type TSP_Runner = Required<TSPRunnerOptions> &
         on_finish_greedy_iteration: (
             callback: (data: DataOfFinishGreedyIteration) => void
         ) => void;
+        on_total_change: (callback: (data: DataOfTotal) => void) => void;
     };
