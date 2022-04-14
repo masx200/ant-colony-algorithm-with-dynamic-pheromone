@@ -31,6 +31,8 @@ export function get_options_route_of_node_coordinates({
         (v) => node_coordinates[v]
     );
     return create_line_chart_options({
+        xAxis_min:"dataMin",
+        yAxis_min:"dataMin",
         data: linechardata,
         // chart: chart,
         title_text: `城市数:${node_coordinates.length},路径长度:${length}`,
