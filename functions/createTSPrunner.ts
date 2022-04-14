@@ -155,8 +155,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         if (length < global_best.length) {
             global_best.length = length;
             global_best.route = generateUniqueArrayOfCircularPath(route);
+            time_of_best_ms = totaltimems;
+            search_count_of_best = current_search_count + 1;
             emit_best_change({
-                search_count_of_best: search_count_of_best + 1,
+                search_count_of_best: search_count_of_best ,
                 current_search_count,
                 current_iterations: get_number_of_iterations(),
                 total_time_ms: totaltimems,
