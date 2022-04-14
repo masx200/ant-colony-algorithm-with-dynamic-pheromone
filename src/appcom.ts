@@ -117,7 +117,7 @@ export default defineComponent({
         } = use_data_of_one_route();
         const {
             dataofresult,
-            onreceiveDataOfGlobalBest,
+            on_receive_Data_Of_Global_Best,
             clearDataOfResult,
             resultTableHeads,
             resultTableBody,
@@ -131,7 +131,7 @@ export default defineComponent({
         } = use_history_of_best(readonly(dataofresult));
 
         const initializeTSP_runner = use_initialize_tsp_runner({
-            onreceiveDataOfGlobalBest,
+            on_receive_Data_Of_Global_Best,
             onreceivedataofoneroute,
             onreceivedataofoneIteration,
         });

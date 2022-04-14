@@ -5,11 +5,11 @@ import { DataOfSummarize } from "./DataOfSummarize";
 import { Fun_initialize_TSP_runner } from "./Fun_initialize_TSP_runner";
 
 export function use_initialize_tsp_runner({
-    onreceiveDataOfGlobalBest,
+    on_receive_Data_Of_Global_Best,
     onreceivedataofoneroute,
     onreceivedataofoneIteration,
 }: {
-    onreceiveDataOfGlobalBest: (data: DataOfSummarize) => void;
+    on_receive_Data_Of_Global_Best: (data: DataOfSummarize) => void;
     onreceivedataofoneroute: (data: DataOfFinishOneRoute) => void;
     onreceivedataofoneIteration: (data: DataOfFinishOneIteration) => void;
 }): Fun_initialize_TSP_runner {
@@ -26,7 +26,7 @@ export function use_initialize_tsp_runner({
             ...rest,
         });
         await runner.remote.on_best_change((data) => {
-            onreceiveDataOfGlobalBest(data);
+            on_receive_Data_Of_Global_Best(data);
             onglobal_best_routeChange(data.global_best_route, node_coordinates);
         });
         await runner.remote.on_finish_one_route((data) => {
