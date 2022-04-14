@@ -314,19 +314,20 @@
             />
         </details>
         <hr />
-        <details
+        <!-- <details
             v-if="show_every_route"
             class="width-100-percent"
             :open="show_summary_of_routes"
             @toggle="show_summary_of_routes = $event.target.open"
         >
             <summary>每条路径的统计</summary>
-            <!-- 路径结果 -->
-            <Data_table
+路径结果 -->
+        <!-- <Data_table
                 :tableheads="oneroutetableheads"
                 :tablebody="oneroutetablebody"
             />
-        </details>
+        </details> -->
+        <!-- -->
     </div>
 </template>
 <script lang="ts" src="./appcom.ts"></script>

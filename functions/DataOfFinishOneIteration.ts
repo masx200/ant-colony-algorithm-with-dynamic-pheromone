@@ -5,6 +5,7 @@ export interface DataOfFinishOneIteration {
 
     random_selection_probability: number;
 
+    worst_length_of_iteration: number;
     optimal_length_of_iteration: number;
     optimal_route_of_iteration: number[];
     time_ms_of_one_iteration: number;

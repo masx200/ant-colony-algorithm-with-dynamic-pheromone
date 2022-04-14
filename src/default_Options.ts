@@ -12,7 +12,7 @@ export const default_max_results_of_2_opt = 10;
 export const default_max_results_of_k_exchange = 10;
 
 export { DefaultOptions };
-export const show_every_route = false;
+// export const show_every_route = false;
 const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
     max_results_of_k_exchange: default_max_results_of_k_exchange,
     max_cities_of_state_transition: 120,

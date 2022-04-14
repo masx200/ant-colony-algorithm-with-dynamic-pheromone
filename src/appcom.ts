@@ -21,7 +21,7 @@ import {
     default_beta,
     default_alpha,
     DefaultOptions,
-    show_every_route,
+    // show_every_route,
 } from "./default_Options";
 import { get_distance_round, set_distance_round } from "./set_distance_round";
 // import { draw_best_route_debounced } from "./draw_best_route_debounced";
@@ -110,10 +110,10 @@ export default defineComponent({
 
         const {
             dataofoneroute,
-            oneroutetablebody,
+            // oneroutetablebody,
             onreceivedataofoneroute,
             clearDataOfOneRoute,
-            oneroutetableheads,
+            // oneroutetableheads,
         } = use_data_of_one_route();
         const {
             dataofresult,
@@ -428,7 +428,7 @@ export default defineComponent({
             show_chart_of_entropy,
             round_result,
             options_of_latest_route_chart,
-            show_every_route: show_every_route,
+            // show_every_route: show_every_route,
             greedy_iteration_table_heads,
             greedy_iteration_table_body,
             max_routes_of_greedy,
@@ -460,8 +460,8 @@ export default defineComponent({
             resethandler: resethandler,
             resultTableHeads,
             resultTableBody,
-            oneroutetableheads,
-            oneroutetablebody,
+            // oneroutetableheads,
+            // oneroutetablebody,
             oneiterationtableheads,
             oneiterationtablebody,
             count_of_ants_ref,

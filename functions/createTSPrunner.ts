@@ -161,14 +161,23 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const get_current_search_count = () => {
         return current_search_count;
     };
-    const set_best_length = (bestlength: number) => {
+    const set_best_length = (best_length: number) => {
         if (greedy_length === Infinity) {
-            greedy_length = bestlength;
+            greedy_length = best_length;
         }
-        if (bestlength < global_best_length) {
-            global_best_length = bestlength;
+        if (best_length < global_best_length) {
+            global_best_length = best_length;
             time_of_best_ms = totaltimems;
             search_count_of_best = current_search_count + 1;
+            emit_best_change({
+                search_count_of_best: search_count_of_best + 1,
+                current_search_count,
+                current_iterations: get_number_of_iterations(),
+                total_time_ms: totaltimems,
+                time_of_best_ms,
+                global_best_route,
+                global_best_length: global_best_length,
+            });
         }
     };
     const set_best_route = (route: number[]) => {
@@ -199,15 +208,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emit_finish_one_route = (data: PureDataOfFinishOneRoute) => {
         totaltimems += data.time_ms_of_one_route;
         current_search_count++;
-        emit_best_change({
-            search_count_of_best,
-            current_search_count,
-            current_iterations: get_number_of_iterations(),
-            total_time_ms: totaltimems,
-            time_of_best_ms,
-            global_best_route,
-            global_best_length: global_best_length,
-        });
+
         inner_emit_finish_one_route({
             ...data,
             current_search_count,
@@ -256,7 +257,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 count_of_nodes,
                 emit_finish_greedy_iteration,
             });
-            greedy_length = best_length;
+            if (greedy_length === Infinity) {
+                greedy_length = best_length;
+            }
             set_best_length(best_length);
             set_best_route(best_route);
         } else {
@@ -341,7 +344,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     sum(
                         routes_and_lengths_of_one_iteration.map((a) => a.length)
                     ) / routes_and_lengths_of_one_iteration.length;
+                const worst_length_of_iteration = Math.max(
+                    ...routes_and_lengths_of_one_iteration.map((a) => a.length)
+                );
                 emit_finish_one_iteration({
+                    worst_length_of_iteration,
                     iterate_best_route,
                     iterate_best_length,
                     average_length_of_iteration,

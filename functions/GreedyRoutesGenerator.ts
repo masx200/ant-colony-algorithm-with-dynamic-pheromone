@@ -22,7 +22,7 @@ export async function GreedyRoutesGenerator({
     emit_finish_greedy_iteration: (data: DataOfFinishGreedyIteration) => void;
     get_best_route: () => number[];
     get_best_length: () => number;
-    set_best_length: (bestlength: number) => void;
+    set_best_length: (best_length: number) => void;
     set_best_route: (route: number[]) => void;
     onRouteCreated: (route: number[], length: number) => void;
     emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
@@ -55,10 +55,10 @@ export async function GreedyRoutesGenerator({
             set_best_route(oldRoute);
         }
         // }
-        if (oldLength < get_best_length()) {
-            set_best_length(oldLength);
-            set_best_route(oldRoute);
-        }
+        // if (oldLength < get_best_length()) {
+        //     set_best_length(oldLength);
+        //     set_best_route(oldRoute);
+        // }
         onRouteCreated(route, length);
 
         emit_finish_one_route({
@@ -77,7 +77,11 @@ export async function GreedyRoutesGenerator({
     );
     const average_length_of_iteration =
         sum(parallel_results.map((a) => a.length)) / parallel_results.length;
+    const worst_length_of_iteration = Math.max(
+        ...parallel_results.map((a) => a.length)
+    );
     emit_finish_greedy_iteration({
+        worst_length_of_iteration,
         average_length_of_iteration,
         current_iterations: 1,
         optimal_length_of_iteration: best_length,
