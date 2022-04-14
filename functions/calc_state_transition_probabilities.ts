@@ -19,7 +19,7 @@ export function calc_state_transition_probabilities({
     beta: number;
 } & SharedOptions) {
     const phermone = getpheromone(nextnode, currentnode);
-    assert_true(phermone > 0);
+    // assert_true(phermone > 0);
     const weight =
         Math.pow(phermone, alpha) /
         Math.pow(getdistancebyserialnumber(nextnode, currentnode), beta);
