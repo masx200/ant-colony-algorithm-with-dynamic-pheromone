@@ -23,9 +23,14 @@ export function calc_pheromone_dynamic({
         sum(
             latest_and_optimal_routes.map(({ route, length: route_length }) => {
                 return (
-                    ((1 +
-                        Number(is_segment_in_cycle_route(route, row, column))) /
-                        2) *
+                    Math.pow(
+                        (1 +
+                            Number(
+                                is_segment_in_cycle_route(route, row, column)
+                            )) /
+                            2,
+                        convergence_coefficient
+                    ) *
                     (Math.pow(
                         greedy_length / route_length,
                         convergence_coefficient
