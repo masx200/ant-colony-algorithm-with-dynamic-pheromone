@@ -7,19 +7,14 @@ import { closed_total_path_length } from "./closed-total-path-length";
 import { creategetdistancebyindex } from "./creategetdistancebyindex";
 import { cycle_reorganize } from "./cycle_reorganize";
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
-import { NodeCoordinates } from "./NodeCoordinates";
+import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 
 export function Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,
     start,
     round = false,
     max_cities_of_greedy = Infinity,
-}: {
-    node_coordinates: NodeCoordinates;
-    start: number;
-    round?: boolean;
-    max_cities_of_greedy?: number;
-}): { route: number[]; length: number } {
+}: GreedyWithStartOptions): { route: number[]; length: number } {
     set_distance_round(round);
     if (start < 0 || start >= node_coordinates.length) {
         throw new Error("incorrect start");

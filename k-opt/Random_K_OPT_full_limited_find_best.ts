@@ -10,16 +10,16 @@ import { pickRandomOne } from "../functions/pickRandomOne";
 
 export function Random_K_OPT_full_limited_find_best({
     count_of_nodes,
-    oldRoute,
+    route: oldRoute,
     max_results_of_k_opt,
     node_coordinates,
-    oldLength,
+    length: oldLength,
 }: {
     count_of_nodes: number;
-    oldRoute: number[];
+    route: number[];
     max_results_of_k_opt: number;
     node_coordinates: NodeCoordinates;
-    oldLength: number;
+    length: number;
 }): { route: number[]; length: number } {
     const routes_of_k_opt: number[][] = Array.from({
         length: max_results_of_k_opt,

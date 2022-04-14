@@ -1,16 +1,12 @@
-import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { GreedyWithStartOptions } from "../functions/GreedyWithStartOptions";
+// import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 export async function thread_Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,
     start,
     round = false,
     max_cities_of_greedy = Infinity,
-}: {
-    node_coordinates: NodeCoordinates;
-    start: number;
-    round?: boolean;
-    max_cities_of_greedy?: number;
-}): Promise<{
+}: GreedyWithStartOptions): Promise<{
     route: number[];
     length: number;
 }> {

@@ -68,10 +68,10 @@ export async function EachIterationHandler(
         count_of_nodes,
         max_segments_of_cross_point,
         distance_round,
-        oldRoute: get_best_route(),
+        route: get_best_route(),
         max_results_of_k_opt,
         node_coordinates,
-        oldLength: get_best_length(),
+        length: get_best_length(),
         max_results_of_k_exchange,
         max_results_of_2_opt,
     });
