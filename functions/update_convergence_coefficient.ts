@@ -10,9 +10,9 @@ export function update_convergence_coefficient({
     greedy_length: number;
 }): number {
     if (coefficient_of_diversity_increase > 0) {
-        convergence_coefficient *= Math.pow(
-            1 - coefficient_of_diversity_increase,
-            2
+        convergence_coefficient *= Math.max(
+            1,
+            Math.pow(1 - coefficient_of_diversity_increase, 2)
         );
     } else if (iterate_best_length > greedy_length) {
         convergence_coefficient *= 1.7;
