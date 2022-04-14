@@ -41,7 +41,8 @@ import { update_convergence_coefficient } from "./update_convergence_coefficient
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { create_pheromone_cache } from "./create_pheromone_cache";
 import { sum } from "lodash-es";
-// import { reactive } from "@vue/reactivity";
+
+
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emitter = EventEmitterTargetClass({ sync: true });
     const {
@@ -107,7 +108,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 const result = calc_pheromone_dynamic({
                     latest_and_optimal_routes:
                         latest_and_optimal_routes_rank_first_half,
-                    PheromoneZero,
+                    // PheromoneZero,
                     row,
                     column,
                     greedy_length,
@@ -130,7 +131,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         get: getPheromone,
         column: count_of_nodes,
     };
-    const PheromoneZero = 1;
+
     const latest_and_optimal_routes_rank_first_half =
         create_latest_and_optimal_routes_rank_first_half(
             collection_of_latest_routes,
