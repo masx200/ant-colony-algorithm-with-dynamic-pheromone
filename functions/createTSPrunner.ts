@@ -334,12 +334,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 time_ms_of_one_iteration += timems_of_process_iteration;
                 totaltimems += timems_of_process_iteration;
 
-                convergence_coefficient = update_convergence_coefficient({
-                    coefficient_of_diversity_increase,
-                    convergence_coefficient,
-                    iterate_best_length,
-                    greedy_length,
-                });
                 const average_length_of_iteration =
                     sum(
                         routes_and_lengths_of_one_iteration.map((a) => a.length)
@@ -360,6 +354,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         lastrandom_selection_probability,
                     time_ms_of_one_iteration: time_ms_of_one_iteration,
                     convergence_coefficient,
+                });
+                convergence_coefficient = update_convergence_coefficient({
+                    coefficient_of_diversity_increase,
+                    convergence_coefficient,
+                    iterate_best_length,
+                    greedy_length,
                 });
                 time_ms_of_one_iteration = 0;
                 lastrandom_selection_probability =
