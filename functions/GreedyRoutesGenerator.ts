@@ -8,30 +8,35 @@ import { sum } from "lodash-es";
 import { get_distance_round } from "../src/set_distance_round";
 import { assert_true } from "../test/assert_true";
 
-export async function GreedyRoutesGenerator({
-    shared,
-    emit_finish_greedy_iteration,
-    get_best_route,
-    get_best_length,
-    set_best_length,
-    set_best_route,
-    onRouteCreated,
-    emit_finish_one_route,
-}: {
-    shared: SharedOptions;
-    emit_finish_greedy_iteration: (data: DataOfFinishGreedyIteration) => void;
-    get_best_route: () => number[];
-    get_best_length: () => number;
-    set_best_length: (best_length: number) => void;
-    set_best_route: (route: number[]) => void;
-    onRouteCreated: (route: number[], length: number) => void;
-    emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
+export async function GreedyRoutesGenerator(
+    options: {
+        emit_finish_greedy_iteration: (
+            data: DataOfFinishGreedyIteration
+        ) => void;
+        get_best_route: () => number[];
+        get_best_length: () => number;
+        // set_best_length: (best_length: number) => void;
+        // set_best_route: (route: number[]) => void;
+        onRouteCreated: (route: number[], length: number) => void;
+        emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
 
-    count_of_nodes: number;
-}): Promise<{ best_length: number; best_route: number[] }> {
-    const { count_of_nodes } = shared;
+        count_of_nodes: number;
+    } & SharedOptions
+): Promise<{ best_length: number; best_route: number[] }> {
+    const {
+        set_global_best,
+        count_of_nodes,
+        emit_finish_greedy_iteration,
+        get_best_route,
+        get_best_length,
+        // set_best_length,
+        // set_best_route,
+        onRouteCreated,
+        emit_finish_one_route,
+    } = options;
+    // const { count_of_nodes } = shared;
     const greedy_results_iter = greedy_first_search_routes_parallel({
-        ...shared,
+        ...options,
         round: get_distance_round(),
     });
     const parallel_results: {
@@ -51,8 +56,9 @@ export async function GreedyRoutesGenerator({
         const oldRoute = route;
         // if (get_best_route().length === 0) {
         if (oldLength < get_best_length()) {
-            set_best_length(oldLength);
-            set_best_route(oldRoute);
+            set_global_best(oldRoute, oldLength);
+            // set_best_length(oldLength);
+            // set_best_route(oldRoute);
         }
         // }
         // if (oldLength < get_best_length()) {

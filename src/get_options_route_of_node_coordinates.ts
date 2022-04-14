@@ -7,6 +7,7 @@ import { cycle_reorganize } from "../functions/cycle_reorganize";
 import { ECOption } from "../functions/echarts-line";
 // import { draw_line_chart } from "../functions/draw_line_chart";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
+import { assert_true } from "../test/assert_true";
 import { get_distance_round } from "./set_distance_round";
 
 export function get_options_route_of_node_coordinates({
@@ -16,7 +17,8 @@ export function get_options_route_of_node_coordinates({
     route: number[];
     node_coordinates: NodeCoordinates;
 }): ECBasicOption & ECOption {
-    const greedypath = cycle_reorganize(route, 0);
+    assert_true(node_coordinates.length === route.length);
+    const reorganize_route = cycle_reorganize(route, 0);
     const length = closed_total_path_length({
         round: get_distance_round(),
         path: route,
@@ -25,7 +27,7 @@ export function get_options_route_of_node_coordinates({
             get_distance_round()
         ),
     });
-    const linechardata = [...greedypath, greedypath[0]].map(
+    const linechardata = [...reorganize_route, reorganize_route[0]].map(
         (v) => node_coordinates[v]
     );
     return create_line_chart_options({

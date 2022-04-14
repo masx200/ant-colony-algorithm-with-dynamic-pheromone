@@ -12,6 +12,7 @@ export async function EachRouteGenerator(
 }> {
     const starttime_of_one_route = Number(new Date());
     const {
+        set_global_best,
         distance_round,
         current_search_count,
         max_results_of_2_opt,
@@ -25,8 +26,8 @@ export async function EachRouteGenerator(
         max_results_of_k_exchange,
         get_best_length,
         get_best_route,
-        set_best_length,
-        set_best_route,
+        // set_best_length,
+        // set_best_route,
         max_segments_of_cross_point,
     } = options;
     const {
@@ -49,8 +50,9 @@ export async function EachRouteGenerator(
     });
     // if (get_best_route().length === 0) {
     if (oldLength < get_best_length()) {
-        set_best_length(oldLength);
-        set_best_route(oldRoute);
+        // set_best_length(oldLength);
+        // set_best_route(oldRoute);
+        set_global_best(oldRoute, oldLength);
     }
     // }
     const endtime_of_one_route = Number(new Date());
@@ -72,8 +74,9 @@ export async function EachRouteGenerator(
     });
 
     if (length < get_best_length()) {
-        set_best_length(length);
-        set_best_route(route);
+        // set_best_length(length);
+        // set_best_route(route);
+        set_global_best(oldRoute, oldLength);
     }
     assert_true(get_best_length() < Infinity);
     assert_true(get_best_route().length === count_of_nodes);

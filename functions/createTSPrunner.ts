@@ -41,7 +41,7 @@ import { update_convergence_coefficient } from "./update_convergence_coefficient
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { create_pheromone_cache } from "./create_pheromone_cache";
 import { sum } from "lodash-es";
-
+// import { reactive } from "@vue/reactivity";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const emitter = EventEmitterTargetClass({ sync: true });
@@ -148,13 +148,41 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         );
         // length_of_routes = latest_and_optimal_routes.length;
     }
+    function set_global_best(route: number[], length: number) {
+        if (greedy_length === Infinity) {
+            greedy_length = length;
+        }
+        if (length < global_best.length) {
+            global_best.length = length;
+            global_best.route = generateUniqueArrayOfCircularPath(route);
+            emit_best_change({
+                search_count_of_best: search_count_of_best + 1,
+                current_search_count,
+                current_iterations: get_number_of_iterations(),
+                total_time_ms: totaltimems,
+                time_of_best_ms,
+                global_best_route: route,
+                global_best_length: length,
+            });
+        }
+    }
+    const global_best: {
+        length: number;
+        route: number[];
+    } = { length: Infinity, route: [] };
+    const get_best_route = () => {
+        return global_best.route;
+    };
 
+    const get_best_length = () => {
+        return global_best.length;
+    };
     let current_search_count = 0;
-    let global_best_route: number[] = [];
+    // let global_best_route: number[] = [];
 
     let time_of_best_ms = 0;
     let search_count_of_best = 0;
-    let global_best_length: number = Infinity;
+    // let global_best_length: number = Infinity;
     let greedy_length: number = Infinity;
 
     const get_total_time_ms = () => {
@@ -164,36 +192,28 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const get_current_search_count = () => {
         return current_search_count;
     };
-    const set_best_length = (best_length: number) => {
-        if (greedy_length === Infinity) {
-            greedy_length = best_length;
-        }
-        if (best_length < global_best_length) {
-            global_best_length = best_length;
-            time_of_best_ms = totaltimems;
-            search_count_of_best = current_search_count + 1;
-            emit_best_change({
-                search_count_of_best: search_count_of_best + 1,
-                current_search_count,
-                current_iterations: get_number_of_iterations(),
-                total_time_ms: totaltimems,
-                time_of_best_ms,
-                global_best_route,
-                global_best_length: global_best_length,
-            });
-        }
-    };
-    const set_best_route = (route: number[]) => {
-        global_best_route = generateUniqueArrayOfCircularPath(route);
-    };
-
-    const get_best_route = () => {
-        return global_best_route;
-    };
-
-    const get_best_length = () => {
-        return global_best_length;
-    };
+    // const set_best_length = (best_length: number) => {
+    //     if (greedy_length === Infinity) {
+    //         greedy_length = best_length;
+    //     }
+    //     if (best_length < global_best_length) {
+    //         global_best_length = best_length;
+    //         time_of_best_ms = totaltimems;
+    //         search_count_of_best = current_search_count + 1;
+    //         emit_best_change({
+    //             search_count_of_best: search_count_of_best + 1,
+    //             current_search_count,
+    //             current_iterations: get_number_of_iterations(),
+    //             total_time_ms: totaltimems,
+    //             time_of_best_ms,
+    //             global_best_route,
+    //             global_best_length: global_best_length,
+    //         });
+    //     }
+    // };
+    // const set_best_route = (route: number[]) => {
+    //     global_best_route = generateUniqueArrayOfCircularPath(route);
+    // };
 
     const get_number_of_iterations = () => {
         if (current_search_count < max_routes_of_greedy) {
@@ -217,7 +237,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             current_search_count,
 
             total_time_ms: totaltimems,
-            global_best_length,
+            global_best_length: get_best_length(),
         });
     };
     const {
@@ -233,7 +253,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     ) => {
         inner_emit_finish_one_iteration({
             ...data,
-            global_best_length: global_best_length,
+            global_best_length: get_best_length(),
             current_iterations: get_number_of_iterations(),
             convergence_coefficient,
         });
@@ -249,11 +269,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const runOneIteration = async () => {
         if (current_search_count === 0) {
             const { best_length, best_route } = await GreedyRoutesGenerator({
-                shared,
+                ...shared,
                 get_best_route,
                 get_best_length,
-                set_best_length,
-                set_best_route,
+                // set_best_length,
+                // set_best_route,
                 onRouteCreated,
                 emit_finish_one_route,
 
@@ -263,8 +283,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             if (greedy_length === Infinity) {
                 greedy_length = best_length;
             }
-            set_best_length(best_length);
-            set_best_route(best_route);
+            set_global_best(best_route, best_length);
+            // set_best_length(best_length);
+            // set_best_route(best_route);
         } else {
             let time_ms_of_one_iteration: number = 0;
             const routes_and_lengths_of_one_iteration: {
@@ -287,8 +308,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         get_best_length,
                         get_best_route,
 
-                        set_best_length,
-                        set_best_route,
+                        // set_best_length,
+                        // set_best_route,
                     })
                 )
             );
@@ -385,8 +406,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     function onRouteCreated(route: number[], length: number) {
         if (length < get_best_length()) {
-            set_best_length(length);
-            set_best_route(route);
+            set_global_best(route, length);
+            // set_best_length(length);
+            // set_best_route(route);
         }
         if (collection_of_optimal_routes) {
             collection_of_optimal_routes.add(route, length);
@@ -446,11 +468,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
             get_best_route,
             get_best_length,
-            set_best_route,
-            set_best_length,
+            // set_best_route,
+            // set_best_length,
             get_current_search_count,
             pheromoneStore,
             count_of_nodes,
+            set_global_best,
         };
     }
     return result;
