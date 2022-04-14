@@ -283,6 +283,12 @@
         <!-- 拆分表格 -->
         <hr />
         <Data_table
+            :tableheads="summary_total_TableHeads"
+            :tablebody="summary_total_TableBody"
+        />
+        <!-- 拆分表格 -->
+        <hr />
+        <Data_table
             :tableheads="global_best_routeHeads"
             :tablebody="global_best_routeBody"
         />
