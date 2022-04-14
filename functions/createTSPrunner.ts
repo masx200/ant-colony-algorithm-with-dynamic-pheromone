@@ -35,7 +35,7 @@ import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
-import { create_latest_and_optimal_routes } from "./create_latest_and_optimal_routes";
+import { create_latest_and_optimal_routes_rank_first_half } from "./create_latest_and_optimal_routes_rank_first_half";
 import { calc_pheromone_dynamic } from "./calc_pheromone_dynamic";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
@@ -105,7 +105,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             const cached = pheromone_cache.get(row, column);
             if (0 === cached) {
                 const result = calc_pheromone_dynamic({
-                    latest_and_optimal_routes,
+                    latest_and_optimal_routes:
+                        latest_and_optimal_routes_rank_first_half,
                     PheromoneZero,
                     row,
                     column,
@@ -129,16 +130,17 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         get: getPheromone,
         column: count_of_nodes,
     };
-    const PheromoneZero = 1e-16;
-    const latest_and_optimal_routes = create_latest_and_optimal_routes(
-        collection_of_latest_routes,
-        collection_of_optimal_routes
-    );
+    const PheromoneZero = 1;
+    const latest_and_optimal_routes_rank_first_half =
+        create_latest_and_optimal_routes_rank_first_half(
+            collection_of_latest_routes,
+            collection_of_optimal_routes
+        );
     // let length_of_routes = latest_and_optimal_routes.length;
     function update_latest_and_optimal_routes() {
         assignOwnKeys(
-            latest_and_optimal_routes,
-            create_latest_and_optimal_routes(
+            latest_and_optimal_routes_rank_first_half,
+            create_latest_and_optimal_routes_rank_first_half(
                 collection_of_latest_routes,
                 collection_of_optimal_routes
             )
@@ -404,7 +406,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     }
     const get_neighbors_from_optimal_routes_and_latest_routes =
         create_get_neighbors_from_optimal_routes_and_latest_routes(
-            latest_and_optimal_routes
+            latest_and_optimal_routes_rank_first_half
         );
     const shared = getShared();
     const result: TSP_Runner = {
