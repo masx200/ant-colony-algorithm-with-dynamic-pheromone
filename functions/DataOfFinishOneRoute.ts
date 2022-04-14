@@ -7,4 +7,3 @@ export type DataOfFinishOneRoute = {
     length: number;
     // current_iterations: number;
 };
-

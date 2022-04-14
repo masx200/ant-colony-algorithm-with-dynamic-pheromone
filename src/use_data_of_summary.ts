@@ -8,7 +8,7 @@ export function use_data_of_summary() {
             data_of_best.value = data;
         };
 
-    const clearDataOfResult = function clearDataOfResult() {
+    const clear_data_of_best = function clear_data_of_best() {
         data_of_best.value = undefined;
     };
     const summary_best_TableHeads = [
@@ -83,10 +83,10 @@ export function use_data_of_summary() {
         summary_total_TableBody,
         global_best_routeHeads,
         global_best_routeBody,
-        dataofresult: data_of_best,
+        data_of_best: data_of_best,
         on_receive_Data_Of_Global_Best,
-        clearDataOfResult,
-        // resultTableHeads,
-        // resultTableBody,
+        clear_data_of_best,
+        // summary_best_TableHeads,
+        // summary_best_TableBody,
     };
 }

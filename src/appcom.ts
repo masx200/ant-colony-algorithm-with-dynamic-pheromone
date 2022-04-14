@@ -116,19 +116,23 @@ export default defineComponent({
             // oneroutetableheads,
         } = use_data_of_one_route();
         const {
-            dataofresult,
-            on_receive_Data_Of_Global_Best,
-            clearDataOfResult,
-            resultTableHeads,
-            resultTableBody,
-            global_best_routeBody,
+            on_receive_Data_Of_total,
+            data_of_total,
+            summary_best_TableHeads,
+            summary_total_TableHeads,
+            summary_best_TableBody,
+            summary_total_TableBody,
             global_best_routeHeads,
+            global_best_routeBody,
+            data_of_best: data_of_best,
+            on_receive_Data_Of_Global_Best,
+            clear_data_of_best,
         } = use_data_of_summary();
         const {
             clearData: clearDataOfHistoryOfBest,
             TableHeads: TableHeadsOfHistoryOfBest,
             TableBody: TableBodyOfHistoryOfBest,
-        } = use_history_of_best(readonly(dataofresult));
+        } = use_history_of_best(readonly(data_of_best));
 
         const initializeTSP_runner = use_initialize_tsp_runner({
             on_receive_Data_Of_Global_Best,
@@ -143,25 +147,7 @@ export default defineComponent({
         const searchrounds = ref(default_search_rounds);
         const count_of_ants_ref = ref(default_count_of_ants);
         const selecteleref = ref<HTMLSelectElement>();
-        // const { container: container_of_best_chart, chart: chart_store_best } =
-        //     use_escharts_container_pair();
-        // const {
-        //     container: container_of_latest_chart,
-        //     chart: chart_store_latest,
-        // } = use_escharts_container_pair();
-        // const {
-        //     container:
-        //         container_of_iteration_rounds_and_information_entropy_chart,
-        //     chart: iteration_rounds_and_information_entropy_chart,
-        // } = use_escharts_container_pair();
-        // const {
-        //     container: container_of_path_number_and_current_path_length_chart,
-        //     chart: path_number_and_current_path_length_chart,
-        // } = use_escharts_container_pair();
-        // const {
-        //     container: container_of_path_number_and_optimal_path_length_chart,
-        //     chart: path_number_and_optimal_path_length_chart,
-        // } = use_escharts_container_pair();
+
         const options_of_best_route_chart: Ref<ECBasicOption> = ref({});
         const options_of_latest_route_chart: Ref<ECBasicOption & ECOption> =
             ref({});
@@ -324,7 +310,7 @@ export default defineComponent({
             TSP_Reset([
                 clearDataOfOneRoute,
                 clearDataOfOneIteration,
-                clearDataOfResult,
+                clear_data_of_best,
             ]);
         };
 
@@ -423,6 +409,10 @@ export default defineComponent({
         const beta = ref(default_beta);
         const max_routes_of_greedy = ref(DefaultOptions.max_routes_of_greedy);
         return {
+            summary_best_TableHeads,
+            summary_total_TableHeads,
+            summary_best_TableBody,
+            summary_total_TableBody,
             input_options,
             show_chart_of_latest,
             show_chart_of_entropy,
@@ -458,8 +448,8 @@ export default defineComponent({
             is_running,
             options_of_iterations_and_information_entropy_chart,
             resethandler: resethandler,
-            resultTableHeads,
-            resultTableBody,
+            // summary_best_TableHeads,
+            // summary_best_TableBody,
             // oneroutetableheads,
             // oneroutetablebody,
             oneiterationtableheads,

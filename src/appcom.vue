@@ -277,8 +277,8 @@
 
         <!-- //汇总结果 -->
         <Data_table
-            :tableheads="resultTableHeads"
-            :tablebody="resultTableBody"
+            :tableheads="summary_best_TableHeads"
+            :tablebody="summary_best_TableBody"
         />
         <!-- 拆分表格 -->
         <hr />

@@ -10,7 +10,7 @@ import {
 import { DataOfBestChange } from "../functions/DataOfBestChange";
 
 export function use_history_of_best(
-    dataofresult: DeepReadonly<Ref<DataOfBestChange | undefined>>
+    data_of_best: DeepReadonly<Ref<DataOfBestChange | undefined>>
 ): {
     history_of_best: {
         time_of_best_ms: number;
@@ -29,7 +29,7 @@ export function use_history_of_best(
         }[]
     >([]);
     onMounted(() => {
-        watch(dataofresult, (value, old) => {
+        watch(data_of_best, (value, old) => {
             const global_best_length = value?.global_best_length;
             const old_global_best_length = old?.global_best_length;
             if (!global_best_length) {
@@ -56,7 +56,7 @@ export function use_history_of_best(
         });
     });
 
-    const clearData = function clearDataOfResult() {
+    const clearData = function clear_data_of_best() {
         history_of_best.length = 0;
     };
     const TableHeads = ["最优解路径序号", "全局最优长度", "最优解的耗时秒"];
