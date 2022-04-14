@@ -92,7 +92,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     );
 
     let lastrandom_selection_probability = 0;
-    let totaltimems = 0;
+    let total_time_ms = 0;
     let pheromone_cache = create_pheromone_cache(count_of_nodes);
     function getPheromone(row: number, column: number): number {
         if (
@@ -155,13 +155,13 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         if (length < global_best.length) {
             global_best.length = length;
             global_best.route = generateUniqueArrayOfCircularPath(route);
-            time_of_best_ms = totaltimems;
+            time_of_best_ms = total_time_ms;
             search_count_of_best = current_search_count + 1;
             emit_best_change({
                 search_count_of_best: search_count_of_best,
                 current_search_count,
                 current_iterations: get_number_of_iterations(),
-                total_time_ms: totaltimems,
+                total_time_ms: total_time_ms,
                 time_of_best_ms,
                 global_best_route: route,
                 global_best_length: length,
@@ -188,7 +188,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let greedy_length: number = Infinity;
 
     const get_total_time_ms = () => {
-        return totaltimems;
+        return total_time_ms;
     };
 
     const get_current_search_count = () => {
@@ -200,13 +200,13 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     //     }
     //     if (best_length < global_best_length) {
     //         global_best_length = best_length;
-    //         time_of_best_ms = totaltimems;
+    //         time_of_best_ms = total_time_ms;
     //         search_count_of_best = current_search_count + 1;
     //         emit_best_change({
     //             search_count_of_best: search_count_of_best + 1,
     //             current_search_count,
     //             current_iterations: get_number_of_iterations(),
-    //             total_time_ms: totaltimems,
+    //             total_time_ms: total_time_ms,
     //             time_of_best_ms,
     //             global_best_route,
     //             global_best_length: global_best_length,
@@ -231,14 +231,14 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const { on: on_finish_one_route, emit: inner_emit_finish_one_route } =
         createEventPair<DataOfFinishOneRoute>(emitter);
     const emit_finish_one_route = (data: PureDataOfFinishOneRoute) => {
-        totaltimems += data.time_ms_of_one_route;
+        total_time_ms += data.time_ms_of_one_route;
         current_search_count++;
 
         inner_emit_finish_one_route({
             ...data,
             current_search_count,
 
-            total_time_ms: totaltimems,
+            total_time_ms: total_time_ms,
             global_best_length: get_best_length(),
         });
     };
@@ -358,7 +358,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     optimal_length_of_iteration
                 );
                 time_ms_of_one_iteration += timems_of_process_iteration;
-                totaltimems += timems_of_process_iteration;
+                total_time_ms += timems_of_process_iteration;
 
                 const average_length_of_iteration =
                     sum(
