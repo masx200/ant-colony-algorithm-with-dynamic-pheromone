@@ -21,6 +21,6 @@ export function draw_line_chart_raw({
         yAxis_min,
         data,
     });
-    chart.setOption(option, { lazyUpdate: false });
+    chart.setOption(option, { lazyUpdate: true });
     chart.resize();
 }

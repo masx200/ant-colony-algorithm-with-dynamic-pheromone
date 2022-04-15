@@ -1,5 +1,5 @@
 import { use_escharts_container_pair } from "./use_escharts_container_pair";
-
+import { throttle } from "lodash-es";
 import {
     defineComponent,
     onMounted,
@@ -11,14 +11,15 @@ import {
 import { ECBasicOption } from "echarts/types/dist/shared";
 import { run_idle_work } from "../functions/run_idle_work";
 import { debounce_animation_frame } from "./debounce_animation_frame";
+import { drawChartWait } from "./drawChartMaxWait";
 
 export default defineComponent({
     props: {
         options: { required: true, type: Object as PropType<ECBasicOption> },
     },
     setup(props) {
-        const debounced_update = debounce_animation_frame(
-            function update_chart() {
+        const debounced_update = throttle(
+            debounce_animation_frame(function update_chart() {
                 // console.log("update_chart", props.options, chart, intersect);
                 if (!chart.value) {
                     return;
@@ -28,8 +29,9 @@ export default defineComponent({
                 // }
                 // console.log("render chart");
                 chart.value.resize();
-                chart.value.setOption(props.options);
-            }
+                chart.value.setOption(props.options, { lazyUpdate: true });
+            }),
+            drawChartWait
         );
         const { container: container, chart: chart } =
             use_escharts_container_pair();
