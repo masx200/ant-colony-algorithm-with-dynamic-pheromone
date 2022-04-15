@@ -398,6 +398,15 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         lastrandom_selection_probability,
                     });
                 routes_and_lengths_of_one_iteration.length = 0;
+                //如果相对信息熵小于1,则在最优路径集合中暂时移除全局最优路径
+                if (population_relative_information_entropy < 1) {
+                    assignOwnKeys(
+                        collection_of_optimal_routes,
+                        collection_of_optimal_routes.filter(
+                            (a) => a.length !== get_best_length()
+                        )
+                    );
+                }
             }
         }
     };
