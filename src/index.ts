@@ -3,8 +3,9 @@ import { appcontainer } from "./appcontainer";
 import { app } from "./main";
 app.config.errorHandler = (e) => {
     alert(e);
-setTimeout(()=>{
-    throw e;})
+    setTimeout(() => {
+        throw e;
+    });
 };
 app.mount(appcontainer);
 !(async () => {
