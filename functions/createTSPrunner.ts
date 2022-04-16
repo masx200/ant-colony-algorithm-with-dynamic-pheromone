@@ -291,20 +291,21 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     });
     const runOneIteration = async () => {
         if (current_search_count === 0) {
-            const { best_length, best_route } = await GreedyRoutesGenerator({
-                ...shared,
-                get_best_route,
-                get_best_length,
-                // set_best_length,
-                // set_best_route,
-                onRouteCreated,
-                emit_finish_one_route,
+            const { best_length, best_route, average_length } =
+                await GreedyRoutesGenerator({
+                    ...shared,
+                    get_best_route,
+                    get_best_length,
+                    // set_best_length,
+                    // set_best_route,
+                    onRouteCreated,
+                    emit_finish_one_route,
 
-                count_of_nodes,
-                emit_finish_greedy_iteration,
-            });
-            if (greedy_length === Infinity) {
-                greedy_length = best_length;
+                    count_of_nodes,
+                    emit_finish_greedy_iteration,
+                });
+            if (greedy_length > average_length) {
+                greedy_length = average_length;
             }
             set_global_best(best_route, best_length);
             // set_best_length(best_length);

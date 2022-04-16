@@ -22,7 +22,7 @@ export async function GreedyRoutesGenerator(
 
         count_of_nodes: number;
     } & SharedOptions
-): Promise<{ best_length: number; best_route: number[] }> {
+): Promise<{ best_length: number; best_route: number[] ,average_length:number}> {
     const {
         set_global_best,
         count_of_nodes,
@@ -97,5 +97,5 @@ export async function GreedyRoutesGenerator(
     });
     assert_true(get_best_length() < Infinity);
     assert_true(get_best_route().length === count_of_nodes);
-    return { best_length, best_route };
+    return { best_length, best_route,average_length:average_length_of_iteration };
 }
