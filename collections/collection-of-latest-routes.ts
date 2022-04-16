@@ -1,8 +1,8 @@
 // import { getUniqueStringOfCircularRoute } from "../functions/getUniqueStringOfCircularRoute";
 import { assert_true } from "../test/assert_true";
 import { assignOwnKeys } from "./assignOwnKeys";
-import { CollectionOfRoutes } from "./CollectionOfRoutes";
-export { CollectionOfRoutes };
+import type { CollectionOfRoutes } from "./CollectionOfRoutes";
+export type { CollectionOfRoutes };
 export function create_collection_of_latest_routes(
     max_size: number
 ): CollectionOfRoutes {
