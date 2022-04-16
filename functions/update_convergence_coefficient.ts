@@ -21,7 +21,7 @@ export function update_convergence_coefficient({
             convergence_coefficient /
                 Math.pow(
                     convergence_coefficient_grow_speed,
-                    max_number_of_stagnation * 1.5
+                    max_number_of_stagnation 
                 )
         );
     }
