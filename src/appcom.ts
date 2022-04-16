@@ -62,6 +62,7 @@ export default defineComponent({
         LineChart,
     },
     setup() {
+        const show_progress = ref(true);
         const input_options = reactive(DefaultOptions);
 
         const round_result = ref(get_distance_round());
@@ -414,6 +415,7 @@ export default defineComponent({
         const beta = ref(default_beta);
         const max_routes_of_greedy = ref(DefaultOptions.max_routes_of_greedy);
         return {
+            show_progress,
             show_array_routes_of_best,
             show_configurations,
             summary_best_TableHeads,

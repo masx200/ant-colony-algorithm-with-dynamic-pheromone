@@ -22,11 +22,18 @@
             </option>
         </select>
         <br />
-        <button v-text="'重置'" @click="resethandler" />
+        <button v-text="'重置'" @click="resethandler" /><br />
         <button
             v-text="'停止'"
             @click="stop_handler"
             :disabled="disable_stop"
+        />
+        <hr />
+        <span v-text="'显示进度条'"></span>
+        <el-switch
+            v-model="show_progress"
+            active-text="Open"
+            inactive-text="Close"
         />
         <hr />
         <details
