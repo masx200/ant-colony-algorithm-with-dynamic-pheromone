@@ -1,7 +1,7 @@
 import { max_number_of_stagnation } from "./max_number_of_stagnation";
 const convergence_coefficient_grow_speed = 1.25;
 const convergence_coefficient_min = 1;
-const convergence_coefficient_max = 1000;
+const convergence_coefficient_max = 5000;
 export function update_convergence_coefficient({
     number_of_stagnation,
     coefficient_of_diversity_increase,
