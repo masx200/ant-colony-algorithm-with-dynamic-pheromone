@@ -2,6 +2,7 @@
 import { assert_true } from "../test/assert_true";
 import { assignOwnKeys } from "./assignOwnKeys";
 import { CollectionOfRoutes } from "./CollectionOfRoutes";
+export { CollectionOfRoutes };
 export function create_collection_of_latest_routes(
     max_size: number
 ): CollectionOfRoutes {
@@ -13,7 +14,7 @@ export function create_collection_of_latest_routes(
     assignOwnKeys(result, {
         max_size,
         get [Symbol.toStringTag]() {
-            return "CollectionOfLatestRoutes";
+            return "CollectionOfRoutes";
         },
         add(route: number[], length: number) {
             assert_true(route.length > 0);
@@ -31,14 +32,14 @@ export function create_collection_of_latest_routes(
         },
     });
     return result as CollectionOfRoutes;
-    // return new CollectionOfLatestRoutes(0, max_size);
+    // return new CollectionOfRoutes(0, max_size);
 }
-// export class CollectionOfLatestRoutes extends Array<{
+// export class CollectionOfRoutes extends Array<{
 //     route: number[];
 //     length: number;
 // }> {
 //     get [Symbol.toStringTag]() {
-//         return "CollectionOfLatestRoutes";
+//         return "CollectionOfRoutes";
 //     }
 //     filter(
 //         predicate: (

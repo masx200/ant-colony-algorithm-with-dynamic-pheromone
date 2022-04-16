@@ -25,7 +25,7 @@ it("test-collection_of_optimal_routes", () => {
     expect(cl.length).toBe(10);
     expect(cl[0]).toEqual({ length: 10, route: [1, 2, 3, 10] });
     expect(cl.slice(-1)[0]).toEqual({ length: 9, route: [1, 2, 3, 4, 6, 9] });
-    expect(cl[Symbol.toStringTag]).toBe("CollectionOfOptimalRoutes");
+    expect(cl[Symbol.toStringTag]).toBe("CollectionOfRoutes");
     expect(cl.max_size).toBe(10);
 
     expect(Array.from(cl)).toEqual([
