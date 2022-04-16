@@ -409,10 +409,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     iterate_best_length,
                     greedy_length,
                 });
-                number_of_stagnation++;
-                if (number_of_stagnation > max_number_of_stagnation) {
+                if (number_of_stagnation >= max_number_of_stagnation) {
                     number_of_stagnation = 0;
                 }
+                number_of_stagnation++;
+
                 time_ms_of_one_iteration = 0;
                 lastrandom_selection_probability =
                     update_last_random_selection_probability({

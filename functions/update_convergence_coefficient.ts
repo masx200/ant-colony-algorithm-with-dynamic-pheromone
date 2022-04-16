@@ -15,7 +15,7 @@ export function update_convergence_coefficient({
     iterate_best_length: number;
     greedy_length: number;
 }): number {
-    if (number_of_stagnation > max_number_of_stagnation) {
+    if (number_of_stagnation >= max_number_of_stagnation) {
         return Math.max(
             convergence_coefficient_min,
             convergence_coefficient /
