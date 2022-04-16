@@ -14,7 +14,11 @@ export function update_convergence_coefficient({
     greedy_length: number;
 }): number {
     if (number_of_stagnation > max_number_of_stagnation) {
-        return Math.max(1, convergence_coefficient / 100);
+        return Math.max(
+            1,
+            convergence_coefficient /
+                Math.pow(1.25, max_number_of_stagnation + 1)
+        );
     }
     if (coefficient_of_diversity_increase > 0) {
         convergence_coefficient =
