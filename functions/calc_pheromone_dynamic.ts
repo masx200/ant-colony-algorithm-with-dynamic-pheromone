@@ -41,7 +41,7 @@ export function calc_pheromone_dynamic({
                 const b = Infinity_to_max_or_min(
                     Math.pow(
                         greedy_length / route_length,
-                        convergence_coefficient
+                        convergence_coefficient * convergence_coefficient
                     )
                 );
                 //b可能是Infinity
