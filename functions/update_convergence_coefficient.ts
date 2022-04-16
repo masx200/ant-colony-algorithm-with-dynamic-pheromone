@@ -17,7 +17,8 @@ export function update_convergence_coefficient({
         return Math.max(
             1,
             convergence_coefficient /
-                Math.pow(1.25, max_number_of_stagnation + 1)
+                Math.pow(1.25, max_number_of_stagnation) /
+                2
         );
     }
     if (coefficient_of_diversity_increase > 0) {
