@@ -299,12 +299,19 @@
         />
         <!-- 拆分表格 -->
         <hr />
-        <Data_table
-            :tableheads="global_best_routeHeads"
-            :tablebody="global_best_routeBody"
-        />
+        <details
+            class="width-100-percent"
+            :open="show_array_routes_of_best"
+            @toggle="show_array_routes_of_best = $event.target.open"
+        >
+            <summary>最优路径的数组展示</summary>
+            <Data_table
+                :tableheads="global_best_routeHeads"
+                :tablebody="global_best_routeBody"
+            />
 
-        <hr />
+            <hr />
+        </details>
         <Data_table
             :tableheads="TableHeadsOfHistoryOfBest"
             :tablebody="TableBodyOfHistoryOfBest"
