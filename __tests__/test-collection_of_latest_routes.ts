@@ -12,7 +12,7 @@ it("collection_of_latest_routes", () => {
     expect(cl[0]).toEqual({ length: 3, route: [1, 2, 3] });
     cl.add([3, 2, 1], 1);
 
-    expect(cl.length).toBe(1);
+    expect(cl.length).toBe(2);
     expect(cl[0]).toEqual({ length: 3, route: [1, 2, 3] });
 
     Array(20)
