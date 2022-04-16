@@ -26,7 +26,8 @@ import { EachRouteGenerator } from "./EachRouteGenerator";
 import { generateUniqueArrayOfCircularPath } from "./generateUniqueArrayOfCircularPath";
 import { PureDataOfFinishOneRoute } from "./PureDataOfFinishOneRoute";
 
-import { ReadOnlyPheromone, TSP_Runner } from "./TSP_Runner";
+import { TSP_Runner } from "./TSP_Runner";
+// import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 import { SharedOptions } from "./SharedOptions";
 
 import { create_collection_of_latest_routes } from "../collections/collection-of-latest-routes";
@@ -42,6 +43,7 @@ import { update_last_random_selection_probability } from "./update_last_random_s
 import { create_pheromone_cache } from "./create_pheromone_cache";
 import { sum } from "lodash-es";
 import { DataOfTotal } from "./DataOfTotal";
+import { PheromoneCache } from "./PheromoneCache";
 // import { reactive } from "@vue/reactivity";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
@@ -94,45 +96,57 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     let lastrandom_selection_probability = 0;
     let total_time_ms = 0;
-    let pheromone_cache = create_pheromone_cache(count_of_nodes);
-    function getPheromone(row: number, column: number): number {
-        if (
-            row < 0 ||
-            row > count_of_nodes - 1 ||
-            column < 0 ||
-            column > count_of_nodes - 1
-        ) {
-            throw Error("row,column,out of bounds:" + row + "," + column);
-        } else {
-            const cached = pheromone_cache.get(row, column);
-            if (0 === cached) {
-                const result = calc_pheromone_dynamic({
-                    latest_and_optimal_routes:
-                        latest_and_optimal_routes_rank_first_half,
-                    // PheromoneZero,
-                    row,
-                    column,
-                    greedy_length,
-                    convergence_coefficient,
-                });
-                // debugger;
-                // console.log(row, column, result);
-                pheromone_cache.set(row, column, result);
-                return result;
-            } else {
-                return cached;
-            }
-        }
-    }
-    function clear_pheromone_cache() {
-        pheromone_cache = create_pheromone_cache(count_of_nodes);
-    }
-    const pheromoneStore: ReadOnlyPheromone = {
-        row: count_of_nodes,
-        get: getPheromone,
-        column: count_of_nodes,
-    };
 
+    function clear_pheromone_cache() {
+        pheromoneStore.clear();
+    }
+    const pheromoneStore: PheromoneCache = new Proxy(
+        create_pheromone_cache(count_of_nodes),
+        {
+            get(target, key) {
+                if (key === "get") {
+                    const raw_get = Reflect.get(
+                        target,
+                        key
+                    ) as PheromoneCache["get"];
+                    function getPheromone(row: number, column: number): number {
+                        if (
+                            row < 0 ||
+                            row > count_of_nodes - 1 ||
+                            column < 0 ||
+                            column > count_of_nodes - 1
+                        ) {
+                            throw Error(
+                                "row,column,out of bounds:" + row + "," + column
+                            );
+                        } else {
+                            const cached = raw_get(row, column);
+                            if (0 === cached) {
+                                const result = calc_pheromone_dynamic({
+                                    latest_and_optimal_routes:
+                                        latest_and_optimal_routes_rank_first_half,
+                                    // PheromoneZero,
+                                    row,
+                                    column,
+                                    greedy_length,
+                                    convergence_coefficient,
+                                });
+                                // debugger;
+                                // console.log(row, column, result);
+                                target.set(row, column, result);
+                                return result;
+                            } else {
+                                return cached;
+                            }
+                        }
+                    }
+                    return getPheromone;
+                } else {
+                    return Reflect.get(target, key);
+                }
+            },
+        }
+    );
     const latest_and_optimal_routes_rank_first_half =
         create_latest_and_optimal_routes_rank_first_half(
             collection_of_latest_routes,

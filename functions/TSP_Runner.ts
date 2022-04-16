@@ -1,4 +1,3 @@
-import { MatrixSymmetry } from "@masx200/sparse-2d-matrix";
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 import { DataOfBestChange } from "./DataOfBestChange";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
@@ -6,12 +5,8 @@ import { DataOfFinishOneIteration } from "./DataOfFinishOneIteration";
 import { DataOfFinishOneRoute } from "./DataOfFinishOneRoute";
 import { DataOfTotal } from "./DataOfTotal";
 import { NodeCoordinates } from "./NodeCoordinates";
+import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 import { SharedOptions } from "./SharedOptions";
-
-export type ReadOnlyPheromone = Pick<
-    MatrixSymmetry<number>,
-    "row" | "column" | "get"
->;
 
 export type TSP_Runner = Required<TSPRunnerOptions> &
     SharedOptions & {

@@ -1,6 +1,6 @@
 import { TSPRunnerOptions } from "../src/TSPRunnerOptions";
 import { NodeCoordinates } from "./NodeCoordinates";
-import { ReadOnlyPheromone } from "./TSP_Runner";
+import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 
 export type SharedOptions = Required<TSPRunnerOptions> & {
     get_convergence_coefficient: () => number;

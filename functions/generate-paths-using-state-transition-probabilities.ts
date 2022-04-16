@@ -10,7 +10,7 @@ import { pickRandomOne } from "./pickRandomOne";
 import { SharedOptions } from "./SharedOptions";
 import { select_available_cities_from_optimal_and_latest } from "./select_available_cities_from_optimal_and_latest";
 import { get_distance_round } from "../src/set_distance_round";
-import { ReadOnlyPheromone } from "./TSP_Runner";
+import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 
 export function generate_paths_using_state_transition_probabilities(
     options: {
