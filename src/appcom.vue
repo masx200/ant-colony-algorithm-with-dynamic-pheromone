@@ -4,6 +4,7 @@
             :class="{ 'fixed-top-navbar': navbar_float }"
             :percentage="percentage"
             :indeterminate="indeterminate"
+            v-show="show_progress"
         />
         <h1>自适应+蚁群+k-opt+动态计算信息素-TSP-测试</h1>
         <hr />
