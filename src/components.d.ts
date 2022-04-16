@@ -8,6 +8,7 @@ declare module "@vue/runtime-core" {
         ElProgress: typeof import("element-plus/es")["ElProgress"];
         ElRadio: typeof import("element-plus/es")["ElRadio"];
         ElRadioGroup: typeof import("element-plus/es")["ElRadioGroup"];
+        ElSwitch: typeof import("element-plus/es")["ElSwitch"];
     }
 }
 
