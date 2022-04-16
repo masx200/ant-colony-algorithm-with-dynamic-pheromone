@@ -29,7 +29,7 @@ export function update_convergence_coefficient({
         convergence_coefficient *= 1.7;
         return convergence_coefficient;
     } else {
-        convergence_coefficient *= 1.3;
+        convergence_coefficient *= 1.25;
         return convergence_coefficient;
     }
 
