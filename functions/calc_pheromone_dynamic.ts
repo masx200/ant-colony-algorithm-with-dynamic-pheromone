@@ -48,7 +48,6 @@ export function calc_pheromone_dynamic({
                 const r = c * a * b;
                 return nan_to_zero(r);
             })
-        ) /
-            length_of_routes
+        ) / length_of_routes
     );
 }
