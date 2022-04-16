@@ -44,6 +44,7 @@ import { create_pheromone_cache } from "./create_pheromone_cache";
 import { sum } from "lodash-es";
 import { DataOfTotal } from "./DataOfTotal";
 import { PheromoneCache } from "./PheromoneCache";
+import { max_number_of_stagnation } from "./max_number_of_stagnation";
 // import { reactive } from "@vue/reactivity";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
@@ -73,6 +74,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
     let convergence_coefficient = 1;
+    let number_of_stagnation = 0;
     function get_convergence_coefficient() {
         return convergence_coefficient;
     }
@@ -168,6 +170,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             greedy_length = length;
         }
         if (length < global_best.length) {
+            number_of_stagnation = 0;
             global_best.length = length;
             global_best.route = generateUniqueArrayOfCircularPath(route);
             time_of_best_ms = total_time_ms;
@@ -400,11 +403,16 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     convergence_coefficient,
                 });
                 convergence_coefficient = update_convergence_coefficient({
+                    number_of_stagnation,
                     coefficient_of_diversity_increase,
                     convergence_coefficient,
                     iterate_best_length,
                     greedy_length,
                 });
+                number_of_stagnation++;
+                if (number_of_stagnation > max_number_of_stagnation) {
+                    number_of_stagnation = 0;
+                }
                 time_ms_of_one_iteration = 0;
                 lastrandom_selection_probability =
                     update_last_random_selection_probability({
@@ -412,6 +420,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         lastrandom_selection_probability,
                     });
                 routes_and_lengths_of_one_iteration.length = 0;
+
                 //如果相对信息熵小于1,则在最优路径集合中暂时移除全局最优路径
                 if (population_relative_information_entropy < 1) {
                     assignOwnKeys(

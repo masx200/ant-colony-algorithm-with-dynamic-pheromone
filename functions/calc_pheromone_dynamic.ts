@@ -2,8 +2,8 @@ import { sum } from "lodash-es";
 import { Infinity_to_max_or_min } from "./Infinity_to_max_or_min";
 import { is_segment_in_cycle_route } from "./is_segment_in_cycle_route";
 import { nan_to_zero } from "./nan_to_zero";
-const default_pheromone_zero = 0;
-const PheromoneZero = default_pheromone_zero;
+// const default_pheromone_zero = 0;
+// const PheromoneZero = default_pheromone_zero;
 export function calc_pheromone_dynamic({
     latest_and_optimal_routes,
     // PheromoneZero,
@@ -22,7 +22,7 @@ export function calc_pheromone_dynamic({
     const length_of_routes = latest_and_optimal_routes.length;
     //0*Infinity===NaN
     return (
-        PheromoneZero +
+        // PheromoneZero +
         sum(
             latest_and_optimal_routes.map(({ route, length: route_length }) => {
                 const a = Math.pow(
