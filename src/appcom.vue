@@ -29,126 +29,137 @@
             :disabled="disable_stop"
         />
         <hr />
-        <span>结果四舍五入</span>
-        <el-radio-group v-model="round_result" :disabled="disablemapswitching">
-            <el-radio :label="true">是</el-radio>
-            <el-radio :label="false">否</el-radio> </el-radio-group
-        ><br />
-        <hr />
+        <details
+            class="width-100-percent"
+            :open="show_configurations"
+            @toggle="show_configurations = $event.target.open"
+        >
+            <summary>蚁群的参数配置</summary>
+            <span>结果四舍五入</span>
+            <el-radio-group
+                v-model="round_result"
+                :disabled="disablemapswitching"
+            >
+                <el-radio :label="true">是</el-radio>
+                <el-radio :label="false">否</el-radio> </el-radio-group
+            ><br />
+            <hr />
 
-        <span>最优路径的集合最大大小</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="
-                input_options.max_size_of_collection_of_optimal_routes
-            "
-            :disabled="disablemapswitching"
-            :min="1"
-            :controls="false"
-        /><br />
-        <span>最新路径的集合最大大小</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="
-                input_options.max_size_of_collection_of_latest_routes
-            "
-            :disabled="disablemapswitching"
-            :min="1"
-            :controls="false"
-        /><br />
-        <span>状态转移规则的每步最多城市数</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="input_options.max_cities_of_state_transition"
-            :disabled="disablemapswitching"
-            :min="1"
-            :controls="false"
-        /><br />
-        <span>贪心算法的每步最多城市数</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="input_options.max_cities_of_greedy"
-            :disabled="disablemapswitching"
-            :min="1"
-            :controls="false"
-        /><br />
-        <span>查找交叉点的最大线段数量</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="input_options.max_segments_of_cross_point"
-            :disabled="disablemapswitching"
-            :min="1"
-            :controls="false"
-        /><br />
-        <span>贪心算法路径数量</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="max_routes_of_greedy"
-            :disabled="disablemapswitching"
-            :min="2"
-            :controls="false"
-        /><br /><span>每条的k-opt最大数量</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="input_options.max_results_of_k_opt"
-            :disabled="disablemapswitching"
-            :min="1"
-            :controls="false"
-        /><br />
-        <span>每条的k-exchange最大次数</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="input_options.max_results_of_k_exchange"
-            :disabled="disablemapswitching"
-            :min="1"
-            :controls="false"
-        /><br /><span>每条的2-opt最大次数</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="input_options.max_results_of_2_opt"
-            :disabled="disablemapswitching"
-            :min="1"
-            :controls="false"
-        /><br />
+            <span>最优路径的集合最大大小</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="
+                    input_options.max_size_of_collection_of_optimal_routes
+                "
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br />
+            <span>最新路径的集合最大大小</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="
+                    input_options.max_size_of_collection_of_latest_routes
+                "
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br />
+            <span>状态转移规则的每步最多城市数</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="input_options.max_cities_of_state_transition"
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br />
+            <span>贪心算法的每步最多城市数</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="input_options.max_cities_of_greedy"
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br />
+            <span>查找交叉点的最大线段数量</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="input_options.max_segments_of_cross_point"
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br />
+            <span>贪心算法路径数量</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="max_routes_of_greedy"
+                :disabled="disablemapswitching"
+                :min="2"
+                :controls="false"
+            /><br /><span>每条的k-opt最大数量</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="input_options.max_results_of_k_opt"
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br />
+            <span>每条的k-exchange最大次数</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="input_options.max_results_of_k_exchange"
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br /><span>每条的2-opt最大次数</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="input_options.max_results_of_2_opt"
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br />
 
-        <span>蚂蚁数量</span>
-        <el-input-number
-            step-strictly
-            :step="1"
-            v-model.number="count_of_ants_ref"
-            :disabled="disablemapswitching"
-            :min="2"
-            :controls="false"
-        /><br />
-        <span>信息素因子</span>
-        <el-input-number
-            :controls="false"
-            step-strictly
-            :step="0.001"
-            v-model.number="alpha"
-            :disabled="disablemapswitching"
-            :min="0.001"
-            :max="5"
-        /><br />
-        <span>启发式因子</span>
-        <el-input-number
-            :controls="false"
-            step-strictly
-            :step="0.001"
-            v-model.number="beta"
-            :disabled="disablemapswitching"
-            :min="0.001"
-            :max="10"
-        /><br />
+            <span>蚂蚁数量</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="count_of_ants_ref"
+                :disabled="disablemapswitching"
+                :min="2"
+                :controls="false"
+            /><br />
+            <span>信息素因子</span>
+            <el-input-number
+                :controls="false"
+                step-strictly
+                :step="0.001"
+                v-model.number="alpha"
+                :disabled="disablemapswitching"
+                :min="0.001"
+                :max="5"
+            /><br />
+            <span>启发式因子</span>
+            <el-input-number
+                :controls="false"
+                step-strictly
+                :step="0.001"
+                v-model.number="beta"
+                :disabled="disablemapswitching"
+                :min="0.001"
+                :max="10"
+            /><br />
+        </details>
+
         <hr />
         <span>按照终止条件</span>
         <el-radio-group
