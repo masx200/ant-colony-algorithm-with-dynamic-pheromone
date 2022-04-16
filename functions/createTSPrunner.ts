@@ -170,9 +170,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             greedy_length = length;
         }
         if (length < global_best.length) {
+            const formatted_route= generateUniqueArrayOfCircularPath(route);
             number_of_stagnation = 0;
             global_best.length = length;
-            global_best.route = generateUniqueArrayOfCircularPath(route);
+            global_best.route =formatted_route
             time_of_best_ms = total_time_ms;
             search_count_of_best = current_search_count + 1;
             emit_best_change({
@@ -181,7 +182,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 // current_iterations: get_number_of_iterations(),
                 // total_time_ms: total_time_ms,
                 time_of_best_ms,
-                global_best_route: route,
+                global_best_route: formatted_route,
                 global_best_length: length,
             });
         }
