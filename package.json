@@ -1,6 +1,7 @@
 {
-    "version": "5.0.4",
+    "version": "5.0.5",
     "resolutions": {
+        "@vue/reactivity": "3.2.33",
         "minimist": "1.2.6",
         "async": "3.2.2"
     },
@@ -36,8 +37,8 @@
         "@types/lodash-es": "^4.17.6",
         "@types/node": "^12.12.17",
         "@vitejs/plugin-vue": "^2.2.4",
-        "@vue/reactivity": "^3.2.32",
-        "@vue/runtime-core": "^3.2.32",
+        "@vue/reactivity": "^3.2.33",
+        "@vue/runtime-core": "^3.2.33",
         "babel-plugin-clean-code": "^0.0.3",
         "babel-plugin-import": "^1.13.3",
         "combinatorial-generators": "^1.0.1",
@@ -67,7 +68,7 @@
         "vite-plugin-checker": "^0.4.3",
         "vite-plugin-html": "^3.2.0",
         "vite-plugin-pwa": "^0.11.13",
-        "vue": "^3.2.32",
+        "vue": "^3.2.33",
         "vue-tsc": "^0.34.4"
     },
     "dependencies": {

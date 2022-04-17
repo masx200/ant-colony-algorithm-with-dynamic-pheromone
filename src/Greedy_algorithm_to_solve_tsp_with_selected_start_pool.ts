@@ -10,7 +10,7 @@ export const Greedy_algorithm_to_solve_tsp_with_selected_start_pool =
             w.terminate();
         },
         maxThreads: navigator.hardwareConcurrency,
-        minThreads:1,
+        minThreads: 1,
         create: () => {
             return create_Worker_comlink<GreedyWorkerAPI>(() => {
                 const w =
