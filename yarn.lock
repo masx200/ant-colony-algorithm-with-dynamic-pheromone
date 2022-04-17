@@ -1732,6 +1732,7 @@ __metadata:
     "@masx200/mini-cli-args-parser": ^1.0.4
     "@masx200/sparse-2d-matrix": ^1.2.2
     "@masx200/tsp-lib-test-data": ^1.1.1
+    "@masx200/universal-thread-pool": ^1.0.5
     "@rollup/plugin-babel": ^5.3.1
     "@types/find": ^0.2.1
     "@types/fs-extra": ^8.0.1
@@ -1804,6 +1805,15 @@ __metadata:
   version: 1.1.1
   resolution: "@masx200/tsp-lib-test-data@npm:1.1.1"
   checksum: 363793ceba5d6d332d8db2c2775dcefb19f54681fdd239cdd8936118122e8dea96df0d45f8a78f5c7b0bda7af77bdc8f6cb651b2107165d18b6c409ba1494f8e
+  languageName: node
+  linkType: hard
+
+"@masx200/universal-thread-pool@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@masx200/universal-thread-pool@npm:1.0.5"
+  dependencies:
+    "@vue/reactivity": 3.2.33
+  checksum: 474d29dddb09caa297f5a61486898d349cfacfa93f2295beb823e335713f08d0af0f954dadd2678a9cb72e0aacf3c2c82a42225eadb1bf5284a7e8aec7a8783b
   languageName: node
   linkType: hard
 
@@ -2435,6 +2445,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/reactivity@npm:3.2.33":
+  version: 3.2.33
+  resolution: "@vue/reactivity@npm:3.2.33"
+  dependencies:
+    "@vue/shared": 3.2.33
+  checksum: fe801ea75fabfe95f414c32a79fee275917ef458b2b2f0f05834ae9bd4f65fefc9d25b62be55d680674ec4ef301b75ec45501f920efda780e70a214b21dfa02c
+  languageName: node
+  linkType: hard
+
 "@vue/reactivity@npm:^3.2.31":
   version: 3.2.31
   resolution: "@vue/reactivity@npm:3.2.31"
@@ -2488,6 +2507,13 @@ __metadata:
   version: 3.2.32
   resolution: "@vue/shared@npm:3.2.32"
   checksum: d268632cc4330ae352fce31504e7d506a08f76f88a74115d782e440e0d90f43f46abceebdd1b7b8971ffc0ea229a0b25eeeb51417481632d564031933e5c58e6
+  languageName: node
+  linkType: hard
+
+"@vue/shared@npm:3.2.33":
+  version: 3.2.33
+  resolution: "@vue/shared@npm:3.2.33"
+  checksum: 0083c9555b44f1c230079fac9270764e51af740f851101ae8972758fe6acf52184f76b4ab0c67a3840096d8f5a0988b99cae3046826b0f15af2431db6127ae48
   languageName: node
   linkType: hard
 

@@ -69,5 +69,8 @@
         "vite-plugin-pwa": "^0.11.13",
         "vue": "^3.2.32",
         "vue-tsc": "^0.34.4"
+    },
+    "dependencies": {
+        "@masx200/universal-thread-pool": "^1.0.5"
     }
 }
