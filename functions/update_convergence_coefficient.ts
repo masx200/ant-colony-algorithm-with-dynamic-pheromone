@@ -34,7 +34,7 @@ export function update_convergence_coefficient({
 
         return convergence_coefficient;
     } else if (iterate_best_length > greedy_length) {
-        convergence_coefficient *= convergence_coefficient_grow_speed ** 2;
+        convergence_coefficient *= convergence_coefficient_grow_speed ** 3;
         return Math.min(convergence_coefficient_max, convergence_coefficient);
     } else {
         convergence_coefficient *= convergence_coefficient_grow_speed;
