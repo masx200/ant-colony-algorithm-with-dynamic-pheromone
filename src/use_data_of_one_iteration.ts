@@ -1,25 +1,7 @@
 import { reactive } from "vue";
 import { DataOfFinishOneIteration } from "../functions/DataOfFinishOneIteration";
 
-export function use_data_of_one_iteration(): {
-    onreceivedataofoneIteration: (data: DataOfFinishOneIteration) => void;
-    clearDataOfOneIteration: () => void;
-    dataofoneiteration: DataOfFinishOneIteration[];
-    oneiterationtablebody: [
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number
-    ][];
-
-    oneiterationtableheads: string[];
-} {
+export function use_data_of_one_iteration() {
     const oneiterationtableheads = [
         "序号",
         "信息熵",
@@ -34,23 +16,27 @@ export function use_data_of_one_iteration(): {
         "收敛性系数",
     ];
     const onreceivedataofoneIteration = function onreceivedataofoneIteration(
-        data: DataOfFinishOneIteration
+        datas: DataOfFinishOneIteration[]
     ) {
-        dataofoneiteration.push(data);
-        oneiterationtablebody.push([
-            data.current_iterations,
-            data.population_relative_information_entropy,
-            data.random_selection_probability,
+        dataofoneiteration.length = 0;
+        oneiterationtablebody.length = 0;
+        datas.forEach((data) => {
+            dataofoneiteration.push(data);
+            oneiterationtablebody.push([
+                data.current_iterations,
+                data.population_relative_information_entropy,
+                data.random_selection_probability,
 
-            data.time_ms_of_one_iteration / 1000,
-            data.iterate_best_length,
-            data.average_length_of_iteration,
-            data.worst_length_of_iteration,
-            data.global_best_length,
+                data.time_ms_of_one_iteration / 1000,
+                data.iterate_best_length,
+                data.average_length_of_iteration,
+                data.worst_length_of_iteration,
+                data.global_best_length,
 
-            data.optimal_length_of_iteration,
-            data.convergence_coefficient,
-        ]);
+                data.optimal_length_of_iteration,
+                data.convergence_coefficient,
+            ]);
+        });
     };
     const clearDataOfOneIteration = function clearDataOfOneIteration(): void {
         dataofoneiteration.length = 0;

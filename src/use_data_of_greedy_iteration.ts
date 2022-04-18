@@ -19,6 +19,7 @@ export function use_data_of_greedy_iteration(): {
     const onreceivedata = function onreceivedataofoneIteration(
         data: DataOfFinishGreedyIteration
     ) {
+        dataraw.length = 0;
         dataraw.push(data);
     };
     const clearData = function clearData(): void {

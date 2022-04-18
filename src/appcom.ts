@@ -329,8 +329,8 @@ export default defineComponent({
 
             on_receive_Data_Of_total(data);
             on_receive_Data_Of_Global_Best(data);
-            onreceivedataofoneIteration(data.data_of_iterations.slice(-1)[0]);
-            onreceivedataofoneroute(data.data_of_routes.slice(-1)[0]);
+            onreceivedataofoneIteration(data.data_of_iterations);
+            onreceivedataofoneroute(data.data_of_routes);
         }
         const TSP_terminate = () => {
             data_of_greedy_iteration.clearData();
