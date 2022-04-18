@@ -1,6 +1,7 @@
-import { sum } from "lodash";
+import { sum, uniq } from "lodash";
 import { assert_true } from "../test/assert_true";
-import { ispathsequalinbothdirectionswithcycle } from "./ispathsequalinbothdirectionswithcycle";
+import { getUniqueStringOfCircularRoute } from "./getUniqueStringOfCircularRoute";
+// import { ispathsequalinbothdirectionswithcycle } from "./ispathsequalinbothdirectionswithcycle";
 
 export function calc_population_relative_information_entropy(
     routes: Array<number[]>
@@ -16,7 +17,11 @@ export function calc_population_relative_information_entropy(
     if (!routes.every((route) => route.length === nodesnumber)) {
         throw new Error("incorrect routes");
     }
-    const notrepeatroutes = routes.reduce((previous: number[][], route) => {
+    const unique_strings = routes.map((r) => getUniqueStringOfCircularRoute(r));
+    const notrepeatroutes =
+        uniq(
+            unique_strings
+        ); /*  routes.reduce((previous: number[][], route) => {
         if (previous.length) {
             if (
                 previous.some((notrepeatroute) =>
@@ -30,12 +35,15 @@ export function calc_population_relative_information_entropy(
         } else {
             return [route];
         }
-    }, []);
+    }, []); */
     const fitnessvalues = notrepeatroutes.map((route) =>
-        routes.reduce(
+        unique_strings.reduce(
             (previous, current) =>
                 previous +
-                Number(ispathsequalinbothdirectionswithcycle(current, route)),
+                Number(
+                    route === current
+                    // ispathsequalinbothdirectionswithcycle(current, route)
+                ),
             0
         )
     );
