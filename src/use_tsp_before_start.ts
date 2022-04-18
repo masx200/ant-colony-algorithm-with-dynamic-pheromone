@@ -6,15 +6,15 @@ export function use_tsp_before_start(
 ): Fun_TSP_Before_Start {
     const TSP_before_Start: Fun_TSP_Before_Start =
         async function TSP_before_Start({
-            onglobal_best_routeChange,
-            onLatestRouteChange,
+            // onglobal_best_routeChange,
+            // onLatestRouteChange,
             node_coordinates,
             count_of_ants,
             ...rest
         }) {
             const runner = await initializeTSP_runner({
-                onglobal_best_routeChange,
-                onLatestRouteChange,
+                // onglobal_best_routeChange,
+                // onLatestRouteChange,
                 node_coordinates,
                 count_of_ants,
                 ...rest,

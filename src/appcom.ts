@@ -55,6 +55,7 @@ import { get_options_route_number_and_best_length_chart } from "./get_options_ro
 import { get_options_iterations_and_information_entropy_chart } from "./get_options_iterations_and_information_entropy_chart";
 import { get_options_route_number_and_current_length_chart } from "./get_options_route_number_and_current_length_chart";
 import { ECOption } from "../functions/echarts-line";
+import { TSP_Output_Data } from "../functions/TSP_Output_Data";
 export default defineComponent({
     components: {
         Data_table: Data_table,
@@ -62,6 +63,7 @@ export default defineComponent({
         LineChart,
     },
     setup() {
+        const selected_node_coordinates = ref<NodeCoordinates>();
         const show_progress = ref(true);
         const input_options = reactive(DefaultOptions);
 
@@ -139,11 +141,12 @@ export default defineComponent({
             TableBody: TableBodyOfHistoryOfBest,
         } = use_history_of_best(readonly(data_of_best));
 
-        const initializeTSP_runner = use_initialize_tsp_runner({
-            on_receive_Data_Of_Global_Best,
-            onreceivedataofoneroute,
-            onreceivedataofoneIteration,
-        });
+        const initializeTSP_runner = use_initialize_tsp_runner();
+        //     {
+        //     on_receive_Data_Of_Global_Best,
+        //     onreceivedataofoneroute,
+        //     onreceivedataofoneIteration,
+        // }
         const TSP_before_Start = use_tsp_before_start(initializeTSP_runner);
 
         const is_running = ref(false);
@@ -164,6 +167,7 @@ export default defineComponent({
         const options_of_best_path_length_chart: Ref<ECBasicOption> = ref({});
         const submit = async () => {
             const options = await generate_greedy_preview_echarts_options({
+                selected_node_coordinates,
                 selecteleref,
             });
             options_of_best_route_chart.value = options;
@@ -193,9 +197,13 @@ export default defineComponent({
             await submit_select_node_coordinates();
         });
         const onLatestRouteChange = (
-            route: number[],
-            node_coordinates: NodeCoordinates
+            route: number[]
+            // node_coordinates: NodeCoordinates
         ) => {
+            const node_coordinates = selected_node_coordinates.value;
+            if (!node_coordinates) {
+                return;
+            }
             // const latestchart = chart_store_latest.value;
             // if (latestchart) {
             //     draw_latest_route_debounced(
@@ -214,9 +222,13 @@ export default defineComponent({
         };
 
         const onglobal_best_routeChange = (
-            route: number[],
-            node_coordinates: NodeCoordinates
+            route: number[]
+            // node_coordinates: NodeCoordinates
         ) => {
+            const node_coordinates = selected_node_coordinates.value;
+            if (!node_coordinates) {
+                return;
+            }
             // console.log('// onglobal_best_routeChange',route)
             // assert_true(route.length > 0);
             // assert_true(route.length === node_coordinates.length);
@@ -295,6 +307,7 @@ export default defineComponent({
             TSP_RunnerRef.value ||= await create_runner();
             const runner = TSP_RunnerRef.value;
             return run_tsp_by_search_rounds({
+                on_update_output_data,
                 runner: runner.remote,
 
                 onprogress,
@@ -309,6 +322,16 @@ export default defineComponent({
         const greedy_iteration_table_body = data_of_greedy_iteration.tablebody;
         const on_receive_data_of_greedy =
             data_of_greedy_iteration.onreceivedata;
+        function on_update_output_data(data: TSP_Output_Data) {
+            on_receive_data_of_greedy(data.data_of_greedy[0]);
+            onglobal_best_routeChange(data.global_best_route);
+            onLatestRouteChange(data.latest_route);
+
+            on_receive_Data_Of_total(data);
+            on_receive_Data_Of_Global_Best(data);
+            onreceivedataofoneIteration(data.data_of_iterations.slice(-1)[0]);
+            onreceivedataofoneroute(data.data_of_routes.slice(-1)[0]);
+        }
         const TSP_terminate = () => {
             data_of_greedy_iteration.clearData();
             clearDataOfHistoryOfBest();
@@ -374,21 +397,21 @@ export default defineComponent({
                     alpha_zero: alpha_value,
                     beta_zero: beta_value,
 
-                    onglobal_best_routeChange,
+                    // onglobal_best_routeChange,
                     node_coordinates: await node_coordinates(),
                     count_of_ants,
-                    onLatestRouteChange,
+                    // onLatestRouteChange,
                 });
-                await runner.remote.on_finish_one_route(
-                    finish_one_route_listener
-                );
-                await runner.remote.on_finish_one_iteration(
-                    finish_one_iteration_listener
-                );
-                await runner.remote.on_finish_greedy_iteration(
-                    on_receive_data_of_greedy
-                );
-                await runner.remote.on_total_change(on_receive_Data_Of_total);
+                // await runner.remote.on_finish_one_route(
+                //     finish_one_route_listener
+                // );
+                // await runner.remote.on_finish_one_iteration(
+                //     finish_one_iteration_listener
+                // );
+                // await runner.remote.on_finish_greedy_iteration(
+                //     on_receive_data_of_greedy
+                // );
+                // await runner.remote.on_total_change(on_receive_Data_Of_total);
                 Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
                 return runner;
             } else {
@@ -400,6 +423,7 @@ export default defineComponent({
             TSP_RunnerRef.value ||= await create_runner();
             const runner = TSP_RunnerRef.value;
             return run_tsp_by_search_time({
+                on_update_output_data,
                 runner: runner.remote,
 
                 search_time_seconds,

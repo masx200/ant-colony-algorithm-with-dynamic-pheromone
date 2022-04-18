@@ -1,14 +1,17 @@
 import { Ref } from "vue";
+import { TSP_Output_Data } from "../functions/TSP_Output_Data";
 import { assert_number } from "../test/assert_number";
 import { tsp_runner_run_async } from "./tsp_runner_run_async";
 
 export async function run_tsp_by_search_time({
+    on_update_output_data,
     runner,
     is_running,
     search_time_seconds,
 
     onprogress,
 }: {
+    on_update_output_data(data: TSP_Output_Data): void;
     runner: Parameters<typeof tsp_runner_run_async>[0]["runner"];
 
     search_time_seconds: Ref<number>;
@@ -22,6 +25,7 @@ export async function run_tsp_by_search_time({
         assert_number(search_time_ms);
         is_running.value = true;
         await tsp_runner_run_async({
+            on_update_output_data,
             time_of_search_ms: search_time_ms,
             runner,
 

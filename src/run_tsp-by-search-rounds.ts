@@ -1,4 +1,5 @@
 import { Ref } from "vue";
+import { TSP_Output_Data } from "../functions/TSP_Output_Data";
 import { assert_number } from "../test/assert_number";
 import {
     default_count_of_ants,
@@ -8,16 +9,14 @@ import { tsp_runner_run_async } from "./tsp_runner_run_async";
 
 export async function run_tsp_by_search_rounds({
     runner,
-
+    on_update_output_data,
     onprogress,
     searchrounds,
     count_of_ants_ref,
     is_running,
 }: {
-    runner: {
-        runIterations: (iterations: number) => Promise<void>;
-        runOneIteration: () => Promise<void>;
-    };
+    on_update_output_data(data: TSP_Output_Data): void;
+    runner: Parameters<typeof tsp_runner_run_async>[0]["runner"];
 
     onprogress: (percentage: number) => void;
     searchrounds: Ref<number>;
@@ -32,6 +31,7 @@ export async function run_tsp_by_search_rounds({
         assert_number(iterations_of_search);
         is_running.value = true;
         await tsp_runner_run_async({
+            on_update_output_data,
             runner: runner,
             iterations_of_search,
             onprogress,

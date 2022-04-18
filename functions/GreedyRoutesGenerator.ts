@@ -73,7 +73,7 @@ export async function GreedyRoutesGenerator(
 
         emit_finish_one_route({
             time_ms_of_one_route: time_ms,
-            route,
+            // route,
             length,
         });
     }
