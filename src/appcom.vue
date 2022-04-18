@@ -231,7 +231,7 @@
             <!-- 最近一条路径的图 -->
         </div>
         <hr />
-        <details
+        <!-- <details
             class="width-100-percent"
             :open="show_routes_of_latest"
             @toggle="show_routes_of_latest = $event.target.open"
@@ -244,7 +244,7 @@
             ></LineChart>
         </details>
 
-        <hr />
+        <hr /> -->
         <details
             class="width-100-percent"
             :open="show_chart_of_latest"

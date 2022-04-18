@@ -54,7 +54,7 @@ import { get_options_route_of_node_coordinates } from "./get_options_route_of_no
 import { get_options_route_number_and_best_length_chart } from "./get_options_route_number_and_best_length_chart";
 import { get_options_iterations_and_information_entropy_chart } from "./get_options_iterations_and_information_entropy_chart";
 import { get_options_route_number_and_current_length_chart } from "./get_options_route_number_and_current_length_chart";
-import { ECOption } from "../functions/echarts-line";
+// import { ECOption } from "../functions/echarts-line";
 import { TSP_Output_Data } from "../functions/TSP_Output_Data";
 export default defineComponent({
     components: {
@@ -76,7 +76,7 @@ export default defineComponent({
         const show_chart_of_best = ref(false);
         const show_summary_of_routes = ref(true);
         const show_routes_of_best = ref(true);
-        const show_routes_of_latest = ref(false);
+        // const show_routes_of_latest = ref(false);
         const show_chart_of_latest = ref(false);
         const show_chart_of_entropy = ref(false);
         const show_summary_of_iterations = ref(true);
@@ -86,7 +86,7 @@ export default defineComponent({
             show_summary_of_iterations,
             show_chart_of_entropy,
             show_chart_of_latest,
-            show_routes_of_latest,
+            // show_routes_of_latest,
             show_summary_of_routes,
             show_routes_of_best,
             show_chart_of_best,
@@ -157,8 +157,8 @@ export default defineComponent({
         const selecteleref = ref<HTMLSelectElement>();
 
         const options_of_best_route_chart: Ref<ECBasicOption> = ref({});
-        const options_of_latest_route_chart: Ref<ECBasicOption & ECOption> =
-            ref({});
+        // const options_of_latest_route_chart: Ref<ECBasicOption & ECOption> =
+        //     ref({});
         const options_of_iterations_and_information_entropy_chart: Ref<ECBasicOption> =
             ref({});
         const options_of_current_path_length_chart: Ref<ECBasicOption> = ref(
@@ -171,7 +171,7 @@ export default defineComponent({
                 selecteleref,
             });
             options_of_best_route_chart.value = options;
-            options_of_latest_route_chart.value = options;
+            // options_of_latest_route_chart.value = options;
             // assignOwnKeys(options_of_best_route_chart, options);
             // assignOwnKeys(options_of_latest_route_chart, options);
         };
@@ -196,30 +196,30 @@ export default defineComponent({
             finish_one_route_listener();
             await submit_select_node_coordinates();
         });
-        const onLatestRouteChange = (
-            route: number[]
-            // node_coordinates: NodeCoordinates
-        ) => {
-            const node_coordinates = selected_node_coordinates.value;
-            if (!node_coordinates) {
-                return;
-            }
-            // const latestchart = chart_store_latest.value;
-            // if (latestchart) {
-            //     draw_latest_route_debounced(
-            //         route,
-            //         node_coordinates,
-            //         latestchart
-            //     );
-            // }
-            const options = get_options_route_of_node_coordinates({
-                route,
-                node_coordinates,
-            });
-            options_of_latest_route_chart.value = options;
-            // assignOwnKeys(options_of_latest_route_chart, options);
-            // assignOwnKeys(options_of_latest_route_chart, options);
-        };
+        // const onLatestRouteChange = (
+        //     route: number[]
+        //     // node_coordinates: NodeCoordinates
+        // ) => {
+        //     const node_coordinates = selected_node_coordinates.value;
+        //     if (!node_coordinates) {
+        //         return;
+        //     }
+        //     // const latestchart = chart_store_latest.value;
+        //     // if (latestchart) {
+        //     //     draw_latest_route_debounced(
+        //     //         route,
+        //     //         node_coordinates,
+        //     //         latestchart
+        //     //     );
+        //     // }
+        //     const options = get_options_route_of_node_coordinates({
+        //         route,
+        //         node_coordinates,
+        //     });
+        //     // options_of_latest_route_chart.value = options;
+        //     // assignOwnKeys(options_of_latest_route_chart, options);
+        //     // assignOwnKeys(options_of_latest_route_chart, options);
+        // };
 
         const onglobal_best_routeChange = (
             route: number[]
@@ -325,7 +325,7 @@ export default defineComponent({
         function on_update_output_data(data: TSP_Output_Data) {
             on_receive_data_of_greedy(data.data_of_greedy[0]);
             onglobal_best_routeChange(data.global_best_route);
-            onLatestRouteChange(data.latest_route);
+            // onLatestRouteChange(data.latest_route);
 
             on_receive_Data_Of_total(data);
             on_receive_Data_Of_Global_Best(data);
@@ -450,7 +450,7 @@ export default defineComponent({
             show_chart_of_latest,
             show_chart_of_entropy,
             round_result,
-            options_of_latest_route_chart,
+            // options_of_latest_route_chart,
             // show_every_route: show_every_route,
             greedy_iteration_table_heads,
             greedy_iteration_table_body,
@@ -459,7 +459,7 @@ export default defineComponent({
             alpha,
             beta,
             can_run,
-            show_routes_of_latest,
+            // show_routes_of_latest,
             show_routes_of_best,
             show_summary_of_routes,
             options_of_best_route_chart,
