@@ -16,7 +16,7 @@ import { assert_true } from "../test/assert_true";
 
 import { createEventPair } from "./createEventPair";
 
-import { DataOfBestChange } from "./DataOfBestChange";
+// import { DataOfBestChange } from "./DataOfBestChange";
 
 import { DataOfFinishOneIteration } from "./DataOfFinishOneIteration";
 import { DataOfFinishOneRoute } from "./DataOfFinishOneRoute";
@@ -42,7 +42,7 @@ import { update_convergence_coefficient } from "./update_convergence_coefficient
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
 import { create_pheromone_cache } from "./create_pheromone_cache";
 import { sum } from "lodash-es";
-import { DataOfTotal } from "./DataOfTotal";
+// import { DataOfTotal } from "./DataOfTotal";
 import { PheromoneCache } from "./PheromoneCache";
 import { max_number_of_stagnation } from "./max_number_of_stagnation";
 import { TSP_Output_Data } from "./TSP_Output_Data";
@@ -79,17 +79,17 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const data_of_routes: DataOfFinishOneRoute[] = [];
     const data_of_iterations: DataOfFinishOneIteration[] = [];
     const data_of_greedy: DataOfFinishGreedyIteration[] = [];
-    const { on: on_best_change, emit: emit_best_change } =
-        createEventPair<DataOfBestChange>(emitter);
+    // const { on: on_best_change, emit: emit_best_change } =
+    //     createEventPair<DataOfBestChange>(emitter);
 
-    const { on: on_total_change, emit: emit_total_change } =
-        createEventPair<DataOfTotal>(emitter);
-    on_best_change((data) => {
-        Object.assign(output_data, data);
-    });
-    on_total_change((data) => {
-        Object.assign(output_data, data);
-    });
+    // const { on: on_total_change, emit: emit_total_change } =
+    //     createEventPair<DataOfTotal>(emitter);
+    // on_best_change((data) => {
+    //     Object.assign(output_data, data);
+    // });
+    // on_total_change((data) => {
+    //     Object.assign(output_data, data);
+    // });
     // const data_of_best: Data_Of_best[] = [];
     const output_data: TSP_Output_Data = {
         // data_of_best,
@@ -243,15 +243,15 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             global_best.route = formatted_route;
             time_of_best_ms = total_time_ms;
             search_count_of_best = current_search_count + 1;
-            emit_best_change({
-                search_count_of_best: search_count_of_best,
-                // current_search_count,
-                // current_iterations: get_number_of_iterations(),
-                // total_time_ms: total_time_ms,
-                time_of_best_ms,
-                global_best_route: formatted_route,
-                global_best_length: length,
-            });
+            // emit_best_change({
+            //     search_count_of_best: search_count_of_best,
+            //     // current_search_count,
+            //     // current_iterations: get_number_of_iterations(),
+            //     // total_time_ms: total_time_ms,
+            //     time_of_best_ms,
+            //     global_best_route: formatted_route,
+            //     global_best_length: length,
+            // });
         }
     }
     const global_best: {
@@ -515,11 +515,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             collection_of_latest_routes.add(route, length);
         }
 
-        emit_total_change({
-            total_time_ms,
-            current_search_count,
-            current_iterations: get_number_of_iterations(),
-        });
+        // emit_total_change({
+        //     total_time_ms,
+        //     current_search_count,
+        //     current_iterations: get_number_of_iterations(),
+        // });
     }
 
     function get_search_count_of_best() {
