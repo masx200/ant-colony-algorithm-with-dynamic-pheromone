@@ -1,5 +1,5 @@
 {
-    "version": "5.0.5",
+    "version": "5.0.6",
     "resolutions": {
         "@vue/reactivity": "3.2.33",
         "minimist": "1.2.6",

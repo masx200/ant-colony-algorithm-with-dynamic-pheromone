@@ -5,10 +5,16 @@ export function use_data_of_one_route() {
     const onreceivedataofoneroute = function onreceivedataofoneroute(
         datas: DataOfFinishOneRoute[]
     ): void {
-        dataofoneroute.length = 0;
-        datas.forEach((data) => {
-            dataofoneroute.push(data);
-        });
+        if (datas.length > dataofoneroute.length) {
+            for (let i = dataofoneroute.length; i < datas.length; i++) {
+                const data = datas[i];
+                dataofoneroute.push(data);
+            }
+        }
+        // dataofoneroute.length = 0;
+        // datas.forEach((data) => {
+        //     dataofoneroute.push(data);
+        // });
     };
 
     const clearDataOfOneRoute = function clearDataOfOneRoute() {

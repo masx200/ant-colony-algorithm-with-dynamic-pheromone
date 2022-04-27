@@ -320,11 +320,18 @@
 
             <hr />
         </details>
-        <Data_table
-            :tableheads="TableHeadsOfHistoryOfBest"
-            :tablebody="TableBodyOfHistoryOfBest"
-        />
-        <hr />
+        <details
+            class="width-100-percent"
+            :open="show_history_routes_of_best"
+            @toggle="show_history_routes_of_best = $event.target.open"
+        >
+            <summary>最优路径的变化历史</summary>
+            <Data_table
+                :tableheads="TableHeadsOfHistoryOfBest"
+                :tablebody="TableBodyOfHistoryOfBest"
+            />
+            <hr />
+        </details>
         <!-- <details class="width-100-percent" :open="true">
             <summary>贪心路径的统计</summary> -->
         <Data_table

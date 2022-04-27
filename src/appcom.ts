@@ -72,6 +72,7 @@ export default defineComponent({
             set_distance_round(round);
         });
         const show_configurations = ref(true);
+        const show_history_routes_of_best = ref(true);
         const show_array_routes_of_best = ref(true);
         const show_chart_of_best = ref(false);
         const show_summary_of_routes = ref(true);
@@ -81,6 +82,7 @@ export default defineComponent({
         const show_chart_of_entropy = ref(false);
         const show_summary_of_iterations = ref(true);
         const details_shows_should_hide = [
+            show_history_routes_of_best,
             show_array_routes_of_best,
             show_configurations,
             show_summary_of_iterations,
@@ -439,6 +441,7 @@ export default defineComponent({
         const beta = ref(default_beta);
         const max_routes_of_greedy = ref(DefaultOptions.max_routes_of_greedy);
         return {
+            show_history_routes_of_best,
             show_progress,
             show_array_routes_of_best,
             show_configurations,
