@@ -74,4 +74,5 @@ export async function tsp_runner_run_async({
         }
         await sleep_requestAnimationFrame_async_or_settimeout();
     }
+    on_update_output_data(await runner.get_output_data());
 }
