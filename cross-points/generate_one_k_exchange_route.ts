@@ -15,7 +15,7 @@ export function generate_one_k_exchange_route({
     const index_range = IntegerRange(0, route.length - 1);
 
     const selected = ArrayShuffle(index_range).slice(0, k);
-    assert_true(k === selected.length)
+    assert_true(k === selected.length);
     const changes = ArrayShuffle(selected);
     const selected_to_changes = new Map(
         selected.map((a, i) => [a, changes[i]])
