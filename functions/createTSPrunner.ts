@@ -50,6 +50,7 @@ import { TSP_Output_Data } from "./TSP_Output_Data";
 // import { reactive } from "@vue/reactivity";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
+    let greedy_length: number = Infinity;
     const emitter = EventEmitterTargetClass({ sync: true });
     const {
         on: on_finish_greedy_iteration,
@@ -271,7 +272,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let time_of_best_ms = 0;
     let search_count_of_best = 0;
     // let global_best_length: number = Infinity;
-    let greedy_length: number = Infinity;
 
     const get_total_time_ms = () => {
         return total_time_ms;
@@ -388,7 +388,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         max_results_of_k_opt,
                         get_best_length,
                         get_best_route,
-
+                        greedy_length,
                         // set_best_length,
                         // set_best_route,
                     })
