@@ -23,7 +23,7 @@ export function random_k_exchange_limited({
     for (let count = 0; count <= max_results_of_k_exchange; count++) {
         const index_range = [...route.keys()]
             .map((a) => a + 1)
-            .filter((k) => k >= 2);
+            .filter((k) => k >= 2 && k <= node_coordinates.length / 2);
         const k = pickRandomOne(
             index_range,
             index_range.map((a) => 1 / a)
