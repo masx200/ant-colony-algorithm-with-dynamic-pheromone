@@ -166,9 +166,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     let lastrandom_selection_probability = 0;
     let total_time_ms = 0;
-
+    let pheromone_exceeds_maximum_range = false;
     function clear_pheromone_cache() {
         pheromoneStore.clear();
+        pheromone_exceeds_maximum_range = false;
     }
     const pheromoneStore: PheromoneCache = new Proxy(
         create_pheromone_cache(count_of_nodes),
@@ -203,6 +204,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                                 });
                                 // debugger;
                                 // console.log(row, column, result);
+                                if (result > Number.MAX_VALUE) {
+                                    /* 信息素可能太大.如果有信息素超过浮点数最大范围,则在构建一条路径时,直接返回全局最优路径. */
+                                    pheromone_exceeds_maximum_range = true;
+                                }
                                 target.set(row, column, result);
                                 return result;
                             } else {
@@ -389,6 +394,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         get_best_length,
                         get_best_route,
                         greedy_length,
+                        pheromone_exceeds_maximum_range: () =>
+                            pheromone_exceeds_maximum_range,
                         // set_best_length,
                         // set_best_route,
                     })

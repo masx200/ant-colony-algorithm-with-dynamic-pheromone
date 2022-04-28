@@ -12,6 +12,7 @@ export async function EachRouteGenerator(
 }> {
     const starttime_of_one_route = Number(new Date());
     const {
+        pheromone_exceeds_maximum_range,
         // greedy_length,
         set_global_best,
         // distance_round,
@@ -31,6 +32,14 @@ export async function EachRouteGenerator(
         // set_best_route,
         // max_segments_of_cross_point,
     } = options;
+    if (pheromone_exceeds_maximum_range()) {
+        /* 信息素可能太大.如果有信息素超过浮点数最大范围,则在构建一条路径时,直接返回全局最优路径. */
+        return {
+            time_ms: 0,
+            length: get_best_length(),
+            route: get_best_route(),
+        };
+    }
     const {
         route: oldRoute,
         length: oldLength,
