@@ -1,4 +1,4 @@
-import { sum } from "lodash";
+import { sum, uniqBy } from "lodash";
 import { assert_true } from "../test/assert_true";
 import { calc_population_relative_information_entropy } from "./calc_population-relative-information-entropy";
 import { get_best_route_Of_Series_routes_and_lengths } from "./get_best_route_Of_Series_routes_and_lengths";
@@ -67,10 +67,13 @@ export async function EachIterationHandler(
     const best_half_routes = Array.from(routes_and_lengths)
         .sort((a, b) => a.length - b.length)
         .slice(0, routes_and_lengths.length / 2);
-    const need_to_optimization_routes_and_lengths = [
-        { route: get_best_route(), length: get_best_length() },
-        ...best_half_routes,
-    ];
+    const need_to_optimization_routes_and_lengths = uniqBy(
+        [
+            { route: get_best_route(), length: get_best_length() },
+            ...best_half_routes,
+        ],
+        (a) => a.length
+    );
 
     const optimization_results = await Promise.all(
         need_to_optimization_routes_and_lengths.map((v) =>
