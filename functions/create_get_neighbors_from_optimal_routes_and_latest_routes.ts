@@ -31,7 +31,7 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
                     return [
                         route.at((index - 1 + route.length) % route.length),
                         route.at((index + 1 + route.length) % route.length),
-                    ].filter(Boolean) as number[];
+                    ].filter((n) => typeof n === "number") as number[];
                 })
                 .flat()
         );
