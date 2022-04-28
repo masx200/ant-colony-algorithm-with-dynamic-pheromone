@@ -76,7 +76,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
-    let latest_route: number[] = [];
+    // let latest_route: number[] = [];
     const data_of_routes: DataOfFinishOneRoute[] = [];
     const data_of_iterations: DataOfFinishOneIteration[] = [];
     const data_of_greedy: DataOfFinishGreedyIteration[] = [];
@@ -97,9 +97,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         data_of_greedy,
         data_of_iterations,
         data_of_routes,
-        get latest_route() {
-            return latest_route;
-        },
+        // get latest_route() {
+        //     return latest_route;
+        // },
         get search_count_of_best() {
             return search_count_of_best;
         },
@@ -481,14 +481,14 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 routes_and_lengths_of_one_iteration.length = 0;
 
                 //如果相对信息熵小于1,则在最优路径集合中暂时移除全局最优路径
-                if (population_relative_information_entropy < 1) {
-                    assignOwnKeys(
-                        collection_of_optimal_routes,
-                        collection_of_optimal_routes.filter(
-                            (a) => a.length !== get_best_length()
-                        )
-                    );
-                }
+                // if (population_relative_information_entropy < 1) {
+                //     assignOwnKeys(
+                //         collection_of_optimal_routes,
+                //         collection_of_optimal_routes.filter(
+                //             (a) => a.length !== get_best_length()
+                //         )
+                //     );
+                // }
             }
         }
     };
@@ -502,7 +502,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     };
 
     function onRouteCreated(route: number[], length: number) {
-        latest_route = route;
+        // latest_route = route;
         if (length < get_best_length()) {
             set_global_best(route, length);
             // set_best_length(length);

@@ -79,7 +79,7 @@ export async function EachRouteGenerator(
     if (length < get_best_length()) {
         // set_best_length(length);
         // set_best_route(route);
-        set_global_best(oldRoute, oldLength);
+        set_global_best(route, length);
     }
     assert_true(get_best_length() < Infinity);
     assert_true(get_best_route().length === count_of_nodes);

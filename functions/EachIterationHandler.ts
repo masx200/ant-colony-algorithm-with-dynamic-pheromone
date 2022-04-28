@@ -31,6 +31,7 @@ export async function EachIterationHandler(
 }> {
     const starttime_of_process_iteration = Number(new Date());
     const {
+        set_global_best,
         distance_round,
         routes_and_lengths,
         get_best_length,
@@ -75,7 +76,11 @@ export async function EachIterationHandler(
         max_results_of_k_exchange,
         max_results_of_2_opt,
     });
-
+    if (optimal_length_of_iteration < get_best_length()) {
+        set_global_best(optimal_route_of_iteration, optimal_length_of_iteration);
+        // set_best_length(length);
+        // set_best_route(route);
+    }
     // const optimal_route_of_iteration = iterate_best_route;
     // const optimal_length_of_iteration = iterate_best_length;
 

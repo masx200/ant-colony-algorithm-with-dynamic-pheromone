@@ -8,7 +8,7 @@ import { DataOfTotal } from "./DataOfTotal";
 export type TSP_Output_Data = DataOfTotal &
     DataOfBestChange & {
         // best_route: number[];
-        latest_route: number[];
+        // latest_route: number[];
         data_of_greedy: DataOfFinishGreedyIteration[];
         data_of_iterations: DataOfFinishOneIteration[];
         data_of_routes: DataOfFinishOneRoute[];
