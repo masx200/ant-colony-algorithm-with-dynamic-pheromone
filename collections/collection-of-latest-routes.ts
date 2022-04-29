@@ -24,7 +24,7 @@ export function create_collection_of_latest_routes(
             result.push({ route, length });
 
             if (result.length > max_size) {
-                assignOwnKeys(this, result.slice(-max_size));
+                assignOwnKeys(result, result.slice(-max_size));
                 // this.#unique_string_store = this.#unique_string_store.slice(
                 //     -this.max_size
                 // );

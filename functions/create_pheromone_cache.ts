@@ -1,4 +1,4 @@
-import { MatrixSymmetryCreate } from "@masx200/sparse-2d-matrix";
+import { MatrixSymmetryCreate, MatrixFill } from "@masx200/sparse-2d-matrix";
 import { PheromoneCache } from "./PheromoneCache";
 
 export function create_pheromone_cache(count_of_nodes: number): PheromoneCache {
@@ -7,7 +7,8 @@ export function create_pheromone_cache(count_of_nodes: number): PheromoneCache {
     const min_value = Number.EPSILON;
     return {
         clear() {
-            pheromone_cache = MatrixSymmetryCreate({ row: count_of_nodes });
+            // pheromone_cache = MatrixSymmetryCreate({ row: count_of_nodes });
+            MatrixFill(pheromone_cache, 0);
         },
         row: count_of_nodes,
         get: function (row: number, column: number) {

@@ -22,7 +22,7 @@ const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
     beta_zero: default_beta,
     count_of_ants: default_count_of_ants,
     max_size_of_collection_of_optimal_routes: 10,
-    max_size_of_collection_of_latest_routes: 10,
+    // max_size_of_collection_of_latest_routes: 10,
     max_routes_of_greedy: 20,
     max_segments_of_cross_point: 60,
 

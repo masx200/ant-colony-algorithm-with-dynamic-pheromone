@@ -30,13 +30,13 @@ import { TSP_Runner } from "./TSP_Runner";
 // import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 import { SharedOptions } from "./SharedOptions";
 
-import { create_collection_of_latest_routes } from "../collections/collection-of-latest-routes";
+// import { create_collection_of_latest_routes } from "../collections/collection-of-latest-routes";
 import { create_collection_of_optimal_routes } from "../collections/collection-of-optimal-routes";
 import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
-import { create_latest_and_optimal_routes_rank_first_half } from "./create_latest_and_optimal_routes_rank_first_half";
+// import { create_latest_and_optimal_routes_rank_first_half } from "./create_latest_and_optimal_routes_rank_first_half";
 import { calc_pheromone_dynamic } from "./calc_pheromone_dynamic";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
@@ -150,15 +150,15 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         distance_round,
         max_routes_of_greedy,
 
-        max_size_of_collection_of_latest_routes,
+        // max_size_of_collection_of_latest_routes,
         max_size_of_collection_of_optimal_routes,
     } = options;
     set_distance_round(distance_round);
     const count_of_nodes = node_coordinates.length;
 
-    const collection_of_latest_routes = create_collection_of_latest_routes(
-        max_size_of_collection_of_latest_routes
-    );
+    // const collection_of_latest_routes = create_collection_of_latest_routes(
+    //     max_size_of_collection_of_latest_routes
+    // );
 
     const collection_of_optimal_routes = create_collection_of_optimal_routes(
         max_size_of_collection_of_optimal_routes
@@ -222,19 +222,18 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             },
         }
     );
-    const latest_and_optimal_routes_rank_first_half =
-        create_latest_and_optimal_routes_rank_first_half(
-            collection_of_latest_routes,
-            collection_of_optimal_routes
-        );
+    const latest_and_optimal_routes_rank_first_half = Array.from(
+        collection_of_optimal_routes
+    );
+    // create_latest_and_optimal_routes_rank_first_half(
+    //     // collection_of_latest_routes,
+    //     collection_of_optimal_routes
+    // );
     // let length_of_routes = latest_and_optimal_routes.length;
     function update_latest_and_optimal_routes() {
         assignOwnKeys(
             latest_and_optimal_routes_rank_first_half,
-            create_latest_and_optimal_routes_rank_first_half(
-                collection_of_latest_routes,
-                collection_of_optimal_routes
-            )
+            Array.from(collection_of_optimal_routes)
         );
         // length_of_routes = latest_and_optimal_routes.length;
     }
@@ -518,9 +517,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         if (collection_of_optimal_routes) {
             collection_of_optimal_routes.add(route, length);
         }
-        if (collection_of_latest_routes) {
-            collection_of_latest_routes.add(route, length);
-        }
+        // if (collection_of_latest_routes) {
+        //     collection_of_latest_routes.add(route, length);
+        // }
 
         // emit_total_change({
         //     total_time_ms,
