@@ -40,6 +40,10 @@ export function create_collection_of_optimal_routes(
             if (result.some((a) => a.length === length)) {
                 return;
             }
+            if (result.length < max_size) {
+                result.push({ route, length });
+                return;
+            }
             // const unique_string = getUniqueStringOfCircularRoute(route);
 
             // if (this.#unique_string_store.includes(unique_string)) {
