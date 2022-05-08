@@ -2,7 +2,7 @@ import "core-js/stable/array/at";
 import { appcontainer } from "./appcontainer";
 import { app } from "./main";
 app.config.errorHandler = (e) => {
-    alert(e);
+    alert?.(e);
     setTimeout(() => {
         throw e;
     });
