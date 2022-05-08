@@ -108,6 +108,40 @@ export default defineComponent({
                 }
             });
         });
+        onMounted(() => {
+            if (Reflect.has(navigator, "wakeLock")) {
+                let lock:
+                    | {
+                          addEventListener: (
+                              arg0: string,
+                              arg1: () => void
+                          ) => void;
+                          release: () => Promise<void>;
+                      }
+                    | null
+                    | undefined;
+                watch(is_running, async (running) => {
+                    console.log({ running }, { lock });
+                    if (running) {
+                        if (lock) {
+                            return;
+                        }
+                        const wakeLock = Reflect.get(navigator, "wakeLock");
+
+                        lock = await wakeLock.request("screen");
+
+                        lock?.addEventListener("release", () => {
+                            lock = null;
+                        });
+                    } else {
+                        if (lock) {
+                            await lock.release();
+                            return;
+                        }
+                    }
+                });
+            }
+        });
         const percentage = ref(0);
         const {
             oneiterationtableheads,
