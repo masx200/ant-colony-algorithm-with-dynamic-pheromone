@@ -3,7 +3,14 @@ import { appcontainer } from "./appcontainer";
 import { app } from "./main";
 app.config.errorHandler = (e: any) => {
     typeof alert === "function" &&
-        alert?.([String(e), String(e?.stack)].join("\n"));
+        alert?.(
+            [
+                String(e),
+                e.message,
+                String(e.error?.stack),
+                String(e?.stack),
+            ].join("\n")
+        );
     setTimeout(() => {
         throw e;
     });
