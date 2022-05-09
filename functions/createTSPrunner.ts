@@ -345,10 +345,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     on_finish_one_iteration(() => {
         update_latest_and_optimal_routes();
         clear_pheromone_cache();
+        neighbors_from_optimal_routes_and_latest_routes.clear();
     });
     on_finish_greedy_iteration(() => {
         update_latest_and_optimal_routes();
         clear_pheromone_cache();
+        neighbors_from_optimal_routes_and_latest_routes.clear();
     });
     const runOneIteration = async () => {
         if (current_search_count === 0) {
@@ -537,10 +539,13 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     function get_random_selection_probability() {
         return lastrandom_selection_probability;
     }
-    const get_neighbors_from_optimal_routes_and_latest_routes =
+
+    const neighbors_from_optimal_routes_and_latest_routes =
         create_get_neighbors_from_optimal_routes_and_latest_routes(
             latest_and_optimal_routes_rank_first_half
         );
+    const get_neighbors_from_optimal_routes_and_latest_routes =
+        neighbors_from_optimal_routes_and_latest_routes.get;
     const shared = getShared();
     const result: TSP_Runner = {
         ...shared,
