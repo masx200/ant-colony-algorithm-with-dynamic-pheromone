@@ -1,8 +1,8 @@
 import "core-js/stable/array/at";
 import { appcontainer } from "./appcontainer";
 import { app } from "./main";
-app.config.errorHandler = (e) => {
-    alert?.(e);
+app.config.errorHandler = (e: any) => {
+    alert?.([String(e), String(e?.stack)].join("\n"));
     setTimeout(() => {
         throw e;
     });
