@@ -1,7 +1,7 @@
 {
     "version": "5.0.6",
     "resolutions": {
-"ejs":"3.1.7",
+        "ejs": "3.1.7",
         "@vue/reactivity": "3.2.33",
         "minimist": "1.2.6",
         "async": "3.2.2"
