@@ -1948,7 +1948,7 @@ dayjs@^1.11.1:
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.2.tgz#fa0f5223ef0d6724b3d8327134890cfe3d72fbe5"
 
-debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.3, debug@^4.3.4:
+debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   dependencies:
@@ -3715,9 +3715,13 @@ prettier@^2.5.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
 
-pretty-bytes@^5.3.0, pretty-bytes@^5.6.0:
+pretty-bytes@^5.3.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.6.0.tgz#356256f643804773c82f64723fe78c92c62beaeb"
+
+pretty-bytes@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-6.0.0.tgz#928be2ad1f51a2e336add8ba764739f9776a8140"
 
 pretty-format@^27.0.0, pretty-format@^27.5.1:
   version "27.5.1"
@@ -3894,7 +3898,7 @@ rollup-plugin-terser@^7.0.0:
     serialize-javascript "^4.0.0"
     terser "^5.0.0"
 
-rollup@^2.43.1, rollup@^2.59.0, rollup@^2.60.2, rollup@^2.70.1:
+rollup@^2.43.1, rollup@^2.59.0, rollup@^2.70.1, rollup@^2.70.2:
   version "2.72.1"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.72.1.tgz#861c94790537b10008f0ca0fbc60e631aabdd045"
   optionalDependencies:
@@ -4428,16 +4432,16 @@ vite-plugin-html@^3.2.0:
     node-html-parser "^5.3.3"
     pathe "^0.2.0"
 
-vite-plugin-pwa@^0.11.13:
-  version "0.11.13"
-  resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.11.13.tgz#54ed80580b7d3e61aadcf4325fe9bc6f7ffce5db"
+vite-plugin-pwa@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.12.0.tgz#c0be71cf42452055bafca777b6c110f46d0feac7"
   dependencies:
-    debug "^4.3.3"
-    fast-glob "^3.2.7"
-    pretty-bytes "^5.6.0"
-    rollup "^2.60.2"
-    workbox-build "^6.4.2"
-    workbox-window "^6.4.2"
+    debug "^4.3.4"
+    fast-glob "^3.2.11"
+    pretty-bytes "^6.0.0"
+    rollup "^2.70.2"
+    workbox-build "^6.5.3"
+    workbox-window "^6.5.3"
 
 vite@^2.9.9:
   version "2.9.9"
@@ -4604,7 +4608,7 @@ workbox-broadcast-update@6.5.3:
   dependencies:
     workbox-core "6.5.3"
 
-workbox-build@^6.4.2:
+workbox-build@^6.5.3:
   version "6.5.3"
   resolved "https://registry.yarnpkg.com/workbox-build/-/workbox-build-6.5.3.tgz#38e3f286d63d2745bff4d1478bb3a6ab5c8b1170"
   dependencies:
@@ -4726,7 +4730,7 @@ workbox-sw@6.5.3:
   version "6.5.3"
   resolved "https://registry.yarnpkg.com/workbox-sw/-/workbox-sw-6.5.3.tgz#cd2f0c086f4496acd25774ed02c48504189bebdd"
 
-workbox-window@6.5.3, workbox-window@^6.4.2:
+workbox-window@6.5.3, workbox-window@^6.5.3:
   version "6.5.3"
   resolved "https://registry.yarnpkg.com/workbox-window/-/workbox-window-6.5.3.tgz#4ade70056cb73477ef1cd8fea7cfd0ecbd825c7f"
   dependencies:
