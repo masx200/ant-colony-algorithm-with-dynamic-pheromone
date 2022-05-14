@@ -1660,7 +1660,7 @@ __metadata:
     "@vue/reactivity": ^3.2.33
     "@vue/runtime-core": ^3.2.33
     babel-plugin-clean-code: ^0.0.3
-    babel-plugin-import: ^1.13.3
+    babel-plugin-import: ^1.13.5
     combinatorial-generators: ^1.1.2
     comlink: ^4.3.1
     core-js: ^3.21.1
@@ -1673,7 +1673,7 @@ __metadata:
     lodash: ^4.17.21
     lodash-es: ^4.17.21
     mocha: ^10.0.0
-    prettier: ^2.5.1
+    prettier: ^2.6.2
     robust-segment-intersect: ^1.0.1
     rollup: ^2.70.1
     terser: ^5.12.0
@@ -1682,10 +1682,10 @@ __metadata:
     tslib: ^2.3.1
     typescript: ^4.6.4
     unplugin-auto-import: ^0.7.1
-    unplugin-element-plus: ^0.3.4
-    unplugin-vue-components: ^0.19.2
+    unplugin-element-plus: ^0.4.0
+    unplugin-vue-components: ^0.19.5
     vite: ^2.9.9
-    vite-plugin-checker: ^0.4.3
+    vite-plugin-checker: ^0.4.6
     vite-plugin-html: ^3.2.0
     vite-plugin-pwa: ^0.12.0
     vue: ^3.2.33
@@ -2589,7 +2589,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-import@npm:^1.13.3":
+"babel-plugin-import@npm:^1.13.5":
   version: 1.13.5
   resolution: "babel-plugin-import@npm:1.13.5"
   dependencies:
@@ -3539,7 +3539,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-module-lexer@npm:^0.10.4":
+"es-module-lexer@npm:^0.10.5":
   version: 0.10.5
   resolution: "es-module-lexer@npm:0.10.5"
   checksum: d2f9debd9d913323322095934653e0558bb8220177645eb76d316b4afd911e8d83ffee0b748b0faa9f3ce1560db3eee4a0ac68d6c2f750c11f4250adce84cf02
@@ -6204,7 +6204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.5.1":
+"prettier@npm:^2.6.2":
   version: 2.6.2
   resolution: "prettier@npm:2.6.2"
   bin:
@@ -7375,19 +7375,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-element-plus@npm:^0.3.4":
-  version: 0.3.4
-  resolution: "unplugin-element-plus@npm:0.3.4"
+"unplugin-element-plus@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "unplugin-element-plus@npm:0.4.0"
   dependencies:
     "@rollup/pluginutils": ^4.2.0
-    es-module-lexer: ^0.10.4
+    es-module-lexer: ^0.10.5
     magic-string: ^0.26.1
-    unplugin: ^0.6.0
-  checksum: 07a4f93809b049387a276bffc1c3cc4208e1bf2ffde14f7ce818298808ea9d49ff16345267008b5067830090d75bd04f760c5426eb967c3d5e2810b7856f0783
+    unplugin: ^0.6.1
+  checksum: 9350cc3e8da3c944d22c2c42212fee9ca9e9d4194087fc370287ea69af1d1a452ee3ba7f8efdaa74eeae272105b225af9124c87fdec92e266f12e974459bdad5
   languageName: node
   linkType: hard
 
-"unplugin-vue-components@npm:^0.19.2":
+"unplugin-vue-components@npm:^0.19.5":
   version: 0.19.5
   resolution: "unplugin-vue-components@npm:0.19.5"
   dependencies:
@@ -7414,7 +7414,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin@npm:^0.6.0, unplugin@npm:^0.6.1, unplugin@npm:^0.6.3":
+"unplugin@npm:^0.6.1, unplugin@npm:^0.6.3":
   version: 0.6.3
   resolution: "unplugin@npm:0.6.3"
   dependencies:
@@ -7480,7 +7480,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-checker@npm:^0.4.3":
+"vite-plugin-checker@npm:^0.4.6":
   version: 0.4.6
   resolution: "vite-plugin-checker@npm:0.4.6"
   dependencies:
