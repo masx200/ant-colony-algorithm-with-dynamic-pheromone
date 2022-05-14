@@ -46,8 +46,8 @@
         "combinatorial-generators": "^1.0.1",
         "comlink": "^4.3.1",
         "core-js": "^3.21.1",
-        "echarts": "^5.3.1",
-        "element-plus": "^2.1.4",
+        "echarts": "^5.3.2",
+        "element-plus": "^2.2.0",
         "find": "^0.3.0",
         "fs-extra": "^10.1.0",
         "husky": "^7.0.4",
@@ -71,6 +71,6 @@
         "vite-plugin-html": "^3.2.0",
         "vite-plugin-pwa": "^0.12.0",
         "vue": "^3.2.33",
-        "vue-tsc": "^0.34.4"
+        "vue-tsc": "^0.34.13"
     }
 }
