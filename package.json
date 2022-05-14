@@ -43,7 +43,7 @@
         "@vue/runtime-core": "^3.2.33",
         "babel-plugin-clean-code": "^0.0.3",
         "babel-plugin-import": "^1.13.3",
-        "combinatorial-generators": "^1.0.1",
+        "combinatorial-generators": "^1.1.2",
         "comlink": "^4.3.1",
         "core-js": "^3.21.1",
         "echarts": "^5.3.2",

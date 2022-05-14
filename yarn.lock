@@ -1661,7 +1661,7 @@ __metadata:
     "@vue/runtime-core": ^3.2.33
     babel-plugin-clean-code: ^0.0.3
     babel-plugin-import: ^1.13.3
-    combinatorial-generators: ^1.0.1
+    combinatorial-generators: ^1.1.2
     comlink: ^4.3.1
     core-js: ^3.21.1
     echarts: ^5.3.2
@@ -3034,7 +3034,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"combinatorial-generators@npm:^1.0.1":
+"combinatorial-generators@npm:^1.1.2":
   version: 1.1.2
   resolution: "combinatorial-generators@npm:1.1.2"
   checksum: fdcb99e9cfc4386dbdf8ecb9e95232187313d43f0c03e2b80fe4e11d3e52fc28768e0dad6e0b9b73ce294aeed90264051e6972dc2fb4ac028fd15bd5bfc9b05b
