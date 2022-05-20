@@ -3,8 +3,8 @@ import { PheromoneCache } from "./PheromoneCache";
 
 export function create_pheromone_cache(count_of_nodes: number): PheromoneCache {
     let pheromone_cache = MatrixSymmetryCreate({ row: count_of_nodes });
-    const max_value = Number.MAX_VALUE;
-    const min_value = Number.EPSILON;
+    // const max_value = Number.MAX_VALUE;
+    // const min_value = Number.EPSILON;
     return {
         clear() {
             // pheromone_cache = MatrixSymmetryCreate({ row: count_of_nodes });
@@ -16,8 +16,8 @@ export function create_pheromone_cache(count_of_nodes: number): PheromoneCache {
         },
         column: count_of_nodes,
         set: function (row: number, column: number, value: number) {
-            value = Math.min(value, max_value);
-            value = Math.max(value, min_value);
+            // value = Math.min(value, max_value);
+            // value = Math.max(value, min_value);
             pheromone_cache.set(row, column, value);
         },
     };

@@ -46,6 +46,7 @@ import { sum } from "lodash-es";
 import { PheromoneCache } from "./PheromoneCache";
 import { max_number_of_stagnation } from "./max_number_of_stagnation";
 import { TSP_Output_Data } from "./TSP_Output_Data";
+import { cycle_route_to_segments } from "./cycle_route_to_segments";
 // import { Data_Of_best } from "./Data_Of_best";
 // import { reactive } from "@vue/reactivity";
 
@@ -168,7 +169,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let total_time_ms = 0;
     let pheromone_exceeds_maximum_range = false;
     function clear_pheromone_cache() {
-        pheromoneStore.clear();
+        // pheromoneStore.clear();
         pheromone_exceeds_maximum_range = false;
     }
     const pheromoneStore: PheromoneCache = new Proxy(
@@ -192,7 +193,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                             );
                         } else {
                             const cached = raw_get(row, column);
-                            if (0 === cached) {
+                            if (0 >= cached) {
                                 const result = calc_pheromone_dynamic({
                                     latest_and_optimal_routes:
                                         global_optimal_routes,
@@ -208,8 +209,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                                     /* 信息素可能太大.如果有信息素超过浮点数最大范围,则在构建一条路径时,直接返回全局最优路径. */
                                     pheromone_exceeds_maximum_range = true;
                                 }
-                                target.set(row, column, result);
-                                return result;
+                                const max_value = Number.MAX_VALUE;
+                                const min_value = Number.EPSILON;
+                                let value = Math.min(result, max_value);
+                                value = Math.max(value, min_value);
+                                target.set(row, column, value);
+                                return value;
                             } else {
                                 return cached;
                             }
@@ -479,7 +484,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         coefficient_of_diversity_increase,
                         lastrandom_selection_probability,
                     });
-                routes_and_lengths_of_one_iteration.length = 0;
+                // routes_and_lengths_of_one_iteration.length = 0;
 
                 //如果相对信息熵小于1,则在最优路径集合中暂时移除全局最优路径
                 // if (population_relative_information_entropy < 1) {
@@ -490,6 +495,21 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 //         )
                 //     );
                 // }
+
+                /* 只对最优路径集合和此轮迭代的路径集合中的路径进行信息素更新,其他路径上的信息素保持不变 */
+
+                const routes_should_update_pheremone: number[][] = [
+                    ...routes_and_lengths_of_one_iteration,
+                    ...collection_of_optimal_routes,
+                ].map((a) => a.route);
+
+                for (const route of routes_should_update_pheremone) {
+                    for (const [city1, city2] of cycle_route_to_segments(
+                        route
+                    )) {
+                        pheromoneStore.set(city1, city2, 0);
+                    }
+                }
             }
         }
     };
