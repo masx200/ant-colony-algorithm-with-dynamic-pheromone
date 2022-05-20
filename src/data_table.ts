@@ -5,7 +5,7 @@ export default defineComponent({
         tableheads: { type: Array as PropType<string[]>, required: true },
         tablebody: {
             required: true,
-            type: Array as PropType<Array<string | number | boolean>>,
+            type: Array as PropType<Array<string | number | boolean>[]>,
         },
     },
 });
