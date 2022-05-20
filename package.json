@@ -1,5 +1,5 @@
 {
-    "version": "5.0.8",
+    "version": "5.1.1",
     "resolutions": {
         "ejs": "3.1.7",
         "@vue/reactivity": "3.2.33",
@@ -10,14 +10,12 @@
     "name": "@masx200/ant-colony-algorithm-with-dynamic-pheromone",
     "type": "module",
     "scripts": {
-        "precommit": "npm run format",
         "test": "jest",
         "dev": "vite -c vite.config.ts",
         "build": "vue-tsc --noEmit --jsx preserve && vite build",
         "check": "vue-tsc --noEmit --jsx preserve ",
         "preview": "vite preview",
-        "format": " prettier --write  *.ts */*.html */*.ts */*.css *.md  */*.vue *.json",
-        "prepare": "husky install"
+        "format": " prettier --write  *.ts */*.html */*.ts */*.css *.md  */*.vue *.json"
     },
     "devDependencies": {
         "@babel/core": "^7.17.5",
