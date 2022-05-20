@@ -73,9 +73,11 @@ export function generate_paths_using_state_transition_probabilities(
                       max_size_of_cities: max_cities_of_state_transition,
                   });
         };
+
+        /* 随机选择时,也从缩小的可选城市中选择 */
         const nextnode = randomselection
             ? getnumberfromarrayofnmber(
-                  pickRandomOne(Array.from(available_nodes))
+                  pickRandomOne(Array.from(get_filtered_nodes()))
               )
             : picknextnode({
                   ...options,

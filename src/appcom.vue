@@ -75,7 +75,7 @@
                 :min="1"
                 :controls="false"
             /><br /> -->
-            <span>状态转移规则的每步最多城市数</span>
+            <span>状态转移规则的每步最多可选城市数</span>
             <el-input-number
                 step-strictly
                 :step="1"
