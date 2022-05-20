@@ -1657,8 +1657,8 @@ __metadata:
     "@types/lodash-es": ^4.17.6
     "@types/node": ^17.0.35
     "@vitejs/plugin-vue": ^2.2.4
-    "@vue/reactivity": ^3.2.33
-    "@vue/runtime-core": ^3.2.33
+    "@vue/reactivity": ^3.2.34
+    "@vue/runtime-core": ^3.2.34
     babel-plugin-clean-code: ^0.0.3
     babel-plugin-import: ^1.13.5
     combinatorial-generators: ^1.1.2
@@ -2310,23 +2310,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/runtime-core@npm:3.2.34":
+"@vue/runtime-core@npm:3.2.34, @vue/runtime-core@npm:^3.2.34":
   version: 3.2.34
   resolution: "@vue/runtime-core@npm:3.2.34"
   dependencies:
     "@vue/reactivity": 3.2.34
     "@vue/shared": 3.2.34
   checksum: 0104ed329e9d253a697ab8dba8d7b3156dcf96cce004eb5fd7b23e67ac55e918b36b5978d56f5ad88384b49db06894b5314c7063e147ea424e5cfa2f47af5ee0
-  languageName: node
-  linkType: hard
-
-"@vue/runtime-core@npm:^3.2.33":
-  version: 3.2.33
-  resolution: "@vue/runtime-core@npm:3.2.33"
-  dependencies:
-    "@vue/reactivity": 3.2.33
-    "@vue/shared": 3.2.33
-  checksum: 8eaba9a5d94461cd8a1adb805a2874f751e08abcc9169ca47a5d4479c20b5cf9c7323adbaa99047e85b6d32240764f4232078c24199a22a2c7044717c12a6984
   languageName: node
   linkType: hard
 
