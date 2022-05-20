@@ -19,7 +19,7 @@ export function update_convergence_coefficient({
         convergence_coefficient = Math.max(
             convergence_coefficient_min,
             convergence_coefficient *
-                Math.pow(1 - coefficient_of_diversity_increase, 0.25)
+                Math.pow(1 - coefficient_of_diversity_increase, 0.5)
         );
 
         return convergence_coefficient;

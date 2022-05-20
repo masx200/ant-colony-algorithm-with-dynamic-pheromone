@@ -420,6 +420,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 });
             }
             if (routes_and_lengths_of_one_iteration.length === count_of_ants) {
+                const last_convergence_coefficient = convergence_coefficient;
                 const {
                     // iterate_best_route,
                     coefficient_of_diversity_increase,
@@ -484,31 +485,29 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         coefficient_of_diversity_increase,
                         lastrandom_selection_probability,
                     });
-                // routes_and_lengths_of_one_iteration.length = 0;
-
-                //如果相对信息熵小于1,则在最优路径集合中暂时移除全局最优路径
-                // if (population_relative_information_entropy < 1) {
-                //     assignOwnKeys(
-                //         collection_of_optimal_routes,
-                //         collection_of_optimal_routes.filter(
-                //             (a) => a.length !== get_best_length()
-                //         )
-                //     );
-                // }
 
                 /* 只对最优路径集合和此轮迭代的路径集合中的路径进行信息素更新,其他路径上的信息素保持不变 */
+                /* 设需要更新的路径集合为Tupdate.
+如果收敛系数比之前增加了,则Tupdate为最优路径集合和此轮迭代的路径的和集,
+如果收敛系数比之前减少了,则Tupdate为全部路径集合.
+收敛系数增加的次数远大于减少的次数. */
+                if (
+                    lastrandom_selection_probability < convergence_coefficient
+                ) {
+                    const routes_should_update_pheremone: number[][] = [
+                        ...routes_and_lengths_of_one_iteration,
+                        ...collection_of_optimal_routes,
+                    ].map((a) => a.route);
 
-                const routes_should_update_pheremone: number[][] = [
-                    ...routes_and_lengths_of_one_iteration,
-                    ...collection_of_optimal_routes,
-                ].map((a) => a.route);
-
-                for (const route of routes_should_update_pheremone) {
-                    for (const [city1, city2] of cycle_route_to_segments(
-                        route
-                    )) {
-                        pheromoneStore.set(city1, city2, 0);
+                    for (const route of routes_should_update_pheremone) {
+                        for (const [city1, city2] of cycle_route_to_segments(
+                            route
+                        )) {
+                            pheromoneStore.set(city1, city2, 0);
+                        }
                     }
+                } else {
+                    pheromoneStore.clear();
                 }
             }
         }
