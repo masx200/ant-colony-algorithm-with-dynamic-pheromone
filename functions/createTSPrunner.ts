@@ -223,17 +223,13 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         }
     );
     const global_optimal_routes = Array.from(collection_of_optimal_routes);
-    // create_global_optimal_routes(
-    //     // collection_of_latest_routes,
-    //     collection_of_optimal_routes
-    // );
-    // let length_of_routes = latest_and_optimal_routes.length;
+    
     function update_latest_and_optimal_routes() {
         assignOwnKeys(
             global_optimal_routes,
             Array.from(collection_of_optimal_routes)
         );
-        // length_of_routes = latest_and_optimal_routes.length;
+      
     }
     function set_global_best(route: number[], length: number) {
         if (greedy_length === Infinity) {
