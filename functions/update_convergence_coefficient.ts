@@ -19,7 +19,7 @@ export function update_convergence_coefficient({
         convergence_coefficient = Math.max(
             convergence_coefficient_min,
             convergence_coefficient *
-                Math.pow(1 - coefficient_of_diversity_increase, 1.5)
+                Math.pow(1 - coefficient_of_diversity_increase, 1)
         );
 
         return convergence_coefficient;
@@ -35,7 +35,7 @@ export function update_convergence_coefficient({
         );
     }
     if (iterate_best_length > greedy_length) {
-        convergence_coefficient *= convergence_coefficient_grow_speed ** 4;
+        convergence_coefficient *= convergence_coefficient_grow_speed ** 5;
         return Math.min(convergence_coefficient_max, convergence_coefficient);
     } else {
         convergence_coefficient *= convergence_coefficient_grow_speed;
