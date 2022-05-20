@@ -36,7 +36,7 @@ import { GreedyRoutesGenerator } from "./GreedyRoutesGenerator";
 import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
-// import { create_latest_and_optimal_routes_rank_first_half } from "./create_latest_and_optimal_routes_rank_first_half";
+// import { create_global_optimal_routes } from "./create_global_optimal_routes";
 import { calc_pheromone_dynamic } from "./calc_pheromone_dynamic";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
@@ -195,7 +195,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                             if (0 === cached) {
                                 const result = calc_pheromone_dynamic({
                                     latest_and_optimal_routes:
-                                        latest_and_optimal_routes_rank_first_half,
+                                        global_optimal_routes,
                                     // PheromoneZero,
                                     row,
                                     column,
@@ -222,17 +222,15 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             },
         }
     );
-    const latest_and_optimal_routes_rank_first_half = Array.from(
-        collection_of_optimal_routes
-    );
-    // create_latest_and_optimal_routes_rank_first_half(
+    const global_optimal_routes = Array.from(collection_of_optimal_routes);
+    // create_global_optimal_routes(
     //     // collection_of_latest_routes,
     //     collection_of_optimal_routes
     // );
     // let length_of_routes = latest_and_optimal_routes.length;
     function update_latest_and_optimal_routes() {
         assignOwnKeys(
-            latest_and_optimal_routes_rank_first_half,
+            global_optimal_routes,
             Array.from(collection_of_optimal_routes)
         );
         // length_of_routes = latest_and_optimal_routes.length;
@@ -542,7 +540,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     const neighbors_from_optimal_routes_and_latest_routes =
         create_get_neighbors_from_optimal_routes_and_latest_routes(
-            latest_and_optimal_routes_rank_first_half
+            global_optimal_routes
         );
     const get_neighbors_from_optimal_routes_and_latest_routes =
         neighbors_from_optimal_routes_and_latest_routes.get;
