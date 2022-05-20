@@ -223,13 +223,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         }
     );
     const global_optimal_routes = Array.from(collection_of_optimal_routes);
-    
+
     function update_latest_and_optimal_routes() {
         assignOwnKeys(
             global_optimal_routes,
             Array.from(collection_of_optimal_routes)
         );
-      
     }
     function set_global_best(route: number[], length: number) {
         if (greedy_length === Infinity) {
