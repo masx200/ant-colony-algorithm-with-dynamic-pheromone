@@ -63,6 +63,7 @@ export default defineComponent({
         LineChart,
     },
     setup() {
+        const selected_value = ref(TSP_cities_data[0]);
         const selected_node_coordinates = ref<NodeCoordinates>();
         const show_progress = ref(true);
         const input_options = reactive(DefaultOptions);
@@ -225,37 +226,14 @@ export default defineComponent({
         onMounted(async () => {
             reset();
             const element = selecteleref.value;
-            element && (element.selectedIndex = 0);
-
+            if (element) {
+                element.selectedIndex = 0;
+            }
             data_change_listener();
             finish_one_iteration_listener();
             finish_one_route_listener();
             await submit_select_node_coordinates();
         });
-        // const onLatestRouteChange = (
-        //     route: number[]
-        //     // node_coordinates: NodeCoordinates
-        // ) => {
-        //     const node_coordinates = selected_node_coordinates.value;
-        //     if (!node_coordinates) {
-        //         return;
-        //     }
-        //     // const latestchart = chart_store_latest.value;
-        //     // if (latestchart) {
-        //     //     draw_latest_route_debounced(
-        //     //         route,
-        //     //         node_coordinates,
-        //     //         latestchart
-        //     //     );
-        //     // }
-        //     const options = get_options_route_of_node_coordinates({
-        //         route,
-        //         node_coordinates,
-        //     });
-        //     // options_of_latest_route_chart.value = options;
-        //     // assignOwnKeys(options_of_latest_route_chart, options);
-        //     // assignOwnKeys(options_of_latest_route_chart, options);
-        // };
 
         const onglobal_best_routeChange = (
             route: number[]
@@ -475,6 +453,7 @@ export default defineComponent({
         const beta = ref(default_beta);
         const max_routes_of_greedy = ref(DefaultOptions.max_routes_of_greedy);
         return {
+            selected_value,
             show_history_routes_of_best,
             show_progress,
             show_array_routes_of_best,

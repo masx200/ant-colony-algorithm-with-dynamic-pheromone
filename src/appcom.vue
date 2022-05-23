@@ -9,7 +9,12 @@
         <h1>自适应+蚁群+k-opt+动态计算信息素-TSP-测试</h1>
         <hr />
         <span>选择城市地图</span>
+        <br />
+        <hr />
+        <span>当前地图:{{ selected_value }}</span>
+        <br />
         <select
+            v-model="selected_value"
             ref="selecteleref"
             :disabled="disablemapswitching"
             @change="submit_select_node_coordinates"
