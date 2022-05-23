@@ -1,9 +1,10 @@
+import { get_random_start } from "../functions/get_random_start";
 import { GreedyWithStartOptions } from "../functions/GreedyWithStartOptions";
 // import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start_pool } from "./Greedy_algorithm_to_solve_tsp_with_selected_start_pool";
 export async function thread_Greedy_algorithm_to_solve_tsp_with_selected_start({
     node_coordinates,
-    start,
+    start = get_random_start(node_coordinates),
     round = false,
     max_cities_of_greedy = Infinity,
 }: GreedyWithStartOptions): Promise<{

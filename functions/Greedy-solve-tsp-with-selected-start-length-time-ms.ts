@@ -1,11 +1,12 @@
 // import { NodeCoordinates } from "./NodeCoordinates";
 import { Greedy_algorithm_to_solve_tsp_with_selected_start } from "./Greedy_algorithm_to_solve_tsp_with_selected_start";
+import { get_random_start } from "./get_random_start";
 import { set_distance_round } from "../src/set_distance_round";
 import { GreedyWithStartOptions } from "./GreedyWithStartOptions";
 
 export function Greedy_solve_tsp_with_selected_start_length_time_ms({
     node_coordinates,
-    start,
+    start = get_random_start(node_coordinates),
     round = false,
     max_cities_of_greedy = Infinity,
 }: GreedyWithStartOptions): {
