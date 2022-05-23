@@ -491,9 +491,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 如果收敛系数比之前增加了,则Tupdate为最优路径集合和此轮迭代的路径的和集,
 如果收敛系数比之前减少了,则Tupdate为全部路径集合.
 收敛系数增加的次数远大于减少的次数. */
-                if (
-                    last_convergence_coefficient < convergence_coefficient
-                ) {
+                if (last_convergence_coefficient < convergence_coefficient) {
                     const routes_should_update_pheremone: number[][] = [
                         ...routes_and_lengths_of_one_iteration,
                         ...collection_of_optimal_routes,
