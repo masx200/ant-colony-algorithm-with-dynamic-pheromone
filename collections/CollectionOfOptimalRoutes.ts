@@ -1,4 +1,4 @@
-export type CollectionOfRoutes = Array<{
+export type CollectionOfOptimalRoutes = Array<{
     route: number[];
     length: number;
 }> & {

@@ -2,12 +2,12 @@
 import { assert_number } from "../test/assert_number";
 import { assert_true } from "../test/assert_true";
 import { assignOwnKeys } from "./assignOwnKeys";
-import type { CollectionOfRoutes } from "./CollectionOfRoutes";
+import type { CollectionOfOptimalRoutes } from "./CollectionOfOptimalRoutes";
 import { get_entries_by_max_value } from "./get_entries_by_max_value";
-export type { CollectionOfRoutes };
+export type { CollectionOfOptimalRoutes };
 export function create_collection_of_optimal_routes(
     max_size: number
-): CollectionOfRoutes {
+): CollectionOfOptimalRoutes {
     assert_true(0 < max_size, "max_size greater than 0");
 
     const result: Array<{
@@ -26,11 +26,11 @@ export function create_collection_of_optimal_routes(
             return { index, value };
         }
     }
-    // return new CollectionOfRoutes(0, max_size);
+    // return new CollectionOfOptimalRoutes(0, max_size);
     assignOwnKeys(result, {
         max_size,
         get [Symbol.toStringTag]() {
-            return "CollectionOfRoutes";
+            return "CollectionOfOptimalRoutes";
         },
         add: (route: number[], length: number) => {
             assert_true(route.length > 0, "route length is not greater than 0");
@@ -70,14 +70,14 @@ export function create_collection_of_optimal_routes(
             }
         },
     });
-    return result as CollectionOfRoutes;
+    return result as CollectionOfOptimalRoutes;
 }
-// export class CollectionOfRoutes extends Array<{
+// export class CollectionOfOptimalRoutes extends Array<{
 //     route: number[];
 //     length: number;
 // }> {
 //     get [Symbol.toStringTag]() {
-//         return "CollectionOfRoutes";
+//         return "CollectionOfOptimalRoutes";
 //     }
 
 //     #get_longest_length_of_routes():
