@@ -122,7 +122,7 @@ export default defineComponent({
                     | null
                     | undefined;
                 watch(is_running, async (running) => {
-                    console.log({ running }, { lock });
+                   // console.log({ running }, { lock });
                     if (running) {
                         if (lock) {
                             return;
