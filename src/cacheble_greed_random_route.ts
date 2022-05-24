@@ -1,4 +1,3 @@
-import { getnumberfromarrayofnmber } from "../functions/getnumberfromarrayofnmber";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { thread_Greedy_algorithm_to_solve_tsp_with_selected_start } from "./thread_Greedy_algorithm_to_solve_tsp_with_selected_start";
@@ -29,7 +28,7 @@ export async function cacheble_greed_random_route({
         const inputindexs = Array(node_coordinates.length)
             .fill(0)
             .map((_v, i) => i);
-        const start = getnumberfromarrayofnmber(pickRandomOne(inputindexs));
+        const start = pickRandomOne(inputindexs);
         const route_promise =
             thread_Greedy_algorithm_to_solve_tsp_with_selected_start({
                 node_coordinates,

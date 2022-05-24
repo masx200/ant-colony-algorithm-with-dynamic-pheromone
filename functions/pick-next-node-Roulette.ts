@@ -1,5 +1,5 @@
 import { calc_state_transition_probabilities } from "./calc_state_transition_probabilities";
-import { getnumberfromarrayofnmber } from "./getnumberfromarrayofnmber";
+
 import { PickNextNodeRouletteOptions } from "./PickNextNodeRouletteOptions";
 import { pickRandomOne } from "./pickRandomOne";
 import { SharedOptions } from "./SharedOptions";
@@ -24,24 +24,22 @@ export function picknextnodeRoulette(
     }
     const beta = beta_zero;
     const alpha = alpha_zero;
-    const result = getnumberfromarrayofnmber(
-        pickRandomOne(
-            availablenextnodes,
-            availablenextnodes.map((nextnode) => {
-                const weight = calc_state_transition_probabilities({
-                    ...options,
-                    getpheromone,
-                    get_convergence_coefficient,
-                    nextnode,
-                    currentnode,
-                    alpha,
-                    getdistancebyserialnumber,
-                    beta,
-                });
+    const result = pickRandomOne(
+        availablenextnodes,
+        availablenextnodes.map((nextnode) => {
+            const weight = calc_state_transition_probabilities({
+                ...options,
+                getpheromone,
+                get_convergence_coefficient,
+                nextnode,
+                currentnode,
+                alpha,
+                getdistancebyserialnumber,
+                beta,
+            });
 
-                return weight;
-            })
-        )
+            return weight;
+        })
     );
     return result;
 }

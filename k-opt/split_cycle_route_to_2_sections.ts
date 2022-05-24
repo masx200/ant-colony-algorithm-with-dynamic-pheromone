@@ -2,13 +2,13 @@ import { random } from "lodash";
 
 import { assert_true } from "../test/assert_true";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
-import { getnumberfromarrayofnmber } from "../functions/getnumberfromarrayofnmber";
+
 import { pickRandomOne } from "../functions/pickRandomOne";
 export function split_cycle_route_to_2_sections(
     oldRoute: number[]
 ): [number[], number[]] {
     assert_true(oldRoute.length >= 4);
-    const start = getnumberfromarrayofnmber(pickRandomOne(oldRoute));
+    const start = pickRandomOne(oldRoute);
 
     const reoganized_route = cycle_reorganize(oldRoute, start);
 

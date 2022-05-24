@@ -5,7 +5,7 @@ import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { combinations } from "combinatorial-generators";
 import { robustsegmentintersect } from "./robust-segment-intersect";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
-import { getnumberfromarrayofnmber } from "../functions/getnumberfromarrayofnmber";
+
 import { pickRandomOne } from "../functions/pickRandomOne";
 
 export function intersection_filter_with_cycle_route_find_one_old({
@@ -20,7 +20,7 @@ export function intersection_filter_with_cycle_route_find_one_old({
     assert_true(count_of_nodes > 1);
     assert_true(cycle_route.length === node_coordinates.length);
     const oldRoute = cycle_route;
-    const start = getnumberfromarrayofnmber(pickRandomOne(oldRoute));
+    const start = pickRandomOne(oldRoute);
 
     const cloned = cycle_reorganize(oldRoute, start);
     const cyclesegments = cycle_route_to_segments(cloned);

@@ -1,7 +1,6 @@
 import { sum } from "lodash";
 import { assert_true } from "../test/assert_true";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
-import { getnumberfromarrayofnmber } from "../functions/getnumberfromarrayofnmber";
 
 export const divide_route_to_2_opt_with_segment = (
     oldRoute: number[],
@@ -12,7 +11,7 @@ export const divide_route_to_2_opt_with_segment = (
     const length_of_old = oldRoute.length;
     assert_true(k <= length_of_old / 2);
     assert_true(k >= 2);
-    const start = getnumberfromarrayofnmber(segment[0][1]);
+    const start = segment[0][1];
 
     const cloned = cycle_reorganize(oldRoute, start);
     const length_of_first_part = cloned.findIndex((a) => a === segment[1][1]);

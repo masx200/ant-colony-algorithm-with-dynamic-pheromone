@@ -6,7 +6,7 @@ import { haverepetitions } from "../functions/haverepetitions";
 import { combinations } from "combinatorial-generators";
 import { robustsegmentintersect } from "./robust-segment-intersect";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
-import { getnumberfromarrayofnmber } from "../functions/getnumberfromarrayofnmber";
+
 import { pickRandomOne } from "../functions/pickRandomOne";
 import { ArrayShuffle } from "../functions/ArrayShuffle";
 export function find_one_intersection_partial_with_cycle_route({
@@ -23,7 +23,7 @@ export function find_one_intersection_partial_with_cycle_route({
     assert_true(count_of_nodes > 1);
     assert_true(cycle_route.length === node_coordinates.length);
     const oldRoute = cycle_route;
-    const start = getnumberfromarrayofnmber(pickRandomOne(oldRoute));
+    const start = pickRandomOne(oldRoute);
 
     const cloned = cycle_reorganize(oldRoute, start);
     const cyclesegments = ArrayShuffle(cycle_route_to_segments(cloned)).slice(

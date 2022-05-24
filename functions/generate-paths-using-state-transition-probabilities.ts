@@ -2,7 +2,7 @@ import { assert_true } from "../test/assert_true";
 import { closed_total_path_length } from "./closed-total-path-length";
 import { creategetdistancebyindex } from "./creategetdistancebyindex";
 import { geteuclideandistancebyindex } from "./geteuclideandistancebyindex";
-import { getnumberfromarrayofnmber } from "./getnumberfromarrayofnmber";
+
 import { NodeCoordinates } from "./NodeCoordinates";
 import { picknextnodeRoulette } from "./pick-next-node-Roulette";
 // import { PickNextNodeRouletteOptions } from "./PickNextNodeRouletteOptions";
@@ -54,7 +54,7 @@ export function generate_paths_using_state_transition_probabilities(
     const inputindexs = Array(node_coordinates.length)
         .fill(0)
         .map((_v, i) => i);
-    const startnode = getnumberfromarrayofnmber(pickRandomOne(inputindexs));
+    const startnode = pickRandomOne(inputindexs);
     const route: number[] = [startnode];
     const available_nodes = new Set<number>(
         inputindexs.filter((v) => !route.includes(v))
@@ -76,9 +76,7 @@ export function generate_paths_using_state_transition_probabilities(
 
         /* 随机选择时,也从缩小的可选城市中选择 */
         const nextnode = randomselection
-            ? getnumberfromarrayofnmber(
-                  pickRandomOne(Array.from(get_filtered_nodes()))
-              )
+            ? pickRandomOne(Array.from(get_filtered_nodes()))
             : picknextnode({
                   ...options,
                   alpha_zero,
