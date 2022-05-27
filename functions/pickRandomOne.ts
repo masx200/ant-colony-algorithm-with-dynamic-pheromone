@@ -7,19 +7,32 @@ export function pickRandomOne<T>(input: Array<T>, weights: number[] = []): T {
         return input[0];
     }
     if (weights.length) {
+        // console.log(weights)
         assert_true(weights.length === input.length);
+
         const sumofweights = sum(weights);
         const Roulette = Array.from(weights);
 
         let i = 0;
         for (const w of weights) {
-            Roulette[i] = Math.min(
-                1,
-                w / sumofweights + (Roulette[i - 1] ?? 0)
+            Roulette[i] = Math.max(
+                0,
+                Math.min(1, w / sumofweights + (Roulette[i - 1] ?? 0))
             );
             i++;
         }
+        // debugger
         // console.log(Roulette)
+        // if (Number.isNaN(Roulette.at(-1))) {
+        //     Roulette[Roulette.length - 1] = 1;
+        // }
+        // console.log(Roulette);
+        for (let i = 0; i < Roulette.length; i++) {
+            const value = Roulette[i];
+            if (Number.isNaN(value)) {
+                Roulette[i] = 1;
+            }
+        }
         assert_true(Roulette.every((n) => n >= 0 && n <= 1));
         const ran = Math.random();
         // for (let i = 0; i < input.length; i++) {
