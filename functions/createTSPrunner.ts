@@ -150,7 +150,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const {
         distance_round,
         max_routes_of_greedy,
-
+        max_cities_of_state_transition,
         // max_size_of_collection_of_latest_routes,
         max_size_of_collection_of_optimal_routes,
     } = options;
@@ -340,15 +340,18 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             convergence_coefficient,
         });
     }
+    const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
     on_finish_one_iteration(() => {
         update_latest_and_optimal_routes();
         clear_pheromone_cache();
-        neighbors_from_optimal_routes_and_latest_routes.clear();
+        if (!is_count_not_large) {
+            neighbors_from_optimal_routes_and_latest_routes.clear();
+        }
     });
     on_finish_greedy_iteration(() => {
         update_latest_and_optimal_routes();
         clear_pheromone_cache();
-        neighbors_from_optimal_routes_and_latest_routes.clear();
+        // neighbors_from_optimal_routes_and_latest_routes.clear();
     });
     const runOneIteration = async () => {
         if (current_search_count === 0) {
