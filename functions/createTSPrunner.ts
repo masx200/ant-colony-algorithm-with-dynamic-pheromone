@@ -47,8 +47,10 @@ import { PheromoneCache } from "./PheromoneCache";
 import { max_number_of_stagnation } from "./max_number_of_stagnation";
 import { TSP_Output_Data } from "./TSP_Output_Data";
 import { cycle_route_to_segments } from "./cycle_route_to_segments";
-// import { Data_Of_best } from "./Data_Of_best";
-// import { reactive } from "@vue/reactivity";
+import {
+    Cached_hash_table_of_path_lengths_and_path_segments,
+    update_Cached_hash_table_of_path_lengths_and_path_segments,
+} from "./Cached_hash_table_of_path_lengths_and_path_segments";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let greedy_length: number = Infinity;
@@ -81,18 +83,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const data_of_routes: DataOfFinishOneRoute[] = [];
     const data_of_iterations: DataOfFinishOneIteration[] = [];
     const data_of_greedy: DataOfFinishGreedyIteration[] = [];
-    // const { on: on_best_change, emit: emit_best_change } =
-    //     createEventPair<DataOfBestChange>(emitter);
 
-    // const { on: on_total_change, emit: emit_total_change } =
-    //     createEventPair<DataOfTotal>(emitter);
-    // on_best_change((data) => {
-    //     Object.assign(output_data, data);
-    // });
-    // on_total_change((data) => {
-    //     Object.assign(output_data, data);
-    // });
-    // const data_of_best: Data_Of_best[] = [];
     const output_data: TSP_Output_Data = {
         // data_of_best,
         data_of_greedy,
@@ -202,6 +193,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                                     column,
                                     greedy_length,
                                     convergence_coefficient,
+                                    routes_segments_cache:
+                                        routes_segments_cache,
                                 });
                                 // debugger;
                                 // console.log(row, column, result);
@@ -282,28 +275,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     const get_current_search_count = () => {
         return current_search_count;
     };
-    // const set_best_length = (best_length: number) => {
-    //     if (greedy_length === Infinity) {
-    //         greedy_length = best_length;
-    //     }
-    //     if (best_length < global_best_length) {
-    //         global_best_length = best_length;
-    //         time_of_best_ms = total_time_ms;
-    //         search_count_of_best = current_search_count + 1;
-    //         emit_best_change({
-    //             search_count_of_best: search_count_of_best + 1,
-    //             current_search_count,
-    //             current_iterations: get_number_of_iterations(),
-    //             total_time_ms: total_time_ms,
-    //             time_of_best_ms,
-    //             global_best_route,
-    //             global_best_length: global_best_length,
-    //         });
-    //     }
-    // };
-    // const set_best_route = (route: number[]) => {
-    //     global_best_route = generateUniqueArrayOfCircularPath(route);
-    // };
 
     const get_number_of_iterations = () => {
         if (current_search_count < max_routes_of_greedy) {
@@ -353,6 +324,9 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         clear_pheromone_cache();
         // neighbors_from_optimal_routes_and_latest_routes.clear();
     });
+
+    const routes_segments_cache: Cached_hash_table_of_path_lengths_and_path_segments =
+        new Map();
     const runOneIteration = async () => {
         if (current_search_count === 0) {
             const { best_length, best_route, average_length } =
@@ -374,6 +348,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             set_global_best(best_route, best_length);
             // set_best_length(best_length);
             // set_best_route(best_route);
+            update_Cached_hash_table_of_path_lengths_and_path_segments(
+                routes_segments_cache,
+                collection_of_optimal_routes
+            );
         } else {
             let time_ms_of_one_iteration: number = 0;
             const routes_and_lengths_of_one_iteration: {
@@ -510,6 +488,10 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                 } else {
                     pheromoneStore.clear();
                 }
+                update_Cached_hash_table_of_path_lengths_and_path_segments(
+                    routes_segments_cache,
+                    collection_of_optimal_routes
+                );
             }
         }
     };

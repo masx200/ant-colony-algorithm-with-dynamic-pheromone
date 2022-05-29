@@ -1,4 +1,5 @@
 {
+    "exclude": ["node_modules"],
     "compilerOptions": {
         "jsx": "preserve",
         "types": ["vite/client", "@types/jest", "@types/node"],
@@ -29,7 +30,8 @@
         "bin",
         "__tests__",
         "cross-points",
-        "cross-points/robust-segment-intersect-module.d.ts",
-        "k-opt"
+        "cross-points/*.ts",
+        "k-opt",
+        "*/*.ts"
     ]
 }
