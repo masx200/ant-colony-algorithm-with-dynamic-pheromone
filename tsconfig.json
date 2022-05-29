@@ -1,48 +1,37 @@
 {
-  "exclude": [
-    "node_modules"
-  ],
-  "compilerOptions": {
-    "jsx": "preserve",
-    "types": [
-      "vite/client",
-      "@types/jest",
-      "@types/node"
-    ],
-    "declaration": false,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "target": "ES2018",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "ES2021",
-      "ESNext.Array"
-    ],
-    "moduleResolution": "Node",
-    "strict": true,
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": [
-    "collections",
-    "vite.config.ts",
-    "src",
-    "test",
-    "functions",
-    "bin",
-    "__tests__",
-    "cross-points",
-    "cross-points/*.ts",
-    "k-opt",
-    "*/*.ts"
-  ]
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "jsx": "preserve",
+        "types": ["vite/client", "@types/jest", "@types/node"],
+        "declaration": false,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "target": "ES2018",
+        "useDefineForClassFields": true,
+        "module": "ESNext",
+        "lib": ["ESNext", "DOM", "ES2021", "ESNext.Array"],
+        "moduleResolution": "Node",
+        "strict": true,
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "noEmit": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "collections",
+        "vite.config.ts",
+        "src",
+        "test",
+        "functions",
+        "bin",
+        "__tests__",
+        "cross-points",
+        "cross-points/*.ts",
+        "k-opt",
+        "*/*.ts"
+    ]
 }

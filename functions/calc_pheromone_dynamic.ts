@@ -1,9 +1,12 @@
 import { sum } from "lodash-es";
+import {
+    Cached_hash_table_of_path_lengths_and_path_segments,
+    has_Cached_hash_table_of_path_lengths_and_path_segments,
+} from "./Cached_hash_table_of_path_lengths_and_path_segments";
 import { Infinity_to_max_or_min } from "./Infinity_to_max_or_min";
-import { is_segment_in_cycle_route } from "./is_segment_in_cycle_route";
+// import { is_segment_in_cycle_route } from "./is_segment_in_cycle_route";
 import { nan_to_zero } from "./nan_to_zero";
-// const default_pheromone_zero = 0;
-// const PheromoneZero = default_pheromone_zero;
+
 export function calc_pheromone_dynamic({
     latest_and_optimal_routes,
     // PheromoneZero,
@@ -11,6 +14,7 @@ export function calc_pheromone_dynamic({
     column,
     greedy_length,
     convergence_coefficient,
+    routes_segments_cache,
 }: {
     latest_and_optimal_routes: { route: number[]; length: number }[];
     // PheromoneZero: number;
@@ -18,16 +22,24 @@ export function calc_pheromone_dynamic({
     column: number;
     greedy_length: number;
     convergence_coefficient: number;
+    routes_segments_cache: Cached_hash_table_of_path_lengths_and_path_segments;
 }): number {
     const length_of_routes = latest_and_optimal_routes.length;
     //0*Infinity===NaN
     return (
         // PheromoneZero +
         sum(
-            latest_and_optimal_routes.map(({ route, length: route_length }) => {
+            latest_and_optimal_routes.map(({ length: route_length }) => {
                 const a = Math.pow(
                     (3 +
-                        Number(is_segment_in_cycle_route(route, row, column))) /
+                        Number(
+                            has_Cached_hash_table_of_path_lengths_and_path_segments(
+                                routes_segments_cache,
+                                route_length,
+                                row,
+                                column
+                            )
+                        )) /
                         4,
                     convergence_coefficient
                 );
