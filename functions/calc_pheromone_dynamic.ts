@@ -25,6 +25,7 @@ export function calc_pheromone_dynamic({
     convergence_coefficient: number;
     routes_segments_cache: Cached_hash_table_of_path_lengths_and_path_segments;
 }): number {
+    assert_true(latest_and_optimal_routes.length > 0);
     const length_of_routes = latest_and_optimal_routes.length;
     //0*Infinity===NaN
     const result =
@@ -62,6 +63,7 @@ export function calc_pheromone_dynamic({
                 return nan_to_zero(r);
             })
         ) / length_of_routes;
+    // debugger;
     assert_true(Number.isFinite(result), "pheromone should  be finite");
     return result;
 }
