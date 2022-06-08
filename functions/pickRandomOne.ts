@@ -12,14 +12,21 @@ export function pickRandomOne<T>(input: Array<T>, weights: number[] = []): T {
         // console.log(weights)
         assert_true(weights.length === input.length);
 
-        return Randomly.select(
-            input.map((result, index) => {
-                return {
-                    result,
-                    chance: weights[index],
-                };
-            })
-        );
+        const choose_array = input.map((result, index) => {
+            return {
+                result,
+                chance: weights[index],
+            };
+        });
+        let result = Randomly.select(choose_array);
+        if (typeof result == "undefined") {
+            /* 由于weights中存在infinity导致没有结果? */
+            result = choose_array.reduce((p, c) =>
+                p.chance > c.chance ? p : c
+            ).result;
+        }
+        assert_true(typeof result !== "undefined");
+        return result;
         // const sumofweights = sum(weights);
         // const Roulette = Array.from(weights);
 
@@ -81,6 +88,7 @@ export function pickRandomOne<T>(input: Array<T>, weights: number[] = []): T {
         assert_true(index >= 0);
         assert_true(index < input.length);
         const result = input[index];
+        assert_true(typeof result !== "undefined");
         return result;
     }
 }

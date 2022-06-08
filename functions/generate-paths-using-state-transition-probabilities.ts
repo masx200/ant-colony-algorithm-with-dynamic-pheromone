@@ -89,6 +89,9 @@ export function generate_paths_using_state_transition_probabilities(
                   getpheromone,
                   getdistancebyserialnumber,
               });
+        // if (typeof nextnode !== "number") {
+        //     debugger;
+        // }
         assert_true(typeof nextnode === "number");
         route.push(nextnode);
         available_nodes.delete(nextnode);
