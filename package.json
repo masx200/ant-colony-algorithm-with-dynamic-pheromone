@@ -71,6 +71,7 @@
         "vue-tsc": "^0.34.16"
     },
     "dependencies": {
+        "@types/robust-segment-intersect": "^1.0.0",
         "weighted-randomly-select": "^1.0.6"
     }
 }
