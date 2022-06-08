@@ -1972,6 +1972,7 @@ __metadata:
     vite-plugin-pwa: ^0.12.0
     vue: ^3.2.36
     vue-tsc: ^0.34.16
+    weighted-randomly-select: ^1.0.6
   languageName: unknown
   linkType: soft
 
@@ -7768,6 +7769,13 @@ __metadata:
   version: 0.4.3
   resolution: "webpack-virtual-modules@npm:0.4.3"
   checksum: 158d30633e0d9be3cfcde10fe959b28df5d5adb1068e0f057fcfb10b0b16ede6c892eba438f6ced089c7c442087748c2fcd1e3f035e4e2dc6760517a8c227714
+  languageName: node
+  linkType: hard
+
+"weighted-randomly-select@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "weighted-randomly-select@npm:1.0.6"
+  checksum: e56424c235f5547fa8f6ee5da2ab84d36e8b98a7b845018d0c560b4dd03a750bf368ce6e1d16fbf2de611abc9e33d49bcd4aa3e62be59e8cfeaa2e5be59fee77
   languageName: node
   linkType: hard
 
