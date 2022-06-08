@@ -13,7 +13,7 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
     function get_neighbors_from_optimal_routes_and_latest_routes(
         city: number
     ): number[] {
-        assert_Integer(city);
+        assert_Integer(city, "city should be an integer,but received:" + city);
         const cached = cache.get(city);
         if (cached) {
             return cached;

@@ -17,6 +17,7 @@ export function select_available_cities_from_optimal_and_latest({
     current_city: number;
     max_size_of_cities: number;
 }): number[] | Set<number> {
+    assert_true(available_nodes.size > 0);
     const maximum = Math.min(max_size_of_cities, available_nodes.size);
     const slice_from_start = Math.random() < 0.5;
     // const neighbors = intersection(
@@ -58,5 +59,6 @@ export function select_available_cities_from_optimal_and_latest({
     // const result: number[] = Array.from(source).slice(0, maximum);
     assert_true(result.length <= available_nodes.size);
     assert_true(result.length <= max_size_of_cities);
+    assert_true(result.length > 0);
     return result;
 }

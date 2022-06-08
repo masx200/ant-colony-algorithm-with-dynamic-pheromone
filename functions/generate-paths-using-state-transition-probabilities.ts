@@ -62,6 +62,8 @@ export function generate_paths_using_state_transition_probabilities(
     const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
     while (route.length !== count_of_nodes) {
         const current_city = Array.from(route).slice(-1)[0];
+        assert_true(typeof current_city === "number");
+        // console.log("current_city", current_city);
         const randomselection = Math.random() < random_selection_probability;
         const get_filtered_nodes = function (): number[] | Set<number> {
             return is_count_not_large
@@ -87,6 +89,7 @@ export function generate_paths_using_state_transition_probabilities(
                   getpheromone,
                   getdistancebyserialnumber,
               });
+        assert_true(typeof nextnode === "number");
         route.push(nextnode);
         available_nodes.delete(nextnode);
     }
