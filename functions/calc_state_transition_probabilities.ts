@@ -1,7 +1,7 @@
-// import { assert_true } from "../test/assert_true";
+import { assert_true } from "../test/assert_true";
 import { GetDistanceBySerialNumber } from "./GetDistanceBySerialNumber";
 import { GetPheromone } from "./GetPheromone";
-import { SharedOptions } from "./SharedOptions";
+// import { SharedOptions } from "./SharedOptions";
 
 export function calc_state_transition_probabilities({
     getpheromone,
@@ -17,12 +17,16 @@ export function calc_state_transition_probabilities({
     alpha: number;
     getdistancebyserialnumber: GetDistanceBySerialNumber;
     beta: number;
-} & SharedOptions) {
+}) {
     const phermone = getpheromone(nextnode, currentnode);
+    assert_true(!Number.isNaN(phermone), "phermone should not be NaN");
     // assert_true(phermone > 0);
     const weight =
         Math.pow(phermone, alpha) /
         Math.pow(getdistancebyserialnumber(nextnode, currentnode), beta);
     // assert_true(weight > 0);
+    // debugger;
+    assert_true(!Number.isNaN(weight), "weight should not be NaN");
+
     return weight;
 }
