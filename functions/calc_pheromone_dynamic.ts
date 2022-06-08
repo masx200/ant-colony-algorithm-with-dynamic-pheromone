@@ -1,4 +1,5 @@
 import { sum } from "lodash-es";
+import { assert_true } from "../test/assert_true";
 import {
     Cached_hash_table_of_path_lengths_and_path_segments,
     has_Cached_hash_table_of_path_lengths_and_path_segments,
@@ -26,7 +27,7 @@ export function calc_pheromone_dynamic({
 }): number {
     const length_of_routes = latest_and_optimal_routes.length;
     //0*Infinity===NaN
-    return (
+    const result =
         // PheromoneZero +
         sum(
             latest_and_optimal_routes.map(({ length: route_length }) => {
@@ -60,6 +61,7 @@ export function calc_pheromone_dynamic({
                 const r = c * a * b;
                 return nan_to_zero(r);
             })
-        ) / length_of_routes
-    );
+        ) / length_of_routes;
+    assert_true(Number.isFinite(result), "pheromone should  be finite");
+    return result;
 }
