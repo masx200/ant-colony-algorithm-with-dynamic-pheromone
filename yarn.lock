@@ -1927,9 +1927,9 @@ __metadata:
     "@babel/plugin-syntax-typescript": ^7.17.12
     "@babel/preset-typescript": ^7.17.12
     "@masx200/event-emitter-target": ^2.0.4
-    "@masx200/mini-cli-args-parser": ^1.0.4
+    "@masx200/mini-cli-args-parser": ^1.0.5
     "@masx200/sparse-2d-matrix": ^1.4.0
-    "@masx200/tsp-lib-test-data": ^1.1.1
+    "@masx200/tsp-lib-test-data": ^1.1.2
     "@masx200/universal-thread-pool": ^1.0.6
     "@masx200/weighted-randomly-select": ^2.0.0
     "@rollup/plugin-babel": ^5.3.1
@@ -1986,10 +1986,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@masx200/mini-cli-args-parser@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "@masx200/mini-cli-args-parser@npm:1.0.4"
-  checksum: dbb4ff79b35e4350f3855fe5f566d116b345a25b9fdf8387373b870a03bedf28d91e68a41b9848abccb54d34b3bc1dadb78775f884663ba0781765d37ad01444
+"@masx200/mini-cli-args-parser@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@masx200/mini-cli-args-parser@npm:1.0.5"
+  checksum: 54f6e41eeb1206678774ffcaaf6cec916ab69c726630757d6f6706b8ce64fb0fdcbac672f92e3978d4844d84453c33cf664ba3bdf16c8e3f35102f843c4c8853
   languageName: node
   linkType: hard
 
@@ -2000,10 +2000,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@masx200/tsp-lib-test-data@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@masx200/tsp-lib-test-data@npm:1.1.1"
-  checksum: 363793ceba5d6d332d8db2c2775dcefb19f54681fdd239cdd8936118122e8dea96df0d45f8a78f5c7b0bda7af77bdc8f6cb651b2107165d18b6c409ba1494f8e
+"@masx200/tsp-lib-test-data@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@masx200/tsp-lib-test-data@npm:1.1.2"
+  checksum: 259774dde0a681f85543d2d0e6663f2ed237a29d7436f85c7729510303f5459685a6bbca2d7fdffa0a26a4b29b0015159cd61942532c6d803cbcc410e5bad7a2
   languageName: node
   linkType: hard
 
