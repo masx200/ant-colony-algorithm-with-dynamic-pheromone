@@ -1931,6 +1931,7 @@ __metadata:
     "@masx200/sparse-2d-matrix": ^1.4.0
     "@masx200/tsp-lib-test-data": ^1.1.1
     "@masx200/universal-thread-pool": ^1.0.6
+    "@masx200/weighted-randomly-select": ^2.0.0
     "@rollup/plugin-babel": ^5.3.1
     "@types/find": ^0.2.1
     "@types/fs-extra": ^9.0.13
@@ -1973,7 +1974,6 @@ __metadata:
     vite-plugin-pwa: ^0.12.0
     vue: ^3.2.36
     vue-tsc: ^0.34.16
-    weighted-randomly-select: ^1.0.6
   languageName: unknown
   linkType: soft
 
@@ -2013,6 +2013,13 @@ __metadata:
   dependencies:
     "@vue/reactivity": ^3.2.36
   checksum: c37f07a372d595e170b2ec6db1cc3ec758d29ce26eaff9a1aec2869b17d450189bb584cb3c3b83d1bf33131120394538b46930718e1872391b657ed2a1a77a7d
+  languageName: node
+  linkType: hard
+
+"@masx200/weighted-randomly-select@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@masx200/weighted-randomly-select@npm:2.0.0"
+  checksum: 476df815324a98d0f76f0c2cbb53868f4e382e2c92fcefbc1b8c2234acac957c7f73ef5769f2744c3d9db89e683c19a4e5cb83cac8db021315cf0f1978693905
   languageName: node
   linkType: hard
 
@@ -7777,13 +7784,6 @@ __metadata:
   version: 0.4.3
   resolution: "webpack-virtual-modules@npm:0.4.3"
   checksum: 158d30633e0d9be3cfcde10fe959b28df5d5adb1068e0f057fcfb10b0b16ede6c892eba438f6ced089c7c442087748c2fcd1e3f035e4e2dc6760517a8c227714
-  languageName: node
-  linkType: hard
-
-"weighted-randomly-select@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "weighted-randomly-select@npm:1.0.6"
-  checksum: e56424c235f5547fa8f6ee5da2ab84d36e8b98a7b845018d0c560b4dd03a750bf368ce6e1d16fbf2de611abc9e33d49bcd4aa3e62be59e8cfeaa2e5be59fee77
   languageName: node
   linkType: hard
 

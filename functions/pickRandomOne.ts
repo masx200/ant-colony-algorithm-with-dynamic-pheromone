@@ -1,7 +1,7 @@
 import { random /* , sum  */ } from "lodash";
 import { assert_true } from "../test/assert_true";
 import "core-js/stable/array/at";
-import Randomly from "weighted-randomly-select";
+import Randomly from "@masx200/weighted-randomly-select";
 
 export function pickRandomOne<T>(input: Array<T>, weights: number[] = []): T {
     assert_true(input.length > 0);
