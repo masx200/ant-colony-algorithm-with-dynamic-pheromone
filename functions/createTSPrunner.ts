@@ -473,12 +473,12 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 如果收敛系数比之前减少了,则Tupdate为全部路径集合.
 收敛系数增加的次数远大于减少的次数. */
                 if (last_convergence_coefficient < convergence_coefficient) {
-                    const routes_should_update_pheremone: number[][] = [
+                    const routes_should_update_pheromone: number[][] = [
                         ...routes_and_lengths_of_one_iteration,
                         ...collection_of_optimal_routes,
                     ].map((a) => a.route);
 
-                    for (const route of routes_should_update_pheremone) {
+                    for (const route of routes_should_update_pheromone) {
                         for (const [city1, city2] of cycle_route_to_segments(
                             route
                         )) {

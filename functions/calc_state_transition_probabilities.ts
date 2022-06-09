@@ -18,11 +18,11 @@ export function calc_state_transition_probabilities({
     getdistancebyserialnumber: GetDistanceBySerialNumber;
     beta: number;
 }) {
-    const phermone = getpheromone(nextnode, currentnode);
-    assert_true(!Number.isNaN(phermone), "phermone should not be NaN");
-    // assert_true(phermone > 0);
+    const pheromone = getpheromone(nextnode, currentnode);
+    assert_true(!Number.isNaN(pheromone), "pheromone should not be NaN");
+    // assert_true(pheromone > 0);
     const weight =
-        Math.pow(phermone, alpha) /
+        Math.pow(pheromone, alpha) /
         Math.pow(getdistancebyserialnumber(nextnode, currentnode), beta);
     // assert_true(weight > 0);
     // debugger;
