@@ -30,16 +30,21 @@ export function select_available_cities_from_optimal_and_latest({
     }
 
     const length_to_add = maximum - source.size;
-    if (length_to_add>0) {
+    if (length_to_add > 0) {
         if (cloned_available.size > length_to_add) {
             const rest_nodes = Array.from(cloned_available);
 
-            const start = Math.floor(
-                Math.random() * rest_nodes.length - length_to_add
+            const start = Math.max(
+                0,
+                Math.floor(Math.random() * rest_nodes.length) - length_to_add
             );
-            rest_nodes.slice(start, length_to_add).forEach((node) => {
+            assert_true(start >= 0);
+            const selected = rest_nodes.slice(start, start + length_to_add);
+            assert_true(selected.length === length_to_add);
+            selected.forEach((node) => {
                 source.add(node);
             });
+            // debugger;
         } else {
             cloned_available.forEach((node) => {
                 source.add(node);
@@ -47,7 +52,7 @@ export function select_available_cities_from_optimal_and_latest({
         }
     }
     const result = Array.from(source);
-
+    // debugger;
     assert_true(result.length <= available_nodes.size);
     assert_true(result.length <= max_cities_of_state_transition);
     assert_true(result.length > 0);

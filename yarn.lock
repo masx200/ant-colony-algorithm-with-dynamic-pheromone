@@ -1927,7 +1927,6 @@ __metadata:
     "@babel/plugin-syntax-typescript": ^7.17.12
     "@babel/preset-typescript": ^7.17.12
     "@masx200/event-emitter-target": ^2.0.4
-    "@masx200/mini-cli-args-parser": ^1.0.5
     "@masx200/sparse-2d-matrix": ^1.4.0
     "@masx200/tsp-lib-test-data": ^1.1.2
     "@masx200/universal-thread-pool": ^1.0.6
@@ -1983,13 +1982,6 @@ __metadata:
   dependencies:
     regenerator-runtime: ^0.13.9
   checksum: e4d688b82a014f206ad352979cb70af97de80b2a469aa8dcc3a09045fe07d577571a42bf8862680bc955638a3855d930bf15d6ff754a4357a3920598ba3ddb58
-  languageName: node
-  linkType: hard
-
-"@masx200/mini-cli-args-parser@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@masx200/mini-cli-args-parser@npm:1.0.5"
-  checksum: 54f6e41eeb1206678774ffcaaf6cec916ab69c726630757d6f6706b8ce64fb0fdcbac672f92e3978d4844d84453c33cf664ba3bdf16c8e3f35102f843c4c8853
   languageName: node
   linkType: hard
 
