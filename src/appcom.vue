@@ -69,17 +69,7 @@
                 :min="1"
                 :controls="false"
             /><br />
-            <!-- <span>最新路径的集合最大大小</span>
-            <el-input-number
-                step-strictly
-                :step="1"
-                v-model.number="
-                    input_options.max_size_of_collection_of_latest_routes
-                "
-                :disabled="disablemapswitching"
-                :min="1"
-                :controls="false"
-            /><br /> -->
+
             <span>状态转移规则的每步最多可选城市数</span>
             <el-input-number
                 step-strictly
@@ -236,20 +226,7 @@
             <!-- 最近一条路径的图 -->
         </div>
         <hr />
-        <!-- <details
-            class="width-100-percent"
-            :open="show_routes_of_latest"
-            @toggle="show_routes_of_latest = $event.target.open"
-        >
-            <summary>最近一条路径的展示</summary>
-            <LineChart
-                class="singlechart"
-                style=""
-                :options="options_of_latest_route_chart"
-            ></LineChart>
-        </details>
 
-        <hr /> -->
         <details
             class="width-100-percent"
             :open="show_chart_of_latest"
@@ -313,6 +290,13 @@
         <!-- 拆分表格 -->
         <hr />
         <details
+            style="
+                width: 95%;
+                margin-left: 20px;
+                margin-right: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            "
             class="width-100-percent"
             :open="show_array_routes_of_best"
             @toggle="show_array_routes_of_best = $event.target.open"
@@ -358,20 +342,6 @@
             />
         </details>
         <hr />
-        <!-- <details
-            v-if="show_every_route"
-            class="width-100-percent"
-            :open="show_summary_of_routes"
-            @toggle="show_summary_of_routes = $event.target.open"
-        >
-            <summary>每条路径的统计</summary>
-路径结果 -->
-        <!-- <Data_table
-                :tableheads="oneroutetableheads"
-                :tablebody="oneroutetablebody"
-            />
-        </details> -->
-        <!-- -->
     </div>
 </template>
 <script lang="ts" src="./appcom.ts"></script>
