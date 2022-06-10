@@ -72,7 +72,8 @@ export function generate_paths_using_state_transition_probabilities(
                       available_nodes,
                       get_neighbors_from_optimal_routes_and_latest_routes,
                       current_city,
-                      max_size_of_cities: max_cities_of_state_transition,
+                      max_cities_of_state_transition:
+                          max_cities_of_state_transition,
                   });
         };
 
