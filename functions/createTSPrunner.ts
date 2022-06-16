@@ -79,41 +79,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
-    // let latest_route: number[] = [];
+
     const data_of_routes: DataOfFinishOneRoute[] = [];
-    const data_of_iterations: DataOfFinishOneIteration[] = [];
+    const delta_data_of_iterations: DataOfFinishOneIteration[] = [];
     const data_of_greedy: DataOfFinishGreedyIteration[] = [];
 
-    const output_data: TSP_Output_Data = {
-        // data_of_best,
-        data_of_greedy,
-        data_of_iterations,
-        data_of_routes,
-        // get latest_route() {
-        //     return latest_route;
-        // },
-        get search_count_of_best() {
-            return search_count_of_best;
-        },
-        get time_of_best_ms() {
-            return time_of_best_ms;
-        },
-        get global_best_route() {
-            return global_best.route;
-        },
-        get global_best_length() {
-            return global_best.length;
-        },
-        get total_time_ms() {
-            return total_time_ms;
-        },
-        get current_search_count() {
-            return current_search_count;
-        },
-        get current_iterations() {
-            return get_number_of_iterations();
-        },
-    };
     const {
         on: on_finish_one_iteration,
         emit: inner_emit_finish_one_iteration,
@@ -125,12 +95,43 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         data_of_routes.push(data);
     });
     on_finish_one_iteration((data) => {
-        data_of_iterations.push(data);
+        delta_data_of_iterations.push(data);
     });
     on_finish_greedy_iteration((data) => {
         data_of_greedy.push(data);
     });
-    function get_output_data() {
+    function get_output_data_and_consume_iteration_data() {
+        const output_data: TSP_Output_Data = {
+            data_of_greedy,
+            get delta_data_of_iterations() {
+                const result = Array.from(delta_data_of_iterations);
+                delta_data_of_iterations.length = 0;
+                return result;
+            },
+            data_of_routes,
+
+            get search_count_of_best() {
+                return search_count_of_best;
+            },
+            get time_of_best_ms() {
+                return time_of_best_ms;
+            },
+            get global_best_route() {
+                return global_best.route;
+            },
+            get global_best_length() {
+                return global_best.length;
+            },
+            get total_time_ms() {
+                return total_time_ms;
+            },
+            get current_search_count() {
+                return current_search_count;
+            },
+            get current_iterations() {
+                return get_number_of_iterations();
+            },
+        };
         return output_data;
     }
     let convergence_coefficient = 1;
@@ -142,15 +143,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         distance_round,
         max_routes_of_greedy,
         max_cities_of_state_transition,
-        // max_size_of_collection_of_latest_routes,
+
         max_size_of_collection_of_optimal_routes,
     } = options;
     set_distance_round(distance_round);
     const count_of_nodes = node_coordinates.length;
-
-    // const collection_of_latest_routes = create_collection_of_latest_routes(
-    //     max_size_of_collection_of_latest_routes
-    // );
 
     const collection_of_optimal_routes = create_collection_of_optimal_routes(
         max_size_of_collection_of_optimal_routes
@@ -548,7 +545,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         // on_total_change,
         // on_finish_greedy_iteration,
         max_results_of_k_opt,
-        get_output_data,
+        get_output_data_and_consume_iteration_data,
         get_search_count_of_best,
         get_time_of_best,
         get_random_selection_probability,

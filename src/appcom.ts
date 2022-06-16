@@ -146,7 +146,7 @@ export default defineComponent({
         const percentage = ref(0);
         const {
             oneiterationtableheads,
-            onreceivedataofoneIteration,
+            onreceive_delta_dataofoneIteration,
             clearDataOfOneIteration,
             dataofoneiteration,
             oneiterationtablebody,
@@ -179,11 +179,7 @@ export default defineComponent({
         } = use_history_of_best(readonly(data_of_best));
 
         const initializeTSP_runner = use_initialize_tsp_runner();
-        //     {
-        //     on_receive_Data_Of_Global_Best,
-        //     onreceivedataofoneroute,
-        //     onreceivedataofoneIteration,
-        // }
+
         const TSP_before_Start = use_tsp_before_start(initializeTSP_runner);
 
         const is_running = ref(false);
@@ -339,11 +335,10 @@ export default defineComponent({
         function on_update_output_data(data: TSP_Output_Data) {
             on_receive_data_of_greedy(data.data_of_greedy[0]);
             onglobal_best_routeChange(data.global_best_route);
-            // onLatestRouteChange(data.latest_route);
 
             on_receive_Data_Of_total(data);
             on_receive_Data_Of_Global_Best(data);
-            onreceivedataofoneIteration(data.data_of_iterations);
+            onreceive_delta_dataofoneIteration(data.delta_data_of_iterations);
             onreceivedataofoneroute(data.data_of_routes);
         }
         const TSP_terminate = () => {

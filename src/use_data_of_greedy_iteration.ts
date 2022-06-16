@@ -16,9 +16,7 @@ export function use_data_of_greedy_iteration(): {
         "贪心最差长度",
         "全局最优长度",
     ];
-    const onreceivedata = function onreceivedataofoneIteration(
-        data: DataOfFinishGreedyIteration
-    ) {
+    const onreceivedata = function (data: DataOfFinishGreedyIteration) {
         dataraw.length = 0;
         dataraw.push(data);
     };
