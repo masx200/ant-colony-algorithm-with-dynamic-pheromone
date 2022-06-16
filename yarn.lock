@@ -1951,8 +1951,8 @@ __metadata:
     "@types/node": ^17.0.35
     "@types/robust-segment-intersect": ^1.0.0
     "@vitejs/plugin-vue": ^2.2.4
-    "@vue/reactivity": ^3.2.36
-    "@vue/runtime-core": ^3.2.36
+    "@vue/reactivity": ^3.2.37
+    "@vue/runtime-core": ^3.2.37
     babel-plugin-clean-code: ^0.0.3
     babel-plugin-import: ^1.13.5
     combinatorial-generators: ^1.1.2
@@ -2558,23 +2558,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/runtime-core@npm:3.2.37":
+"@vue/runtime-core@npm:3.2.37, @vue/runtime-core@npm:^3.2.37":
   version: 3.2.37
   resolution: "@vue/runtime-core@npm:3.2.37"
   dependencies:
     "@vue/reactivity": 3.2.37
     "@vue/shared": 3.2.37
   checksum: 8dbf4e1f973335f5089d6b5965c2756a47589009956f883adb47036315a6d5701ef9d23d52456a6272673bc6f0bcee4f096826b5eae3fec65274e24e9f722a9b
-  languageName: node
-  linkType: hard
-
-"@vue/runtime-core@npm:^3.2.36":
-  version: 3.2.36
-  resolution: "@vue/runtime-core@npm:3.2.36"
-  dependencies:
-    "@vue/reactivity": 3.2.36
-    "@vue/shared": 3.2.36
-  checksum: c565d77400081a2d4eba400d0f9ec885a2867f92fea96e47fa80c42efe28cfbd8b434fe30ae30997b3f6bb6b3a718ed5b797227f36e925d1acdb660aa8ba29e9
   languageName: node
   linkType: hard
 
@@ -2605,13 +2595,6 @@ __metadata:
   version: 3.2.33
   resolution: "@vue/shared@npm:3.2.33"
   checksum: 0083c9555b44f1c230079fac9270764e51af740f851101ae8972758fe6acf52184f76b4ab0c67a3840096d8f5a0988b99cae3046826b0f15af2431db6127ae48
-  languageName: node
-  linkType: hard
-
-"@vue/shared@npm:3.2.36":
-  version: 3.2.36
-  resolution: "@vue/shared@npm:3.2.36"
-  checksum: ffce62a32af0371bb9efd98a918183517a1b9267012d6a064a591acd2a2b128062c5fe97c0f6a0dd0aefed3695f01b593cd9ee08cb247efb6a167b738af5bf65
   languageName: node
   linkType: hard
 
