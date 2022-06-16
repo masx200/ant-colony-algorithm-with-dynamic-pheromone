@@ -330,6 +330,7 @@
         <!-- </details> -->
         <hr />
         <details
+        style='content-visibility: auto;'
             class="width-100-percent"
             :open="show_summary_of_iterations"
             @toggle="show_summary_of_iterations = $event.target.open"
