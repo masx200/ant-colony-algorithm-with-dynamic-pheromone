@@ -54,7 +54,7 @@ import {
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let greedy_length: number = Infinity;
-    const emitter = EventEmitterTargetClass({ sync: true });
+    const emitter = EventEmitterTargetClass(/* { sync: true } */);
     const {
         on: on_finish_greedy_iteration,
         emit: emit_finish_greedy_iteration,
