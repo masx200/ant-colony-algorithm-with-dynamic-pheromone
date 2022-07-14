@@ -1936,7 +1936,7 @@ __metadata:
     "@babel/plugin-proposal-async-generator-functions": ^7.17.12
     "@babel/plugin-syntax-typescript": ^7.17.12
     "@babel/preset-typescript": ^7.17.12
-    "@masx200/event-emitter-target": ^2.0.4
+    "@masx200/event-emitter-target": ^2.0.5
     "@masx200/sparse-2d-matrix": ^1.4.0
     "@masx200/tsp-lib-test-data": ^1.1.2
     "@masx200/universal-thread-pool": ^1.0.6
@@ -1984,12 +1984,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@masx200/event-emitter-target@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@masx200/event-emitter-target@npm:2.0.4"
+"@masx200/event-emitter-target@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@masx200/event-emitter-target@npm:2.0.5"
   dependencies:
     regenerator-runtime: ^0.13.9
-  checksum: e4d688b82a014f206ad352979cb70af97de80b2a469aa8dcc3a09045fe07d577571a42bf8862680bc955638a3855d930bf15d6ff754a4357a3920598ba3ddb58
+  checksum: 85f17e51183c8d67b2faf5a1a32e084ca2f880bca191c12655439497936461e794562af7e8b60c27fe9d88a257c558b84652a7b8409cf17865f585dd6c0caddb
   languageName: node
   linkType: hard
 
