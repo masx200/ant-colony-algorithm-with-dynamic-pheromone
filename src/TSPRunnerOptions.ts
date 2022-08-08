@@ -17,6 +17,6 @@ export type TSPRunnerOptions = {
     alpha_zero?: number | undefined;
     beta_zero?: number | undefined;
     count_of_ants?: number | undefined;
-    Relative_Information_Entropy_Factor?: number;
+    relative_Information_Entropy_Factor?: number;
     max_number_of_stagnation?: number;
 };

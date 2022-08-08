@@ -1,5 +1,5 @@
 import { max_number_of_stagnation } from "../functions/max_number_of_stagnation";
-import { Relative_Information_Entropy_Factor } from "../functions/Relative_Information_Entropy_Factor";
+import { relative_Information_Entropy_Factor } from "../functions/relative_Information_Entropy_Factor";
 import { TSPRunnerOptions } from "./TSPRunnerOptions";
 
 export const default_count_of_ants = 20;
@@ -30,6 +30,6 @@ const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
 
     max_cities_of_greedy: 300,
     distance_round: true,
-    Relative_Information_Entropy_Factor: Relative_Information_Entropy_Factor,
+    relative_Information_Entropy_Factor: relative_Information_Entropy_Factor,
     max_number_of_stagnation: max_number_of_stagnation,
 };
