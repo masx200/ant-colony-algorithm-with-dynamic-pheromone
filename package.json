@@ -1,5 +1,5 @@
 {
-    "version": "5.6.1",
+    "version": "5.7.0",
     "resolutions": {
         "ejs": "3.1.7",
         "terser": "^5.14.2",
