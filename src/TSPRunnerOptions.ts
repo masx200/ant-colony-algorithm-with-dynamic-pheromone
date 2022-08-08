@@ -1,6 +1,6 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 
-export type TSPRunnerOptions = {
+export type TSPRunnerOptions = { node_coordinates: NodeCoordinates } & Partial<{
     max_results_of_k_exchange?: number;
     distance_round?: boolean;
     max_cities_of_greedy?: number;
@@ -13,10 +13,9 @@ export type TSPRunnerOptions = {
 
     max_results_of_k_opt?: number | undefined;
 
-    node_coordinates: NodeCoordinates;
     alpha_zero?: number | undefined;
     beta_zero?: number | undefined;
     count_of_ants?: number | undefined;
     relative_Information_Entropy_Factor?: number;
     max_number_of_stagnation?: number;
-};
+}>;
