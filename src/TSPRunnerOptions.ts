@@ -1,13 +1,13 @@
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 
 export type TSPRunnerOptions = {
-    max_results_of_k_exchange: number;
+    max_results_of_k_exchange?: number;
     distance_round?: boolean;
     max_cities_of_greedy?: number;
     max_segments_of_cross_point?: number;
     max_cities_of_state_transition?: number;
     max_routes_of_greedy?: number;
-    // max_size_of_collection_of_latest_routes?: number;
+
     max_size_of_collection_of_optimal_routes?: number;
     max_results_of_2_opt?: number;
 
@@ -17,4 +17,6 @@ export type TSPRunnerOptions = {
     alpha_zero?: number | undefined;
     beta_zero?: number | undefined;
     count_of_ants?: number | undefined;
+    Relative_Information_Entropy_Factor?: number;
+    max_number_of_stagnation?: number;
 };
