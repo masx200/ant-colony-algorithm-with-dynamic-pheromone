@@ -14,7 +14,7 @@ export const default_max_results_of_2_opt = 10;
 export const default_max_results_of_k_exchange = 10;
 
 export { DefaultOptions };
-// export const show_every_route = false;
+
 const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
     max_results_of_k_exchange: default_max_results_of_k_exchange,
     max_cities_of_state_transition: 40,
@@ -24,7 +24,7 @@ const DefaultOptions: Omit<Required<TSPRunnerOptions>, "node_coordinates"> = {
     beta_zero: default_beta,
     count_of_ants: default_count_of_ants,
     max_size_of_collection_of_optimal_routes: 10,
-    // max_size_of_collection_of_latest_routes: 10,
+
     max_routes_of_greedy: 20,
     max_segments_of_cross_point: 40,
 

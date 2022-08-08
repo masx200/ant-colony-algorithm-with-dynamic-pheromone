@@ -76,7 +76,7 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
             (k) => [k, Reflect.get(input, k) ?? Reflect.get(DefaultOptions, k)]
         )
     ) as Required<TSPRunnerOptions>;
-
+    console.log(options);
     assert_number(count_of_ants);
     assert_true(count_of_ants >= 2);
 

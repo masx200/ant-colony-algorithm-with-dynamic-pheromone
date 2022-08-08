@@ -57,7 +57,26 @@
                 <el-radio :label="false">否</el-radio> </el-radio-group
             ><br />
             <hr />
-
+            <span>相对信息熵因子</span>
+            <el-input-number
+                step-strictly
+                :step="0.01"
+                v-model.number="
+                    input_options.relative_Information_Entropy_Factor
+                "
+                :disabled="disablemapswitching"
+                :min="0.1"
+                :controls="false"
+            /><br />
+            <span>最大停滞次数</span>
+            <el-input-number
+                step-strictly
+                :step="1"
+                v-model.number="input_options.max_number_of_stagnation"
+                :disabled="disablemapswitching"
+                :min="1"
+                :controls="false"
+            /><br />
             <span>最优路径的集合最大大小</span>
             <el-input-number
                 step-strictly

@@ -66,7 +66,7 @@ export default defineComponent({
         const selected_value = ref(TSP_cities_data[0]);
         const selected_node_coordinates = ref<NodeCoordinates>();
         const show_progress = ref(true);
-        const input_options = reactive(DefaultOptions);
+        const input_options = reactive(structuredClone(DefaultOptions));
 
         const round_result = ref(get_distance_round());
         watch(round_result, (round) => {
