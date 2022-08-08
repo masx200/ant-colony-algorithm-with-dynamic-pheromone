@@ -44,7 +44,7 @@ import { create_pheromone_cache } from "./create_pheromone_cache";
 import { sum } from "lodash-es";
 // import { DataOfTotal } from "./DataOfTotal";
 import { PheromoneCache } from "./PheromoneCache";
-import { max_number_of_stagnation } from "./max_number_of_stagnation";
+
 import { TSP_Output_Data } from "./TSP_Output_Data";
 import { cycle_route_to_segments } from "./cycle_route_to_segments";
 import {
@@ -324,6 +324,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
 
     const routes_segments_cache: Cached_hash_table_of_path_lengths_and_path_segments =
         new Map();
+    const { max_number_of_stagnation, relative_Information_Entropy_Factor } =
+        options;
     const runOneIteration = async () => {
         if (current_search_count === 0) {
             const { best_length, best_route, average_length } =
@@ -451,6 +453,8 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                     convergence_coefficient,
                     iterate_best_length,
                     greedy_length,
+                    max_number_of_stagnation,
+                    relative_Information_Entropy_Factor,
                 });
                 if (number_of_stagnation >= max_number_of_stagnation) {
                     number_of_stagnation = 0;
