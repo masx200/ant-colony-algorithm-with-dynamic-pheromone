@@ -2,6 +2,7 @@ import { convergence_coefficient_max } from "./convergence_coefficient_max";
 import { max_number_of_stagnation } from "./max_number_of_stagnation";
 const convergence_coefficient_grow_speed = 1.1;
 const convergence_coefficient_min = 1;
+export const Relative_Information_Entropy_Factor = 1;
 export function update_convergence_coefficient({
     number_of_stagnation,
     coefficient_of_diversity_increase,
@@ -19,7 +20,10 @@ export function update_convergence_coefficient({
         convergence_coefficient = Math.max(
             convergence_coefficient_min,
             convergence_coefficient *
-                Math.pow(1 - coefficient_of_diversity_increase, 1)
+                Math.pow(
+                    1 - coefficient_of_diversity_increase,
+                    Relative_Information_Entropy_Factor
+                )
         );
 
         return convergence_coefficient;
