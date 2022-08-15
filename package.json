@@ -67,7 +67,7 @@
         "vue-tsc": "^0.37.3"
     },
     "dependencies": {
-        "@masx200/weighted-randomly-select": "^2.0.0",
+        "@masx200/weighted-randomly-select": "^2.1.1",
         "@types/robust-segment-intersect": "^1.0.0"
     }
 }

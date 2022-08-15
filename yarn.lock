@@ -1962,7 +1962,7 @@ __metadata:
     "@masx200/sparse-2d-matrix": ^1.4.0
     "@masx200/tsp-lib-test-data": ^1.1.2
     "@masx200/universal-thread-pool": ^1.0.6
-    "@masx200/weighted-randomly-select": ^2.0.0
+    "@masx200/weighted-randomly-select": ^2.1.1
     "@rollup/plugin-babel": ^5.3.1
     "@types/find": ^0.2.1
     "@types/fs-extra": ^9.0.13
@@ -2037,10 +2037,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@masx200/weighted-randomly-select@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@masx200/weighted-randomly-select@npm:2.0.0"
-  checksum: 476df815324a98d0f76f0c2cbb53868f4e382e2c92fcefbc1b8c2234acac957c7f73ef5769f2744c3d9db89e683c19a4e5cb83cac8db021315cf0f1978693905
+"@masx200/weighted-randomly-select@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@masx200/weighted-randomly-select@npm:2.1.1"
+  checksum: 0bbfd06e79169e1a7853a4af8504e8e209372d333c3c38024e8be51d8421ff962738d6bcbc3850d6ef2555304fd1e1799a23c9e134541d6655bb944202f2c890
   languageName: node
   linkType: hard
 
