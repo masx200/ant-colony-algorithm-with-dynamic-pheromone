@@ -1,7 +1,7 @@
 import { random /* , sum  */ } from "lodash";
 import { assert_true } from "../test/assert_true";
 import "core-js/stable/array/at";
-import Randomly from "@masx200/weighted-randomly-select";
+import * as Randomly from "@masx200/weighted-randomly-select";
 
 export function pickRandomOne<T>(input: Array<T>, weights: number[] = []): T {
     assert_true(input.length > 0);
@@ -19,12 +19,12 @@ export function pickRandomOne<T>(input: Array<T>, weights: number[] = []): T {
             };
         });
         let result = Randomly.select(choose_array);
-        if (typeof result == "undefined") {
-            /* 由于weights中存在infinity导致没有结果? */
-            result = choose_array.reduce((p, c) =>
-                p.chance > c.chance ? p : c
-            ).result;
-        }
+        // if (typeof result == "undefined") {
+        //     /* 由于weights中存在infinity导致没有结果? */
+        //     result = choose_array.reduce((p, c) =>
+        //         p.chance > c.chance ? p : c
+        //     ).result;
+        // }
         assert_true(typeof result !== "undefined");
         return result;
         // const sumofweights = sum(weights);
