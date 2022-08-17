@@ -2,7 +2,8 @@ import { isEqual } from "lodash";
 import { divide_route_to_2_opt_with_segment } from "../cross-points/divide_route_to_2-opt-with-segment";
 import { intersection_filter_with_cycle_route_find_one_old } from "../cross-points/intersection_filter_with_cycle_route_find_one_old";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
-
+import { it } from "vitest";
+import { expect } from "vitest";
 it("test-intersection_filter_with_cycle_route_find_one-divide_route_to_2_opt_with_segment", () => {
     const ulysses22: NodeCoordinates = [
         [38.24, 20.42],

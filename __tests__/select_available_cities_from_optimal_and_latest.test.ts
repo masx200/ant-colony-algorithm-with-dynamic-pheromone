@@ -1,5 +1,6 @@
 import { select_available_cities_from_optimal_and_latest } from "../functions/select_available_cities_from_optimal_and_latest";
 import assert from "assert";
+import { it } from "vitest";
 it("select_available_cities_from_optimal_and_latest-1", () => {
     const result = select_available_cities_from_optimal_and_latest({
         current_city: 1,

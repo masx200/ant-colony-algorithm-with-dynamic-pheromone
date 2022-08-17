@@ -37,7 +37,10 @@ export default defineConfig(({ mode, command }) => {
             legalComments: "none",
             drop: isdrop ? ["console", "debugger"] : undefined,
         },
-        root: path.resolve(__dirname, "src"),
+        root:
+            mode === "test"
+                ? path.resolve(__dirname)
+                : path.resolve(__dirname, "src"),
         plugins: [
             AutoImport({
                 resolvers: [ElementPlusResolver()],
@@ -46,7 +49,7 @@ export default defineConfig(({ mode, command }) => {
                 resolvers: [ElementPlusResolver()],
             }),
             checker({
-                vueTsc: true,
+                // vueTsc: true,
                 typescript: { root: path.resolve(__dirname) },
             }),
             // checker({ vueTsc: true }),
@@ -102,6 +105,10 @@ export default defineConfig(({ mode, command }) => {
             // getBabelOutputPlugin({ plugins: ["babel-plugin-clean-code"] }),
         ],
         build: {
+            rollupOptions: {
+                input: resolve(__dirname, "src", "index.html"),
+                // output: { file: resolve(__dirname, "dist", "index.html") },
+            },
             cssCodeSplit: false,
             minify: "esbuild",
             emptyOutDir: true,
@@ -114,3 +121,4 @@ export default defineConfig(({ mode, command }) => {
     };
     return config;
 });
+import { resolve } from "path";

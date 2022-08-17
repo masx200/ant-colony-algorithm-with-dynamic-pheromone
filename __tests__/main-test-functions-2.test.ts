@@ -3,7 +3,7 @@ import { testgeteuclideandistance } from "../test/testgeteuclideandistance";
 
 import { testpathsequalinbothdirections } from "../test/testpathsequalinbothdirections";
 import { testrobustsegmentintersect } from "../test/testrobustsegmentintersect";
-
+import { it } from "vitest";
 it("main test functions-2", () => {
     testgeteuclideandistance();
     testpathsequalinbothdirections();
