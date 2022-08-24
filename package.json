@@ -25,7 +25,7 @@
         "@babel/preset-typescript": "^7.17.12",
         "@masx200/event-emitter-target": "^2.0.5",
         "@masx200/sparse-2d-matrix": "^1.4.0",
-        "@masx200/tsp-lib-test-data": "^2.0.0",
+        "@masx200/tsp-lib-test-data": "^2.0.1",
         "@masx200/universal-thread-pool": "^1.0.6",
         "@rollup/plugin-babel": "^5.3.1",
         "@types/find": "^0.2.1",
