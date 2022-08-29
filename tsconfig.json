@@ -2,7 +2,7 @@
     "exclude": ["node_modules"],
     "compilerOptions": {
         "jsx": "preserve",
-        "types": ["vite/client",  "@types/node"],
+        "types": ["vite/client", "@types/node"],
         "declaration": false,
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,

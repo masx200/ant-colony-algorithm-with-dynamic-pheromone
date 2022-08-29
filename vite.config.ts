@@ -10,7 +10,7 @@ import vpchecker from "vite-plugin-checker";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
 //@ts-ignore
-const checker = vpchecker.default;
+const checker = vpchecker;
 // console.log(babel)
 //@ts-ignore
 export default defineConfig(({ mode, command }) => {
