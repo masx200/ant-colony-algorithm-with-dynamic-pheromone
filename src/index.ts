@@ -18,6 +18,7 @@ app.config.errorHandler = (e: any) => {
 app.mount(appcontainer);
 !(async () => {
     if (process.env.NODE_ENV === "production") {
+//@ts-ignore
         const { registerSW } = await import("virtual:pwa-register");
 
         if (
