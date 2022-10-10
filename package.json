@@ -27,7 +27,7 @@
         "@masx200/sparse-2d-matrix": "^1.4.0",
         "@masx200/tsp-lib-test-data": "^2.0.1",
         "@masx200/universal-thread-pool": "^1.0.6",
-        "@rollup/plugin-babel": "^5.3.1",
+        "@rollup/plugin-babel": "^6.0.0",
         "@types/find": "^0.2.1",
         "@types/fs-extra": "^9.0.13",
         "@types/html-minifier-terser": "^7.0.0",
