@@ -4,7 +4,9 @@
     "ejs": "3.1.7",
     "terser": "^5.14.2",
     "minimist": "1.2.6",
-    "async": "3.2.2"
+    "async": "3.2.2",
+    "vite":"3.2.1",
+    "vitest":"0.24.3"
   },
   "packageManager": "yarn@3.2.0",
   "name": "@masx200/ant-colony-algorithm-with-dynamic-pheromone",
