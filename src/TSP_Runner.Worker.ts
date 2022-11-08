@@ -10,39 +10,11 @@ function init_runner(options: TSPRunnerOptions) {
         throw new Error("cannot init runner twice");
     }
     runner = createTSPrunner(options);
+    Object.assign(API, runner);
 }
 
-const API: TSP_Worker_API = new Proxy(
-    {
-        init_runner,
-    },
-    {
-        ownKeys(target) {
-            return [
-                Reflect.ownKeys(target),
-                runner ? Reflect.ownKeys(runner) : [],
-            ].flat();
-        },
-        defineProperty: () => false,
-        deleteProperty: () => false,
-        get(target, key) {
-            const value = Reflect.get(target, key);
-            if (typeof value !== "undefined") {
-                return value;
-            } else {
-                if (runner) {
-                    return Reflect.get(runner, key);
-                } else {
-                    throw new Error("No runner found");
-                }
-            }
-        },
-        has(target, key) {
-            return Boolean(
-                Reflect.has(target, key) || (runner && Reflect.has(runner, key))
-            );
-        },
-    }
-) as TSP_Worker_API;
+const API: TSP_Worker_API = {
+    init_runner,
+} as TSP_Worker_API;
 
 expose(API);
