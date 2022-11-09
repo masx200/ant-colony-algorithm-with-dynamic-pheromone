@@ -34,13 +34,9 @@ import { DataOfFinishGreedyIteration } from "./DataOfFinishGreedyIteration";
 import { set_distance_round } from "../src/set_distance_round";
 import { assignOwnKeys } from "../collections/assignOwnKeys";
 
-import { calc_pheromone_dynamic } from "./calc_pheromone_dynamic";
 import { update_convergence_coefficient } from "./update_convergence_coefficient";
 import { update_last_random_selection_probability } from "./update_last_random_selection_probability";
-import { create_pheromone_cache } from "./create_pheromone_cache";
 import { sum } from "lodash-es";
-
-import { PheromoneCache } from "./PheromoneCache";
 
 import { TSP_Output_Data } from "./TSP_Output_Data";
 import { cycle_route_to_segments } from "./cycle_route_to_segments";
@@ -48,6 +44,7 @@ import {
     Cached_hash_table_of_path_lengths_and_path_segments,
     update_Cached_hash_table_of_path_lengths_and_path_segments,
 } from "./Cached_hash_table_of_path_lengths_and_path_segments";
+import { createCachePheromoneCalc } from "./createCachePheromoneCalc";
 
 export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     let greedy_length: number = Infinity;
@@ -156,51 +153,17 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
     function clear_pheromone_cache() {
         pheromone_exceeds_maximum_range = false;
     }
-    const pheromoneStore: PheromoneCache = createPheromoneStore();
     const global_optimal_routes = Array.from(collection_of_optimal_routes);
-
-    function createPheromoneStore(): PheromoneCache {
-        const target = create_pheromone_cache(count_of_nodes);
-
-        const key = "get";
-        const raw_get = Reflect.get(target, key) as PheromoneCache["get"];
-        function getPheromone(row: number, column: number): number {
-            if (
-                row < 0 ||
-                row > count_of_nodes - 1 ||
-                column < 0 ||
-                column > count_of_nodes - 1
-            ) {
-                throw Error("row,column,out of bounds:" + row + "," + column);
-            } else {
-                const cached = raw_get(row, column);
-                if (0 >= cached) {
-                    const result = calc_pheromone_dynamic({
-                        latest_and_optimal_routes: global_optimal_routes,
-
-                        row,
-                        column,
-                        greedy_length,
-                        convergence_coefficient,
-                        routes_segments_cache: routes_segments_cache,
-                    });
-
-                    if (result > Number.MAX_VALUE) {
-                        pheromone_exceeds_maximum_range = true;
-                    }
-                    const max_value = Number.MAX_VALUE;
-                    const min_value = Number.EPSILON;
-                    let value = Math.min(result, max_value);
-                    value = Math.max(value, min_value);
-                    target.set(row, column, value);
-                    return value;
-                } else {
-                    return cached;
-                }
-            }
-        }
-        return Object.assign(Object.create(target), { get: getPheromone });
-    }
+    const routes_segments_cache: Cached_hash_table_of_path_lengths_and_path_segments =
+        new Map();
+    const pheromoneStore = createCachePheromoneCalc(
+        count_of_nodes,
+        global_optimal_routes,
+        () => greedy_length,
+        () => convergence_coefficient,
+        routes_segments_cache,
+        (exceeds) => (pheromone_exceeds_maximum_range = exceeds)
+    );
 
     function update_latest_and_optimal_routes() {
         assignOwnKeys(
@@ -292,8 +255,6 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
         clear_pheromone_cache();
     });
 
-    const routes_segments_cache: Cached_hash_table_of_path_lengths_and_path_segments =
-        new Map();
     const { max_number_of_stagnation, relative_Information_Entropy_Factor } =
         options;
     const runOneIteration = async () => {
@@ -439,11 +400,11 @@ export function createTSPrunner(input: TSPRunnerOptions): TSP_Runner {
                         for (const [city1, city2] of cycle_route_to_segments(
                             route
                         )) {
-                            pheromoneStore.set(city1, city2, 0);
+                            pheromoneStore.calc(city1, city2);
                         }
                     }
                 } else {
-                    pheromoneStore.clear();
+                    pheromoneStore.calcAll();
                 }
                 update_Cached_hash_table_of_path_lengths_and_path_segments(
                     routes_segments_cache,
