@@ -8,7 +8,7 @@ export const local_optimization_route_pool = createThreadPool({
     terminate(w) {
         w.terminate();
     },
-    maxThreads: navigator.hardwareConcurrency,
+    maxThreads: 1,
     create: () => {
         return create_Worker_comlink<local_optimization_route_api>(() => {
             const w = new Worker(
