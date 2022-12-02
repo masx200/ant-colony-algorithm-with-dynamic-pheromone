@@ -4,8 +4,8 @@
             :class="{ 'fixed-top-navbar': navbar_float }"
             :percentage="percentage"
             :indeterminate="indeterminate"
-            v-show="show_progress"
         />
+        <!-- v-show="show_progress" -->
         <h1>自适应+蚁群+k-opt+动态计算信息素-TSP-测试</h1>
         <hr />
         <span>选择城市地图</span>
@@ -35,12 +35,14 @@
             :disabled="disable_stop"
         />
         <hr />
-        <span v-text="'显示进度条'"></span>
+        <span v-text="'进度:'"></span>
+        <span> {{ percentage }}%</span>
+        <!-- <span v-text="'显示进度条'"></span>
         <el-switch
             v-model="show_progress"
             active-text="Open"
             inactive-text="Close"
-        />
+        /> -->
         <hr />
         <details
             class="width-100-percent"
