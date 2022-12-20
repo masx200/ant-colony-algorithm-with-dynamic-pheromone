@@ -1,4 +1,4 @@
-import { isEqual } from "lodash";
+import { isEqual } from "lodash-es";
 import { reversearray } from "./reversearray";
 
 export function ispathsequalinbothdirectionswithoutcycle(

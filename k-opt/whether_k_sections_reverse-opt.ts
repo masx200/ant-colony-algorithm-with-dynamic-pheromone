@@ -1,4 +1,4 @@
-import { random } from "lodash";
+import { random } from "lodash-es";
 
 export function whether_k_sections_reverse_opt({
     max_of_results,

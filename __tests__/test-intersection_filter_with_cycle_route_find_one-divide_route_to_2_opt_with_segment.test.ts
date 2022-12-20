@@ -1,4 +1,4 @@
-import { isEqual } from "lodash";
+import { isEqual } from "lodash-es";
 import { divide_route_to_2_opt_with_segment } from "../cross-points/divide_route_to_2-opt-with-segment";
 import { intersection_filter_with_cycle_route_find_one_old } from "../cross-points/intersection_filter_with_cycle_route_find_one_old";
 import { NodeCoordinates } from "../functions/NodeCoordinates";

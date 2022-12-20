@@ -1,4 +1,4 @@
-import { isEqual } from "lodash";
+import { isEqual } from "lodash-es";
 import { euclidean_distance } from "../functions/euclidean_distance";
 import { getalldistancesofnodes } from "../functions/getalldistancesofnodes";
 import { geteuclideandistancebyindex } from "../functions/geteuclideandistancebyindex";

@@ -1,5 +1,5 @@
 import { generate_k_opt_cycle_routes_limited } from "./generate_k_opt_cycle_routes_limited";
-import { random } from "lodash";
+import { random } from "lodash-es";
 import { assert_true } from "../test/assert_true";
 
 export function random_k_opt_limited_full({

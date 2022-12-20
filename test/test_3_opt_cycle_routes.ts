@@ -1,4 +1,4 @@
-import { sum } from "lodash";
+import { sum } from "lodash-es";
 import { divide_route_to_k_opt_random } from "../k-opt/divide_route_to_k-opt-random";
 import { generate_3_opt_cycle_routes } from "../k-opt/generate_3_opt_cycle_routes";
 import { split_cycle_route_to_3_sections } from "../k-opt/split_cycle_route_to_3_sections";

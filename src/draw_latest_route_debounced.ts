@@ -1,5 +1,5 @@
 import { EChartsType } from "echarts";
-import { debounce } from "lodash";
+import { debounce } from "lodash-es";
 import { NodeCoordinates } from "../functions/NodeCoordinates";
 import { drawChartMaxWait, drawChartWait } from "./drawChartMaxWait";
 import { debounce_animation_frame } from "./debounce_animation_frame";

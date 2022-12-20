@@ -1,5 +1,5 @@
 import { generate_one_k_exchange_route } from "../cross-points/generate_one_k_exchange_route";
-import { isEqual } from "lodash";
+import { isEqual } from "lodash-es";
 import { expect } from "vitest";
 import { it } from "vitest";
 it("test-generate_one_k_exchange_route", () => {

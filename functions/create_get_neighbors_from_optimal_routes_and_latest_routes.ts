@@ -1,5 +1,5 @@
 import { assert_Integer } from "../test/assert_Integer";
-import uniq from "lodash/uniq";
+import { uniq } from "lodash-es";
 
 import "core-js/stable/array/at";
 

@@ -1,4 +1,4 @@
-import { debounce } from "lodash";
+import { debounce } from "lodash-es";
 import { drawChartMaxWait, drawChartWait } from "./drawChartMaxWait";
 import { draw_path_number_and_optimal_path_length_chart } from "./draw_path_number_and_optimal_path_length_chart";
 import { debounce_animation_frame } from "./debounce_animation_frame";

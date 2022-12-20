@@ -1,4 +1,4 @@
-import { sum, uniq } from "lodash";
+import { sum, uniq } from "lodash-es";
 import { assert_true } from "../test/assert_true";
 import { getUniqueStringOfCircularRoute } from "./getUniqueStringOfCircularRoute";
 // import { ispathsequalinbothdirectionswithcycle } from "./ispathsequalinbothdirectionswithcycle";

@@ -7,7 +7,7 @@ import { Precise_2_opt_eliminates_all_intersections } from "../cross-points/Prec
 import { random_k_exchange_limited } from "../cross-points/random_k_exchange_limited";
 import { Random_K_OPT_full_limited_find_best } from "../k-opt/Random_K_OPT_full_limited_find_best";
 import { set_distance_round } from "../src/set_distance_round";
-import { sumBy } from "lodash";
+import { sumBy } from "lodash-es";
 
 export async function local_optimization_routes({
     routes_and_lengths,

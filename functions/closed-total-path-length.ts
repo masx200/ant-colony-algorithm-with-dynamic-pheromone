@@ -1,4 +1,4 @@
-import { sum } from "lodash";
+import { sum } from "lodash-es";
 import { assert_number } from "../test/assert_number";
 import { cycle_route_to_segments } from "./cycle_route_to_segments";
 import { generateUniqueArrayOfCircularPath } from "./generateUniqueArrayOfCircularPath";

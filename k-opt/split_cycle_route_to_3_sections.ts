@@ -1,4 +1,4 @@
-import { random } from "lodash";
+import { random } from "lodash-es";
 
 import { assert_true } from "../test/assert_true";
 import { cycle_reorganize } from "../functions/cycle_reorganize";
