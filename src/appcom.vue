@@ -238,7 +238,7 @@
                 <summary>全局最优路径的展示</summary>
                 <!-- 全局最优解的图 -->
                 <LineChart
-                    :v-if="show_routes_of_best"
+                    v-if="show_routes_of_best"
                     class="single-chart"
                     style=""
                     :options="options_of_best_route_chart"
@@ -259,7 +259,7 @@
                 <!-- 路径序号和当前路径长度的图表 -->
                 <LineChart
                     class="single-chart"
-                    :v-if="show_chart_of_latest"
+                    v-if="show_chart_of_latest"
                     style=""
                     :options="
                         options_of_iterations_and_information_entropy_chart
@@ -278,7 +278,7 @@
             <div class="chart-container" style="">
                 <!-- 迭代轮次和相对信息熵的图表 -->
                 <LineChart
-                    :v-if="show_chart_of_entropy"
+                    v-if="show_chart_of_entropy"
                     class="single-chart"
                     style=""
                     :options="options_of_current_path_length_chart"
@@ -293,7 +293,7 @@
         >
             <summary>路径序号和最优路径长度</summary>
             <LineChart
-                :v-if="show_chart_of_best"
+                v-if="show_chart_of_best"
                 class="single-chart"
                 style=""
                 :options="options_of_best_path_length_chart"
@@ -363,7 +363,7 @@
             <summary>每次迭代的统计</summary>
             <!-- 迭代结果 -->
             <Data_table
-                :v-if="show_summary_of_iterations"
+                v-if="show_summary_of_iterations"
                 :tableheads="oneiterationtableheads"
                 :tablebody="oneiterationtablebody"
             />
@@ -371,7 +371,7 @@
         <hr />
     </div>
 </template>
-<script lang="ts" src="./appcom.ts"></script>
+<script lang="ts" src="./app-com.ts"></script>
 <style scoped>
 .fixed-top-navbar {
     z-index: 10;
