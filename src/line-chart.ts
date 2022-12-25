@@ -6,7 +6,6 @@ import { debounce_animation_frame } from "./debounce_animation_frame";
 import { drawChartWait } from "./drawChartMaxWait";
 import { use_escharts_container_pair } from "./use_escharts_container_pair";
 
-
 export default defineComponent({
     props: {
         options: { required: true, type: Object as PropType<ECBasicOption> },
