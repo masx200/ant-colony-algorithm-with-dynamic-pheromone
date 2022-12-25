@@ -229,7 +229,7 @@
         </div>
         <hr />
 
-        <div class="chartcontainer" style="">
+        <div class="chart-container" style="">
             <details
                 class="width-100-percent"
                 :open="show_routes_of_best"
@@ -238,7 +238,8 @@
                 <summary>全局最优路径的展示</summary>
                 <!-- 全局最优解的图 -->
                 <LineChart
-                    class="singlechart"
+                    :v-if="show_routes_of_best"
+                    class="single-chart"
                     style=""
                     :options="options_of_best_route_chart"
                 ></LineChart>
@@ -254,10 +255,11 @@
             @toggle="show_chart_of_latest = $event.target.open"
         >
             <summary>迭代次数和相对信息熵</summary>
-            <div class="chartcontainer" style="">
+            <div class="chart-container" style="">
                 <!-- 路径序号和当前路径长度的图表 -->
                 <LineChart
-                    class="singlechart"
+                    class="single-chart"
+                    :v-if="show_chart_of_latest"
                     style=""
                     :options="
                         options_of_iterations_and_information_entropy_chart
@@ -273,10 +275,11 @@
             @toggle="show_chart_of_entropy = $event.target.open"
         >
             <summary>路径序号和当前路径长度</summary>
-            <div class="chartcontainer" style="">
+            <div class="chart-container" style="">
                 <!-- 迭代轮次和相对信息熵的图表 -->
                 <LineChart
-                    class="singlechart"
+                    :v-if="show_chart_of_entropy"
+                    class="single-chart"
                     style=""
                     :options="options_of_current_path_length_chart"
                 ></LineChart>
@@ -290,7 +293,8 @@
         >
             <summary>路径序号和最优路径长度</summary>
             <LineChart
-                class="singlechart"
+                :v-if="show_chart_of_best"
+                class="single-chart"
                 style=""
                 :options="options_of_best_path_length_chart"
             ></LineChart>
@@ -359,6 +363,7 @@
             <summary>每次迭代的统计</summary>
             <!-- 迭代结果 -->
             <Data_table
+                :v-if="show_summary_of_iterations"
                 :tableheads="oneiterationtableheads"
                 :tablebody="oneiterationtablebody"
             />
@@ -376,7 +381,7 @@
     top: 0%;
     left: 0;
 }
-.singlechart {
+.single-chart {
     min-height: 300px;
     max-width: 100%;
     width: 100%;
@@ -384,7 +389,7 @@
     /* max-height: 100%; */
     height: 600px;
 }
-.chartcontainer {
+.chart-container {
     max-width: 100%;
     display: flex;
     max-height: 100%;
@@ -396,38 +401,38 @@
 }
 @media screen and (max-width: 1000px) {
     /* 小于1000 */
-    .chartcontainer {
+    .chart-container {
         flex-direction: column;
     }
 }
 /* 小于600 */
 @media screen and (max-width: 400px) {
-    .singlechart {
+    .single-chart {
         max-height: 400px;
         height: 400px;
     }
 }
 @media screen and (max-width: 500px) {
-    .singlechart {
+    .single-chart {
         height: 500px;
         max-height: 500px;
     }
 }
 @media screen and (max-width: 600px) {
-    .singlechart {
+    .single-chart {
         height: 600px;
         max-height: 600px;
     }
 }
 /* 大于600 */
 @media screen and (min-width: 600px) {
-    .singlechart {
+    .single-chart {
         max-height: 600px;
     }
 }
 /* 大于1000 */
 @media screen and (min-width: 1000px) {
-    .chartcontainer {
+    .chart-container {
         flex-direction: row;
     }
 }
