@@ -1,6 +1,7 @@
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import ElementPlus from "unplugin-element-plus/vite";
+//@ts-ignore
+import ElementPlus from "unplugin-element-plus/dist/vite";
 import path from "path";
 import vpchecker from "vite-plugin-checker";
 import vuePlugin from "@vitejs/plugin-vue";
