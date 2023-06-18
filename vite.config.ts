@@ -17,7 +17,7 @@ const checker = vpchecker;
 export default defineConfig(({ mode, command }): UserConfig => {
     const isdrop = mode === "production" && command === "build";
     const config: UserConfig = {
-        worker: {
+        worker: { format: "es",
             plugins: [
                 babel({
                     babelHelpers: "bundled",
