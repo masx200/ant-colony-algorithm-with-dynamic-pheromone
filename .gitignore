@@ -143,3 +143,4 @@ dist-ssr
 #.yarn
 vite.config.ts.js
 yarn.lock
+checks.json
