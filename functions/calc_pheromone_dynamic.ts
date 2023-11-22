@@ -39,11 +39,11 @@ export function calc_pheromone_dynamic({
                                 routes_segments_cache,
                                 route_length,
                                 row,
-                                column
-                            )
+                                column,
+                            ),
                         )) /
                         4,
-                    convergence_coefficient
+                    convergence_coefficient,
                 );
                 if (a === 0) {
                     return 0;
@@ -55,13 +55,13 @@ export function calc_pheromone_dynamic({
                 const b = Infinity_to_max_or_min(
                     Math.pow(
                         greedy_length / route_length,
-                        convergence_coefficient * convergence_coefficient
-                    )
+                        convergence_coefficient * convergence_coefficient,
+                    ),
                 );
                 //b可能是Infinity
                 const r = c * a * b;
                 return nan_to_zero(r);
-            })
+            }),
         ) / length_of_routes;
     assert_true(!Number.isNaN(result), "pheromone should  be not NaN");
     return result;

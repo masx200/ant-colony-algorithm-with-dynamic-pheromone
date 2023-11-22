@@ -1,7 +1,7 @@
 import { EventEmitterTarget } from "@masx200/event-emitter-target";
 
 export function createEventPair<T = undefined>(
-    emitter: EventEmitterTarget
+    emitter: EventEmitterTarget,
 ): {
     off: (callback: (data: T) => void) => void;
     emit: (data: T) => void;

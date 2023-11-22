@@ -14,11 +14,11 @@ export const local_optimization_route_pool = createThreadPool({
             const w = new Worker(
                 new URL(
                     "./local_optimization_route.worker.ts",
-                    import.meta.url
+                    import.meta.url,
                 ),
                 {
                     type: "module",
-                }
+                },
             );
             return w;
         }, worker_error_listener);

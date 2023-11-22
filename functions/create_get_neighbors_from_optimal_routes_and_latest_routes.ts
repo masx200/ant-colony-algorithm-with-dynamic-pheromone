@@ -7,11 +7,11 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
     latest_and_optimal_routes: {
         route: number[];
         length: number;
-    }[]
+    }[],
 ): { get: (city: number) => number[]; clear(): void } {
     const cache = new Map<number, number[]>();
     function get_neighbors_from_optimal_routes_and_latest_routes(
-        city: number
+        city: number,
     ): number[] {
         assert_Integer(city, "city should be an integer,but received:" + city);
         const cached = cache.get(city);
@@ -34,7 +34,7 @@ export function create_get_neighbors_from_optimal_routes_and_latest_routes(
                         route.at((index + 1 + route.length) % route.length),
                     ].filter((n) => typeof n === "number") as number[];
                 })
-                .flat()
+                .flat(),
         );
         cache.set(city, result);
         return result;

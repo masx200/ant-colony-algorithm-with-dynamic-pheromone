@@ -1,6 +1,6 @@
 export function getOrCreateMapOfMapFun<K extends object, B, C>(
     map: Pick<WeakMap<K, Map<B, C>>, "set" | "has" | "get">,
-    key: K
+    key: K,
 ): Map<B, C> {
     let set;
     if (map.has(key)) {

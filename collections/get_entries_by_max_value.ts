@@ -7,6 +7,6 @@ export function get_entries_by_max_value(array: Array<number>): [any, any] {
                 return [ci, cv];
             }
         },
-        [0, array[0]]
+        [0, array[0]],
     );
 }

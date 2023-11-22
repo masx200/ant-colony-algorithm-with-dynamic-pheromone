@@ -34,8 +34,8 @@ export async function* greedy_first_search_routes_parallel({
                     node_coordinates,
                     round,
                     max_cities_of_greedy,
-                })
-            )
+                }),
+            ),
         );
         rest_count -= current_threads;
         for (const result of parallel_results) {

@@ -3,7 +3,7 @@
 export function is_segment_in_cycle_route(
     cycle_route: number[],
     left: number,
-    right: number
+    right: number,
 ): boolean {
     for (const [index, value] of cycle_route.entries()) {
         const array = cycle_route;

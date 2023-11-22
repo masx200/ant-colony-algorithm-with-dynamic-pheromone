@@ -5,11 +5,11 @@ export function geteuclideandistancebyindex(
     left: number,
     right: number,
     node_coordinates: NodeCoordinates,
-    round = false
+    round = false,
 ): number {
     const euclideandistancerecord = getstoreofnode_coordinates(
         node_coordinates,
-        round
+        round,
     );
     if (euclideandistancerecord.has(left, right)) {
         return euclideandistancerecord.get(left, right);

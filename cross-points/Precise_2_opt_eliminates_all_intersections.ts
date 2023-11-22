@@ -36,7 +36,7 @@ export function Precise_2_opt_eliminates_all_intersections({
                     path: route,
                     getdistancebyindex: creategetdistancebyindex(
                         node_coordinates,
-                        get_distance_round()
+                        get_distance_round(),
                     ),
                 });
                 return { length, route };
@@ -45,7 +45,7 @@ export function Precise_2_opt_eliminates_all_intersections({
         const { route: best_route_of_2_opt, length: best_length_of_2_opt } =
             routes_and_lengths.length
                 ? get_best_route_Of_Series_routes_and_lengths(
-                      routes_and_lengths
+                      routes_and_lengths,
                   )
                 : { length: length, route: route };
         if (best_length_of_2_opt < length) {

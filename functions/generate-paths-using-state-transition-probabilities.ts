@@ -20,7 +20,7 @@ export function generate_paths_using_state_transition_probabilities(
         node_coordinates: NodeCoordinates;
 
         pheromoneStore: ReadOnlyPheromone;
-    } & SharedOptions
+    } & SharedOptions,
 ): {
     route: number[];
     length: number;
@@ -47,7 +47,7 @@ export function generate_paths_using_state_transition_probabilities(
             left,
             right,
             node_coordinates,
-            get_distance_round()
+            get_distance_round(),
         );
     };
 
@@ -57,7 +57,7 @@ export function generate_paths_using_state_transition_probabilities(
     const startnode = pickRandomOne(inputindexs);
     const route: number[] = [startnode];
     const available_nodes = new Set<number>(
-        inputindexs.filter((v) => !route.includes(v))
+        inputindexs.filter((v) => !route.includes(v)),
     );
     const is_count_not_large = count_of_nodes <= max_cities_of_state_transition;
     while (route.length !== count_of_nodes) {
@@ -104,7 +104,7 @@ export function generate_paths_using_state_transition_probabilities(
         path: route,
         getdistancebyindex: creategetdistancebyindex(
             node_coordinates,
-            get_distance_round()
+            get_distance_round(),
         ),
     });
     const length = routelength;

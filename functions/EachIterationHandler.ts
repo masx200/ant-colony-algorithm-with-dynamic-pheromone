@@ -17,7 +17,7 @@ export async function EachIterationHandler(
         get_best_route: () => number[];
         get_best_length: () => number;
         node_coordinates: NodeCoordinates;
-    }
+    },
 ): Promise<{
     iterate_best_length: number;
     coefficient_of_diversity_increase: number;
@@ -49,7 +49,7 @@ export async function EachIterationHandler(
         calc_population_relative_information_entropy(routes);
 
     const coefficient_of_diversity_increase = Math.sqrt(
-        1 - Math.pow(current_population_relative_information_entropy, 2)
+        1 - Math.pow(current_population_relative_information_entropy, 2),
     );
 
     assert_true(!Number.isNaN(current_population_relative_information_entropy));
@@ -69,7 +69,7 @@ export async function EachIterationHandler(
             { route: get_best_route(), length: get_best_length() },
             ...best_half_routes,
         ],
-        (a) => a.length
+        (a) => a.length,
     );
 
     const optimization_results = await local_optimization_route_thread({
@@ -90,7 +90,7 @@ export async function EachIterationHandler(
     if (optimal_length_of_iteration < get_best_length()) {
         set_global_best(
             optimal_route_of_iteration,
-            optimal_length_of_iteration
+            optimal_length_of_iteration,
         );
     }
 

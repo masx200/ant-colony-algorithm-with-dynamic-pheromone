@@ -13,7 +13,7 @@ export function construct_one_route_all(
         alpha_zero: number;
         beta_zero: number;
         lastrandom_selection_probability: number;
-    } & SharedOptions
+    } & SharedOptions,
 ): {
     route: number[];
     length: number;

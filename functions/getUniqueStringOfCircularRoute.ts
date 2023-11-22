@@ -3,6 +3,6 @@ import { generateUniqueStringOfArray } from "./generateUniqueStringOfArray";
 
 export function getUniqueStringOfCircularRoute(route: number[]): string {
     return generateUniqueStringOfArray(
-        generateUniqueArrayOfCircularPath(route)
+        generateUniqueArrayOfCircularPath(route),
     );
 }

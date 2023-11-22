@@ -11,7 +11,7 @@ it("random_k_opt_limited_full", () => {
             random_k_opt_limited_full({
                 oldRoute: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
                 max_results_of_k_opt: 7,
-            }).length
+            }).length,
         ).toBe(7);
     }
 });

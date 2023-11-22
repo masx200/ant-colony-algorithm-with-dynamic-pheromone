@@ -4,7 +4,7 @@ import { getUniqueStringOfCircularRoute } from "./getUniqueStringOfCircularRoute
 // import { ispathsequalinbothdirectionswithcycle } from "./ispathsequalinbothdirectionswithcycle";
 
 export function calc_population_relative_information_entropy(
-    routes: Array<number[]>
+    routes: Array<number[]>,
 ) {
     if (!(routes.length >= 2)) {
         throw new Error("incorrect routes");
@@ -20,7 +20,7 @@ export function calc_population_relative_information_entropy(
     const unique_strings = routes.map((r) => getUniqueStringOfCircularRoute(r));
     const notrepeatroutes =
         uniq(
-            unique_strings
+            unique_strings,
         ); /*  routes.reduce((previous: number[][], route) => {
         if (previous.length) {
             if (
@@ -41,18 +41,18 @@ export function calc_population_relative_information_entropy(
             (previous, current) =>
                 previous +
                 Number(
-                    route === current
+                    route === current,
                     // ispathsequalinbothdirectionswithcycle(current, route)
                 ),
-            0
-        )
+            0,
+        ),
     );
     const sumfitnessvalues = sum(fitnessvalues);
     const fitnessweight = fitnessvalues.map((v) => v / sumfitnessvalues);
     const result = Math.min(
         1,
         -sum(fitnessweight.map((fitness) => fitness * Math.log(fitness))) /
-            Math.log(routesnumber)
+            Math.log(routesnumber),
     );
     if (Number.isNaN(result)) {
         throw new Error("Accident ");

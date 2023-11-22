@@ -4,7 +4,7 @@ import { EachRouteGeneratorOptions } from "./Fun_EachRouteGenerator";
 import { SharedOptions } from "./SharedOptions";
 
 export async function EachRouteGenerator(
-    options: EachRouteGeneratorOptions & SharedOptions
+    options: EachRouteGeneratorOptions & SharedOptions,
 ): Promise<{
     route: number[];
     length: number;

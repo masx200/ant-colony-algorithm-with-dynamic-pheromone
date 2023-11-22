@@ -20,18 +20,18 @@ export function is_intersection_filter_with_cycle_route_old({
 
     for (let [[left1, left2], [right1, right2]] of combinations(
         cyclesegments,
-        2
+        2,
     )) {
         if (!haverepetitions([left1, right1, left2, right2])) {
             const intersectparameters = [left1, left2, right1, right2].map(
-                (node) => node_coordinates[node]
+                (node) => node_coordinates[node],
             );
             if (
                 robustsegmentintersect(
                     intersectparameters[0],
                     intersectparameters[1],
                     intersectparameters[2],
-                    intersectparameters[3]
+                    intersectparameters[3],
                 )
             ) {
                 return true;

@@ -5,7 +5,7 @@ import { MatrixSymmetryCreate } from "@masx200/sparse-2d-matrix";
 
 export function createsymmetrymatrixdistancestore(
     node_coordinates: NodeCoordinates,
-    round = false
+    round = false,
 ) {
     const row = node_coordinates.length;
     return MatrixSymmetryCreate({

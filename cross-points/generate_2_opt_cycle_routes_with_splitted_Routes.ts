@@ -2,12 +2,12 @@ import { assert_true } from "../test/assert_true";
 import { reversearray } from "../functions/reversearray";
 export function generate_2_opt_cycle_routes_with_splitted_Routes(
     oldRoute: number[],
-    splitted_Routes: [number[], number[]]
+    splitted_Routes: [number[], number[]],
 ): number[][] {
     assert_true(oldRoute.length >= 4);
 
     assert_true(
-        splitted_Routes.every((partial_route) => partial_route.length >= 2)
+        splitted_Routes.every((partial_route) => partial_route.length >= 2),
     );
     const [first, second] = splitted_Routes;
     const routes: number[][] = [

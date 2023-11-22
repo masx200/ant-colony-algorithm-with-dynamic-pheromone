@@ -2,7 +2,7 @@ export function get_worst_route_Of_Series_routes_and_lengths(
     routes_and_lengths: {
         route: number[];
         length: number;
-    }[]
+    }[],
 ): {
     route: number[];
     length: number;
@@ -14,7 +14,7 @@ export function get_worst_route_Of_Series_routes_and_lengths(
         (previous, current) => {
             return previous.length > current.length ? previous : current;
         },
-        routes_and_lengths[0]
+        routes_and_lengths[0],
     );
 
     return iterate_best_lengthandroute;

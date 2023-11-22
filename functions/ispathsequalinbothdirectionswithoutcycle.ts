@@ -3,7 +3,7 @@ import { reversearray } from "./reversearray";
 
 export function ispathsequalinbothdirectionswithoutcycle(
     left: Array<number>,
-    right: Array<number>
+    right: Array<number>,
 ): boolean {
     if (left.length != right.length) {
         return false;

@@ -4,7 +4,7 @@ import { cycle_reorganize } from "../functions/cycle_reorganize";
 
 export const divide_route_to_2_opt_with_segment = (
     oldRoute: number[],
-    segment: [[number, number], [number, number]]
+    segment: [[number, number], [number, number]],
 ): [number[], number[]] => {
     const k = 2;
     assert_true(oldRoute.length >= 2 * k);

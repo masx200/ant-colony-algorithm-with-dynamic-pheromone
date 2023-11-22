@@ -1,5 +1,5 @@
 export function getOrCreateSetOfMapFun<K extends object, B>(
-    map: Pick<WeakMap<K, Set<B>>, "set" | "has" | "get">
+    map: Pick<WeakMap<K, Set<B>>, "set" | "has" | "get">,
 ): (key: K) => Set<B> {
     return function (key: K): Set<B> {
         let set;

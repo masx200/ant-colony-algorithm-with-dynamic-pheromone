@@ -8,23 +8,23 @@ it("pickRandomOne", () => {
         assert(
             pickRandomOne(
                 input,
-                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            ) === 1
+                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ) === 1,
         );
         assert(
             pickRandomOne(
                 input,
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-            ) === 18
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            ) === 18,
         );
         assert(input.includes(pickRandomOne(input)));
         assert(
             input.includes(
                 pickRandomOne(
                     input,
-                    input.map((a) => 1 / a)
-                )
-            )
+                    input.map((a) => 1 / a),
+                ),
+            ),
         );
     }
 });

@@ -5,7 +5,7 @@ export function update_Cached_hash_table_of_path_lengths_and_path_segments(
     routes_and_lengths: Array<{
         route: number[];
         length: number;
-    }>
+    }>,
 ) {
     for (const { route, length } of routes_and_lengths) {
         if (!map.has(length)) {
@@ -17,8 +17,8 @@ export function update_Cached_hash_table_of_path_lengths_and_path_segments(
                             [row, column] = [column, row];
                         }
                         return JSON.stringify([row, column]);
-                    })
-                )
+                    }),
+                ),
             );
         }
     }
@@ -34,7 +34,7 @@ export function has_Cached_hash_table_of_path_lengths_and_path_segments(
     map: Cached_hash_table_of_path_lengths_and_path_segments,
     length: number,
     row: number,
-    column: number
+    column: number,
 ) {
     if (row > column) {
         [row, column] = [column, row];

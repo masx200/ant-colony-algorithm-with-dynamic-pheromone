@@ -6,7 +6,7 @@ import type { CollectionOfOptimalRoutes } from "./CollectionOfOptimalRoutes";
 import { get_entries_by_max_value } from "./get_entries_by_max_value";
 export type { CollectionOfOptimalRoutes };
 export function create_collection_of_optimal_routes(
-    max_size: number
+    max_size: number,
 ): CollectionOfOptimalRoutes {
     assert_true(0 < max_size, "max_size greater than 0");
 
@@ -21,7 +21,7 @@ export function create_collection_of_optimal_routes(
             return;
         } else {
             const [index, value] = get_entries_by_max_value(
-                result.map((a) => a.length)
+                result.map((a) => a.length),
             );
             return { index, value };
         }
@@ -65,7 +65,7 @@ export function create_collection_of_optimal_routes(
                 const index = longest.index;
                 assignOwnKeys(
                     result,
-                    Array.from(result).filter((_v, i) => i !== index)
+                    Array.from(result).filter((_v, i) => i !== index),
                 );
             }
         },

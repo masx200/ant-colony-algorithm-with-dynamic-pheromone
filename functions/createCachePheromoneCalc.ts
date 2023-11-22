@@ -10,7 +10,7 @@ export function createCachePheromoneCalc(
     greedy_length: () => number,
     convergence_coefficient: () => number,
     routes_segments_cache: Cached_hash_table_of_path_lengths_and_path_segments,
-    pheromone_exceeds_maximum_range: (exceeds: boolean) => void
+    pheromone_exceeds_maximum_range: (exceeds: boolean) => void,
 ): Omit<
     PheromoneCache & {
         calcAll(): void;

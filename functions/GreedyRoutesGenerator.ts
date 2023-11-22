@@ -11,7 +11,7 @@ import { assert_true } from "../test/assert_true";
 export async function GreedyRoutesGenerator(
     options: {
         emit_finish_greedy_iteration: (
-            data: DataOfFinishGreedyIteration
+            data: DataOfFinishGreedyIteration,
         ) => void;
         get_best_route: () => number[];
         get_best_length: () => number;
@@ -21,7 +21,7 @@ export async function GreedyRoutesGenerator(
         emit_finish_one_route: (data: PureDataOfFinishOneRoute) => void;
 
         count_of_nodes: number;
-    } & SharedOptions
+    } & SharedOptions,
 ): Promise<{
     best_length: number;
     best_route: number[];
@@ -83,12 +83,12 @@ export async function GreedyRoutesGenerator(
     const best_route = optimal_route_of_iteration;
     Greedy_algorithm_to_solve_tsp_with_selected_start_pool.destroy();
     const time_ms_of_one_iteration = sum(
-        parallel_results.map((r) => r.time_ms)
+        parallel_results.map((r) => r.time_ms),
     );
     const average_length_of_iteration =
         sum(parallel_results.map((a) => a.length)) / parallel_results.length;
     const worst_length_of_iteration = Math.max(
-        ...parallel_results.map((a) => a.length)
+        ...parallel_results.map((a) => a.length),
     );
     emit_finish_greedy_iteration({
         worst_length_of_iteration,

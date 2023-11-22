@@ -14,7 +14,7 @@ export function cacheble_is_intersection_filter_with_cycle_route({
 }): boolean {
     const map = getOrCreateMapOfMapFun(
         node_coordinates_to_intersect_routes_unique,
-        node_coordinates
+        node_coordinates,
     );
     const unique_string = getUniqueStringOfCircularRoute(cycle_route);
     if (map.has(unique_string)) {

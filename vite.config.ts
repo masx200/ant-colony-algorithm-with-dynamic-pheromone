@@ -17,17 +17,21 @@ const checker = vpchecker;
 export default defineConfig(({ mode, command }): UserConfig => {
     const isdrop = mode === "production" && command === "build";
     const config: UserConfig = {
-        worker: { format: "es",
-            plugins: [
-                babel({
-                    babelHelpers: "bundled",
-                    exclude: [/node_modules/],
-                    extensions: [".ts", ".js"],
-                    plugins: [
-                        ["@babel/plugin-proposal-async-generator-functions"],
-                    ],
-                }),
-            ] as PluginOption[],
+        worker: {
+            format: "es",
+            plugins: () =>
+                [
+                    babel({
+                        babelHelpers: "bundled",
+                        exclude: [/node_modules/],
+                        extensions: [".ts", ".js"],
+                        plugins: [
+                            [
+                                "@babel/plugin-proposal-async-generator-functions",
+                            ],
+                        ],
+                    }),
+                ] as PluginOption[],
         },
         esbuild: {
             legalComments: "none",

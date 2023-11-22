@@ -21,6 +21,6 @@ export function closed_total_path_length({
             } else {
                 return distance;
             }
-        })
+        }),
     );
 }

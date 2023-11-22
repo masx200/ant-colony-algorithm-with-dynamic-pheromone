@@ -23,12 +23,12 @@ export function generate_2_opt_routes_by_random_or_cross_point({
     if (intersection) {
         const splitted_Routes = divide_route_to_2_opt_with_segment(
             route,
-            intersection
+            intersection,
         );
         const routes_of_2_opt_accurate =
             generate_2_opt_cycle_routes_with_splitted_Routes(
                 route,
-                splitted_Routes
+                splitted_Routes,
             );
         return routes_of_2_opt_accurate;
     } else {
