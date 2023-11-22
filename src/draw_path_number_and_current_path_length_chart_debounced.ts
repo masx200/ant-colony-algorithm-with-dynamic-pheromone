@@ -9,6 +9,6 @@ export const draw_path_number_and_current_path_length_chart_debounced =
             drawChartWait,
             {
                 maxWait: drawChartMaxWait,
-            }
-        )
+            },
+        ),
     );

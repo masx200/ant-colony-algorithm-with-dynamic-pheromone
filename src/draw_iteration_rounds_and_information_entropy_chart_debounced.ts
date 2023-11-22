@@ -10,6 +10,6 @@ export const draw_iteration_rounds_and_information_entropy_chart_debounced =
             drawChartWait,
             {
                 maxWait: drawChartMaxWait,
-            }
-        )
+            },
+        ),
     );

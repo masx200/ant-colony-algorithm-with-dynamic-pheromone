@@ -33,8 +33,8 @@ export function testgeteuclideandistance() {
                 4.123105625617661, 7.0710678118654755, 10, 4.123105625617661,
                 6.4031242374328485, 3.1622776601683795,
             ],
-            node1distances
-        )
+            node1distances,
+        ),
     );
     assert_true(10 === Math.max(...node1distances));
 }

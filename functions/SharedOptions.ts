@@ -5,7 +5,7 @@ import { ReadOnlyPheromone } from "./ReadOnlyPheromone";
 export type SharedOptions = Required<TSPRunnerOptions> & {
     get_convergence_coefficient: () => number;
     get_neighbors_from_optimal_routes_and_latest_routes: (
-        current_city: number
+        current_city: number,
     ) => number[];
     get_random_selection_probability: () => number;
     get_search_count_of_best: () => number;

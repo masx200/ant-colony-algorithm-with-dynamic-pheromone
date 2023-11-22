@@ -22,7 +22,7 @@ export async function tsp_runner_run_async({
     onprogress?: (percentage: number) => void;
 }): Promise<void> {
     assert_true(
-        [time_of_search_ms, iterations_of_search].some((a) => a < Infinity)
+        [time_of_search_ms, iterations_of_search].some((a) => a < Infinity),
     );
     let last_update_time = Number(new Date());
     const all_time = time_of_search_ms;
@@ -46,7 +46,7 @@ export async function tsp_runner_run_async({
 
             onprogress &&
                 onprogress(
-                    Math.min(100, 100 * (1 - rest_iterations / all_iterations))
+                    Math.min(100, 100 * (1 - rest_iterations / all_iterations)),
                 );
         } else {
             const last_time = Number(new Date());
@@ -59,7 +59,7 @@ export async function tsp_runner_run_async({
         if (duration > drawChartWait) {
             run_iterations = Math.max(
                 Math.round(run_iterations / 2),
-                min_count
+                min_count,
             );
         } else {
             run_iterations++;
@@ -67,13 +67,13 @@ export async function tsp_runner_run_async({
         run_iterations = Math.min(run_iterations, rest_iterations);
         if (Number(new Date()) - last_update_time > drawChartMaxWait) {
             on_update_output_data(
-                await runner.get_output_data_and_consume_iteration_data()
+                await runner.get_output_data_and_consume_iteration_data(),
             );
             last_update_time = Number(new Date());
         }
         await sleep_requestAnimationFrame_async_or_settimeout();
     }
     on_update_output_data(
-        await runner.get_output_data_and_consume_iteration_data()
+        await runner.get_output_data_and_consume_iteration_data(),
     );
 }

@@ -9,7 +9,7 @@ app.config.errorHandler = (e: any) => {
                 e.message,
                 String(e.error?.stack),
                 String(e?.stack),
-            ].join("\n")
+            ].join("\n"),
         );
     setTimeout(() => {
         throw e;

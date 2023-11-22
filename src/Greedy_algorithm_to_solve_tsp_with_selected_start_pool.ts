@@ -16,11 +16,11 @@ export const Greedy_algorithm_to_solve_tsp_with_selected_start_pool =
                 const w = new Worker(
                     new URL(
                         "./Greedy_algorithm_to_solve_tsp_with_selected_start.worker.ts",
-                        import.meta.url
+                        import.meta.url,
                     ),
                     {
                         type: "module",
-                    }
+                    },
                 );
 
                 return w;

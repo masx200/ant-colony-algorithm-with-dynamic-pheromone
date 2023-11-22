@@ -1,5 +1,5 @@
 export function debounce_animation_frame<
-    T extends (this: any, ...args: any[]) => void
+    T extends (this: any, ...args: any[]) => void,
 >(fn: T): T {
     let timer: undefined | number;
     return function (...args): void {

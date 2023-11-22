@@ -4,7 +4,7 @@ import { ObjectSorted } from "./ObjectSorted";
 export function stringify_replacer(): (
     this: any,
     key: string,
-    value: any
+    value: any,
 ) => any {
     return (_key, v) => {
         if (Array.isArray(v)) {

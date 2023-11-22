@@ -8,7 +8,7 @@ export function select_available_cities_from_optimal_and_latest({
 }: {
     available_nodes: Set<number>;
     get_neighbors_from_optimal_routes_and_latest_routes: (
-        current_city: number
+        current_city: number,
     ) => number[];
     current_city: number;
     max_cities_of_state_transition: number;
@@ -16,12 +16,12 @@ export function select_available_cities_from_optimal_and_latest({
     assert_true(available_nodes.size > 0);
     const maximum = Math.min(
         max_cities_of_state_transition,
-        available_nodes.size
+        available_nodes.size,
     );
     const cloned_available = new Set(available_nodes);
     const source = new Set<number>();
     for (const city of get_neighbors_from_optimal_routes_and_latest_routes(
-        current_city
+        current_city,
     )) {
         if (source.size <= maximum && available_nodes.has(city)) {
             source.add(city);
@@ -36,7 +36,7 @@ export function select_available_cities_from_optimal_and_latest({
 
             const start = Math.max(
                 0,
-                Math.floor(Math.random() * rest_nodes.length) - length_to_add
+                Math.floor(Math.random() * rest_nodes.length) - length_to_add,
             );
             assert_true(start >= 0);
             const selected = rest_nodes.slice(start, start + length_to_add);

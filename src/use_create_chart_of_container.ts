@@ -6,12 +6,12 @@ import { debounce_animation_frame } from "./debounce_animation_frame";
 
 export function use_create_chart_of_container(
     container: HTMLElement,
-    cleanup: (hook: () => void) => void
+    cleanup: (hook: () => void) => void,
 ): Pick<EChartsType, "resize" | "setOption"> {
     const debouncedresize = debounce_animation_frame(
         debounce(() => {
             chart.resize();
-        })
+        }),
     );
     const chart = echarts.init(container);
 
@@ -24,11 +24,11 @@ export function use_create_chart_of_container(
     });
 
     const resize = debounce_animation_frame(
-        debounce(chart.resize)
+        debounce(chart.resize),
     ) as EChartsType["resize"];
 
     const setOption = debounce_animation_frame(
-        debounce(chart.setOption)
+        debounce(chart.setOption),
     ) as EChartsType["setOption"];
     cleanup(() => {
         resizeobserver.disconnect();

@@ -3,7 +3,7 @@ import { DataOfFinishOneRoute } from "../functions/DataOfFinishOneRoute";
 
 export function use_data_of_one_route() {
     const onreceivedataofoneroute = function onreceivedataofoneroute(
-        datas: DataOfFinishOneRoute[]
+        datas: DataOfFinishOneRoute[],
     ): void {
         if (datas.length > dataofoneroute.length) {
             for (let i = dataofoneroute.length; i < datas.length; i++) {

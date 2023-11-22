@@ -10,10 +10,10 @@ const TSP_cords: Record<string, () => Promise<NodeCoordinates>> =
         getNames()
             .map((n) => ({ name: n, dimension: getDimension(n) }))
             .filter(({ dimension }) => dimension <= 1500)
-            .map(({ name }) => [name, () => getNodeCoordinates(name)])
+            .map(({ name }) => [name, () => getNodeCoordinates(name)]),
     );
 const entries: [string, () => Promise<NodeCoordinates>][] = Object.entries(
-    TSP_cords
+    TSP_cords,
 )
     .sort((a, b) => getDimension(a[0]) - getDimension(b[0]))
     .map((entry) => {
@@ -23,5 +23,5 @@ const entries: [string, () => Promise<NodeCoordinates>][] = Object.entries(
     });
 assert_true(entries.length);
 export const TSP_cities_map = new Map<string, () => Promise<NodeCoordinates>>(
-    entries
+    entries,
 );

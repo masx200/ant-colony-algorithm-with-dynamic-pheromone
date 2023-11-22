@@ -22,11 +22,11 @@ export function drawrouteofnode_coordinates({
         path: route,
         getdistancebyindex: creategetdistancebyindex(
             node_coordinates,
-            get_distance_round()
+            get_distance_round(),
         ),
     });
     const linechardata = [...greedypath, greedypath[0]].map(
-        (v) => node_coordinates[v]
+        (v) => node_coordinates[v],
     );
     draw_line_chart({
         data: linechardata,

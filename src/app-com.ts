@@ -109,7 +109,7 @@ export default defineComponent({
                     | {
                           addEventListener: (
                               arg0: string,
-                              arg1: () => void
+                              arg1: () => void,
                           ) => void;
                           release: () => Promise<void>;
                       }
@@ -184,7 +184,7 @@ export default defineComponent({
         const options_of_iterations_and_information_entropy_chart: Ref<ECBasicOption> =
             ref({});
         const options_of_current_path_length_chart: Ref<ECBasicOption> = ref(
-            {}
+            {},
         );
         const options_of_best_path_length_chart: Ref<ECBasicOption> = ref({});
         const submit = async () => {
@@ -246,7 +246,7 @@ export default defineComponent({
         const finish_one_iteration_listener = () => {
             const options =
                 get_options_iterations_and_information_entropy_chart(
-                    dataofoneiteration
+                    dataofoneiteration,
                 );
             options_of_iterations_and_information_entropy_chart.value = options;
         };
@@ -254,7 +254,7 @@ export default defineComponent({
         const finish_one_route_listener = () => {
             const options =
                 get_options_route_number_and_current_length_chart(
-                    dataofoneroute
+                    dataofoneroute,
                 );
             options_of_current_path_length_chart.value = options;
         };

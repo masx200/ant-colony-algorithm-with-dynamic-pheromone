@@ -16,7 +16,7 @@ export function use_escharts_container_pair(): {
         if (container_element) {
             const bestchart = use_create_chart_of_container(
                 container_element,
-                onUnmounted
+                onUnmounted,
             );
             chart.value = bestchart;
         }

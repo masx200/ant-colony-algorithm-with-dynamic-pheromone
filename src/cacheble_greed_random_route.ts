@@ -38,7 +38,7 @@ export async function cacheble_greed_random_route({
             });
         node_coordinates_to_greed_random_route.set(
             node_coordinates,
-            route_promise
+            route_promise,
         );
         const route = await route_promise;
         return route;

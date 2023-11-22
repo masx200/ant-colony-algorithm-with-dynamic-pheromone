@@ -7,7 +7,7 @@ export function draw_path_number_and_current_path_length_chart(
     path_number_and_current_path_length_chart: ShallowRef<
         Pick<EChartsType, "resize" | "setOption"> | undefined
     >,
-    dataofoneroute: DataOfFinishOneRoute[]
+    dataofoneroute: DataOfFinishOneRoute[],
 ) {
     const title_text = "路径序号和当前路径长度";
     const chart = path_number_and_current_path_length_chart.value;

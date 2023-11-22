@@ -10,7 +10,7 @@ import {
 import { DataOfBestChange } from "../functions/DataOfBestChange";
 
 export function use_history_of_best(
-    data_of_best: DeepReadonly<Ref<DataOfBestChange | undefined>>
+    data_of_best: DeepReadonly<Ref<DataOfBestChange | undefined>>,
 ): {
     history_of_best: {
         time_of_best_ms: number;

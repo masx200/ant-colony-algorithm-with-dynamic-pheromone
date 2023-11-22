@@ -16,7 +16,7 @@ export function testclosedtotalpathlength() {
             closed_total_path_length({
                 path: [0, 1, 2],
                 getdistancebyindex: creategetdistancebyindex(node_coordinates),
-            })
+            }),
     );
     assert_true(3 === totalpathlengthwithoutcycle([0, 1], node_coordinates));
 }

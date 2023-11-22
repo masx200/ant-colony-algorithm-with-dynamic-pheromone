@@ -7,7 +7,7 @@ import { reversearray } from "../functions/reversearray";
 
 export const divide_route_to_k_opt_random = (
     oldRoute: number[],
-    k: number
+    k: number,
 ): number[][] => {
     k = Math.round(k);
     assert_true(oldRoute.length >= 2 * k);
@@ -24,7 +24,7 @@ export const divide_route_to_k_opt_random = (
 
         lengths_of_parts[index] += random(
             1,
-            length_of_old - sum(lengths_of_parts)
+            length_of_old - sum(lengths_of_parts),
         );
     }
     for (let length_of_part of lengths_of_parts) {

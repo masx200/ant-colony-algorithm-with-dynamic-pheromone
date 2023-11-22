@@ -5,7 +5,7 @@ import { cycle_reorganize } from "../functions/cycle_reorganize";
 
 import { pickRandomOne } from "../functions/pickRandomOne";
 export function split_cycle_route_to_3_sections(
-    oldRoute: number[]
+    oldRoute: number[],
 ): [number[], number[], number[]] {
     assert_true(oldRoute.length >= 6);
     const start = pickRandomOne(oldRoute);

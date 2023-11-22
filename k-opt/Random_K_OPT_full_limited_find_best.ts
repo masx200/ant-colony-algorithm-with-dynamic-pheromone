@@ -28,7 +28,7 @@ export function Random_K_OPT_full_limited_find_best({
             const k_range = IntegerRange(2, Math.floor(count_of_nodes / 2));
             return pickRandomOne(
                 k_range,
-                k_range.map((a) => 1 / a)
+                k_range.map((a) => 1 / a),
             );
         })
         .map((k) =>
@@ -36,7 +36,7 @@ export function Random_K_OPT_full_limited_find_best({
                 k: k,
                 oldRoute,
                 max_results: 1,
-            })
+            }),
         )
         .flat();
     const routes_and_lengths = routes_of_k_opt
@@ -46,7 +46,7 @@ export function Random_K_OPT_full_limited_find_best({
                 path: route,
                 getdistancebyindex: creategetdistancebyindex(
                     node_coordinates,
-                    get_distance_round()
+                    get_distance_round(),
                 ),
             });
             return { length, route };

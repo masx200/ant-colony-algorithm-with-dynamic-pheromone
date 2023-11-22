@@ -24,11 +24,11 @@ export function get_options_route_of_node_coordinates({
         path: route,
         getdistancebyindex: creategetdistancebyindex(
             node_coordinates,
-            get_distance_round()
+            get_distance_round(),
         ),
     });
     const linechardata = [...reorganize_route, reorganize_route[0]].map(
-        (v) => node_coordinates[v]
+        (v) => node_coordinates[v],
     );
     return create_line_chart_options({
         xAxis_min: "dataMin",

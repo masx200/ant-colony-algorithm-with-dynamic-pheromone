@@ -10,7 +10,7 @@ export function get_options_iterations_and_information_entropy_chart(
     // iteration_rounds_and_information_entropy_chart: ShallowRef<
     //     Pick<EChartsType, "resize" | "setOption"> | undefined
     // >,
-    dataofoneiteration: DataOfFinishOneIteration[]
+    dataofoneiteration: DataOfFinishOneIteration[],
 ): ECBasicOption & ECOption {
     const title_text = "迭代轮次和相对信息熵";
     // const chart = iteration_rounds_and_information_entropy_chart.value;

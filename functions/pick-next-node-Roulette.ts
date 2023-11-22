@@ -6,7 +6,7 @@ import { SharedOptions } from "./SharedOptions";
 export function picknextnodeRoulette(
     options: PickNextNodeRouletteOptions & {
         get_convergence_coefficient: () => number;
-    } & SharedOptions
+    } & SharedOptions,
 ): number {
     const {
         alpha_zero,
@@ -19,7 +19,7 @@ export function picknextnodeRoulette(
     } = options;
     if (availablenextnodes.length === 0) {
         throw Error(
-            "invalid availablenextnodes:" + JSON.stringify(availablenextnodes)
+            "invalid availablenextnodes:" + JSON.stringify(availablenextnodes),
         );
     }
     const beta = beta_zero;
@@ -39,7 +39,7 @@ export function picknextnodeRoulette(
             });
 
             return weight;
-        })
+        }),
     );
     return result;
 }

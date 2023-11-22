@@ -15,11 +15,11 @@ export function generate_k_opt_cycle_routes_limited({
     assert_true(oldRoute.length >= 2 * k);
     const splitted_Routes = divide_route_to_k_opt_random(
         oldRoute,
-        Math.round(k)
+        Math.round(k),
     );
 
     assert_true(
-        splitted_Routes.every((partial_route) => partial_route.length >= 2)
+        splitted_Routes.every((partial_route) => partial_route.length >= 2),
     );
 
     const routes: number[][] = [

@@ -20,7 +20,7 @@ export default defineComponent({
                 chart.value.resize();
                 chart.value.setOption(props.options, { lazyUpdate: true });
             }),
-            drawChartWait
+            drawChartWait,
         );
         const { container: container, chart: chart } =
             use_escharts_container_pair();
@@ -39,7 +39,7 @@ export default defineComponent({
 
                 () => {
                     update_chart();
-                }
+                },
             );
         });
 

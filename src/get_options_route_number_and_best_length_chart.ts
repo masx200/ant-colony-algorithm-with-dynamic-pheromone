@@ -10,7 +10,7 @@ export function get_options_route_number_and_best_length_chart(
     // path_number_and_optimal_path_length_chart: ShallowRef<
     //     undefined | Pick<EChartsType, "resize" | "setOption">
     // >,
-    dataofoneroute: DataOfFinishOneRoute[]
+    dataofoneroute: DataOfFinishOneRoute[],
 ): ECBasicOption & ECOption {
     const title_text = "路径序号和最优路径长度";
     // const chart = path_number_and_optimal_path_length_chart.value;

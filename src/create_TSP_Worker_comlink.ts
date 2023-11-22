@@ -6,7 +6,7 @@ import { TSP_Worker_API } from "./TSP_Worker_API";
 import { TSP_Worker_Remote } from "./TSP_Worker_Remote";
 
 export async function create_TSP_Worker_comlink(
-    options: TSPRunnerOptions
+    options: TSPRunnerOptions,
 ): Promise<TSP_Worker_Remote> {
     const {
         worker,
@@ -17,7 +17,7 @@ export async function create_TSP_Worker_comlink(
             new URL("./TSP_Runner.Worker.ts", import.meta.url),
             {
                 type: "module",
-            }
+            },
         );
 
         return w;

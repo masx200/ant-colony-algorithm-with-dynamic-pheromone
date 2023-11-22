@@ -7,7 +7,7 @@ export function generate_3_opt_cycle_routes(oldRoute: number[]): number[][] {
     const splitted_Routes = split_cycle_route_to_3_sections(oldRoute);
 
     assert_true(
-        splitted_Routes.every((partial_route) => partial_route.length >= 2)
+        splitted_Routes.every((partial_route) => partial_route.length >= 2),
     );
     const [first, second, third] = splitted_Routes;
     const routes: number[][] = [...whether_3_sections_reverse_opt()].map(
@@ -17,7 +17,7 @@ export function generate_3_opt_cycle_routes(oldRoute: number[]): number[][] {
                 ...(j ? reversearray(second) : second),
                 ...(k ? reversearray(third) : third),
             ];
-        }
+        },
     );
     assert_true(routes.every((route) => route.length === oldRoute.length));
     return routes;

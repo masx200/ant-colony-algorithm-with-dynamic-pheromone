@@ -16,7 +16,7 @@ export function use_data_of_one_iteration() {
         "收敛性系数",
     ];
     const onreceive_delta_dataofoneIteration = function (
-        delta_data: DataOfFinishOneIteration[]
+        delta_data: DataOfFinishOneIteration[],
     ) {
         for (let i = 0; i < delta_data.length; i++) {
             const data = delta_data[i];
@@ -52,7 +52,7 @@ export function use_data_of_one_iteration() {
         number,
         number,
         number,
-        number
+        number,
     ][] = reactive([]);
 
     return {
