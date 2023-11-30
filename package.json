@@ -31,7 +31,7 @@
     "@types/find": "^0.2.1",
     "@types/html-minifier-terser": "^7.0.0",
     "@types/lodash-es": "^4.17.6",
-    "@types/node": "^20.1.0",
+    "@types/node": "^20.10.1",
     "@vitejs/plugin-vue": "^4.2.3",
     "babel-plugin-clean-code": "^0.0.3",
     "babel-plugin-import": "^1.13.5",
@@ -61,7 +61,7 @@
   "dependencies": {
     "@masx200/tsp-lib-test-data": "^2.0.1",
     "@masx200/weighted-randomly-select": "^2.1.1",
-    "@types/node": "^20.1.0",
+    "@types/node": "^20.10.1",
     "@types/robust-segment-intersect": "^1.0.0",
     "prettier": "^3.0.0",
     "rollup": "^4.0.0",
