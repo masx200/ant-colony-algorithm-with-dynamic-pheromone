@@ -32,7 +32,7 @@
     "@types/html-minifier-terser": "^7.0.0",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^20.11.6",
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue": "^5.0.4",
     "babel-plugin-clean-code": "^0.0.3",
     "babel-plugin-import": "^1.13.5",
     "combinatorial-generators": "^1.1.2",
